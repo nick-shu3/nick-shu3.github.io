@@ -2,6 +2,8 @@ name: Verify portfolio
 on:
   push:
     branches: [main]
+  pull_request:
+    branches: [main]
   workflow_dispatch:
 permissions:
   contents: read
@@ -9,12 +11,15 @@ jobs:
   verify:
     runs-on: ubuntu-latest
     steps:
-      - uses: actions/checkout@v6
+      - uses: actions/checkout@d23441a48e516b6c34aea4fa41551a30e30af803 # v6
+        with:
+          persist-credentials: false
       - name: Validate source and release boundary
         run: |
           node --check docs/catalog.js
           node --check docs/games/kagi-to-tobira/app.js
           node --check docs/games/squad-front/app.js
+          node tests/security.cjs
           node tests/release.cjs
           node tests/squad.cjs
           node tests/kagi.cjs
