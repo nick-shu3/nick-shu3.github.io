@@ -1,5 +1,5 @@
 (()=>{
-const $=id=>document.getElementById(id),board=$('board'),overlay=$('overlay'),SAVE='kagi-tobira-v2',PUBLIC_SHARING=true,URL=new URL('./',window.location.href).href;
+const $=id=>document.getElementById(id),board=$('board'),overlay=$('overlay'),SAVE='kagi-tobira-v2',PUBLIC_SHARING=true;
 const FIRST=0,LAST=9;
 const requested=Number(new URLSearchParams((window.location?.hash||'').slice(1)).get('challenge'));
 const challenge=Number.isInteger(requested)&&requested>=FIRST+1&&requested<=LAST+1?requested-1:null;
@@ -39,7 +39,7 @@ if(n.picked.length>old.picked.length){const ghost=document.createElement('i'),so
 await Promise.all(promises);
 }
 function record(){if(challenge!==null){data.records[s.index]={steps:s.steps,hints,undos};save();return;}if(!data.completed.includes(s.index))data.completed.push(s.index);const previous=data.records[s.index],current={steps:s.steps,hints,undos};if(!previous||current.steps<previous.steps||current.steps===previous.steps&&hints<previous.hints)data.records[s.index]=current;stageButtons();save();}
-function chapterExit(){return {label:'作品集へ戻る',url:'../../'};}
+function chapterExit(){return {label:'作品集へ戻る',url:'../../../'};}
 function result(){lastFocus=document.activeElement;$('win-title').textContent=s.index===9&&data.completed.length===levels.length?'すべての扉が開いた！':'クリア！';$('win-text').textContent=s.index===9?'最初に見えた扉へ、たどり着きました。':'ステージ '+(s.index+1)+'「'+levels[s.index].title+'」';$('resultStats').textContent='解答 '+s.steps+'手 ／ ヒント '+hints+'段階\n'+data.completed.length+' / '+levels.length+' クリア'+(data.records[s.index]?' ／ ベスト '+data.records[s.index].steps+'手':'');$('again').textContent=s.index<9?'次のステージへ':chapterExit().label;if(challenge!==null){$('win-text').textContent='単問チャレンジ '+(s.index+1)+'階｜'+levels[s.index].title;$('resultStats').textContent=s.steps+'手 ／ '+(hints?'ヒント '+hints+'段階':'ヒントなしで発見！');$('again').textContent='冒険の続きに戻る';}$('challengeLink').href=challengeURL();overlay.hidden=false;$('again').focus();}
 async function move(dx,dy){if(busy||s.won||!overlay.hidden)return;const n=transition(s,dx,dy);if(!n){const t=tile(s,s.p.x+dx,s.p.y+dy);$('message').textContent=t==='H'?'穴には進めない。箱で橋を作ろう。':['A','B'].includes(t)?'鉄格子は閉じている。番号の同じスイッチを探そう。':t==='D'||t==='L'?'鍵が必要。ほかの部屋を調べてみよう。':'この方向には進めない。一手戻して試すこともできる。';return;}busy=true;const old=s;history.push(JSON.parse(JSON.stringify(old)));s=n;if(!s.message)s.message='';if(s.won)record();render();save();tone(n.won?'win':n.bridged.length>old.bridged.length?'bridge':n.picked.length>old.picked.length?'key':old.b&&n.b&&coord(old.b)!==coord(n.b)?'box':['a','b'].some(g=>onPlate(old,g)!==onPlate(n,g))?'gate':'step');try{await animate(old,n);}finally{busy=false;}if(s.won)result();}
 function undo(){if(busy||!history.length)return;s=history.pop();undos++;s.message='一手戻した。別の方法を試そう。';overlay.hidden=true;render();save();}

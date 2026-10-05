@@ -16,8 +16,8 @@
 1. HTML・CSS・JavaScriptなどのソースを配置し、ローカルでコミットします。
 2. PNG画像とSVGアイコンを元の相対パスに配置し、ローカルで別のコミットを作成します。画像を追加する前にPushすると、参照先が欠けた状態で公開処理が動きます。
 3. 全ファイルが揃っていることを確認してから、GitHub DesktopでPushします。隠しフォルダ `.github` も必要です。
-4. リポジトリの Settings → Pages → Build and deployment → Source を **GitHub Actions** にします。
-5. Actions の **Publish portfolio** が成功し、公開URLが表示されることを確認します。
+4. GitHub Pagesは `main` ブランチの `/(root)` から公開します。`index.html` が作品集の入口、`docs/` 以下にゲームを配置しています。
+5. Actions の **Verify portfolio** と Pages の **pages build and deployment** が成功し、公開URLが表示されることを確認します。
 
 `nick-shu3/nick-shu3.github.io` として公開した場合の予定URL：
 https://nick-shu3.github.io/
@@ -34,7 +34,7 @@ https://nick-shu3.github.io/
 | `docs/catalog.js` | カテゴリ切り替え・シューティングの紹介イラスト |
 | `docs/games/kagi-to-tobira/` | カギとトビラ第1章 |
 | `docs/games/squad-front/` | SQUAD FRONT |
-| `.github/workflows/pages.yml` | テスト・GitHub Pages公開 |
+| `.github/workflows/pages.yml` | 公開ファイルとゲームロジックの自動テスト |
 | `tests/` | 公開用ファイルとゲームロジックのテスト |
 
 トップページを更新するときは `docs/index.html` を編集し、直下の `index.html` も同期してください。`tests/release.cjs` が一致を検査します。
