@@ -29,12 +29,15 @@ https://nick-shu3.github.io/
 | 場所 | 内容 |
 | --- | --- |
 | `docs/index.html` | 作品集のトップページ・作品カード |
+| `index.html` | 現在のPages公開元がリポジトリ直下でも作品集を表示するための同内容の入口。`docs/index.html` の `<head>` に `<base href="docs/">` を加えたもの |
 | `docs/style.css` | 作品集の見た目 |
 | `docs/catalog.js` | カテゴリ切り替え・シューティングの紹介イラスト |
 | `docs/games/kagi-to-tobira/` | カギとトビラ第1章 |
 | `docs/games/squad-front/` | SQUAD FRONT |
 | `.github/workflows/pages.yml` | テスト・GitHub Pages公開 |
 | `tests/` | 公開用ファイルとゲームロジックのテスト |
+
+トップページを更新するときは `docs/index.html` を編集し、直下の `index.html` も同期してください。`tests/release.cjs` が一致を検査します。
 
 便利ツールはまだありません。追加するときは `docs/tools/` に作品を配置し、トップページに `data-type="tool"` のカードを追加してください。カテゴリボタンの件数も更新します。
 
