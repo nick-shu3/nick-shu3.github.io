@@ -21,6 +21,9 @@ jobs:
           node --check docs/games/squad-front/app.js
           node --check docs/tools/im-juggler-grape/math.js
           node --check docs/tools/im-juggler-grape/script.js
+          node --check docs/games/hachiyoke-line/game.js
+          node --check docs/games/hachiyoke-line/stages.js
+          node tests/hachiyoke.cjs
           node tests/grape.cjs
           node tests/security.cjs
           node tests/release.cjs
