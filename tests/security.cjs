@@ -1,6 +1,6 @@
 const fs = require('node:fs');
 const assert = require('node:assert/strict');
-const pages = ['index.html', 'docs/index.html', 'docs/games/kagi-to-tobira/index.html', 'docs/games/squad-front/index.html'];
+const pages = ['index.html', 'docs/index.html', 'docs/games/kagi-to-tobira/index.html', 'docs/games/squad-front/index.html', 'docs/tools/im-juggler-grape/index.html'];
 for (const page of pages) {
   const html = fs.readFileSync(page, 'utf8');
   const csp = html.match(/http-equiv="Content-Security-Policy" content="([^"]+)"/);
