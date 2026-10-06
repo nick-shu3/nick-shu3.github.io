@@ -1,0 +1,28 @@
+<!doctype html>
+<html lang="ja">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1,viewport-fit=cover">
+<meta http-equiv="Content-Security-Policy" content="default-src 'none'; script-src 'self'; style-src 'self' 'unsafe-inline'; img-src 'self' blob:; font-src 'self'; connect-src 'none'; object-src 'none'; base-uri 'self'; form-action 'none'">
+<meta name="theme-color" content="#f7f5eb">
+<title>ハチよけライン｜シュウ３のゲームと道具箱</title>
+<link rel="stylesheet" href="style.css">
+<script src="stages.js" defer></script>
+<script src="game.js" defer></script>
+</head>
+<body>
+<main>
+<header><a href="../../../index.html">← ゲームと道具箱</a><span>PROTOTYPE · 01</span></header>
+<div class="title"><div><p class="eyebrow">DRAW A LITTLE SHELTER</p><h1>ハチよけライン<span>小さな線で、大きな安心。</span></h1></div><span class="badge">1ステージ<br>おためし版</span></div>
+<div class="hud"><strong id="phase">線を描いて守ろう</strong><span id="timer">描画 5.0秒</span></div>
+<div class="board">
+<canvas id="game" width="360" height="480" aria-label="森の子を線で囲って蜂から守るゲーム。マウスまたはタッチで線を描きます。">Canvasに対応したブラウザで開いてください。</canvas>
+<div id="result" class="result" hidden><div><p id="result-tag"></p><h2 id="result-title"></h2><p id="result-detail"></p><button id="again">もう一度あそぶ</button></div></div>
+</div>
+<p id="message" class="message" role="status">描き始めると5秒スタート。森の子を囲ってみよう。</p>
+<div class="controls"><button id="finish" class="primary">描き終わり → 蜂を呼ぶ</button><button id="retry" class="secondary">リトライ</button></div>
+<p class="guide"><b>① 5秒で描く</b><span>→</span><b>② 10秒守る</b></p>
+<p class="note">時間内は何本でもOK。線はその場に固定されます。<br>森の子・巣の点線内には描けません。画面を離れると一時停止。</p>
+<footer>シュウ３ · 音なし / 外部通信なし</footer>
+</main>
+</body></html>
