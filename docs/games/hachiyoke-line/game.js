@@ -106,19 +106,44 @@ class Model{
 const api={Model,Walls,pointDistance,segmentDistance};
 if(typeof module!=='undefined'&&module.exports){module.exports=api;return;}
 root.Hachiyoke=api;
-const canvas=document.getElementById('game'),ctx=canvas.getContext('2d'),stage=root.HachiyokeStages[0],model=new Model(stage);
-const $=id=>document.getElementById(id);let pointer=null,previous=0,paused=false,shownPhase='',lastSecond=-1;
+const canvas=document.getElementById('game'),ctx=canvas.getContext('2d'),stages=root.HachiyokeStages;
+const $=id=>document.getElementById(id),stageButtons=[...document.querySelectorAll('#stages button')];
+let unlocked=1;
+try{const saved=Number(root.localStorage.getItem('hachiyoke-unlocked-v1'));if(Number.isInteger(saved))unlocked=clamp(saved,1,stages.length);}catch(_error){/* Private browsing may disable storage. */}
+let stageIndex=0,stage=stages[stageIndex],model=new Model(stage);
+let pointer=null,previous=0,paused=false,shownPhase='',lastSecond=-1;
+function updateStageUI(){
+  $('stage-title').textContent=stage.id+' · '+stage.title;
+  $('stage-hint').textContent=stage.hint||'森の子を囲ってみよう。';
+  for(const [i,button] of stageButtons.entries()){
+    button.disabled=i>=unlocked;
+    if(i===stageIndex)button.setAttribute('aria-current','step');else button.removeAttribute('aria-current');
+    button.title=i>=unlocked?'前のステージをクリアすると解放':stages[i].title;
+  }
+}
+function selectStage(i){
+  if(!Number.isInteger(i)||i<0||i>=unlocked||i>=stages.length)return;
+  end();stageIndex=i;stage=stages[i];model=new Model(stage);shownPhase='';previous=0;
+  updateStageUI();updateUI();
+}
+for(const [i,button] of stageButtons.entries())button.addEventListener('click',()=>selectStage(i));
 function updateUI(){
   const phase=model.phase;
   if(shownPhase!==phase){
     shownPhase=phase;lastSecond=-1;
+    if(phase==='won'&&stageIndex+2>unlocked){
+      unlocked=Math.min(stages.length,stageIndex+2);
+      try{root.localStorage.setItem('hachiyoke-unlocked-v1',String(unlocked));}catch(_error){/* In-memory progress still works. */}
+      updateStageUI();
+    }
     $('phase').textContent={ready:'線を描いて守ろう',draw:'描いています',defend:'森の子を守ろう',won:'守りきった！',lost:'蜂が届いてしまった…'}[phase];
-    $('message').textContent={ready:'描き始めると5秒スタート。森の子を囲ってみよう。',draw:'指を離しても続けて描けます。隙間をふさごう。',defend:'線が壁になりました。10秒間、見守ろう。',won:'成功！囲いの形を変えて、もう一度試してみよう。',lost:'隙間や壁の端から蜂が来たかも。囲い方を変えてみよう。'}[phase];
+    $('message').textContent={ready:stageIndex===0?'描き始めると5秒スタート。森の子を囲ってみよう。':stage.hint+' 描き始めると5秒スタート。',draw:'指を離しても続けて描けます。隙間をふさごう。',defend:'線が壁になりました。'+stage.defendSeconds+'秒間、見守ろう。',won:'成功！次のステージが解放されました。',lost:'隙間や壁の端から蜂が来たかも。囲い方を変えてみよう。'}[phase];
     $('finish').disabled=!['ready','draw'].includes(phase);
     $('result').hidden=!['won','lost'].includes(phase);
-    if(['won','lost'].includes(phase)){$('result-tag').textContent=phase==='won'?'SHELTER COMPLETE':'TRY ANOTHER LINE';$('result-title').textContent=phase==='won'?'10秒、守りきった！':'もうひと工夫！';$('result-detail').textContent=phase==='won'?'森の子は無事。あなたの線が守りました。':'蜂が森の子に触れました。隙間なく囲ってみよう。';}
+    $('next').hidden=phase!=='won'||stageIndex===stages.length-1;
+    if(['won','lost'].includes(phase)){$('result-tag').textContent=phase==='won'?'SHELTER COMPLETE':'TRY ANOTHER LINE';$('result-title').textContent=phase==='won'?stage.defendSeconds+'秒、守りきった！':'もうひと工夫！';$('result-detail').textContent=phase==='won'?(stageIndex===stages.length-1?'全5ステージクリア！みんなを守れました。':'森の子は無事。次のステージへ進めます。'):'蜂が森の子に触れました。隙間なく囲ってみよう。';}
   }
-  const value=phase==='draw'?Math.max(0,stage.drawSeconds-model.elapsed):phase==='defend'?Math.max(0,stage.defendSeconds-model.elapsed):phase==='ready'?5:0;
+  const value=phase==='draw'?Math.max(0,stage.drawSeconds-model.elapsed):phase==='defend'?Math.max(0,stage.defendSeconds-model.elapsed):phase==='ready'?stage.drawSeconds:0;
   const tenth=Math.ceil(value*10);if(tenth!==lastSecond){lastSecond=tenth;$('timer').textContent=(phase==='ready'||phase==='draw'?'描画 ':'防衛 ')+(tenth/10).toFixed(1)+'秒';}
 }
 function circle(x,y,r,color){ctx.beginPath();ctx.arc(x,y,r,0,Math.PI*2);ctx.fillStyle=color;ctx.fill();}
@@ -143,7 +168,7 @@ function render(now){
     ctx.fillStyle='#52684b';ctx.font='10px system-ui';ctx.fillText('森の子',x,y+43);
   }
   for(const b of model.bees){if(model.elapsed<b.delay)continue;const flutter=Math.sin(now*.04+b.delay)*.3;ellipse(b.x-4,b.y-7,6,4,-.6+flutter,'#ffffffd9');ellipse(b.x+4,b.y-7,6,4,.6-flutter,'#ffffffd9');ellipse(b.x,b.y,8,6,0,'#efbd47');ctx.fillStyle='#59452d';ctx.fillRect(b.x-3,b.y-5,2.5,10);ctx.fillRect(b.x+2,b.y-5,2.5,10);circle(b.x+6,b.y-1,1.2,'#243e3b');}
-  if(model.phase==='ready'){ctx.fillStyle='#718267';ctx.font='13px system-ui';ctx.fillText('ここに線を描いてみよう',180,215);ctx.font='10px system-ui';ctx.fillText('森の子をぐるっと囲むと…？',180,237);}
+  if(model.phase==='ready'&&stageIndex===0){ctx.fillStyle='#718267';ctx.font='13px system-ui';ctx.fillText('ここに線を描いてみよう',180,215);ctx.font='10px system-ui';ctx.fillText('森の子をぐるっと囲むと…？',180,237);}
   if(paused){ctx.fillStyle='#f7f5ebdd';ctx.fillRect(0,0,360,480);ctx.fillStyle='#243e3b';ctx.font='bold 20px system-ui';ctx.fillText('一時停止中',180,240);}
 }
 function position(e){const r=canvas.getBoundingClientRect();return {x:(e.clientX-r.left)*stage.width/r.width,y:(e.clientY-r.top)*stage.height/r.height};}
@@ -154,8 +179,9 @@ canvas.addEventListener('pointerup',end);canvas.addEventListener('pointercancel'
 $('finish').addEventListener('click',()=>{end();model.attack();updateUI();});
 function reset(){end();model.reset();shownPhase='';previous=0;updateUI();}
 $('retry').addEventListener('click',reset);$('again').addEventListener('click',reset);
+$('next').addEventListener('click',()=>{if(model.phase==='won')selectStage(stageIndex+1);});
 function pause(){paused=document.hidden||!document.hasFocus();end();previous=0;}
 document.addEventListener('visibilitychange',pause);window.addEventListener('blur',pause);window.addEventListener('focus',pause);
 function frame(now){if(previous&&!paused)model.step(Math.min((now-previous)/1000,.05));previous=now;updateUI();render(now);requestAnimationFrame(frame);}
-updateUI();requestAnimationFrame(frame);
+updateStageUI();updateUI();requestAnimationFrame(frame);
 })(typeof globalThis==='undefined'?this:globalThis);
