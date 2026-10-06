@@ -1,8 +1,8 @@
 'use strict';
 const assert=require('node:assert/strict');
 const {Model,Walls,segmentDistance}=require('../docs/games/hachiyoke-line/game.js');
-const stage=require('../docs/games/hachiyoke-line/stages.js')[0];
-function simulate(m){for(let i=0;i<1300&&m.phase==='defend';i++)m.step(1/120);return m.phase;}
+const stages=require('../docs/games/hachiyoke-line/stages.js'),stage=stages[0];
+function simulate(m){for(let i=0;i<(m.stage.defendSeconds+1)*120&&m.phase==='defend';i++)m.step(1/120);return m.phase;}
 function stroke(m,points){points.forEach((p,i)=>m.pen({x:p[0],y:p[1]},i===0));m.endPen();}
 assert.equal(segmentDistance({x:0,y:0},{x:100,y:100},{x:0,y:100},{x:100,y:0}),0);
 const walls=new Walls(7);walls.add({x:30,y:0},{x:30,y:100});assert(!walls.clear({x:0,y:40},{x:100,y:40},8));assert(!walls.clear({x:40,y:50},{x:40,y:50},8));assert(walls.clear({x:45,y:50},{x:45,y:70},8));
@@ -20,15 +20,27 @@ m.reset();m.pen({x:30,y:100},true);m.endPen();m.pen({x:300,y:200},true);assert.e
 m.attack();const count=m.walls.segments.length;assert(!m.pen({x:10,y:10},true));assert.equal(m.walls.segments.length,count);
 m.reset();m.step(NaN);assert.equal(m.phase,'ready');
 console.log('PASS: no-wall loss, closed-loop win, detour, open/narrow gaps, swept collision, exclusions, separate strokes, draw timer, reset and terminal state.');
+assert.equal(stages.length,5);
+for(const s of stages){
+  assert.equal(s.drawSeconds,5);
+  const game=new Model(s);game.attack();assert.equal(simulate(game),'lost','stage '+s.id+' loses without protection');
+  game.reset();
+  const plan={1:[[115,285],[245,285],[245,415],[115,415],[115,285]],2:[[210,280],[330,280],[330,410],[210,410],[210,280]],3:[[55,280],[305,280],[305,415],[55,415],[55,280]],4:[[55,180],[315,180],[315,425],[55,425],[55,180]],5:[[34,260],[326,260],[326,435],[34,435],[34,260]]}[s.id];
+  stroke(game,plan);game.attack();
+  assert.equal(simulate(game),'won','stage '+s.id+' has a playable winning route');
+  assert.equal(game.bees.length,s.bees.count);
+}
+console.log('PASS: all five stages can be lost and won with their intended five-second drawing rules.');
 // Exercise the actual browser event handlers without substituting physics logic.
 const vm=require('node:vm'),fs=require('node:fs');
 for(const width of [280,428]){
- const elements={},listeners={},frames=[];let hidden=false;
+ const elements={},listeners={},frames=[],saved={};let hidden=false;
  const context=new Proxy({}, {get:(o,k)=>o[k]||(o[k]=(...args)=>{for(const a of args)if(typeof a==='number')assert(Number.isFinite(a),k+' finite');}),set:(o,k,v)=>(o[k]=v,true)});
- for(const id of ['game','phase','timer','message','finish','retry','again','result','result-tag','result-title','result-detail'])elements[id]={textContent:'',hidden:false,disabled:false,events:{},addEventListener(k,fn){this.events[k]=fn;}};
+ for(const id of ['game','phase','timer','message','finish','retry','again','next','stage-title','stage-hint','result','result-tag','result-title','result-detail'])elements[id]={textContent:'',hidden:false,disabled:false,events:{},addEventListener(k,fn){this.events[k]=fn;}};
+ const buttons=stages.map(()=>({disabled:false,events:{},attrs:{},addEventListener(k,fn){this.events[k]=fn;},setAttribute(k,v){this.attrs[k]=v;},removeAttribute(k){delete this.attrs[k];}}));
  Object.assign(elements.game,{width:360,height:480,getContext:()=>context,getBoundingClientRect:()=>({left:0,top:0,width,height:width*4/3}),setPointerCapture(){}});
- const document={getElementById:id=>elements[id],get hidden(){return hidden;},hasFocus:()=>true,addEventListener:(k,fn)=>listeners[k]=fn};
- const sandbox={document,window:{devicePixelRatio:2,addEventListener:(k,fn)=>listeners[k]=fn},HachiyokeStages:[stage],requestAnimationFrame:fn=>frames.push(fn),console};
+ const document={getElementById:id=>elements[id],querySelectorAll:()=>buttons,get hidden(){return hidden;},hasFocus:()=>true,addEventListener:(k,fn)=>listeners[k]=fn};
+ const sandbox={document,window:{devicePixelRatio:2,addEventListener:(k,fn)=>listeners[k]=fn},localStorage:{getItem:k=>saved[k],setItem:(k,v)=>saved[k]=v},HachiyokeStages:stages,requestAnimationFrame:fn=>frames.push(fn),console};
  vm.runInNewContext(fs.readFileSync('docs/games/hachiyoke-line/game.js','utf8'),sandbox);
  let now=1;function tick(){frames.shift()(now);now+=1000/60;}
  function pen(type,x,y){elements.game.events[type]({isPrimary:true,button:0,pointerId:1,clientX:x*width/360,clientY:y*width/360,preventDefault(){}});}
@@ -37,7 +49,11 @@ for(const width of [280,428]){
  elements.finish.events.click();assert(elements.finish.disabled);
  hidden=true;listeners.visibilitychange();for(let i=0;i<120;i++)tick();assert.equal(elements.timer.textContent,'防衛 10.0秒');
  hidden=false;listeners.visibilitychange();for(let i=0;i<605;i++)tick();assert.equal(elements.result.hidden,false);assert.equal(elements['result-title'].textContent,'10秒、守りきった！');
+ assert.equal(saved['hachiyoke-unlocked-v1'],'2');assert.equal(buttons[1].disabled,false);assert.equal(buttons[2].disabled,true);assert.equal(elements.next.hidden,false);
+ buttons[2].events.click();assert.match(elements['stage-title'].textContent,/^1 · /,'locked stage cannot be entered');
  elements.again.events.click();assert.equal(elements.result.hidden,true);assert.equal(elements.finish.disabled,false);
  elements.finish.events.click();for(let i=0;i<400;i++)tick();assert.equal(elements['result-title'].textContent,'もうひと工夫！');
+ elements.retry.events.click();buttons[1].events.click();assert.match(elements['stage-title'].textContent,/^2 · /);assert.equal(buttons[1].attrs['aria-current'],'step');
+ buttons[0].events.click();assert.match(elements['stage-title'].textContent,/^1 · /);
 }
-console.log('PASS: narrow/wide pointer scaling, Canvas coordinates, finish, background pause, win/loss overlay and retry. Real browser rendering is not covered.');
+console.log('PASS: narrow/wide pointer scaling, Canvas coordinates, finish, background pause, unlock, stage selection, win/loss overlay and retry. Real browser rendering is not covered.');
