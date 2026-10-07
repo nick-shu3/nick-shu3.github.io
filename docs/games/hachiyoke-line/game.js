@@ -2,6 +2,7 @@
 (function(root){
 const clamp=(x,a,b)=>Math.max(a,Math.min(b,x));
 const distance=(a,b)=>Math.hypot(a.x-b.x,a.y-b.y);
+const nests=stage=>stage.nests||[stage.nest];
 function pointDistance(p,a,b){
   const dx=b.x-a.x,dy=b.y-a.y,l=dx*dx+dy*dy;
   const t=l?clamp(((p.x-a.x)*dx+(p.y-a.y)*dy)/l,0,1):0;
@@ -36,27 +37,32 @@ function navigation(model){
 }
 class Model{
   constructor(stage){this.stage=stage;this.reset();}
-  reset(){this.phase='ready';this.elapsed=0;this.walls=new Walls(this.stage.lineWidth);for(const s of this.stage.obstacles)this.walls.add(s.a,s.b);this.bees=[];this.last=null;this.nav=null;}
-  allowed(a,b){return [ ...this.stage.targets, this.stage.nest ].every(c=>pointDistance(c,a,b)>c.radius+this.stage.lineWidth/2+8);}
+  reset(){this.phase='ready';this.elapsed=0;this.usedLength=0;this.walls=new Walls(this.stage.lineWidth);for(const s of this.stage.obstacles)this.walls.add(s.a,s.b);this.bees=[];this.last=null;this.nav=null;}
+  allowed(a,b){return [ ...this.stage.targets, ...nests(this.stage) ].every(c=>pointDistance(c,a,b)>c.radius+this.stage.lineWidth/2+8);}
   pen(point,start=false){
     if(!['ready','draw'].includes(this.phase))return false;
     const p={x:clamp(point.x,4,this.stage.width-4),y:clamp(point.y,4,this.stage.height-4)};
     if(!Number.isFinite(p.x)||!Number.isFinite(p.y))return false;
     if(start)this.last=null;
     if(!this.allowed(p,p)){this.last=null;return false;}
+    if(this.stage.maxLength!==undefined&&this.usedLength>=this.stage.maxLength-1e-8)return false;
     if(this.phase==='ready'){this.phase='draw';this.elapsed=0;}
     const a=this.last||p;
-    if(!this.allowed(a,p)){this.last=p;return false;}
-    if(this.last&&distance(a,p)<2)return true;
+    const length=distance(a,p);
+    if(this.last&&length<2)return true;
+    const remaining=this.stage.maxLength===undefined?Infinity:this.stage.maxLength-this.usedLength;
+    const end=length>remaining?{x:a.x+(p.x-a.x)*remaining/length,y:a.y+(p.y-a.y)*remaining/length}:p;
+    if(!this.allowed(a,end)){this.last=null;return false;}
     // Bounding segment count prevents unusually dense input from freezing mobile browsers.
     if(this.walls.segments.length>=6000)return false;
-    this.walls.add(a,p);this.last=p;return true;
+    this.walls.add(a,end);this.usedLength+=distance(a,end);this.last=end;return true;
   }
   endPen(){this.last=null;}
   attack(){
     if(!['ready','draw'].includes(this.phase))return;
     this.endPen();this.phase='defend';this.elapsed=0;this.nav=navigation(this);
-    this.bees=Array.from({length:this.stage.bees.count},(_,i)=>({x:this.stage.nest.x,y:this.stage.nest.y,radius:this.stage.bees.radius,speed:this.stage.bees.speed*(1+i*.055),delay:i*.18,route:[],searching:false,angle:i}));
+    const homes=nests(this.stage);
+    this.bees=Array.from({length:this.stage.bees.count},(_,i)=>({x:homes[i%homes.length].x,y:homes[i%homes.length].y,radius:this.stage.bees.radius,speed:this.stage.bees.speed*(1+i*.055),delay:i*.18,route:[],searching:false,angle:i}));
     for(const b of this.bees)this.routeBee(b);
   }
   routeBee(b){
@@ -145,6 +151,8 @@ function updateUI(){
   }
   const value=phase==='draw'?Math.max(0,stage.drawSeconds-model.elapsed):phase==='defend'?Math.max(0,stage.defendSeconds-model.elapsed):phase==='ready'?stage.drawSeconds:0;
   const tenth=Math.ceil(value*10);if(tenth!==lastSecond){lastSecond=tenth;$('timer').textContent=(phase==='ready'||phase==='draw'?'描画 ':'防衛 ')+(tenth/10).toFixed(1)+'秒';}
+  $('ink-remaining').textContent=stage.maxLength===undefined?'線の長さ：制限なし':'線のこり '+Math.max(0,Math.floor(stage.maxLength-model.usedLength));
+  $('ink-fill').style.width=stage.maxLength===undefined?'100%':Math.max(0,100-model.usedLength/stage.maxLength*100)+'%';
 }
 function circle(x,y,r,color){ctx.beginPath();ctx.arc(x,y,r,0,Math.PI*2);ctx.fillStyle=color;ctx.fill();}
 function ellipse(x,y,rx,ry,rot,color){ctx.beginPath();ctx.ellipse(x,y,rx,ry,rot,0,Math.PI*2);ctx.fillStyle=color;ctx.fill();}
@@ -157,10 +165,11 @@ function render(now){
   for(let y=16;y<480;y+=20)for(let x=10;x<360;x+=20)circle(x,y,.7,'#dce2d0');
   for(const [x,y,r] of [[-12,55,42],[360,210,30],[5,430,24],[350,445,48]]){circle(x,y,r,'#dbe6cc');circle(x+10,y-8,r*.7,'#d0dfbd');}
   // Visual no-draw rings match the protected geometric regions.
-  if(['ready','draw'].includes(model.phase))for(const c of [...stage.targets,stage.nest]){ctx.beginPath();ctx.arc(c.x,c.y,c.radius+stage.lineWidth/2+8,0,Math.PI*2);ctx.strokeStyle='#abbba1';ctx.setLineDash([3,5]);ctx.lineWidth=1;ctx.stroke();ctx.setLineDash([]);}
-  const n=stage.nest;
-  ellipse(n.x,n.y,25,29,0,'#d69d48');for(let i=-2;i<=2;i++){ctx.beginPath();ctx.moveTo(n.x-20,n.y+i*9);ctx.quadraticCurveTo(n.x,n.y+i*9+5,n.x+20,n.y+i*9);ctx.strokeStyle='#b37f35';ctx.lineWidth=2;ctx.stroke();}ellipse(n.x,n.y+9,8,10,0,'#52452e');
-  ctx.font='10px system-ui';ctx.fillStyle='#6d785e';ctx.textAlign='center';ctx.fillText('蜂の巣',n.x,n.y-43);
+  if(['ready','draw'].includes(model.phase))for(const c of [...stage.targets,...nests(stage)]){ctx.beginPath();ctx.arc(c.x,c.y,c.radius+stage.lineWidth/2+8,0,Math.PI*2);ctx.strokeStyle='#abbba1';ctx.setLineDash([3,5]);ctx.lineWidth=1;ctx.stroke();ctx.setLineDash([]);}
+  for(const n of nests(stage)){
+    ellipse(n.x,n.y,25,29,0,'#d69d48');for(let i=-2;i<=2;i++){ctx.beginPath();ctx.moveTo(n.x-20,n.y+i*9);ctx.quadraticCurveTo(n.x,n.y+i*9+5,n.x+20,n.y+i*9);ctx.strokeStyle='#b37f35';ctx.lineWidth=2;ctx.stroke();}ellipse(n.x,n.y+9,8,10,0,'#52452e');
+    ctx.font='10px system-ui';ctx.fillStyle='#6d785e';ctx.textAlign='center';ctx.fillText('蜂の巣',n.x,n.y-43);
+  }
   ctx.strokeStyle='#315e66';ctx.lineWidth=stage.lineWidth;ctx.lineCap='round';ctx.lineJoin='round';
   for(const s of model.walls.segments){ctx.beginPath();ctx.moveTo(s.a.x,s.a.y);ctx.lineTo(s.b.x,s.b.y);ctx.stroke();if(distance(s.a,s.b)<.01)circle(s.a.x,s.a.y,stage.lineWidth/2,'#315e66');}
   for(const t of stage.targets){

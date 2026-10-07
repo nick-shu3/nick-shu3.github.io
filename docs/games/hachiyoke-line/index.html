@@ -6,9 +6,9 @@
 <meta http-equiv="Content-Security-Policy" content="default-src 'none'; script-src 'self'; style-src 'self' 'unsafe-inline'; img-src 'self' blob:; font-src 'self'; connect-src 'none'; object-src 'none'; base-uri 'self'; form-action 'none'">
 <meta name="theme-color" content="#f7f5eb">
 <title>ハチよけライン｜シュウ３のゲームと道具箱</title>
-<link rel="stylesheet" href="style.css?v=2">
-<script src="stages.js?v=2" defer></script>
-<script src="game.js?v=2" defer></script>
+<link rel="stylesheet" href="style.css?v=3">
+<script src="stages.js?v=3" defer></script>
+<script src="game.js?v=3" defer></script>
 </head>
 <body>
 <main>
@@ -17,6 +17,7 @@
 <nav id="stages" class="stages" aria-label="ステージ選択"><button data-stage="0" aria-label="ステージ1">1</button><button data-stage="1" aria-label="ステージ2" disabled>2</button><button data-stage="2" aria-label="ステージ3" disabled>3</button><button data-stage="3" aria-label="ステージ4" disabled>4</button><button data-stage="4" aria-label="ステージ5" disabled>5</button></nav>
 <div class="stage-info"><strong id="stage-title">1 · 木もれびの広場</strong><span id="stage-hint">森の子を囲ってみよう。</span></div>
 <div class="hud"><strong id="phase">線を描いて守ろう</strong><span id="timer">描画 5.0秒</span></div>
+<div class="ink"><span id="ink-remaining">線の長さ：制限なし</span><span class="ink-track"><span id="ink-fill"></span></span></div>
 <div class="board">
 <canvas id="game" width="360" height="480" aria-label="森の子を線で囲って蜂から守るゲーム。マウスまたはタッチで線を描きます。">Canvasに対応したブラウザで開いてください。</canvas>
 <div id="result" class="result" hidden><div><p id="result-tag"></p><h2 id="result-title"></h2><p id="result-detail"></p><button id="next" hidden>次のステージへ →</button><button id="again">もう一度あそぶ</button></div></div>
@@ -24,7 +25,7 @@
 <p id="message" class="message" role="status">描き始めると5秒スタート。森の子を囲ってみよう。</p>
 <div class="controls"><button id="finish" class="primary">描き終わり → 蜂を呼ぶ</button><button id="retry" class="secondary">リトライ</button></div>
 <p class="guide"><b>① 5秒で描く</b><span>→</span><b>② 10秒守る</b></p>
-<p class="note">時間内は何本でもOK。線はその場に固定されます。<br>森の子・巣の点線内には描けません。画面を離れると一時停止。</p>
+<p class="note">時間内は何本でもOK。線はその場に固定されます。<br>2面から線の長さに制限があります。森の子・巣の点線内には描けません。<br>画面を離れると一時停止。</p>
 <footer>シュウ３ · 音なし / 外部通信なし</footer>
 </main>
 </body></html>
