@@ -1,0 +1,9 @@
+{
+  "devDependencies": {
+    "acorn": "8.15.0"
+  },
+  "name": "shu3-portfolio-security-checks",
+  "version": "1.0.0",
+  "private": "true",
+  "description": "Development-only security checks; no browser dependencies"
+}

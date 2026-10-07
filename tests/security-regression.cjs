@@ -8,7 +8,10 @@ assert(inspect('new-tool/index.html',html.replace('class="standalone-pending"','
 assert(inspect('new-tool/index.html',html+'<script>alert(1)</script>').length);
 assert(inspect('new-tool/index.html',html+'<img src="https://example.invalid/pixel">').length);
 for(const code of ['eval(input)','new Function(input)','element.innerHTML = input','fetch(url)','navigator.sendBeacon(url)','window.postMessage(data)','setTimeout("bad()", 1)'])assert(inspect('new-tool/script.js',code).length,code);
+for(const code of ["element['innerHTML'] = input", "const send = window['fetch']; send(url)", 'eval/* review */(input)', "element[`insertAdjacentHTML`]('beforeend', input)", "const f = eval; f(input)", 'import("./remote.js")'])assert(inspect('new-tool/script.js',code).length,code);
 assert.deepEqual(inspect('new-tool/script.js','element.textContent = input;'),[]);
+assert.deepEqual(inspect('new-tool/script.js','const text = "eval(input)"; // fetch(url)'),[]);
+assert(inspect('new-tool/script.js','const = ;').length);
 assert(inspect('new-tool/style.css','@import "https://example.invalid/x.css"').length);
 assert(inspect('new-tool/logo.svg','<svg onload="bad()"></svg>').length);
 // Exercise the real frame guard in top-level, framed, and denied-access contexts.
