@@ -66,7 +66,8 @@ for(const width of [280,428]){
  focused=false;listeners.blur();assert.equal(elements['pause-overlay'].hidden,false);
  pen('pointerdown',115,285);assert.equal(elements['pause-overlay'].hidden,true,'visible canvas action can recover missing focus');
  assert.equal(elements.phase.textContent,'線を描いて守ろう','resume touch does not draw a stray segment');
- focused=true;
+ listeners.blur();assert.equal(elements['pause-overlay'].hidden,false);
+ focused=true;tick();assert.equal(elements['pause-overlay'].hidden,true,'focus recovery without an event resumes on the next frame');
  pen('pointerdown',115,285);pen('pointermove',245,285);pen('pointermove',245,415);pen('pointermove',115,415);pen('pointermove',115,285);pen('pointerup',115,285);
  elements.finish.events.click();assert(elements.finish.disabled);
  hidden=true;listeners.visibilitychange();for(let i=0;i<120;i++)tick();assert.equal(elements.timer.textContent,'防衛 10.0秒');

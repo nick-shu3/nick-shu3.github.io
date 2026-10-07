@@ -195,6 +195,6 @@ function pause(){paused=document.hidden||!document.hasFocus();end();previous=0;u
 function resume(){if(document.hidden)return;paused=false;end();previous=0;updateUI();}
 $('resume').addEventListener('click',resume);
 document.addEventListener('visibilitychange',pause);window.addEventListener('blur',pause);window.addEventListener('focus',pause);
-function frame(now){if(previous&&!paused)model.step(Math.min((now-previous)/1000,.05));previous=now;updateUI();render(now);requestAnimationFrame(frame);}
+function frame(now){if(paused&&!document.hidden&&document.hasFocus())resume();if(previous&&!paused)model.step(Math.min((now-previous)/1000,.05));previous=now;updateUI();render(now);requestAnimationFrame(frame);}
 updateStageUI();updateUI();requestAnimationFrame(frame);
 })(typeof globalThis==='undefined'?this:globalThis);
