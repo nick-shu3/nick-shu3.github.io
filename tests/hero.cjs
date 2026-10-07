@@ -9,11 +9,19 @@ const snapshot=JSON.stringify(s);E.step(s,.1);assert.equal(JSON.stringify(s),sna
 const one=E.create({weapon:12,armor:12});E.start(one);one.x=100;E.step(one,.1);E.step(one,.1);E.step(one,.1);E.step(one,.1);E.step(one,.1);assert.equal(one.hp,60,'one-hit kill has no retaliation');
 const bad=E.create();E.start(bad);const before=JSON.stringify(bad);E.step(bad,NaN);E.step(bad,-1);assert.equal(JSON.stringify(bad),before);
 const fight=E.create();E.start(fight);fight.x=100;E.step(fight,.1);for(let i=0;i<4;i++)E.step(fight,.1);assert.equal(fight.hp,50);assert.equal(fight.enemyHP,14);
+const M=require('../docs/games/hero-again/motion.js');
+const enemy=E.ENEMIES[0];
+assert.equal(M.enemyX({phase:'walk',x:0},enemy),830,'enemy enters from right edge');
+assert(M.enemyX({phase:'walk',x:50},enemy)<M.enemyX({phase:'walk',x:0},enemy));
+assert.equal(M.enemyX({phase:'walk',x:100},enemy),M.enemyX({phase:'fight',x:100},enemy),'no teleport at contact');
+assert.equal(M.enemyX({phase:'walk',x:100},E.ENEMIES[1]),830,'next enemy also enters at right edge');
+assert.equal(M.enemyX({phase:'fallen',x:100},enemy),245,'enemy stays at contact after death');
+assert.notEqual(M.stride(.1),M.stride(.3));
 const fs=require('node:fs'),vm=require('node:vm'),elements={},handlers={};let raf;
 const ctx=new Proxy({}, {get:(o,k)=>o[k]||(()=>{}),set:(o,k,v)=>(o[k]=v,true)});
 function el(id){return elements[id]||(elements[id]={textContent:'',disabled:false,getContext:()=>ctx,addEventListener:(key,fn)=>{handlers[id+':'+key]=fn;}});}
 const doc={hidden:false,getElementById:el,addEventListener:(key,fn)=>{handlers[key]=fn;}};
-vm.runInNewContext(fs.readFileSync('docs/games/hero-again/game.js','utf8'),{window:{HeroAgain:E,addEventListener:()=>{}},document:doc,localStorage:{getItem:()=>'{bad json',setItem:()=>{}},requestAnimationFrame:fn=>{raf=fn;},console});
+vm.runInNewContext(fs.readFileSync('docs/games/hero-again/game.js','utf8'),{window:{HeroAgain:E,HeroMotion:M,addEventListener:()=>{}},document:doc,localStorage:{getItem:()=>'{bad json',setItem:()=>{}},requestAnimationFrame:fn=>{raf=fn;},console});
 assert(elements['save-note'].textContent.includes('読み込めません'));handlers['start:click']();raf(100);raf(1100);const shown=elements.distance.textContent;
 doc.hidden=true;handlers.visibilitychange();raf(100000);assert.equal(elements.distance.textContent,shown);assert.equal(elements.phase.textContent,'一時停止中');
 doc.hidden=false;raf(200000);assert.equal(elements.distance.textContent,shown);handlers['pause:click']();raf(300000);assert.equal(elements.distance.textContent,shown,'resume must not catch up elapsed hidden time');raf(300100);assert.notEqual(elements.distance.textContent,shown);
