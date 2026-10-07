@@ -21,22 +21,32 @@ m.attack();const count=m.walls.segments.length;assert(!m.pen({x:10,y:10},true));
 m.reset();m.step(NaN);assert.equal(m.phase,'ready');
 console.log('PASS: no-wall loss, closed-loop win, detour, open/narrow gaps, swept collision, exclusions, separate strokes, draw timer, reset and terminal state.');
 assert.equal(stages.length,5);
+function loop(m,target,r){const points=[];for(let i=0;i<=20;i++){const a=2*Math.PI*i/20;points.push([target.x+r*Math.cos(a),target.y+r*Math.sin(a)]);}stroke(m,points);}
 for(const s of stages){
   assert.equal(s.drawSeconds,5);
   const game=new Model(s);game.attack();assert.equal(simulate(game),'lost','stage '+s.id+' loses without protection');
   game.reset();
-  const plan={1:[[115,285],[245,285],[245,415],[115,415],[115,285]],2:[[210,280],[330,280],[330,410],[210,410],[210,280]],3:[[55,280],[305,280],[305,415],[55,415],[55,280]],4:[[55,180],[315,180],[315,425],[55,425],[55,180]],5:[[34,260],[326,260],[326,435],[34,435],[34,260]]}[s.id];
-  stroke(game,plan);game.attack();
+  if(s.id===1)stroke(game,[[115,285],[245,285],[245,415],[115,415],[115,285]]);
+  else for(const t of s.targets)loop(game,t,{2:42,3:38,4:38,5:36}[s.id]);
+  if(s.maxLength!==undefined)assert(game.usedLength<=s.maxLength,'within ink budget');
+  game.attack();
   assert.equal(simulate(game),'won','stage '+s.id+' has a playable winning route');
   assert.equal(game.bees.length,s.bees.count);
 }
-console.log('PASS: all five stages can be lost and won with their intended five-second drawing rules.');
+const budget=new Model(stages[1]);stroke(budget,[[20,200],[340,200]]);
+assert.equal(budget.usedLength,290);assert.equal(budget.walls.segments.at(-1).b.x,310,'overlong stroke stops at ink limit');
+stroke(budget,[[30,240],[100,240]]);assert.equal(budget.usedLength,290,'no more wall after ink is spent');
+budget.attack();assert.equal(simulate(budget),'lost','short incomplete wall can be passed');
+const twoSources=new Model(stages[2]);stroke(twoSources,[[8,220],[352,220]]);twoSources.attack();
+assert.deepEqual([...new Set(twoSources.bees.map(b=>b.y===stages[2].nests[0].y?'top':'bottom'))].sort(),['bottom','top']);
+assert.equal(simulate(twoSources),'lost','one horizontal wall does not stop bees from opposite nest');
+console.log('PASS: five winnable stages, ink clipping, exhausted ink, multiple nests, and incomplete defenses.');
 // Exercise the actual browser event handlers without substituting physics logic.
 const vm=require('node:vm'),fs=require('node:fs');
 for(const width of [280,428]){
  const elements={},listeners={},frames=[],saved={};let hidden=false;
  const context=new Proxy({}, {get:(o,k)=>o[k]||(o[k]=(...args)=>{for(const a of args)if(typeof a==='number')assert(Number.isFinite(a),k+' finite');}),set:(o,k,v)=>(o[k]=v,true)});
- for(const id of ['game','phase','timer','message','finish','retry','again','next','stage-title','stage-hint','result','result-tag','result-title','result-detail'])elements[id]={textContent:'',hidden:false,disabled:false,events:{},addEventListener(k,fn){this.events[k]=fn;}};
+ for(const id of ['game','phase','timer','message','finish','retry','again','next','stage-title','stage-hint','ink-remaining','ink-fill','result','result-tag','result-title','result-detail'])elements[id]={textContent:'',hidden:false,disabled:false,style:{},events:{},addEventListener(k,fn){this.events[k]=fn;}};
  const buttons=stages.map(()=>({disabled:false,events:{},attrs:{},addEventListener(k,fn){this.events[k]=fn;},setAttribute(k,v){this.attrs[k]=v;},removeAttribute(k){delete this.attrs[k];}}));
  Object.assign(elements.game,{width:360,height:480,getContext:()=>context,getBoundingClientRect:()=>({left:0,top:0,width,height:width*4/3}),setPointerCapture(){}});
  const document={getElementById:id=>elements[id],querySelectorAll:()=>buttons,get hidden(){return hidden;},hasFocus:()=>true,addEventListener:(k,fn)=>listeners[k]=fn};
@@ -54,6 +64,9 @@ for(const width of [280,428]){
  elements.again.events.click();assert.equal(elements.result.hidden,true);assert.equal(elements.finish.disabled,false);
  elements.finish.events.click();for(let i=0;i<400;i++)tick();assert.equal(elements['result-title'].textContent,'もうひと工夫！');
  elements.retry.events.click();buttons[1].events.click();assert.match(elements['stage-title'].textContent,/^2 · /);assert.equal(buttons[1].attrs['aria-current'],'step');
+ assert.equal(elements['ink-remaining'].textContent,'線のこり 290');assert.equal(elements['ink-fill'].style.width,'100%');
+ pen('pointerdown',20,200);pen('pointermove',340,200);pen('pointerup',340,200);tick();
+ assert.equal(elements['ink-remaining'].textContent,'線のこり 0');assert.equal(elements['ink-fill'].style.width,'0%');
  buttons[0].events.click();assert.match(elements['stage-title'].textContent,/^1 · /);
 }
 console.log('PASS: narrow/wide pointer scaling, Canvas coordinates, finish, background pause, unlock, stage selection, win/loss overlay and retry. Real browser rendering is not covered.');
