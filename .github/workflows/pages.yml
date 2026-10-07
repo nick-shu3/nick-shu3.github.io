@@ -31,6 +31,7 @@ jobs:
           node --check docs/tools/im-juggler-grape/script.js
           node --check docs/games/hachiyoke-line/game.js
           node --check docs/games/hachiyoke-line/stages.js
+          node tests/hero.cjs
           node tests/hachiyoke.cjs
           node tests/grape.cjs
           node tests/security.cjs
