@@ -13,9 +13,9 @@
     nest: { x: 76, y: 72, radius: 28 },
     bees: { count: 6, radius: 8, speed: 105 }, obstacles: []
   }, {
-    id: 3, title: 'ふたりの広場', hint: '巣は上下に2つ。線は520まで。', width: 360, height: 480,
-    drawSeconds: 5, defendSeconds: 12, lineWidth: 7, maxLength: 520,
-    targets: [{ x: 108, y: 310, radius: 18 }, { x: 252, y: 310, radius: 18 }],
+    id: 3, title: 'ふたりの広場', hint: '巣は上下に2つ。7秒でふたりを囲おう。線は650まで。', width: 360, height: 480,
+    drawSeconds: 7, defendSeconds: 12, lineWidth: 7, maxLength: 650,
+    targets: [{ x: 126, y: 310, radius: 18 }, { x: 234, y: 310, radius: 18 }],
     nests: [{ x: 180, y: 68, radius: 28 }, { x: 180, y: 438, radius: 28 }],
     bees: { count: 7, radius: 8, speed: 108 }, obstacles: []
   }, {

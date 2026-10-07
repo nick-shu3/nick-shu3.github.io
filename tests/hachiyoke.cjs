@@ -23,16 +23,24 @@ console.log('PASS: no-wall loss, closed-loop win, detour, open/narrow gaps, swep
 assert.equal(stages.length,5);
 function loop(m,target,r){const points=[];for(let i=0;i<=20;i++){const a=2*Math.PI*i/20;points.push([target.x+r*Math.cos(a),target.y+r*Math.sin(a)]);}stroke(m,points);}
 for(const s of stages){
-  assert.equal(s.drawSeconds,5);
+  assert.equal(s.drawSeconds,s.id===3?7:5);
   const game=new Model(s);game.attack();assert.equal(simulate(game),'lost','stage '+s.id+' loses without protection');
   game.reset();
   if(s.id===1)stroke(game,[[115,285],[245,285],[245,415],[115,415],[115,285]]);
-  else for(const t of s.targets)loop(game,t,{2:42,3:38,4:38,5:36}[s.id]);
+  else for(const t of s.targets)loop(game,t,{2:42,3:48,4:38,5:36}[s.id]);
   if(s.maxLength!==undefined)assert(game.usedLength<=s.maxLength,'within ink budget');
   game.attack();
   assert.equal(simulate(game),'won','stage '+s.id+' has a playable winning route');
   assert.equal(game.bees.length,s.bees.count);
 }
+
+const sharedShelter=new Model(stages[2]);
+stroke(sharedShelter,[[70,265],[290,265],[290,355],[70,355],[70,265]]);
+assert.equal(sharedShelter.usedLength,620);
+sharedShelter.step(5);assert.equal(sharedShelter.phase,'draw','stage 3 leaves time after five seconds');
+sharedShelter.step(2);assert.equal(sharedShelter.phase,'defend','stage 3 starts attack after seven seconds');
+assert.equal(simulate(sharedShelter),'won','stage 3 allows one roomy shelter around both targets');
+
 const budget=new Model(stages[1]);stroke(budget,[[20,200],[340,200]]);
 assert.equal(budget.usedLength,290);assert.equal(budget.walls.segments.at(-1).b.x,310,'overlong stroke stops at ink limit');
 stroke(budget,[[30,240],[100,240]]);assert.equal(budget.usedLength,290,'no more wall after ink is spent');
