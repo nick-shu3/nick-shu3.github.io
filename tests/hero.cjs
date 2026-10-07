@@ -18,10 +18,16 @@ assert.equal(M.enemyX({phase:'walk',x:100},E.ENEMIES[1]),830,'next enemy also en
 assert.equal(M.enemyX({phase:'fallen',x:100},enemy),245,'enemy stays at contact after death');
 assert.notEqual(M.stride(.1),M.stride(.3));
 const fs=require('node:fs'),vm=require('node:vm'),elements={},handlers={};let raf;
-const ctx=new Proxy({}, {get:(o,k)=>o[k]||((...args)=>{for(const a of args)if(typeof a==='number')assert(Number.isFinite(a),'finite Canvas argument: '+k);}),set:(o,k,v)=>(o[k]=v,true)});
+const images=[],drawn=[];
+class TestImage{
+ constructor(){this.naturalWidth=1254;this.naturalHeight=1254;images.push(this);}
+ set src(value){this.path=value;}
+}
+
+const ctx=new Proxy({drawImage:(...args)=>{drawn.push(args);}}, {get:(o,k)=>o[k]||((...args)=>{for(const a of args)if(typeof a==='number')assert(Number.isFinite(a),'finite Canvas argument: '+k);}),set:(o,k,v)=>(o[k]=v,true)});
 function el(id){return elements[id]||(elements[id]={textContent:'',disabled:false,setAttribute:()=>{},getContext:()=>ctx,addEventListener:(key,fn)=>{handlers[id+':'+key]=fn;}});}
 const doc={hidden:false,getElementById:el,addEventListener:(key,fn)=>{handlers[key]=fn;}};
-vm.runInNewContext(fs.readFileSync('docs/games/hero-again/game.js','utf8'),{window:{HeroAgain:E,HeroMotion:M,addEventListener:()=>{}},document:doc,localStorage:{getItem:()=>'{bad json',setItem:()=>{}},requestAnimationFrame:fn=>{raf=fn;},console});
+vm.runInNewContext(fs.readFileSync('docs/games/hero-again/game.js','utf8'),{Image:TestImage,window:{HeroAgain:E,HeroMotion:M,addEventListener:()=>{}},document:doc,localStorage:{getItem:()=>'{bad json',setItem:()=>{}},requestAnimationFrame:fn=>{raf=fn;},console});
 assert(elements['save-note'].textContent.includes('読み込めません'));handlers['start:click']();raf(100);raf(1100);const shown=elements.distance.textContent;
 doc.hidden=true;handlers.visibilitychange();raf(100000);assert.equal(elements.distance.textContent,shown);assert.equal(elements.phase.textContent,'一時停止中');
 doc.hidden=false;raf(200000);assert.equal(elements.distance.textContent,shown);handlers['pause:click']();raf(300000);assert.equal(elements.distance.textContent,shown,'resume must not catch up elapsed hidden time');raf(300100);assert.notEqual(elements.distance.textContent,shown);
@@ -32,7 +38,7 @@ function playback(multiplier){
  function node(id){return nodes[id]||(nodes[id]={textContent:'',disabled:false,setAttribute:(k,v)=>{nodes[id][k]=v;},getContext:()=>ctx,addEventListener:(k,fn)=>{events[id+':'+k]=fn;}});}
  const engine={...E,step:(state,dt)=>{current=state;E.step(state,dt);}};
  const document={hidden:false,getElementById:node,addEventListener:()=>{}};
- vm.runInNewContext(fs.readFileSync('docs/games/hero-again/game.js','utf8'),{window:{HeroAgain:engine,HeroMotion:M,addEventListener:()=>{}},document,localStorage:{getItem:()=>null,setItem:()=>{}},requestAnimationFrame:fn=>{frame=fn;}});
+ vm.runInNewContext(fs.readFileSync('docs/games/hero-again/game.js','utf8'),{Image:TestImage,window:{HeroAgain:engine,HeroMotion:M,addEventListener:()=>{}},document,localStorage:{getItem:()=>null,setItem:()=>{}},requestAnimationFrame:fn=>{frame=fn;}});
  events['speed-'+multiplier+':click']();assert.equal(nodes['speed-'+multiplier]['aria-pressed'],'true');
  events['start:click']();frame(100);
  for(let i=1;i<=4800/multiplier;i++)frame(100+i*1000/60);
@@ -43,3 +49,18 @@ function playback(multiplier){
 const normal=playback(1);assert.deepEqual(playback(2),normal,'2x has identical damage, growth, gear and outcome');assert.deepEqual(playback(4),normal,'4x has identical damage, growth, gear and outcome');
 handlers['speed-4:click']();handlers['pause:click']();const stopped=elements.distance.textContent;raf(400000);raf(400100);assert.equal(elements.distance.textContent,stopped,'4x also respects pause');
 console.log('PASS: 1x/2x/4x equal simulated time produces identical complete state; 4x pause.');
+
+// Exercise the real PNG dimensions, loading, crop bounds and the fallback after failure.
+const png=fs.readFileSync('docs/games/hero-again/assets/hero-v2.png');
+assert.equal(png.subarray(0,8).toString('hex'),'89504e470d0a1a0a');
+assert.equal(png.readUInt32BE(16),1254);assert.equal(png.readUInt32BE(20),1254);
+assert.equal(png[25],6,'RGBA sprite preserves transparency');
+assert.equal(images[0].path,'assets/hero-v2.png');
+images[0].onload();raf(400200);assert(drawn.length>0,'loaded image rendered');
+for(const [,sx,sy,sw,sh,dx,dy,dw,dh] of drawn){
+ assert(sx>=0&&sy>=0&&sx+sw<=1254&&sy+sh<=1254,'sprite stays within PNG');
+ assert([dx,dy,dw,dh].every(Number.isFinite));assert(dw>0&&dh>0);
+}
+const count=drawn.length;images[0].onerror();raf(400300);
+assert.equal(drawn.length,count,'failed image falls back without drawing broken image');
+console.log('PASS: local transparent PNG, finite sprite rendering, bounded source frames, image failure fallback.');
