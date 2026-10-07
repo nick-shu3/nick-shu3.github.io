@@ -52,21 +52,31 @@ console.log('PASS: five winnable stages, ink clipping, exhausted ink, multiple n
 // Exercise the actual browser event handlers without substituting physics logic.
 const vm=require('node:vm'),fs=require('node:fs');
 for(const width of [280,428]){
- const elements={},listeners={},frames=[],saved={};let hidden=false;
+ const elements={},listeners={},frames=[],saved={};let hidden=false,focused=true;
  const context=new Proxy({}, {get:(o,k)=>o[k]||(o[k]=(...args)=>{for(const a of args)if(typeof a==='number')assert(Number.isFinite(a),k+' finite');}),set:(o,k,v)=>(o[k]=v,true)});
- for(const id of ['game','phase','timer','message','finish','retry','again','next','stage-title','stage-hint','ink-remaining','ink-fill','result','result-tag','result-title','result-detail'])elements[id]={textContent:'',hidden:false,disabled:false,style:{},events:{},addEventListener(k,fn){this.events[k]=fn;}};
+ for(const id of ['game','phase','timer','message','finish','retry','again','next','stage-title','stage-hint','ink-remaining','ink-fill','result','result-tag','result-title','result-detail','pause-overlay','resume'])elements[id]={textContent:'',hidden:false,disabled:false,style:{},events:{},addEventListener(k,fn){this.events[k]=fn;}};
  const buttons=stages.map(()=>({disabled:false,events:{},attrs:{},addEventListener(k,fn){this.events[k]=fn;},setAttribute(k,v){this.attrs[k]=v;},removeAttribute(k){delete this.attrs[k];}}));
  Object.assign(elements.game,{width:360,height:480,getContext:()=>context,getBoundingClientRect:()=>({left:0,top:0,width,height:width*4/3}),setPointerCapture(){}});
- const document={getElementById:id=>elements[id],querySelectorAll:()=>buttons,get hidden(){return hidden;},hasFocus:()=>true,addEventListener:(k,fn)=>listeners[k]=fn};
+ const document={getElementById:id=>elements[id],querySelectorAll:()=>buttons,get hidden(){return hidden;},hasFocus:()=>focused,addEventListener:(k,fn)=>listeners[k]=fn};
  const sandbox={document,window:{devicePixelRatio:2,addEventListener:(k,fn)=>listeners[k]=fn},localStorage:{getItem:k=>saved[k],setItem:(k,v)=>saved[k]=v},HachiyokeStages:stages,requestAnimationFrame:fn=>frames.push(fn),console};
  vm.runInNewContext(fs.readFileSync('docs/games/hachiyoke-line/game.js','utf8'),sandbox);
  let now=1;function tick(){frames.shift()(now);now+=1000/60;}
  function pen(type,x,y){elements.game.events[type]({isPrimary:true,button:0,pointerId:1,clientX:x*width/360,clientY:y*width/360,preventDefault(){}});}
  tick();assert.equal(elements.phase.textContent,'線を描いて守ろう');
+ focused=false;listeners.blur();assert.equal(elements['pause-overlay'].hidden,false);
+ pen('pointerdown',115,285);assert.equal(elements['pause-overlay'].hidden,true,'visible canvas action can recover missing focus');
+ assert.equal(elements.phase.textContent,'線を描いて守ろう','resume touch does not draw a stray segment');
+ listeners.blur();assert.equal(elements['pause-overlay'].hidden,false);
+ focused=true;tick();assert.equal(elements['pause-overlay'].hidden,true,'focus recovery without an event resumes on the next frame');
  pen('pointerdown',115,285);pen('pointermove',245,285);pen('pointermove',245,415);pen('pointermove',115,415);pen('pointermove',115,285);pen('pointerup',115,285);
  elements.finish.events.click();assert(elements.finish.disabled);
  hidden=true;listeners.visibilitychange();for(let i=0;i<120;i++)tick();assert.equal(elements.timer.textContent,'防衛 10.0秒');
- hidden=false;listeners.visibilitychange();for(let i=0;i<605;i++)tick();assert.equal(elements.result.hidden,false);assert.equal(elements['result-title'].textContent,'10秒、守りきった！');
+ elements.resume.events.click();assert.equal(elements['pause-overlay'].hidden,false,'hidden document cannot resume');
+ hidden=false;focused=false;listeners.visibilitychange();tick();assert.equal(elements['pause-overlay'].hidden,false);
+ now+=60000;tick();assert.equal(elements.timer.textContent,'防衛 10.0秒','blurred page retains remaining time');
+ elements.resume.events.click();assert.equal(elements['pause-overlay'].hidden,true,'button resumes without a focus event');
+ tick();assert.equal(elements.timer.textContent,'防衛 10.0秒','resume does not catch up background time');
+ focused=true;for(let i=0;i<605;i++)tick();assert.equal(elements.result.hidden,false);assert.equal(elements['result-title'].textContent,'10秒、守りきった！');
  assert.equal(saved['hachiyoke-unlocked-v1'],'2');assert.equal(buttons[1].disabled,false);assert.equal(buttons[2].disabled,true);assert.equal(elements.next.hidden,false);
  buttons[2].events.click();assert.match(elements['stage-title'].textContent,/^1 · /,'locked stage cannot be entered');
  elements.again.events.click();assert.equal(elements.result.hidden,true);assert.equal(elements.finish.disabled,false);

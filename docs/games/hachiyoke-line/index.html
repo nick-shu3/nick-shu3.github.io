@@ -6,9 +6,9 @@
 <meta http-equiv="Content-Security-Policy" content="default-src 'none'; script-src 'self'; style-src 'self' 'unsafe-inline'; img-src 'self' blob:; font-src 'self'; connect-src 'none'; object-src 'none'; base-uri 'self'; form-action 'none'"><link rel="stylesheet" href="../../security/standalone.css?v=1"><script src="../../security/standalone.js?v=1"></script>
 <meta name="theme-color" content="#f7f5eb">
 <title>ハチよけライン｜シュウ３のゲームと道具箱</title>
-<link rel="stylesheet" href="style.css?v=4">
-<script src="stages.js?v=4" defer></script>
-<script src="game.js?v=4" defer></script>
+<link rel="stylesheet" href="style.css?v=5">
+<script src="stages.js?v=5" defer></script>
+<script src="game.js?v=5" defer></script>
 </head>
 <body><noscript>このページはJavaScriptを有効にして、ブラウザで直接開いてください。</noscript>
 <main>
@@ -20,12 +20,13 @@
 <div class="ink"><span id="ink-remaining">線の長さ：制限なし</span><span class="ink-track"><span id="ink-fill"></span></span></div>
 <div class="board">
 <canvas id="game" width="360" height="480" aria-label="森の子を線で囲って蜂から守るゲーム。マウスまたはタッチで線を描きます。">Canvasに対応したブラウザで開いてください。</canvas>
+<div id="pause-overlay" class="pause-overlay" hidden><div><h2>一時停止中</h2><p>線と残り時間はそのままです。</p><button id="resume" type="button">再開する</button></div></div>
 <div id="result" class="result" hidden><div><p id="result-tag"></p><h2 id="result-title"></h2><p id="result-detail"></p><button id="next" hidden>次のステージへ →</button><button id="again">もう一度あそぶ</button></div></div>
 </div>
 <p id="message" class="message" role="status">描き始めると5秒スタート。森の子を囲ってみよう。</p>
 <div class="controls"><button id="finish" class="primary">描き終わり → 蜂を呼ぶ</button><button id="retry" class="secondary">リトライ</button></div>
-<p class="guide"><b>① 5〜7秒で描く</b><span>→</span><b>② 10〜14秒守る</b></p>
-<p class="note">時間内は何本でもOK。線はその場に固定されます。<br>2面から線の長さに制限があります。森の子・巣の点線内には描けません。<br>画面を離れると一時停止。</p>
+<p class="guide"><b>① 5〜8秒で描く</b><span>→</span><b>② 10〜14秒守る</b></p>
+<p class="note">時間内は何本でもOK。線はその場に固定されます。<br>2面から線の長さに制限があります。森の子・巣の点線内には描けません。<br>画面を離れると一時停止。戻れないときは「再開する」を押してください。</p>
 <footer>シュウ３ · 音なし / 外部通信なし</footer>
 </main>
 </body></html>

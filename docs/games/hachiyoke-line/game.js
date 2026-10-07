@@ -135,6 +135,7 @@ function selectStage(i){
 for(const [i,button] of stageButtons.entries())button.addEventListener('click',()=>selectStage(i));
 function updateUI(){
   const phase=model.phase;
+  $('pause-overlay').hidden=!paused||['won','lost'].includes(phase);
   if(shownPhase!==phase){
     shownPhase=phase;lastSecond=-1;
     if(phase==='won'&&stageIndex+2>unlocked){
@@ -178,10 +179,9 @@ function render(now){
   }
   for(const b of model.bees){if(model.elapsed<b.delay)continue;const flutter=Math.sin(now*.04+b.delay)*.3;ellipse(b.x-4,b.y-7,6,4,-.6+flutter,'#ffffffd9');ellipse(b.x+4,b.y-7,6,4,.6-flutter,'#ffffffd9');ellipse(b.x,b.y,8,6,0,'#efbd47');ctx.fillStyle='#59452d';ctx.fillRect(b.x-3,b.y-5,2.5,10);ctx.fillRect(b.x+2,b.y-5,2.5,10);circle(b.x+6,b.y-1,1.2,'#243e3b');}
   if(model.phase==='ready'&&stageIndex===0){ctx.fillStyle='#718267';ctx.font='13px system-ui';ctx.fillText('ここに線を描いてみよう',180,215);ctx.font='10px system-ui';ctx.fillText('森の子をぐるっと囲むと…？',180,237);}
-  if(paused){ctx.fillStyle='#f7f5ebdd';ctx.fillRect(0,0,360,480);ctx.fillStyle='#243e3b';ctx.font='bold 20px system-ui';ctx.fillText('一時停止中',180,240);}
 }
 function position(e){const r=canvas.getBoundingClientRect();return {x:(e.clientX-r.left)*stage.width/r.width,y:(e.clientY-r.top)*stage.height/r.height};}
-canvas.addEventListener('pointerdown',e=>{if(pointer!==null||!e.isPrimary||e.button!==0||paused||!['ready','draw'].includes(model.phase))return;e.preventDefault();pointer=e.pointerId;canvas.setPointerCapture(pointer);if(!model.pen(position(e),true))$('message').textContent='点線の外から描いてください。';updateUI();});
+canvas.addEventListener('pointerdown',e=>{if(!e.isPrimary||e.button!==0)return;if(paused){e.preventDefault();resume();return;}if(pointer!==null||!['ready','draw'].includes(model.phase))return;e.preventDefault();pointer=e.pointerId;canvas.setPointerCapture(pointer);if(!model.pen(position(e),true))$('message').textContent='点線の外から描いてください。';updateUI();});
 canvas.addEventListener('pointermove',e=>{if(e.pointerId!==pointer)return;e.preventDefault();const events=typeof e.getCoalescedEvents==='function'?e.getCoalescedEvents():[];for(const p of events.length?events:[e])model.pen(position(p));});
 function end(){pointer=null;model.endPen();}
 canvas.addEventListener('pointerup',end);canvas.addEventListener('pointercancel',end);canvas.addEventListener('lostpointercapture',end);
@@ -189,8 +189,12 @@ $('finish').addEventListener('click',()=>{end();model.attack();updateUI();});
 function reset(){end();model.reset();shownPhase='';previous=0;updateUI();}
 $('retry').addEventListener('click',reset);$('again').addEventListener('click',reset);
 $('next').addEventListener('click',()=>{if(model.phase==='won')selectStage(stageIndex+1);});
-function pause(){paused=document.hidden||!document.hasFocus();end();previous=0;}
+function pause(){paused=document.hidden||!document.hasFocus();end();previous=0;updateUI();}
+// Safari edge gestures can blur a visible page without delivering a later focus event.
+// An explicit action may resume only a visible page; do not catch up elapsed time.
+function resume(){if(document.hidden)return;paused=false;end();previous=0;updateUI();}
+$('resume').addEventListener('click',resume);
 document.addEventListener('visibilitychange',pause);window.addEventListener('blur',pause);window.addEventListener('focus',pause);
-function frame(now){if(previous&&!paused)model.step(Math.min((now-previous)/1000,.05));previous=now;updateUI();render(now);requestAnimationFrame(frame);}
+function frame(now){if(paused&&!document.hidden&&document.hasFocus())resume();if(previous&&!paused)model.step(Math.min((now-previous)/1000,.05));previous=now;updateUI();render(now);requestAnimationFrame(frame);}
 updateStageUI();updateUI();requestAnimationFrame(frame);
 })(typeof globalThis==='undefined'?this:globalThis);
