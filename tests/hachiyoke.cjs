@@ -53,7 +53,8 @@ console.log('PASS: five winnable stages, ink clipping, exhausted ink, multiple n
 const vm=require('node:vm'),fs=require('node:fs');
 for(const width of [280,428]){
  const elements={},listeners={},frames=[],saved={};let hidden=false,focused=true;
- const context=new Proxy({}, {get:(o,k)=>o[k]||(o[k]=(...args)=>{for(const a of args)if(typeof a==='number')assert(Number.isFinite(a),k+' finite');}),set:(o,k,v)=>(o[k]=v,true)});
+ const drawnStrokes=new Set();
+ const context=new Proxy({}, {get:(o,k)=>o[k]||(o[k]=(...args)=>{for(const a of args)if(typeof a==='number')assert(Number.isFinite(a),k+' finite');if(k==='stroke'){drawnStrokes.add(o.strokeStyle);if(['#4a6550','#779069','#b5c89a'].includes(o.strokeStyle))assert(o.lineWidth<=stages[0].lineWidth,'shelter rendering stays inside collision width');}}),set:(o,k,v)=>(o[k]=v,true)});
  for(const id of ['game','phase','timer','message','finish','retry','again','next','stage-title','stage-hint','ink-remaining','ink-fill','result','result-tag','result-title','result-detail','pause-overlay','resume'])elements[id]={textContent:'',hidden:false,disabled:false,style:{},events:{},addEventListener(k,fn){this.events[k]=fn;}};
  const buttons=stages.map(()=>({disabled:false,events:{},attrs:{},addEventListener(k,fn){this.events[k]=fn;},setAttribute(k,v){this.attrs[k]=v;},removeAttribute(k){delete this.attrs[k];}}));
  Object.assign(elements.game,{width:360,height:480,getContext:()=>context,getBoundingClientRect:()=>({left:0,top:0,width,height:width*4/3}),setPointerCapture(){}});
@@ -78,6 +79,7 @@ for(const width of [280,428]){
  tick();assert.equal(elements.timer.textContent,'防衛 10.0秒','resume does not catch up background time');
  focused=true;for(let i=0;i<605;i++)tick();assert.equal(elements.result.hidden,false);assert.equal(elements['result-title'].textContent,'10秒、守りきった！');
  assert.equal(saved['hachiyoke-unlocked-v1'],'2');assert.equal(buttons[1].disabled,false);assert.equal(buttons[2].disabled,true);assert.equal(elements.next.hidden,false);
+ for(const color of ['#4a6550','#779069','#b5c89a','#d5b15d'])assert(drawnStrokes.has(color),'forest shelter and success expression rendered');
  buttons[2].events.click();assert.match(elements['stage-title'].textContent,/^1 · /,'locked stage cannot be entered');
  elements.again.events.click();assert.equal(elements.result.hidden,true);assert.equal(elements.finish.disabled,false);
  elements.finish.events.click();for(let i=0;i<400;i++)tick();assert.equal(elements['result-title'].textContent,'もうひと工夫！');

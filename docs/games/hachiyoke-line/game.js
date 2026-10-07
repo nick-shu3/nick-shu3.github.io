@@ -157,27 +157,98 @@ function updateUI(){
 }
 function circle(x,y,r,color){ctx.beginPath();ctx.arc(x,y,r,0,Math.PI*2);ctx.fillStyle=color;ctx.fill();}
 function ellipse(x,y,rx,ry,rot,color){ctx.beginPath();ctx.ellipse(x,y,rx,ry,rot,0,Math.PI*2);ctx.fillStyle=color;ctx.fill();}
+function outlinedOval(x,y,rx,ry,rot,fill,stroke,width=1.5){ellipse(x,y,rx,ry,rot,fill);ctx.strokeStyle=stroke;ctx.lineWidth=width;ctx.stroke();}
+function curve(points,color,width=1.5){ctx.beginPath();ctx.moveTo(points[0],points[1]);ctx.quadraticCurveTo(points[2],points[3],points[4],points[5]);ctx.strokeStyle=color;ctx.lineWidth=width;ctx.lineCap='round';ctx.stroke();}
+function drawForest(){
+  ctx.fillStyle='#f2f1df';ctx.fillRect(0,0,360,480);
+  for(let y=16;y<480;y+=24)for(let x=12;x<360;x+=24)ellipse(x,y,.9,.5,-.3,'#e1e4ce');
+  // Decorative foliage only: it is never an obstacle or part of collision geometry.
+  for(const [x,y,r] of [[-12,55,42],[360,210,30],[5,430,24],[350,445,48]]){
+    circle(x,y,r,'#dce5c9');circle(x+10,y-8,r*.7,'#cdddb9');
+    for(let i=0;i<4;i++)ellipse(x-14+i*10,y+6-i%2*12,13,6,-.6+i*.3,'#b9cf9f');
+  }
+  for(const [x,y] of [[22,145],[335,310],[25,390]]){
+    curve([x,y+8,x-1,y,x+2,y-5],'#9aad7b',1.3);
+    for(let i=0;i<5;i++){const a=i*Math.PI*2/5;circle(x+Math.cos(a)*3,y-6+Math.sin(a)*3,2.5,'#fffaf0');}
+    circle(x,y-6,1.8,'#d6b66b');
+  }
+}
+function drawNest(n){
+  ellipse(n.x,n.y+29,26,4,0,'#d0d6b7');
+  outlinedOval(n.x,n.y,24,28,0,'#e0ac56','#856338',2);
+  ellipse(n.x-6,n.y-11,12,8,-.35,'#f2c97c');
+  for(let i=-2;i<=2;i++)curve([n.x-21+Math.abs(i)*2,n.y+i*9,n.x,n.y+i*9+7,n.x+21-Math.abs(i)*2,n.y+i*9],'#a5773d',1.6);
+  outlinedOval(n.x+1,n.y+11,8,9,0,'#554835','#856338',1.5);
+  ellipse(n.x+3,n.y+14,4,4,0,'#3c352a');
+  ellipse(n.x-5,n.y-28,8,4,-.3,'#71945a');
+  curve([n.x-7,n.y-28,n.x-2,n.y-29,n.x+2,n.y-27],'#4d6c40',1.2);
+  ctx.font='600 10px system-ui';ctx.fillStyle='#78613e';ctx.textAlign='center';ctx.fillText('蜂の巣',n.x,n.y-43);
+}
+function drawForestChild(t){
+  const x=t.x,y=t.y,phase=model.phase;
+  ellipse(x,y+22,23,4,0,'#d2d8ba');
+  outlinedOval(x-12,y-12,7,7,0,'#bb875e','#745540');outlinedOval(x+12,y-12,7,7,0,'#bb875e','#745540');
+  circle(x-12,y-12,3.5,'#e9c7a0');circle(x+12,y-12,3.5,'#e9c7a0');
+  outlinedOval(x-8,y+17,5,4,-.2,'#ae7a52','#745540',1.2);outlinedOval(x+8,y+17,5,4,.2,'#ae7a52','#745540',1.2);
+  outlinedOval(x,y,18,18,0,'#cb9a6d','#745540',1.8);
+  ellipse(x-5,y-9,8,5,-.4,'#dfb282');ellipse(x,y+6,12,10,0,'#f4dfbb');
+  ellipse(x-11,y+4,3.5,2.2,0,'#de9e87');ellipse(x+11,y+4,3.5,2.2,0,'#de9e87');
+  if(phase==='won'){
+    curve([x-10,y,x-7,y-6,x-4,y],'#463e31',2);curve([x+4,y,x+7,y-6,x+10,y],'#463e31',2);
+    curve([x-4,y+8,x,y+14,x+4,y+8],'#72523b',1.7);
+    for(const [dx,dy] of [[-25,-10],[25,-16]]){
+      ctx.strokeStyle='#d5b15d';ctx.lineWidth=1.5;ctx.beginPath();ctx.moveTo(x+dx-3,y+dy);ctx.lineTo(x+dx+3,y+dy);ctx.moveTo(x+dx,y+dy-3);ctx.lineTo(x+dx,y+dy+3);ctx.stroke();
+    }
+  }else if(phase==='lost'){
+    curve([x-10,y-2,x-7,y+2,x-4,y-2],'#463e31',2);curve([x+4,y-2,x+7,y+2,x+10,y-2],'#463e31',2);
+    curve([x-3,y+10,x,y+6,x+3,y+10],'#72523b',1.7);
+  }else{
+    circle(x-7,y-1,2.7,'#463e31');circle(x+7,y-1,2.7,'#463e31');
+    circle(x-7.6,y-2,0.8,'#fff9e8');circle(x+6.4,y-2,0.8,'#fff9e8');
+    if(phase==='defend'||phase==='draw'){
+      curve([x-11,y-7,x-8,y-9,x-4,y-8],'#745540',1.2);curve([x+4,y-8,x+8,y-9,x+11,y-7],'#745540',1.2);
+      ellipse(x,y+10,2,2.3,0,'#72523b');
+    }else curve([x-3,y+9,x,y+12,x+3,y+9],'#72523b',1.4);
+  }
+  ellipse(x,y+5,2.8,2,0,'#534232');
+  outlinedOval(x+3,y-21,10,4.5,-.4,'#729555','#486843',1.2);
+  curve([x-4,y-19,x+3,y-22,x+10,y-23],'#486843',1);
+  curve([x-12,y+15,x,y+21,x+12,y+15],'#55775c',4);
+  ctx.font='600 10px system-ui';ctx.fillStyle='#566b45';ctx.textAlign='center';ctx.fillText('森の子',x,y+43);
+}
+function drawBee(b,now){
+  const flutter=Math.sin(now*.04+b.delay)*.3;
+  ellipse(b.x,b.y+9,8,2,0,'#45513418');
+  outlinedOval(b.x-3,b.y-5,5,3.5,-.6+flutter,'#fffdf1e6','#839d9980',.8);
+  outlinedOval(b.x+3,b.y-5,5,3.5,.6-flutter,'#fffdf1e6','#839d9980',.8);
+  outlinedOval(b.x,b.y,7.5,5.5,0,'#efc253','#655134',1.2);
+  curve([b.x-3,b.y-4,b.x-2,b.y,b.x-3,b.y+4],'#655134',2);
+  curve([b.x+1,b.y-4,b.x+2,b.y,b.x+1,b.y+4],'#655134',1.8);
+  circle(b.x+4.5,b.y-1.5,1.3,'#403a2e');circle(b.x+4.2,b.y-2,.4,'#fffaf0');
+  curve([b.x+4,b.y-4,b.x+7,b.y-8,b.x+8,b.y-6],'#655134',.9);
+}
+function drawShelter(){
+  ctx.lineCap='round';ctx.lineJoin='round';
+  // All three strokes stay inside the actual wall width. No decorative thickness.
+  for(const [color,width] of [['#4a6550',stage.lineWidth],['#779069',stage.lineWidth*.62],['#b5c89a',stage.lineWidth*.18]]){
+    ctx.strokeStyle=color;ctx.lineWidth=width;ctx.beginPath();
+    for(const s of model.walls.segments){ctx.moveTo(s.a.x,s.a.y);ctx.lineTo(s.b.x,s.b.y);}
+    ctx.stroke();
+    for(const s of model.walls.segments)if(distance(s.a,s.b)<.01)circle(s.a.x,s.a.y,width/2,color);
+  }
+}
 function render(now){
   const dpr=Math.min(2,window.devicePixelRatio||1),rect=canvas.getBoundingClientRect();
   const width=Math.round(rect.width*dpr),height=Math.round(rect.height*dpr);
   if(canvas.width!==width||canvas.height!==height){canvas.width=width;canvas.height=height;}
   ctx.setTransform(canvas.width/stage.width,0,0,canvas.height/stage.height,0,0);
-  ctx.fillStyle='#f0f2e5';ctx.fillRect(0,0,360,480);
-  for(let y=16;y<480;y+=20)for(let x=10;x<360;x+=20)circle(x,y,.7,'#dce2d0');
-  for(const [x,y,r] of [[-12,55,42],[360,210,30],[5,430,24],[350,445,48]]){circle(x,y,r,'#dbe6cc');circle(x+10,y-8,r*.7,'#d0dfbd');}
+  drawForest();
   // Visual no-draw rings match the protected geometric regions.
   if(['ready','draw'].includes(model.phase))for(const c of [...stage.targets,...nests(stage)]){ctx.beginPath();ctx.arc(c.x,c.y,c.radius+stage.lineWidth/2+8,0,Math.PI*2);ctx.strokeStyle='#abbba1';ctx.setLineDash([3,5]);ctx.lineWidth=1;ctx.stroke();ctx.setLineDash([]);}
-  for(const n of nests(stage)){
-    ellipse(n.x,n.y,25,29,0,'#d69d48');for(let i=-2;i<=2;i++){ctx.beginPath();ctx.moveTo(n.x-20,n.y+i*9);ctx.quadraticCurveTo(n.x,n.y+i*9+5,n.x+20,n.y+i*9);ctx.strokeStyle='#b37f35';ctx.lineWidth=2;ctx.stroke();}ellipse(n.x,n.y+9,8,10,0,'#52452e');
-    ctx.font='10px system-ui';ctx.fillStyle='#6d785e';ctx.textAlign='center';ctx.fillText('蜂の巣',n.x,n.y-43);
-  }
-  ctx.strokeStyle='#315e66';ctx.lineWidth=stage.lineWidth;ctx.lineCap='round';ctx.lineJoin='round';
-  for(const s of model.walls.segments){ctx.beginPath();ctx.moveTo(s.a.x,s.a.y);ctx.lineTo(s.b.x,s.b.y);ctx.stroke();if(distance(s.a,s.b)<.01)circle(s.a.x,s.a.y,stage.lineWidth/2,'#315e66');}
-  for(const t of stage.targets){
-    const x=t.x,y=t.y;ellipse(x,y+20,23,5,0,'#d0dac4');circle(x-12,y-13,9,'#b4815b');circle(x+12,y-13,9,'#b4815b');circle(x,y,18,'#c99a70');ellipse(x,y+6,13,11,0,'#f2dfbd');circle(x-7,y-1,2,'#35483c');circle(x+7,y-1,2,'#35483c');ellipse(x,y+5,3,2,0,'#35483c');ellipse(x+4,y-22,10,5,-.5,'#648552');
-    ctx.fillStyle='#52684b';ctx.font='10px system-ui';ctx.fillText('森の子',x,y+43);
-  }
-  for(const b of model.bees){if(model.elapsed<b.delay)continue;const flutter=Math.sin(now*.04+b.delay)*.3;ellipse(b.x-4,b.y-7,6,4,-.6+flutter,'#ffffffd9');ellipse(b.x+4,b.y-7,6,4,.6-flutter,'#ffffffd9');ellipse(b.x,b.y,8,6,0,'#efbd47');ctx.fillStyle='#59452d';ctx.fillRect(b.x-3,b.y-5,2.5,10);ctx.fillRect(b.x+2,b.y-5,2.5,10);circle(b.x+6,b.y-1,1.2,'#243e3b');}
+  for(const n of nests(stage))drawNest(n);
+  drawShelter();
+  for(const t of stage.targets)drawForestChild(t);
+  for(const b of model.bees)if(model.elapsed>=b.delay)drawBee(b,now);
   if(model.phase==='ready'&&stageIndex===0){ctx.fillStyle='#718267';ctx.font='13px system-ui';ctx.fillText('ここに線を描いてみよう',180,215);ctx.font='10px system-ui';ctx.fillText('森の子をぐるっと囲むと…？',180,237);}
 }
 function position(e){const r=canvas.getBoundingClientRect();return {x:(e.clientX-r.left)*stage.width/r.width,y:(e.clientY-r.top)*stage.height/r.height};}
