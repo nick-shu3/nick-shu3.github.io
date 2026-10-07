@@ -3,7 +3,7 @@
 const E=window.HeroAgain,by=id=>document.getElementById(id),canvas=by('scene'),g=canvas.getContext('2d'),KEY='shu3.hero-again.v1';
 let saved=null,storageOK=true;
 try{const raw=localStorage.getItem(KEY);if(raw&&raw.length<=2048)saved=JSON.parse(raw);}catch(_){storageOK=false;}
-const s=E.create(saved);let paused=false,last=0,seen=-1,lastSave='',visualTime=0;
+const s=E.create(saved);let paused=false,last=0,seen=-1,lastSave='',visualTime=0,speed=1,accumulator=0;
 function save(){const value=JSON.stringify(s.saved);if(value===lastSave)return;try{localStorage.setItem(KEY,value);lastSave=value;}catch(_){storageOK=false;by('save-note').textContent='保存できません。この画面を開いている間だけ記録が残ります。';}}
 if(!storageOK)by('save-note').textContent='保存を読み込めませんでした。新しい冒険として開始します。';
 function update(){
@@ -68,6 +68,13 @@ by('start').addEventListener('click',()=>{if(s.phase==='won')s.saved.attempts=Ma
 by('pause').addEventListener('click',()=>{if(document.hidden)return;paused=!paused;last=0;update();});
 document.addEventListener('visibilitychange',()=>{if(document.hidden&&['walk','fight','fallen'].includes(s.phase)){paused=true;last=0;save();update();}});
 window.addEventListener('pagehide',save);
-function frame(now){const dt=last?Math.min(.1,Math.max(0,(now-last)/1000)):0;last=now;if(!paused&&!document.hidden){E.step(s,dt);visualTime+=dt;}update();render();requestAnimationFrame(frame);}
+for(const value of [1,2,4])by('speed-'+value).addEventListener('click',()=>{
+ speed=value;last=0;
+ for(const option of [1,2,4])by('speed-'+option).setAttribute('aria-pressed',String(option===speed));
+});
+
+function frame(now){const dt=last?Math.min(.1,Math.max(0,(now-last)/1000)):0;last=now;if(!paused&&!document.hidden){accumulator=Math.min(.4,accumulator+dt*speed);
+ // Fixed simulation ticks keep battle outcomes identical at each playback speed.
+ for(let ticks=0;accumulator>=1/60-1e-9&&ticks<24;ticks++){E.step(s,1/60);accumulator=Math.max(0,accumulator-1/60);visualTime+=1/60;}}update();render();requestAnimationFrame(frame);}
 update();render();requestAnimationFrame(frame);
 })();
