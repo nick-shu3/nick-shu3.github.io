@@ -143,7 +143,7 @@ function updateUI(){
       updateStageUI();
     }
     $('phase').textContent={ready:'線を描いて守ろう',draw:'描いています',defend:'森の子を守ろう',won:'守りきった！',lost:'蜂が届いてしまった…'}[phase];
-    $('message').textContent={ready:stageIndex===0?'描き始めると5秒スタート。森の子を囲ってみよう。':stage.hint+' 描き始めると5秒スタート。',draw:'指を離しても続けて描けます。隙間をふさごう。',defend:'線が壁になりました。'+stage.defendSeconds+'秒間、見守ろう。',won:'成功！次のステージが解放されました。',lost:'隙間や壁の端から蜂が来たかも。囲い方を変えてみよう。'}[phase];
+    $('message').textContent={ready:stageIndex===0?'描き始めると5秒スタート。森の子を囲ってみよう。':stage.hint+' 描き始めると'+stage.drawSeconds+'秒スタート。',draw:'指を離しても続けて描けます。隙間をふさごう。',defend:'線が壁になりました。'+stage.defendSeconds+'秒間、見守ろう。',won:'成功！次のステージが解放されました。',lost:'隙間や壁の端から蜂が来たかも。囲い方を変えてみよう。'}[phase];
     $('finish').disabled=!['ready','draw'].includes(phase);
     $('result').hidden=!['won','lost'].includes(phase);
     $('next').hidden=phase!=='won'||stageIndex===stages.length-1;
