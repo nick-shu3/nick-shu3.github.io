@@ -45,7 +45,30 @@ function limb(x,y,angle,length,color,width=10){
  box(-width/2,0,width,length,3,color,'#233442');line([[0,3],[0,length-4]],'#ffffff35',2);
  box(-width/2-2,length-4,width+7,9,3,'#354552','#1b2b38');g.restore();
 }
+// Normal local PNG asset; a failed load keeps the original Canvas hero available.
+const heroArt=new Image();let heroArtReady=false;
+heroArt.onload=()=>{heroArtReady=heroArt.naturalWidth===1254&&heroArt.naturalHeight===1254;};
+heroArt.onerror=()=>{heroArtReady=false;};
+heroArt.src='assets/hero-v2.png';
+const heroFrames=[
+ {sx:0,sy:0,ax:350,feet:620},
+ {sx:627,sy:0,ax:360,feet:618},
+ {sx:0,sy:627,ax:400,feet:574},
+ {sx:627,sy:627,ax:300,feet:581}
+];
 function hero(x,y){
+ if(!heroArtReady){vectorHero(x,y);return;}
+ const running=s.phase==='walk';
+ const frame=heroFrames[s.flash?3:running?1+Math.floor(visualTime*8)%2:0];
+ const scale=.19,bob=running?-Math.abs(Math.sin(visualTime*14))*3:0;
+ oval(x,266,27,6,'#102a3059');
+ g.save();g.translate(x,y);
+ if(s.phase==='fallen'){g.translate(0,20);g.rotate(-1.3);}
+ g.drawImage(heroArt,frame.sx,frame.sy,627,627,-frame.ax*scale,36-frame.feet*scale+bob,627*scale,627*scale);
+ if(s.flash){line([[40,-35],[51,-25],[57,-13]],'#f8dc93',3);}
+ g.restore();
+}
+function vectorHero(x,y){
  const running=s.phase==='walk',swing=running?window.HeroMotion.stride(visualTime):0;
  oval(x,266,27,6,'#102a3059');y+=running?-Math.abs(Math.sin(visualTime*14))*3:0;
  g.save();g.translate(x,y);if(s.phase==='fallen')g.rotate(-1.3);
