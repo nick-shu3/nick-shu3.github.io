@@ -1,0 +1,3 @@
+/* Hidden before any application UI paints; remains hidden if scripts are blocked. */
+html.standalone-pending body { visibility: hidden !important; }
+html.standalone-pending body > noscript { visibility: visible !important; }

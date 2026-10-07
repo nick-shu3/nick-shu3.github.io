@@ -4,16 +4,22 @@ on:
     branches: [main]
   pull_request:
     branches: [main]
+  schedule:
+    - cron: "23 3 * * 1"
   workflow_dispatch:
 permissions:
   contents: read
 jobs:
   verify:
-    runs-on: ubuntu-latest
+    runs-on: ubuntu-24.04
+    timeout-minutes: 10
     steps:
       - uses: actions/checkout@d23441a48e516b6c34aea4fa41551a30e30af803 # v6
         with:
           persist-credentials: false
+          fetch-depth: 0
+      - name: Scan secrets in files and history
+        run: bash scripts/scan-secrets.sh
       - name: Validate source and release boundary
         run: |
           node --check docs/catalog.js
@@ -26,6 +32,7 @@ jobs:
           node tests/hachiyoke.cjs
           node tests/grape.cjs
           node tests/security.cjs
+          node tests/security-regression.cjs
           node tests/release.cjs
           node tests/squad.cjs
           node tests/kagi.cjs
