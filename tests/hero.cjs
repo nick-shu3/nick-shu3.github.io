@@ -18,7 +18,7 @@ assert.equal(M.enemyX({phase:'walk',x:100},E.ENEMIES[1]),830,'next enemy also en
 assert.equal(M.enemyX({phase:'fallen',x:100},enemy),245,'enemy stays at contact after death');
 assert.notEqual(M.stride(.1),M.stride(.3));
 const fs=require('node:fs'),vm=require('node:vm'),elements={},handlers={};let raf;
-const ctx=new Proxy({}, {get:(o,k)=>o[k]||(()=>{}),set:(o,k,v)=>(o[k]=v,true)});
+const ctx=new Proxy({}, {get:(o,k)=>o[k]||((...args)=>{for(const a of args)if(typeof a==='number')assert(Number.isFinite(a),'finite Canvas argument: '+k);}),set:(o,k,v)=>(o[k]=v,true)});
 function el(id){return elements[id]||(elements[id]={textContent:'',disabled:false,setAttribute:()=>{},getContext:()=>ctx,addEventListener:(key,fn)=>{handlers[id+':'+key]=fn;}});}
 const doc={hidden:false,getElementById:el,addEventListener:(key,fn)=>{handlers[key]=fn;}};
 vm.runInNewContext(fs.readFileSync('docs/games/hero-again/game.js','utf8'),{window:{HeroAgain:E,HeroMotion:M,addEventListener:()=>{}},document:doc,localStorage:{getItem:()=>'{bad json',setItem:()=>{}},requestAnimationFrame:fn=>{raf=fn;},console});
