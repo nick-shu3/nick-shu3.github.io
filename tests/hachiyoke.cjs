@@ -23,11 +23,11 @@ console.log('PASS: no-wall loss, closed-loop win, detour, open/narrow gaps, swep
 assert.equal(stages.length,5);
 function loop(m,target,r){const points=[];for(let i=0;i<=20;i++){const a=2*Math.PI*i/20;points.push([target.x+r*Math.cos(a),target.y+r*Math.sin(a)]);}stroke(m,points);}
 for(const s of stages){
-  assert.equal(s.drawSeconds,s.id===3?7:5);
+  assert.equal(s.drawSeconds,s.id===3?7:s.id===4?8:5);
   const game=new Model(s);game.attack();assert.equal(simulate(game),'lost','stage '+s.id+' loses without protection');
   game.reset();
   if(s.id===1)stroke(game,[[115,285],[245,285],[245,415],[115,415],[115,285]]);
-  else for(const t of s.targets)loop(game,t,{2:42,3:48,4:38,5:36}[s.id]);
+  else for(const t of s.targets)loop(game,t,{2:42,3:48,4:50,5:36}[s.id]);
   if(s.maxLength!==undefined)assert(game.usedLength<=s.maxLength,'within ink budget');
   game.attack();
   assert.equal(simulate(game),'won','stage '+s.id+' has a playable winning route');

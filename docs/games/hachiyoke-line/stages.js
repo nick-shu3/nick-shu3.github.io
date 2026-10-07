@@ -19,10 +19,10 @@
     nests: [{ x: 180, y: 68, radius: 28 }, { x: 180, y: 438, radius: 28 }],
     bees: { count: 7, radius: 8, speed: 108 }, obstacles: []
   }, {
-    id: 4, title: '離れたふたり', hint: '離れた2人と2つの巣。線は500まで。', width: 360, height: 480,
-    drawSeconds: 5, defendSeconds: 12, lineWidth: 7, maxLength: 500,
+    id: 4, title: '離れたふたり', hint: '8秒で2人を別々に囲おう。線は680まで。', width: 360, height: 480,
+    drawSeconds: 8, defendSeconds: 12, lineWidth: 7, maxLength: 680,
     targets: [{ x: 100, y: 235, radius: 18 }, { x: 260, y: 370, radius: 18 }],
-    nests: [{ x: 270, y: 70, radius: 28 }, { x: 300, y: 445, radius: 28 }],
+    nests: [{ x: 270, y: 70, radius: 28 }, { x: 320, y: 445, radius: 28 }],
     bees: { count: 8, radius: 8, speed: 112 }, obstacles: []
   }, {
     id: 5, title: 'みんなを守れ', hint: '3つの巣から9匹。線は710まで。', width: 360, height: 480,
