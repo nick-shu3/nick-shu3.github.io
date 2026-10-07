@@ -20,6 +20,8 @@ jobs:
           fetch-depth: 0
       - name: Scan secrets in files and history
         run: bash scripts/scan-secrets.sh
+      - name: Install pinned security parser (CI only)
+        run: npm ci --ignore-scripts --no-audit --no-fund
       - name: Validate source and release boundary
         run: |
           node --check docs/catalog.js

@@ -4,11 +4,11 @@
 
 1. 入力（フォーム・URL・保存データ）、表示先、通信先、依存関係の変化をレビューする。
 2. **Push前**にGitleaksで秘密情報を検査する。Linux x64では `bash scripts/scan-secrets.sh`。他の環境では公式の同版Gitleaksを導入し `gitleaks dir --redact=100 .` と `gitleaks git --redact=100 --log-opts="--all" .` を実行する。出力に秘密の実値を載せない。
-3. `node tests/security.cjs`、`node tests/security-regression.cjs`、`node tests/release.cjs` と対象機能のテストを実行する。
+3. `npm ci --ignore-scripts --no-audit --no-fund` の後、`node tests/security.cjs`、`node tests/security-regression.cjs`、`node tests/release.cjs` と対象機能のテストを実行する。構文解析器は検査時のみ使用し、公開ページには配信しない。
 4. 作業ブランチへPushし、PRを作成する。既存の必須チェック `verify` の成功を確認してからマージする。
 5. Pagesのデプロイ成功と公開画面の動作を確認する。
 
-CIはPR・main更新・週次・手動実行で動く。全履歴取得、取得済み全refの履歴検査、作業ツリー検査、公開ソースの自動探索、CSP・外部リソース・危険なHTML描画・コード実行・通信API・埋め込み補助対策のチェックを行う。Gitleaksは公式v8.30.1のアーカイブをSHA-256照合後に実行する。チェックサム不一致、ダウンロード失敗、秘密検出も失敗扱いにする。
+CIはPR・main更新・週次・手動実行で動く。全履歴取得、取得済み全refの履歴検査、作業ツリー検査、公開ソースの自動探索、CSP・外部リソース・危険なHTML描画・コード実行・通信API・埋め込み補助対策のチェックを行う。JavaScript構文解析により角括弧アクセスやコメントを挟んだ危険な呼び出しも検出する。Gitleaksは公式v8.30.1のアーカイブをSHA-256照合後に実行する。チェックサム不一致、ダウンロード失敗、秘密検出も失敗扱いにする。
 
 GitHubのCIはPush後に走る。公開作業ブランチに秘密をPushした時点で流出し得るため、CIは流出そのものを防ぐ仕組みではない。GitHubのPush protectionも併用する（設定状態は本リポジトリのソースだけでは確認できない）。このチェックはパターンに基づく補助検査であり、難読化・新しいAPI・業務ロジックの脆弱性などを完全には検出しない。
 
