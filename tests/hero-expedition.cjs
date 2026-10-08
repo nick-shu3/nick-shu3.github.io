@@ -113,3 +113,24 @@ for(const stage of [5,6]){
  endFrame(100);endFrame(200);assert.equal(endNodes['ending-panel'].hidden,false);assert.equal(scrolls,1,'ending card scrolled into view once');assert(endNodes['ending-result'].textContent.includes('マラソン往復'));
 }
 console.log('PASS: unaccelerated fall at 4x, real-time UI accounting and home/true ending render with a single result-card scroll.');
+// Chapter presentation is separate from simulation time, and never reveals an unfinished goal.
+function presentationUI(state,reduced=false){
+ const ns={},callbacks={};let draw,scrollCount=0;
+ const el=id=>ns[id]||(ns[id]={textContent:'',setAttribute:()=>{},getContext:()=>ctx,addEventListener:(name,fn)=>{callbacks[id+':'+name]=fn;},scrollIntoView:()=>{scrollCount++;}});
+ vm.runInNewContext(fs.readFileSync('docs/games/hero-again/game.js','utf8'),{Image:Img,window:{HeroAgain:{...E,create:()=>state},HeroMotion:M,HeroScenery:V,matchMedia:()=>({matches:reduced}),addEventListener:()=>{}},document:{hidden:false,getElementById:el,addEventListener:()=>{}},localStorage:{getItem:()=>null,setItem:()=>{}},requestAnimationFrame:f=>{draw=f;}});
+ return {ns,callbacks,frame:t=>draw(t),scrolls:()=>scrollCount};
+}
+for(let stage=0;stage<7;stage++){
+ const done=E.create(legacy);done.stage=stage;done.phase='won';done.x=E.goal(done);
+ const ui=presentationUI(done);assert.equal(ui.ns['chapter-clear'].hidden,false);assert(ui.ns['clear-story'].textContent.length>20);assert.equal(ui.ns['clear-distance'].textContent,'0.000 km');
+ for(let i=0;i<140;i++)ui.frame(100+i*1000/60);
+ const displayed=Number(ui.ns['clear-distance'].textContent.replace(/[, km]/g,''));assert.equal(displayed,E.goal(done)/1000,'exact final chapter distance');assert.equal(ui.scrolls(),1,'one recap scroll');
+ if(stage===5){assert(ui.ns['clear-story'].textContent.includes('通常クリア'));assert(ui.ns.start.textContent.includes('任意'));}
+ const still=presentationUI(done,true);assert.equal(Number(still.ns['clear-distance'].textContent.replace(/[, km]/g,'')),E.goal(done)/1000,'reduced motion skips count animation');
+}
+const noticeState=E.create(legacy);noticeState.stage=3;noticeState.phase='ready';const notice=presentationUI(noticeState);
+assert(notice.ns['chapter-clear'].hidden);assert.equal(notice.ns['clear-distance-final']?.textContent||'','','uncleared destination not exposed');
+noticeState.saved.expedition.weapons[0]=200;notice.frame(100);assert(notice.ns['growth-notice'].textContent.includes('武器更新'));assert(notice.ns['growth-notice'].textContent.includes('攻撃力'));
+noticeState.saved.expedition.resist.heat=2;notice.frame(200);assert(notice.ns['growth-notice'].textContent.includes('環境への備え'));
+const heatReason=E.create(legacy);heatReason.stage=3;E.start(heatReason);for(let i=0;i<51;i++)E.step(heatReason,.1);heatReason.hp=.00001;E.step(heatReason,.1);assert.equal(heatReason.phase,'fallen');assert(heatReason.event.includes('熱による継続ダメージ'));const reasonUI=presentationUI(heatReason);assert(reasonUI.ns['defeat-note'].textContent.includes('耐熱'));
+console.log('PASS: seven chapter recaps, exact animated distances, reduced motion, single scroll, optional mastermind, gear/environment notices and heat defeat explanation.');

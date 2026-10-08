@@ -132,7 +132,7 @@ function step(s,dt){
   s.index++;s.phase='walk';emit(s,text);return;
  }
  const damage=Math.max(1,e.attack-st.defense);s.hp=Math.max(0,s.hp-damage);emit(s,e.name+'へ '+hit.toLocaleString('ja-JP')+' ダメージ ／ 反撃 '+damage.toLocaleString('ja-JP'));
- if(s.hp===0){s.lastDeath=s.x;s.saved.death[s.stage]=s.x;s.phase='fallen';s.timer=3;emit(s,(s.x/1000).toFixed(3)+'kmで力尽きた。装備・強化・素材は残り、3秒後に入口から再出発。');}
+ if(s.hp===0){s.lastDeath=s.x;s.saved.death[s.stage]=s.x;s.phase='fallen';s.timer=3;emit(s,(s.x/1000).toFixed(3)+'kmで敵の反撃により力尽きた。武器・防具を育てて再挑戦しよう。装備・強化・素材は残り、3秒後に入口から再出発。');}
 }
 function zone(s){if(s.stage===0)return null;const e=enemies(s)[s.index],index=e?e.zone:8,z=ZONES[s.stage===2?8-index:index];return {index,name:z[0],boss:enemies(s).find(e=>e.zone===index&&e.boss),rank:(s.stage-1)*9+index};}
 const api={...T,DISTANCE,MAX_UPGRADE,STAGES,ZONES,clean,create,stats,start,step,select,play,stop,goal,enemies,record,equipment,unlocked,zone};
