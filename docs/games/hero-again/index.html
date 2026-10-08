@@ -4,19 +4,23 @@
 <meta http-equiv="Content-Security-Policy" content="default-src 'none'; script-src 'self'; style-src 'self' 'unsafe-inline'; img-src 'self' blob:; font-src 'self'; connect-src 'none'; object-src 'none'; base-uri 'self'; form-action 'none'">
 <link rel="stylesheet" href="../../security/standalone.css?v=1"><script src="../../security/standalone.js?v=1"></script>
 <meta name="theme-color" content="#131d30"><title>勇者は何度でも｜試作版</title>
-<link rel="stylesheet" href="style.css?v=3"><script src="engine.js?v=1" defer></script><script src="motion.js?v=2" defer></script><script src="game.js?v=6" defer></script>
+<link rel="stylesheet" href="style.css?v=4"><script src="engine.js?v=1" defer></script><script src="campaign.js?v=1" defer></script><script src="motion.js?v=3" defer></script><script src="game.js?v=7" defer></script>
 </head><body><noscript>JavaScriptを有効にして直接開いてください。</noscript><main>
 <header><a href="../../../index.html">← ゲームと道具箱</a><span>試作版 · AUTO RPG</span></header>
 <p class="eyebrow">ANOTHER LIFE, A LITTLE FURTHER.</p><h1>勇者は何度でも<span>倒れても、剣は残る。</span></h1>
+<nav class="stage-select" aria-label="ステージ選択"><button id="stage-0" type="button" aria-pressed="true">入門 1km</button><button id="stage-1" type="button" aria-pressed="false" disabled>往路 42.195km</button><button id="stage-2" type="button" aria-pressed="false" disabled>裏・復路 42.195km</button></nav>
+<p class="stage-guide" id="stage-guide">入門をクリアすると往路が解放されます。</p>
 <section class="journey"><div class="row"><strong id="phase">出発の準備</strong><span id="distance">0 / 1,000 m</span></div><progress id="progress" max="1000" value="0" aria-label="ゴールへの進み具合"></progress>
+<div class="route-info"><strong id="zone">チュートリアル</strong><span id="boss-distance">ゴールまで1,000m</span></div>
 <canvas id="scene" width="800" height="340" aria-label="勇者が右へ進み、魔物と戦う横スクロールの風景"></canvas>
 <div class="health"><div class="row"><b>勇者のHP</b><strong id="hp">60 / 60</strong></div><progress id="health" max="60" value="60" aria-label="勇者のHP"></progress></div></section>
 <div class="controls"><button id="start">冒険をはじめる</button><button id="pause" disabled>一時停止</button></div>
 <div class="speed-controls" role="group" aria-label="再生速度"><span>再生速度</span><button id="speed-1" type="button" aria-pressed="true">1倍</button><button id="speed-2" type="button" aria-pressed="false">2倍</button><button id="speed-4" type="button" aria-pressed="false">4倍</button></div>
+<button id="stop" type="button" disabled>冒険を中断してステージ選択へ</button>
 <p id="message" role="status">装備は引き継ぎ。レベルと身体能力は、倒れると初期値に戻ります。</p>
 <section class="stats" aria-label="勇者の能力"><div><span>レベル</span><b id="level">1</b></div><div><span>攻撃力</span><b id="attack">8</b></div><div><span>防御力</span><b id="defense">2</b></div><div><span>次のLvまで</span><b id="xp">2体</b></div></section>
-<section class="equipment"><div class="row"><h2>次の勇者へ残るもの</h2><span class="badge">永続</span></div><div class="gear"><div><span>⚔ 武器</span><b id="weapon">旅立ちの剣 +0</b></div><div><span>◆ 鎧</span><b id="armor">旅立ちの鎧 +0</b></div></div><p>魔物を倒すと武器か鎧が +1。装備は自動で適用されます（各 +12 まで）。</p></section>
+<section class="equipment"><div class="row"><h2>次の勇者へ残るもの</h2><span class="badge">永続</span></div><div class="gear"><div><span>⚔ 武器</span><b id="weapon">旅立ちの剣 +0</b></div><div><span>◆ 鎧</span><b id="armor">旅立ちの鎧 +0</b></div></div><p id="gear-guide">入門では魔物を倒すと武器か鎧が +1（各 +12 まで）。</p><div class="loot-status"><span id="materials">強化素材 0</span><span id="guarantee">往路から装備ドロップが追加されます。</span></div></section>
 <div class="records"><span id="attempt">挑戦 1回目</span><span id="best">最長 0 m</span><span id="wins">踏破 0回</span></div>
-<details><summary>遊び方・ダメージの仕組み</summary><p>勇者は自動で進み、接触した魔物と交互に攻撃します。勇者が先制し、倒しきれなかったときだけ反撃されます。</p><p>与ダメージ＝攻撃力。被ダメージ＝魔物の攻撃力−防御力（最低1）。2体倒すごとにレベルが上がり、最大HP・攻撃力・防御力が成長します。</p><p>HPが尽きるとゲーム内時間で3秒後に再出発。装備と最長記録を引き継ぎます。1,000mのゴールを目指してください。1倍・2倍・4倍を途中で切り替えられます。倍率は進行速度だけを変え、能力やダメージは変わりません。</p><p>画面を離れると一時停止。「再開する」で続けられます。保存はこのブラウザ内のみ。画面を閉じている間は進行しません。</p></details>
+<details><summary>遊び方・成長・保存の仕組み</summary><p>入門1,000m → 往路42.195km → 裏・復路42.195km。クリア画面のボタンから次へ進めます。往路・復路は各9区間で、約250mごとに敵、区間末にはボスが待っています。</p><p>勇者は先制攻撃します。倒しきれなかったときだけ反撃されます。入門の与ダメージ＝攻撃力。往路・復路の与ダメージ＝攻撃力−敵の防御力（最低1）。被ダメージ＝敵の攻撃力−防御力（最低1）。2体倒すごとにレベルが上がります。</p><p>往路・復路の通常敵は素材を必ず1個、20%で装備を落とします。区間ごとの累計5体ごとに確定報酬があり、最初の2回で武器と防具がそろいます。重複装備は素材5個、ボスは素材10個と初回の王印装備を落とします。</p><p>素材で新しいランクの武器・防具を自動強化します。1段階で基礎性能 +8%、最大 +200。必要素材は5＋現在の強化値×2。王印装備は基礎性能が25%高く、強化済みの古い装備を含めて最も強いものを自動装備します。区間の最初の5体は装備を集めやすい先遣隊です。</p><p>倒れるとレベル・身体能力・HPが初期値に戻り、ゲーム内3秒後に挑戦中のステージ入口から再出発します。装備・強化・素材・撃破数・解放状況は残ります。中断やページを閉じた場合も、次はステージ入口からです。位置やHPの途中再開はありません。</p><p>1倍・2倍・4倍は進行速度だけを変えます。画面を離れると一時停止。「再開する」で続けられます。記録はこのブラウザ内のみ。閉じている間は進行しません。</p></details>
 <footer id="save-note">音なし・外部通信なし・ブラウザ内保存</footer>
 </main></body></html>
