@@ -19,8 +19,8 @@ function makeEnemies(stage){
   const rank=(stage-1)*9+zone,z=ZONES[stage===2?8-zone:zone],begin=zone*5000,end=Math.min(DISTANCE,(zone+1)*5000);
   const hp=Math.round(80*1.65**rank),attack=Math.round(34*1.55**rank),defense=Math.round(3*1.5**rank);
   for(let x=begin+250,n=0;x<end;x+=250,n++){
-   // Each zone starts with five scouts, giving a safe place to earn its guaranteed gear.
-   const factor=(n<5?.65:1)*(1+(x-begin)/(end-begin)*.2);
+   // Five scouts teach the new tier; then difficulty rises without a sudden jump.
+   const factor=n<5?.65:.65+.5*(n-4)/Math.max(1,Math.ceil((end-begin)/250)-6);
    list.push({x,name:(stage===2?'覚醒 ': '')+z[1][n%2],type:z[2][n%2],hp:Math.round(hp*factor),attack:Math.round(attack*factor),defense:Math.round(defense*factor),rank,zone,boss:false,tint:z[7],approach:250});
   }
   list.push({x:end,name:stage===2?BACK_BOSSES[zone]:z[3],type:stage===2&&zone===8?5:z[4],hp:hp*5,attack:Math.round(attack*1.4),defense:Math.round(defense*1.3),rank,zone,boss:true,tint:z[7],approach:end-(list[list.length-1]?.x||begin)});
@@ -60,7 +60,7 @@ function equipment(s,key){
  if(s.stage===0)return legacy;
  const items=s.saved[key==='weapon'?'weapons':'armors'],rare=s.saved[key==='weapon'?'rareWeapons':'rareArmors'];let best=legacy;
  for(let i=0;i<18;i++)if(items[i]>=0){
-  const power=Math.round((key==='weapon'?36:24)*1.55**i*(1+items[i]*.08)*(rare[i]?1.25:1));
+  const power=Math.round((key==='weapon'?36:24)*1.55**i*(1+items[i]*.10)*(rare[i]?1.25:1));
   if(power>=best.power)best={power,index:i,level:items[i],name:gearName(i,key,rare[i])};
  }return best;
 }
@@ -101,7 +101,7 @@ function refine(s){
  }return changed;
 }
 function reward(s,e){
- material(s,e.boss?10:1);let text=e.name+'を倒した。素材 +'+(e.boss?10:1)+'。';
+ material(s,e.boss?10:2);let text=e.name+'を倒した。素材 +'+(e.boss?10:2)+'。';
  if(e.boss&&!s.saved.bosses[e.rank]){s.saved.bosses[e.rank]=true;text+=' '+drop(s,e.rank,e.rank%2===0?'weapon':'armor',true);}
  if(!e.boss){
   const count=s.saved.counts[e.rank]=Math.min(1000000,s.saved.counts[e.rank]+1);

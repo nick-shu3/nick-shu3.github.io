@@ -37,7 +37,10 @@ const saved=C.clean(JSON.parse(JSON.stringify(fresh.saved)));assert.deepEqual(sa
 assert(JSON.stringify(saved).length<8192,'save below browser load cap');
 C.play(fresh);assert.equal(fresh.stage,2);assert.equal(C.zone(fresh).name,'魔王城');
 const returnDeaths=finish(fresh,700000);assert(returnDeaths>0);assert.equal(C.zone(fresh).name,'旅立ちの草原');assert(fresh.saved.bosses.every(Boolean));
-assert(fresh.saved.weapons.every(x=>x>=0)&&fresh.saved.armors.every(x=>x>=0),'guaranteed drops cover all zones');
+// Faster completion may precede the tenth kill needed for the final zone armor.
+const collection=C.create(fresh.saved,()=>1);C.select(collection,1);C.play(collection);finish(collection,500000);
+assert(collection.saved.weapons.every(x=>x>=0)&&collection.saved.armors.every(x=>x>=0),'guaranteed drops cover all zones after enough cumulative kills');
+assert(outwardDeaths<=5&&returnDeaths<=20,'guaranteed rewards bound no-random-drop retries');
 const stable=JSON.stringify(fresh.saved);C.step(fresh,.1);assert.equal(JSON.stringify(fresh.saved),stable);
 const reload=C.create(JSON.parse(stable),()=>1);assert.equal(reload.stage,2);assert.equal(reload.phase,'ready');assert.equal(reload.x,0);assert.deepEqual(reload.saved,fresh.saved);
 C.play(reload);C.step(reload,.1);assert(!C.select(reload,0),'no stage switching during combat');C.stop(reload);assert.equal(reload.x,0);assert.equal(reload.level,1);assert(C.select(reload,0));
@@ -65,3 +68,27 @@ assert.equal(C.clean({wins:1,stageBest:[1000,250,0]}).started[1],true);
 assert.equal(C.clean({started:['true',1,null]}).started[0],false,'invalid flags rejected');
 console.log('PASS: manual restart, reload, automatic restart, stage switching and replay count each departure once; old saves migrate.');
 console.log('PASS: original tutorial unchanged, legacy migration, locked routes, malformed saves, 18 zone bosses, exponential growth, guaranteed gear, no-drop outbound/return completion, death retention and reload.');
+
+// Fixed-step worst-case progression: no random drops, including no bonus rarity.
+const balanced=C.create({wins:1,weapon:12,armor:9,selected:1},()=>1);
+for(const stage of [1,2]){
+ C.select(balanced,stage);C.play(balanced);
+ let ticks=0,deaths=0,repeats=0,maxRepeats=0,last=-1;
+ while(balanced.phase!=='won'&&ticks<600000){
+  const before=balanced.phase;C.step(balanced,1/60);ticks++;
+  if(before!=='fallen'&&balanced.phase==='fallen'){
+   deaths++;repeats=balanced.lastDeath===last?repeats+1:1;last=balanced.lastDeath;maxRepeats=Math.max(maxRepeats,repeats);
+  }
+ }
+ assert.equal(balanced.phase,'won','fixed-step route completes without random drops');
+ assert(deaths<=(stage===1?5:20),'retry budget');
+ assert(maxRepeats<=4,'no prolonged identical defeat loop');
+ console.log('PASS: stage '+stage+' fixed-step no-random-drop '+(deaths+1)+' attempts, '+(ticks/60/4/60).toFixed(1)+' simulated minutes at 4x, longest repeated defeat '+maxRepeats);
+}
+for(const stage of [1,2]){
+ const foes=C.enemies({...balanced,stage});
+ for(let i=1;i<foes.length;i++){
+  const a=foes[i-1],b=foes[i];
+  if(!a.boss&&!b.boss&&a.zone===b.zone)assert(b.hp/a.hp<=1.26,'smooth regular enemy ramp');
+ }
+}
