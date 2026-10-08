@@ -1,6 +1,8 @@
 'use strict';
 (()=> {
 const E=window.HeroAgain,V=window.HeroScenery,M=window.HeroMotion,by=id=>document.getElementById(id),canvas=by('scene'),g=canvas.getContext('2d'),KEY='shu3.hero-again.v1';
+const B=window.HeroBosses,bossImages=B?B.load():null;
+let bossActor='',bossEntered=0,bossAttackUntil=0,bossPreviousHP=0;
 let saved=null,storageOK=true,backupRaw='';
 const gentle=window.matchMedia?window.matchMedia('(prefers-reduced-motion: reduce)').matches:false;
 let atlasArt=null,gearStamp='',recapStage=-1,recapProgress=0,growthAge=0,lastGear=null,lastResist='',lastStage=-1,lastNoticeSerial=-1,lastGearStats=null;
@@ -177,6 +179,7 @@ function vectorHero(x,y){
  g.restore();
 }
 function drawEnemy(x,y,e){
+ if(B&&B.draw(g,bossImages,e,x,visualTime-bossEntered,visualTime,Math.max(0,bossAttackUntil-visualTime),gentle))return;
  g.save();if(e.tint)g.filter='hue-rotate('+e.tint+'deg)';
  if(e.boss){g.translate(x,266);g.scale(1.45,1.45);g.translate(-x,-266);}
  if(e.type<3){monster(x,y,e);}else{
@@ -237,7 +240,7 @@ function monster(x,y,e){
  g.restore();
 }
 function enemyDetails(x,e){
- if(s.stage<3)return;
+ if(s.stage<3||(B&&B.design(e)&&bossImages[B.design(e).file].ready))return;
  const z=E.ZONES_EXTRA[e.rank-18],pulse=gentle?0:Math.sin(visualTime*3)*2;
  g.save();if(e.boss){g.translate(x,266);g.scale(1.45,1.45);g.translate(-x,-266);}
  if(z.env[0]>.5){
@@ -422,10 +425,16 @@ function render(){
   line([[goalX+10,127],[goalX+10,105]],'#dacba2',3);poly([[goalX+11,105],[goalX+38,108],[goalX+11,119]],'#c77d73');
   g.fillStyle='#f1dcac';g.font='bold 12px system-ui';g.fillText('GOAL',goalX+24,147);
  }
- const e=E.enemies(s)[s.index];if(e){const x=M.sceneEnemyX(s,e)+M.layout(s.stage).direction*(e.boss?35:0),rise=M.groundY(s.stage,x)-266;if(x>-70&&x<870){g.save();g.translate(0,rise);facing(x,()=>{drawEnemy(x,231,e);enemyDetails(x,e);});g.fillStyle='#edf0da';g.font='bold 12px system-ui';g.textAlign='center';g.fillText((e.boss?'BOSS · ':'')+e.name,x,e.boss?116:160);g.textAlign='left';if(s.phase==='fight'){box(x-30,e.boss?124:169,60,5,2,'#182e3a');box(x-30,e.boss?124:169,60*s.enemyHP/e.hp,5,2,'#dca07f');}g.restore();}}
+ const e=E.enemies(s)[s.index];
+ const actor=e?[s.stage,s.index,e.name].join(':'):'';
+ if(actor!==bossActor){bossActor=actor;bossEntered=-1;bossAttackUntil=0;bossPreviousHP=s.hp;}
+ else if(s.phase==='fight'&&s.flash>0&&s.hp<bossPreviousHP)bossAttackUntil=visualTime+.28;
+ bossPreviousHP=s.hp;
+ if(e){const dedicated=B&&B.design(e),labelY=dedicated?88:e.boss?116:160,healthY=dedicated?96:e.boss?124:169;
+ const x=M.sceneEnemyX(s,e)+M.layout(s.stage).direction*(e.boss?35:0),rise=M.groundY(s.stage,x)-266;if(x>-70&&x<870){if(bossEntered<0)bossEntered=visualTime;g.save();g.translate(0,rise);facing(x,()=>{drawEnemy(x,231,e);enemyDetails(x,e);});g.fillStyle='#edf0da';g.font='bold 12px system-ui';g.textAlign='center';g.fillText((e.boss?'BOSS · ':'')+e.name,x,labelY);g.textAlign='left';if(s.phase==='fight'){box(x-30,healthY,60,5,2,'#182e3a');box(x-30,healthY,60*s.enemyHP/e.hp,5,2,'#dca07f');}g.restore();}}
  if(s.stage>0){const gear=E.equipment(s,'weapon');if(gear.index>=0){const color=gear.index>=18?E.ZONES_EXTRA[gear.index-18].color:V.gearColor(gear.index);oval(M.layout(s.stage).heroX,266,28,5,color+'33');}}
  const heroX=M.layout(s.stage).heroX;facing(heroX,()=>hero(heroX,s.phase==='falling'?100+130*s.saved.expedition.fall/E.goal(s):230));g.restore();
- if(e&&e.boss&&s.phase==='fight'){const color=s.stage>=3?E.ZONES_EXTRA[e.rank-18].color:V.THEMES[V.realm(s.stage,e.zone)].color;box(216,16,368,48,10,'#142534dd',color+'66');g.fillStyle=color;g.font='bold 13px system-ui';g.textAlign='center';g.fillText((s.stage===2?'覚醒 BOSS · ':'区間 BOSS · ')+e.name,400,36);box(234,45,332,7,3,'#070e19');box(234,45,332*s.enemyHP/e.hp,7,3,color);g.textAlign='left';}
+ if(e&&e.boss&&s.phase==='fight'){const color=s.stage>=3?E.ZONES_EXTRA[e.rank-18].color:V.THEMES[V.realm(s.stage,e.zone)].color;box(216,16,368,48,10,'#142534dd',color+'66');g.fillStyle=color;g.font='bold 13px system-ui';g.textAlign='center';g.fillText((B&&B.design(e)?'BOSS · ':s.stage===2?'覚醒 BOSS · ':'区間 BOSS · ')+e.name,400,36);box(234,45,332,7,3,'#070e19');box(234,45,332*s.enemyHP/e.hp,7,3,color);g.textAlign='left';}
  if(paused||s.phase==='won'){rect(0,0,800,340,'#132031bd');g.fillStyle='#f0d8a2';g.textAlign='center';g.font='bold 30px system-ui';g.fillText(paused?'一時停止中':s.stage>=3?(s.stage===6?'輪を越えた、その先へ。':s.stage===5?'おかえり、勇者。通常クリア！':'階段は、まだ続く。'):s.stage===2?'往復、踏破。':s.stage===1?'討伐完了！ 故郷へ帰ろう':'勇者、ゴールへ。',400,161);g.font='16px system-ui';g.fillText(paused?'下の「再開する」で続けられます':s.stage===1?'魔力が高まり、帰り道の魔物が強化された。':s.stage===5?'冒険は達成。黒幕への挑戦は、任意の追加目標です。':s.stage<6?'下のボタンから、次の冒険へ':'装備は、次の冒険にも残ります。',400,198);g.textAlign='left';}
 }
 by('start').addEventListener('click',()=>{paused=false;E.play(s);last=0;accumulator=0;update();});
