@@ -38,3 +38,18 @@ nextFrame(100);for(let i=1;i<=8;i++)nextFrame(100+i*100);
 draws.length=0;state.serial++;state.hp--;state.flash=.18;nextFrame(1000);nextFrame(1100);
 assert(draws.some(p=>p.age>.65&&p.attack>0),'combat event triggers counterattack instead of restarting entry');
 console.log('PASS: real battle log updates preserve boss entry and trigger counterattack.');
+
+// The sprite's transformed corners must clear the top HUD (bottom edge 64),
+// even during entry/attack and on the highest visible stair approach.
+for(const ground of [210,218,257,266,286])for(const [name,item] of Object.entries(B.DESIGNS)){
+ const image={naturalWidth:480,naturalHeight:600};
+ for(const age of [0,.1,.65,2])for(const attack of [0,.07,.14,.28]){
+  const p=B.pose(item.kind,age,1,attack,false);let top=Infinity;
+  const ctx=new Proxy({drawImage:(im,sx,sy,sw,sh,x,y,w,h)=>{
+   for(const cx of [x,x+w])for(const cy of [y,y+h])top=Math.min(top,ground+p.dy+p.scale*(cx*Math.sin(p.angle)+cy*Math.cos(p.angle)));
+  }},{get:(o,k)=>o[k]||(()=>{}),set:(o,k,v)=>(o[k]=v,true)});
+  B.draw(ctx,{[item.file]:{image,ready:true}},{name,boss:true},300,age,1,attack,false,Math.min(174,(ground-82)/1.03-8));
+  assert(top>=74,'entry/attack sprite clears HUD by at least 10px: '+name);
+ }
+}
+console.log('PASS: enlarged boss entry and attack corners clear the top HUD on flat ground and stair approaches.');

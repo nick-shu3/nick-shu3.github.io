@@ -181,7 +181,7 @@ function vectorHero(x,y){
  g.restore();
 }
 function drawEnemy(x,y,e){
- if(B&&B.draw(g,bossImages,e,x,visualTime-bossEntered,visualTime,Math.max(0,bossAttackUntil-visualTime),gentle))return;
+ if(B&&B.draw(g,bossImages,e,x,visualTime-bossEntered,visualTime,Math.max(0,bossAttackUntil-visualTime),gentle,Math.min(174,(M.groundY(s.stage,x)-82)/1.03-8)))return;
  if(N&&N.draw(g,enemyImages,e,x,s.stage,visualTime,s.phase,Math.max(0,bossAttackUntil-visualTime),gentle))return;
  g.save();if(e.tint)g.filter='hue-rotate('+e.tint+'deg)';
  if(e.boss){g.translate(x,266);g.scale(1.45,1.45);g.translate(-x,-266);}
@@ -459,8 +459,8 @@ function render(){
  if(actor!==bossActor){bossActor=actor;bossEntered=-1;bossAttackUntil=0;bossPreviousHP=s.hp;}
  else if(s.phase==='fight'&&s.flash>0&&s.hp<bossPreviousHP)bossAttackUntil=visualTime+.28;
  bossPreviousHP=s.hp;
- if(e){const dedicated=B&&B.design(e),labelY=dedicated?88:e.boss?116:160,healthY=dedicated?96:e.boss?124:169;
- const x=M.sceneEnemyX(s,e)+M.layout(s.stage).direction*(e.boss?35:0),rise=M.groundY(s.stage,x)-266;if(x>-70&&x<870){if(bossEntered<0)bossEntered=visualTime;g.save();g.translate(0,rise);facing(x,()=>{drawEnemy(x,231,e);enemyDetails(x,e);});g.fillStyle='#edf0da';g.font='bold 12px system-ui';g.textAlign='center';g.fillText((e.boss?'BOSS · ':'')+e.name,x,labelY);g.textAlign='left';if(s.phase==='fight'){box(x-30,healthY,60,5,2,'#182e3a');box(x-30,healthY,60*s.enemyHP/e.hp,5,2,'#dca07f');}g.restore();}}
+ if(e){const dedicated=B&&B.design(e),size=N&&N.size(e,s.stage),healthY=size?266-size.height-16:e.boss?124:169,labelY=healthY-9;
+ const x=M.sceneEnemyX(s,e)+M.layout(s.stage).direction*(e.boss?55:20),rise=M.groundY(s.stage,x)-266;if(x>-70&&x<870){if(bossEntered<0)bossEntered=visualTime;g.save();g.translate(0,rise);facing(x,()=>{drawEnemy(x,231,e);enemyDetails(x,e);});g.fillStyle='#edf0da';g.font='bold 12px system-ui';g.textAlign='center';if(!dedicated)g.fillText((e.boss?'BOSS · ':'')+e.name,x,labelY);g.textAlign='left';if(!dedicated&&s.phase==='fight'){box(x-30,healthY,60,5,2,'#182e3a');box(x-30,healthY,60*s.enemyHP/e.hp,5,2,'#dca07f');}g.restore();}}
  if(s.stage>0){const gear=E.equipment(s,'weapon');if(gear.index>=0){const color=gear.index>=18?E.ZONES_EXTRA[gear.index-18].color:V.gearColor(gear.index);oval(M.layout(s.stage).heroX,266,28,5,color+'33');}}
  const heroX=M.layout(s.stage).heroX;facing(heroX,()=>hero(heroX,s.phase==='falling'?100+130*s.saved.expedition.fall/E.goal(s):230));drawDamage();g.restore();
  if(e&&e.boss&&s.phase==='fight'){const color=s.stage>=3?E.ZONES_EXTRA[e.rank-18].color:V.THEMES[V.realm(s.stage,e.zone)].color;box(216,16,368,48,10,'#142534dd',color+'66');g.fillStyle=color;g.font='bold 13px system-ui';g.textAlign='center';g.fillText((B&&B.design(e)?'BOSS · ':s.stage===2?'覚醒 BOSS · ':'区間 BOSS · ')+e.name,400,36);box(234,45,332,7,3,'#070e19');box(234,45,332*s.enemyHP/e.hp,7,3,color);g.textAlign='left';}
@@ -488,11 +488,11 @@ function damageLabel(target,value,x,y,continuous){
 }
 function battleStep(dt){
  const before={stage:s.stage,index:s.index,phase:s.phase,hp:s.hp,enemyHP:s.enemyHP},enemy=E.enemies(s)[s.index];
- const x=enemy?M.sceneEnemyX(s,enemy)+M.layout(s.stage).direction*(enemy.boss?35:0):0;
+ const x=enemy?M.sceneEnemyX(s,enemy)+M.layout(s.stage).direction*(enemy.boss?55:20):0;
  E.step(s,dt);
  if(s.stage!==before.stage||!['walk','fight'].includes(before.phase))return;
  const hit=before.phase==='fight'?Math.max(0,before.enemyHP-s.enemyHP):0;
- if(hit&&enemy)damageLabel('enemy',hit,x,(B&&B.design(enemy)?76:enemy.boss?104:148)+M.groundY(s.stage,x)-266,false);
+ if(hit&&enemy){const size=N&&N.size(enemy,s.stage);damageLabel('enemy',hit,x,Math.max(106,(B&&B.design(enemy)?108:size?266-size.height-38:enemy.boss?104:148)+M.groundY(s.stage,x)-266),false);}
  const loss=Math.max(0,before.hp-s.hp);
  if(loss)damageLabel('hero',loss,M.layout(s.stage).heroX,150,!hit);
 }
@@ -500,7 +500,7 @@ function drawDamage(){
  for(let i=damageLabels.length-1;i>=0;i--)if(visualTime-damageLabels[i].time>.85)damageLabels.splice(i,1);
  g.save();g.font='bold 21px system-ui';g.textAlign='center';g.lineWidth=4;g.strokeStyle='#251219';g.fillStyle='#ff6868';
  for(const label of damageLabels){
-  const age=visualTime-label.time,y=label.y-(gentle?0:age*24),value=label.value>=1?Math.round(label.value).toLocaleString('ja-JP'):label.value.toFixed(2);
+  const age=visualTime-label.time,y=label.target==='enemy'?Math.max(92,label.y-(gentle?0:age*24)):label.y-(gentle?0:age*24),value=label.value>=1?Math.round(label.value).toLocaleString('ja-JP'):label.value.toFixed(2);
   if(value==='0.00')continue;
   g.globalAlpha=gentle?1:Math.min(1,(.85-age)/.2);g.strokeText('−'+value,label.x,y);g.fillText('−'+value,label.x,y);
  }

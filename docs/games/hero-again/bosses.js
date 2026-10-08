@@ -1,16 +1,16 @@
 'use strict';
 (() => {
 const DESIGNS = Object.freeze({
- '魔王': {file:'demon-king',color:'#f15b59',height:154,width:142,kind:'sword'},
- '覚醒魔王': {file:'awakened-king',color:'#cf77ff',height:160,width:152,kind:'sword'},
- '終門の王': {file:'gate-king',color:'#edc582',height:151,width:155,kind:'shield'},
- '環の書記官': {file:'ring-scribe',color:'#8bdcff',height:145,width:150,kind:'magic'}
+ '魔王': {file:'demon-king',color:'#f15b59',height:185,width:178,kind:'sword'},
+ '覚醒魔王': {file:'awakened-king',color:'#cf77ff',height:192,width:190,kind:'sword'},
+ '終門の王': {file:'gate-king',color:'#edc582',height:181,width:194,kind:'shield'},
+ '環の書記官': {file:'ring-scribe',color:'#8bdcff',height:174,width:188,kind:'magic'}
 });
 function design(enemy){return enemy && enemy.boss===true && Object.hasOwn(DESIGNS,enemy.name)?DESIGNS[enemy.name]:null;}
 function pose(kind,age,time,attack,reduced){
  if(reduced)return {alpha:1,dx:0,dy:0,scale:1,angle:0,pulse:0};
  const entry=Math.min(1,Math.max(0,age)/.65),hit=Math.sin(Math.PI*Math.min(1,Math.max(0,attack)/.28));
- return {alpha:.35+.65*entry,dx:(1-entry)*22-hit*(kind==='shield'?7:13),dy:kind==='magic'?Math.sin(time*2.2)*3:Math.sin(time*3)*.7,scale:1+(1-entry)*.08,angle:hit*(kind==='sword'?-.075:kind==='shield'?.035:0),pulse:(Math.sin(time*3)+1)/2};
+ return {alpha:.35+.65*entry,dx:(1-entry)*22-hit*(kind==='shield'?7:13),dy:kind==='magic'?Math.sin(time*2.2)*3:Math.sin(time*3)*.7,scale:1+(1-entry)*.03,angle:hit*(kind==='sword'?-.045:kind==='shield'?.025:0),pulse:(Math.sin(time*3)+1)/2};
 }
 function load(){
  const images=Object.create(null);
@@ -21,10 +21,10 @@ function load(){
  }
  return images;
 }
-function draw(g,images,enemy,x,age,time,attack,reduced){
+function draw(g,images,enemy,x,age,time,attack,reduced,maxHeight=174){
  const item=design(enemy),asset=item&&images[item.file];if(!asset||!asset.ready)return false;
  const p=pose(item.kind,age,time,attack,reduced),image=asset.image;
- const ratio=Math.min(item.width/image.naturalWidth,item.height/image.naturalHeight),w=image.naturalWidth*ratio,h=image.naturalHeight*ratio;
+ const ratio=Math.min(item.width/image.naturalWidth,Math.min(item.height,maxHeight)/image.naturalHeight),w=image.naturalWidth*ratio,h=image.naturalHeight*ratio;
  g.save();g.translate(x,266);g.globalAlpha=p.alpha;
  g.beginPath();g.ellipse(0,0,40+p.pulse*3,7,0,0,Math.PI*2);g.fillStyle=item.color+'33';g.fill();
  g.translate(p.dx,p.dy);g.rotate(p.angle);g.scale(p.scale,p.scale);
