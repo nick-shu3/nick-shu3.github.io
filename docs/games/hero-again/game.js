@@ -2,6 +2,7 @@
 (()=> {
 const E=window.HeroAgain,V=window.HeroScenery,M=window.HeroMotion,by=id=>document.getElementById(id),canvas=by('scene'),g=canvas.getContext('2d'),KEY='shu3.hero-again.v1';
 const B=window.HeroBosses,bossImages=B?B.load():null;
+const N=window.HeroEnemies,enemyImages=N?N.load():null;
 let bossActor='',bossEntered=0,bossAttackUntil=0,bossPreviousHP=0;
 let saved=null,storageOK=true,backupRaw='';
 const gentle=window.matchMedia?window.matchMedia('(prefers-reduced-motion: reduce)').matches:false;
@@ -180,6 +181,7 @@ function vectorHero(x,y){
 }
 function drawEnemy(x,y,e){
  if(B&&B.draw(g,bossImages,e,x,visualTime-bossEntered,visualTime,Math.max(0,bossAttackUntil-visualTime),gentle))return;
+ if(N&&N.draw(g,enemyImages,e,x,s.stage,visualTime,s.phase,Math.max(0,bossAttackUntil-visualTime),gentle))return;
  g.save();if(e.tint)g.filter='hue-rotate('+e.tint+'deg)';
  if(e.boss){g.translate(x,266);g.scale(1.45,1.45);g.translate(-x,-266);}
  if(e.type<3){monster(x,y,e);}else{
@@ -241,6 +243,7 @@ function monster(x,y,e){
 }
 function enemyDetails(x,e){
  if(s.stage<3||(B&&B.design(e)&&bossImages[B.design(e).file].ready))return;
+ const normal=N&&N.variant(e,s.stage);if(normal&&enemyImages[normal.sheet].ready)return;
  const z=E.ZONES_EXTRA[e.rank-18],pulse=gentle?0:Math.sin(visualTime*3)*2;
  g.save();if(e.boss){g.translate(x,266);g.scale(1.45,1.45);g.translate(-x,-266);}
  if(z.env[0]>.5){

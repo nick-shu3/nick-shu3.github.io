@@ -1,5 +1,6 @@
 'use strict';
 require('./hero-bosses.cjs');
+require('./hero-enemies.cjs');
 const assert=require('node:assert/strict'),E=require('../docs/games/hero-again/engine.js');
 assert.deepEqual(E.clean({weapon:-1,armor:Infinity,best:2000,attempts:0,wins:'2'}),E.clean(null));
 assert.equal(E.clean({weapon:12}).weapon,12);assert.equal(E.clean({weapon:13}).weapon,0);
