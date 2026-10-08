@@ -3,6 +3,7 @@
 const E=window.HeroAgain,V=window.HeroScenery,M=window.HeroMotion,by=id=>document.getElementById(id),canvas=by('scene'),g=canvas.getContext('2d'),KEY='shu3.hero-again.v1';
 const B=window.HeroBosses,bossImages=B?B.load():null;
 const N=window.HeroEnemies,enemyImages=N?N.load():null;
+const L=window.HeroLandscapes,landscapeImages=L?L.load():null;
 let bossActor='',bossEntered=0,bossAttackUntil=0,bossPreviousHP=0;
 let saved=null,storageOK=true,backupRaw='';
 const gentle=window.matchMedia?window.matchMedia('(prefers-reduced-motion: reduce)').matches:false;
@@ -352,8 +353,10 @@ function homeLandmark(){
  for(let i=0;i<3;i++){const x=(s.stage===5?70:510)+i*85,y=229-i%2*16;box(x,y,66,45,3,'#c5b493','#536355');poly([[x-8,y],[x+33,y-31],[x+74,y]],'#91646b','#493e4d');box(x+24,y+21,18,24,3,'#485f62');box(x+8,y+8,12,12,2,'#f1daa0');}
 }
 function expeditionLandscape(){
- if(s.stage===6&&s.phase==='won'){rect(0,0,800,340,'#849cae');oval(655,88,38,38,'#efd49d');rect(0,210,800,130,'#94a681');homeLandmark();return;}
+ if(s.stage===6&&s.phase==='won'){if(!(L&&L.draw(g,landscapeImages,6,34,1,true))){rect(0,0,800,340,'#849cae');oval(655,88,38,38,'#efd49d');rect(0,210,800,130,'#94a681');homeLandmark();}return;}
  const z=E.zone(s),position=Math.max(0,Math.min(1,(s.x-z.begin)/(z.end-z.begin)));
+ const illustrated=L&&L.draw(g,landscapeImages,s.stage,z.rank,position,false);
+ if(!illustrated){
  rect(0,0,800,340,z.sky);const prev=E.ZONES_EXTRA[z.index-1];
  if(prev&&prev.stage===s.stage&&position<.08&&!gentle){g.save();g.globalAlpha=1-position/.08;rect(0,0,800,340,prev.sky);g.restore();}
  if(s.stage===3){
@@ -370,13 +373,36 @@ function expeditionLandscape(){
   if(z.env[1]>.5&&!gentle)for(let i=0;i<20;i++)oval((i*73)%800,((i*39+visualTime*20)%250),1,1,'#eaf5ed99');
  }
  realmDetails(z,position);
+ }else{
+  if(position<.08&&!gentle){const prev=E.ZONES_EXTRA[z.index-1];if(prev&&prev.stage===s.stage){g.save();g.globalAlpha=1-position/.08;L.draw(g,landscapeImages,s.stage,prev.rank,1,false);g.restore();}}
+  // Quiet foreground particles retain motion without obscuring painted scenery.
+  for(let i=0;i<12;i++){const x=((i*127+(gentle?0:visualTime*8))%900)-50,y=80+(i*43)%160;oval(x,y,i%3?1:1.7,i%3?1:1.7,z.color+'66');}
+ }
  const view=M.layout(s.stage);
  if(view.stairs){
-  // A common slope joins ascent and descent; the return faces the opposite way.
-  poly([[0,M.groundY(s.stage,0)],[800,M.groundY(s.stage,800)],[800,340],[0,340]],z.floor);
-  const offset=((z.index+position)*900)%30;
-  for(let i=-1;i<29;i++){const x=i*30-view.direction*offset,y=M.groundY(s.stage,x);line([[x,y],[x+30,y],[x+30,y-2.4]],'#e4d9c5aa',3);line([[x,y+12],[x+30,y+12]],z.color+'33',1);}
- }else{rect(0,264,800,76,z.floor);line([[0,266],[800,266]],'#e4d9c5aa',3);} 
+  // Physical staircase geometry follows the same actor ground line.
+  poly([[0,M.groundY(s.stage,0)+18],[800,M.groundY(s.stage,800)+18],[800,M.groundY(s.stage,800)+30],[0,M.groundY(s.stage,0)+30]],'#1b202c');
+  const offset=((z.index+position)*900)%40;
+  for(let i=-1;i<22;i++){
+   const x=i*40-view.direction*offset,y=M.groundY(s.stage,x),tint=i%2?z.floor:'#49545d';
+   poly([[x,y],[x+40,y],[x+40,y+15],[x,y+18]],tint,'#252b35');
+   line([[x,y],[x+40,y],[x+40,y-3.2]],'#e5d9bcb3',2.5);
+   line([[x+5,y+7],[x+22,y+5],[x+29,y+10]],'#11192355',1);
+   line([[x+2,y+17],[x+38,y+14]],z.color+'44',1);
+  }
+  for(let i=0;i<6;i++){
+   const x=i*170-40-view.direction*offset,y=M.groundY(s.stage,x)+18;
+   poly([[x-9,y],[x+14,y-1],[x+24,340],[x-15,340]],'#303744','#141b27');
+   line([[x+5,y+7],[x+11,337]],'#c2c4b43a',2);
+  }
+ }else{
+  rect(0,264,800,76,z.floor);line([[0,266],[800,266]],'#e4d9c5aa',3);
+  const drift=s.x%100;
+  for(let row=0;row<3;row++)for(let col=-1;col<10;col++){
+   const x=col*100+row%2*50-drift,y=268+row*25;
+   box(x,y,98,23,2,row%2?'#4b435e':'#55506a','#30283f');line([[x+7,y+3],[x+85,y+3]],'#bda2cc33',1);
+  }
+ }
  if(s.stage===5&&s.phase==='won'){rect(0,0,800,340,'#ebd7a31a');homeLandmark();for(let i=0;i<9;i++)oval(35+i*82,90+i%3*24,2,2,'#f3d492');}
  if(s.phase==='falling'){rect(0,0,800,340,'#100c1ed0');for(let i=0;i<8;i++)line([[i*105,0],[i*105,340]],'#f0ce8544',2);g.fillStyle='#f2d5a1';g.font='bold 20px system-ui';g.textAlign='center';g.fillText('めでたし、めでたし……？',400,95);g.textAlign='left';}
 }
