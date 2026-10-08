@@ -2,7 +2,7 @@
 (()=>{
 const B=typeof module!=='undefined'&&module.exports?require('./campaign.js'):window.HeroAgain;
 const DEPTH=6351000,SKY=30000,MAX=200;
-// Fictional protected stairway. Physical displacement and traversal pacing are separate.
+// Protected stairway: movement matches the 65 m/s campaign pace.
 const zones=[
  {stage:3,end:2200000,name:'赤く響く空洞',color:'#e58a55',sky:'#321826',floor:'#5b3631',env:[1,0,0,1],gear:'heat',enemy:['融鉄の獣','圧晶の巨人'],boss:'核の門番',hint:'熱い岩盤の向こうに、同じ輪の刻印がある。'},
  {stage:3,end:5200000,name:'流れる岩の回廊',color:'#e4a16a',sky:'#392934',floor:'#755144',env:[.85,0,0,.8],gear:'pressure',enemy:['熔岩の精','岩殻の兵'],boss:'流岩の守護者',hint:'誰かが先に、通れる道を造っている。'},
@@ -124,10 +124,12 @@ function step(s,dt){
  if(s.phase==='fallen'){s.timer-=dt;if(s.timer<=0){ledger.attempts[s.stage-3]=Math.min(1000000,ledger.attempts[s.stage-3]+1);start(s);}checkpoint(s);return;}
  const z=zone(s),p=protection(s),st=stats(s),n=enemies(s)[s.index];
  s.stamina=Math.min(100,s.stamina+dt*(12-9*z.env[2]*(1-p.oxygen)));
- s.hp=Math.max(0,s.hp-dt*st.maxHP*.004*z.env[0]*(1-p.heat));
+ // Keep travel heat exposure per metre unchanged at the slower movement pace.
+ const heatPace=s.phase==='walk'?65/((z.end-z.begin)/90):1;
+ s.hp=Math.max(0,s.hp-dt*st.maxHP*.004*z.env[0]*(1-p.heat)*heatPace);
  if(s.hp===0){defeat(s,'heat');checkpoint(s);return;}
  if(s.phase==='walk'){
-  const before=s.x;s.x=Math.min(n?n.x:goal(s),s.x+dt*(z.end-z.begin)/90*(1-.25*z.env[1]*(1-p.cold)));
+  const before=s.x;s.x=Math.min(n?n.x:goal(s),s.x+dt*65*(1-.25*z.env[1]*(1-p.cold)));
   const move=s.x-before;ledger.walk=Math.min(1e12,ledger.walk+move);ledger.route[s.stage-3]=Math.max(ledger.route[s.stage-3],s.x);if(s.stage<6){const key=s.stage===5?'descent':'climb';ledger[key]=Math.min(1e12,ledger[key]+move);}
   if(n&&s.x>=n.x){s.phase='fight';s.enemyHP=n.hp;s.timer=.35;emit(s,(n.boss?'強敵：':'')+n.name+'。'+(['堅い殻を持つ。','息吹を奪う攻撃。','連撃を狙っている。'][n.trait])+' '+labels[n.weak]+'で弱点を突ける。');}
   else if(s.x>=goal(s)){s.phase='won';ledger.wins[s.stage-3]=Math.min(1000000,ledger.wins[s.stage-3]+1);emit(s,s.stage===3?'地上へ出た！ だが、階段はそのまま空へ続いている。':s.stage===4?'成層圏の門が開いた。「この階段を下り切れば、今度こそ本当のゴールです。」':s.stage===5?'終門の王を倒し、故郷へ帰還した。通常クリア！ 刻印の向こうに、試練を仕組んだ者の気配がある。':'環の書記官を倒した。「勇者を記録に閉じ込め、永遠に試していた」と告げる。輪は消え、今度こそ自由な道へ。真のエンディング。');}
