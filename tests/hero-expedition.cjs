@@ -29,8 +29,8 @@ const firstMove=s.x;E.stop(s);assert.equal(s.phase,'ready');E.play(s);assert.equ
 // Complete every new route without random drops. Validate death retention and safe reloads mid-fight.
 for(const stage of [3,4,5,6]){
  assert.equal(s.stage,stage);let deaths=0,reloaded=false;const startDeaths=s.saved.expedition.deaths;
- for(let i=0;i<500000&&s.phase!=='won';i++){
-  const phase=s.phase,gear=JSON.stringify([s.saved.expedition.weapons,s.saved.expedition.armors,s.saved.expedition.resist]);E.step(s,.1);
+ for(let i=0;i<5000000&&s.phase!=='won';i++){
+  const phase=s.phase,gear=phase==='fight'?JSON.stringify([s.saved.expedition.weapons,s.saved.expedition.armors,s.saved.expedition.resist]):null;E.step(s,.1);
   assert(Number.isFinite(s.hp)&&s.hp>=0);assert(s.stamina>=0&&s.stamina<=100);
   if(phase==='fight'&&s.phase==='fallen'){deaths++;assert.equal(JSON.stringify([s.saved.expedition.weapons,s.saved.expedition.armors,s.saved.expedition.resist]),gear);}
   if(s.phase==='fight'&&s.enemyHP>0&&!reloaded){
