@@ -114,7 +114,7 @@ function reward(s,n){
  if(n.boss){e.bosses[i]=true;const next=zones[i+1];if(next?.stage===s.stage)e.checkpoints[s.stage-3]=i+1;}
  refine(s);return n.name+'を倒した。素材と装備、環境への備えが次の勇者へ残る。';
 }
-function defeat(s){s.saved.expedition.deaths=Math.min(1e9,s.saved.expedition.deaths+1);s.phase='fallen';s.timer=3;emit(s,'力尽きた。装備と素材は残り、この環境区間から再挑戦する。');}
+function defeat(s,cause){s.saved.expedition.deaths=Math.min(1e9,s.saved.expedition.deaths+1);s.phase='fallen';s.timer=3;emit(s,(cause==='heat'?'熱による継続ダメージで力尽きた。耐熱装備を育てると消耗を抑えられる。':'敵の反撃で力尽きた。武器・防具と、相手の弱点に対応する環境装備を育てよう。')+' 装備と素材は残り、この環境区間から再挑戦する。');}
 function tickTime(s,dt){if(Number.isFinite(dt)&&dt>0&&['walk','fight','fallen','falling'].includes(s.phase))s.saved.expedition.time=Math.min(1e10,s.saved.expedition.time+dt);}
 function step(s,dt){
  if(!Number.isFinite(dt)||dt<=0)return;dt=Math.min(.1,dt);const ledger=s.saved.expedition;
@@ -125,7 +125,7 @@ function step(s,dt){
  const z=zone(s),p=protection(s),st=stats(s),n=enemies(s)[s.index];
  s.stamina=Math.min(100,s.stamina+dt*(12-9*z.env[2]*(1-p.oxygen)));
  s.hp=Math.max(0,s.hp-dt*st.maxHP*.004*z.env[0]*(1-p.heat));
- if(s.hp===0){defeat(s);checkpoint(s);return;}
+ if(s.hp===0){defeat(s,'heat');checkpoint(s);return;}
  if(s.phase==='walk'){
   const before=s.x;s.x=Math.min(n?n.x:goal(s),s.x+dt*(z.end-z.begin)/90*(1-.25*z.env[1]*(1-p.cold)));
   const move=s.x-before;ledger.walk=Math.min(1e12,ledger.walk+move);ledger.route[s.stage-3]=Math.max(ledger.route[s.stage-3],s.x);if(s.stage<6){const key=s.stage===5?'descent':'climb';ledger[key]=Math.min(1e12,ledger[key]+move);}

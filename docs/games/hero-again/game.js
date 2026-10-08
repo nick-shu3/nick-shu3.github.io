@@ -3,7 +3,8 @@
 const E=window.HeroAgain,V=window.HeroScenery,M=window.HeroMotion,by=id=>document.getElementById(id),canvas=by('scene'),g=canvas.getContext('2d'),KEY='shu3.hero-again.v1';
 let saved=null,storageOK=true,backupRaw='';
 const gentle=window.matchMedia?window.matchMedia('(prefers-reduced-motion: reduce)').matches:false;
-let atlasArt=null,gearStamp='',endingSeen=false;
+let atlasArt=null,gearStamp='',recapStage=-1,recapProgress=0,growthAge=0,lastGear=null,lastResist='',lastStage=-1,lastNoticeSerial=-1,lastGearStats=null;
+const CHAPTER_RECAP=[['旅立ちの一歩','倒れても装備は残る。小さな一歩を重ね、勇者は遠い討伐の旅へ出発します。'],['討伐完了、故郷へ','魔王を討ち、旅の目的を果たしました。しかし魔力は高まり、帰路の魔物は強化されています。残した装備を頼りに、故郷へ帰りましょう。'],['ただいま、勇者','長い往復を終え、故郷の灯りに帰り着きました。めでたし、めでたし……この足元に潜む異変を、勇者はまだ知りません。'],['光の出口、その先へ','熱と岩盤、水音と植物の根を越え、地上へ戻りました。けれど階段は終わらず、今度は雲の向こうへ続いています。'],['青い世界の輪郭','雲を眼下に置き、成層圏へ到達しました。上空では寒さが少し和らいでも、空気は薄いまま。ここから下り切れば、本当のゴールです。'],['おかえり。冒険は達成です。','終門の王を倒し、故郷へ帰還しました。通常クリア成立です。ここで旅を終えても大丈夫。刻印に隠された黒幕への挑戦は、任意の追加目標です。'],['記録の輪を越えて','環の書記官を倒し、永遠の試練から自由になりました。装備と旅の記録を残して、勇者は自分の道を歩き始めます。']];
 try{const raw=localStorage.getItem(KEY);if(raw&&raw.length<=32768){saved=JSON.parse(raw);if(saved&&typeof saved==='object'&&!Array.isArray(saved)&&!saved.expedition)backupRaw=raw;}}catch(_){storageOK=false;}
 const s=E.create(saved);let paused=s.stage>=3&&['walk','fight','fallen','falling'].includes(s.phase),last=0,seen=-1,lastSave='',visualTime=0,speed=1,accumulator=0;
 function save(){if(E.checkpoint)E.checkpoint(s);const value=JSON.stringify(s.saved);if(value===lastSave)return;try{if(backupRaw){if(!localStorage.getItem(KEY+'.before-expedition'))localStorage.setItem(KEY+'.before-expedition',backupRaw);backupRaw='';}localStorage.setItem(KEY,value);lastSave=value;}catch(_){storageOK=false;by('save-note').textContent='保存できません。この画面を開いている間だけ記録が残ります。';}}
@@ -12,8 +13,16 @@ function number(value){return Math.round(value).toLocaleString('ja-JP');}
 function distance(value){return s.stage===0?number(value)+'m':(value/1000).toFixed(3)+'km';}
 function distanceResult(n){return (n/1000).toLocaleString('ja-JP',{maximumFractionDigits:3})+'km';}
 function update(){
+ let clearScroll=false;
  const view=M.layout(s.stage);canvas.setAttribute('aria-label',view.stairs?(s.stage===5?'勇者が左下へ階段を降り、左から来る魔物と戦う風景':'勇者が右上へ階段を登り、右から来る魔物と戦う風景'):view.direction<0?'勇者が左へ帰路を進み、左から来る魔物と戦う風景':'勇者が右へ進み、魔物と戦う横スクロールの風景');
  const st=E.stats(s),active=['walk','fight','fallen','falling'].includes(s.phase),zone=E.zone(s),hiddenRoute=s.stage>=3;
+ by('chapter-clear').hidden=s.phase!=='won';
+ if(s.phase==='won'){
+  if(recapStage!==s.stage){recapStage=s.stage;recapProgress=gentle?1:0;clearScroll=true;}
+  const recap=CHAPTER_RECAP[s.stage];by('clear-title').textContent=recap[0];by('clear-story').textContent=recap[1];
+  by('clear-distance').textContent=(E.goal(s)/1000*recapProgress).toLocaleString('ja-JP',{minimumFractionDigits:3,maximumFractionDigits:3})+' km';
+  by('clear-distance-final').textContent='この章で '+(E.goal(s)/1000).toLocaleString('ja-JP',{maximumFractionDigits:3})+'km 走破';
+ }else{recapStage=-1;recapProgress=0;}
  by('progress').hidden=hiddenRoute;by('environment-panel').hidden=!hiddenRoute;
  by('environment').textContent=E.environment?E.environment(s):'';by('resistance').textContent=E.gearEffects?E.gearEffects(s):'';by('stamina').textContent=number(s.stamina||0);
  const result=E.result?E.result(s):null;by('ending-panel').hidden=!result;
@@ -23,11 +32,19 @@ function update(){
  by('level').textContent=s.level;by('attack').textContent=number(st.attack);by('defense').textContent=number(st.defense);by('xp').textContent=(2-s.kills%2)+'体';
  const gears=['weapon','armor'].map(key=>E.equipment(s,key));
  for(let i=0;i<2;i++)by(i===0?'weapon':'armor').textContent=gears[i].name+' +'+gears[i].level;
+ const resist=s.saved.expedition?JSON.stringify(s.saved.expedition.resist):'';
+ if(lastStage!==s.stage){lastGear=null;lastResist=resist;lastStage=s.stage;by('growth-notice').textContent='';by('defeat-note').textContent='';growthAge=0;}
+ const changes=[];
+ if(lastGear)for(let i=0;i<2;i++)if(gears[i].name!==lastGear[i].name||gears[i].level!==lastGear[i].level)changes.push((i?'防具':'武器')+'更新：'+gears[i].name+' +'+gears[i].level+' ／ '+(i?'防御力 ':'攻撃力 ')+number(lastGearStats[i?'defense':'attack'])+' → '+number(st[i?'defense':'attack']));
+ if(lastResist&&resist!==lastResist&&s.stage>=3)changes.push('環境への備えが成長しました。軽減効果は「環境への備え」で確認できます。');
+ if(changes.length){by('growth-notice').textContent=changes.join(' ／ ');growthAge=5;}
+ lastGear=gears.map(item=>({...item}));lastResist=resist;lastGearStats={attack:st.attack,defense:st.defense};
+ if(s.phase==='fallen'&&lastNoticeSerial!==s.serial){lastNoticeSerial=s.serial;by('defeat-note').textContent='前回の敗因：'+(s.stage>=1?s.event:'敵の反撃でHPがなくなりました。装備を育てて再挑戦しましょう。');}
  const stamp=gears.map(g=>g.name+':'+g.index+':'+g.level).join('|');if(stamp!==gearStamp){gearStamp=stamp;gears.forEach((gear,i)=>gearIcon(i===0?'weapon':'armor',gear));}
  by('attempt').textContent='挑戦 '+E.record(s,'attempts')+'回目';by('best').textContent=hiddenRoute?'最長 '+distance(s.saved.expedition.route[s.stage-3]):'最長 '+distance(E.record(s,'best'));by('wins').textContent='踏破 '+E.record(s,'wins')+'回';
  by('phase').textContent=paused?'一時停止中':({ready:'出発の準備',walk:'ゴールを目指して',fight:'魔物と戦闘中',fallen:'次の勇者へ…',falling:'足元が崩れた！',won:'ゴール到達！'})[s.phase];
  by('pause').disabled=!active;by('pause').textContent=paused?'再開する':'一時停止';by('stop').disabled=!active;
- by('start').disabled=!['ready','won'].includes(s.phase);by('start').textContent=s.phase==='won'?(s.stage===0?'往路42.195kmへ進む':s.stage===1?'討伐を終えて、帰路につく':s.stage===2?'めでたし、めでたし…':s.stage===3?'空へ続く階段へ':s.stage===4?'最後の下り階段へ':s.stage===5?'刻印の向こうに挑む':'装備を引き継いでもう一度'):'冒険をはじめる';
+ by('start').disabled=!['ready','won'].includes(s.phase);by('start').textContent=s.phase==='won'?(s.stage===0?'往路42.195kmへ進む':s.stage===1?'討伐を終えて、帰路につく':s.stage===2?'めでたし、めでたし…':s.stage===3?'空へ続く階段へ':s.stage===4?'最後の下り階段へ':s.stage===5?'追加目標：黒幕に挑む（任意）':'装備を引き継いでもう一度'):'冒険をはじめる';
  for(let i=0;i<(E.ZONES_EXTRA?7:3);i++){if(i>=3)by('stage-'+i).hidden=i>E.unlocked(s);by('stage-'+i).disabled=active||i>E.unlocked(s);by('stage-'+i).setAttribute('aria-pressed',String(i===s.stage));}
  by('stage-guide').textContent=E.STAGES[s.stage]+' ／ '+(hiddenRoute?'現在距離と区間番号を表示。ゴールと区間総数は未知。':(E.unlocked(s)===0?'入門クリアで往路が解放。':E.unlocked(s)===1?'往路クリアで裏・復路が解放。':'往路・復路ともに解放済み。'));
  const localZones=hiddenRoute?E.ZONES_EXTRA.filter(z=>z.stage===s.stage):[],localIndex=hiddenRoute?localZones.findIndex(z=>z.rank===zone.rank)+1:0;
@@ -38,7 +55,7 @@ function update(){
  by('gear-guide').textContent=s.stage===0?'入門では武器か鎧が +1（各 +12 まで）。':'一番強い装備を自動装備。素材で武器・防具を自動強化（各 +200 まで）。';
  by('materials').textContent='強化素材 '+number(s.saved.materials);
  by('guarantee').textContent=hiddenRoute?'環境装備は累計撃破の確定報酬でも育ちます。':zone?'区間撃破 '+number(s.saved.counts[zone.rank])+'体 ／ 次の確定報酬まで '+(5-s.saved.counts[zone.rank]%5)+'体':'往路から装備ドロップが追加されます。';
- if(result&&s.phase==='won'&&s.stage>=5&&!endingSeen){endingSeen=true;if(typeof by('ending-panel').scrollIntoView==='function')by('ending-panel').scrollIntoView({behavior:gentle?'auto':'smooth',block:'start'});}
+ if(clearScroll&&typeof by('chapter-clear').scrollIntoView==='function')by('chapter-clear').scrollIntoView({behavior:gentle?'auto':'smooth',block:'start'});
  if(seen!==s.serial){seen=s.serial;by('message').textContent=(s.stage===1&&s.phase==='won'?'討伐を終え、故郷へ帰ります。しかし、魔力の高まりにより帰り道のモンスターが強化されています。':s.event)||'装備は引き継ぎ。レベルと身体能力は、倒れると初期値に戻ります。';save();}
 }
 function gearIcon(key,gear){
@@ -219,6 +236,40 @@ function monster(x,y,e){
  }
  g.restore();
 }
+function enemyDetails(x,e){
+ if(s.stage<3)return;
+ const z=E.ZONES_EXTRA[e.rank-18],pulse=gentle?0:Math.sin(visualTime*3)*2;
+ g.save();if(e.boss){g.translate(x,266);g.scale(1.45,1.45);g.translate(-x,-266);}
+ if(z.env[0]>.5){
+  for(let i=0;i<3;i++){const dx=x-22+i*20;poly([[dx,209],[dx-10,190],[dx+4,194],[dx+10,214]],'#66333a',z.color);line([[dx,204],[dx+5,216],[dx-2,229]],'#ffd08a',2);}
+ }else if(z.env[1]>.5){
+  for(let i=0;i<4;i++){const dx=x-27+i*17;poly([[dx-6,211],[dx,181-i%2*10],[dx+7,211]],'#9ed6e6','#e2f7f4');}
+ }else if(s.stage===4||s.stage===5){
+  poly([[x-25,223],[x-56,191],[x-45,229],[x-25,239]],'#cadce5',z.color);poly([[x+25,223],[x+56,191],[x+45,229],[x+25,239]],'#819cb9',z.color);
+ }else{
+  for(let i=0;i<3;i++)poly([[x-28+i*24,221],[x-21+i*24,200],[x-10+i*24,227]],'#687b78',z.color);
+ }
+ oval(x,237,7+pulse*.2,7+pulse*.2,z.color+'88', '#f4e8c5');line([[x-4,237],[x+4,237]],'#f9e9ba',1);
+ if(e.boss){for(let i=0;i<3;i++){g.beginPath();g.arc(x,224,42+i*8,Math.PI*1.15,Math.PI*1.85);g.strokeStyle=z.color+(i?'44':'aa');g.lineWidth=2;g.stroke();}}
+ g.restore();
+}
+function realmDetails(z,position){
+ const drift=gentle?0:visualTime;
+ if(s.stage===3){
+  if(z.env[0]>.5){for(let i=0;i<5;i++){const x=i*175+30;poly([[x,340],[x+25,195+i%2*30],[x+53,220],[x+85,340]],'#221b28');line([[x+30,223],[x+43,267],[x+32,309]],'#ef915277',3);}line([[0,316],[140,300],[270,319],[470,303],[800,315]],'#f28e5344',9);}
+  else if(z.name.includes('水')){for(let i=0;i<6;i++){const x=i*141+35;poly([[x-20,248],[x,190],[x+20,248]],'#4a8b99','#9bd8de77');oval(x,307,55,4,'#81c7d144');}for(let i=0;i<4;i++)line([[i*220+35,75],[i*220+38,205]],'#89d6e088',2);}
+  else{for(let i=0;i<5;i++){const x=i*180+20;line([[x,10],[x+17,76],[x-8,151]],'#638d6399',6);for(let j=0;j<3;j++)oval(x+7+j*9,80+j*14,12,5,'#83b87966');}}
+ }else if(s.stage===4||s.stage===5){
+  const high=s.stage===4?s.x>11000:s.x<19000;
+  if(high){for(let i=0;i<34;i++){const x=(i*173+29)%800,y=(i*53+17)%125;oval(x,y,i%5? .7:1.2,i%5?.7:1.2,'#dfedf477');}g.beginPath();g.ellipse(400,415,470,215,0,Math.PI,Math.PI*2);g.strokeStyle='#bde5eb66';g.lineWidth=7;g.stroke();}
+  for(let i=0;i<7;i++){const x=((i*155-drift*(s.stage===5?-9:4))%1100+1100)%1100-130,y=high?225+i%3*14:150+i%3*25;oval(x,y,90,18,'#edf4f144');oval(x+45,y-9,45,15,'#edf4f133');}
+  if(s.stage===5&&z.name.includes('故郷')){
+   for(let i=0;i<11;i++){const x=30+i*66,y=206+i%3*9;box(x,y,22,15,2,'#52656a');rect(x+6,y+5,3,4,'#f2d497');rect(x+14,y+5,3,4,'#f2d497');}
+   poly([[315,269],[335,174],[380,145],[425,174],[443,269]],'#313f4d','#d6ba79');oval(379,188,13,13,'#caaa6944','#dec892');
+  }
+  if(s.stage===5&&s.phase==='walk'&&!gentle){for(let i=0;i<6;i++){const x=(i*157+drift*90)%880-40,y=82+i*24;line([[x,y],[x+35,y-3]],'#edf3e52b',1);}}
+ }
+}
 function landscape(){
  if(s.stage>=3){expeditionLandscape();return;}
  if(s.stage>0){
@@ -312,6 +363,7 @@ function expeditionLandscape(){
   if(altitude<8000)for(let i=0;i<5;i++)poly([[i*230-90,250],[i*230+30,130],[i*230+130,250]],'#668b82');
   if(z.env[1]>.5&&!gentle)for(let i=0;i<20;i++)oval((i*73)%800,((i*39+visualTime*20)%250),1,1,'#eaf5ed99');
  }
+ realmDetails(z,position);
  const view=M.layout(s.stage);
  if(view.stairs){
   // A common slope joins ascent and descent; the return faces the opposite way.
@@ -319,7 +371,7 @@ function expeditionLandscape(){
   const offset=((z.index+position)*900)%30;
   for(let i=-1;i<29;i++){const x=i*30-view.direction*offset,y=M.groundY(s.stage,x);line([[x,y],[x+30,y],[x+30,y-2.4]],'#e4d9c5aa',3);line([[x,y+12],[x+30,y+12]],z.color+'33',1);}
  }else{rect(0,264,800,76,z.floor);line([[0,266],[800,266]],'#e4d9c5aa',3);} 
- if(s.stage===5&&s.phase==='won')homeLandmark();
+ if(s.stage===5&&s.phase==='won'){rect(0,0,800,340,'#ebd7a31a');homeLandmark();for(let i=0;i<9;i++)oval(35+i*82,90+i%3*24,2,2,'#f3d492');}
  if(s.phase==='falling'){rect(0,0,800,340,'#100c1ed0');for(let i=0;i<8;i++)line([[i*105,0],[i*105,340]],'#f0ce8544',2);g.fillStyle='#f2d5a1';g.font='bold 20px system-ui';g.textAlign='center';g.fillText('めでたし、めでたし……？',400,95);g.textAlign='left';}
 }
 function fallScene(){
@@ -370,11 +422,11 @@ function render(){
   line([[goalX+10,127],[goalX+10,105]],'#dacba2',3);poly([[goalX+11,105],[goalX+38,108],[goalX+11,119]],'#c77d73');
   g.fillStyle='#f1dcac';g.font='bold 12px system-ui';g.fillText('GOAL',goalX+24,147);
  }
- const e=E.enemies(s)[s.index];if(e){const x=M.sceneEnemyX(s,e),rise=M.groundY(s.stage,x)-266;if(x>-70&&x<870){g.save();g.translate(0,rise);facing(x,()=>drawEnemy(x,231,e));g.fillStyle='#edf0da';g.font='bold 12px system-ui';g.textAlign='center';g.fillText((e.boss?'BOSS · ':'')+e.name,x,e.boss?116:160);g.textAlign='left';if(s.phase==='fight'){box(x-30,e.boss?124:169,60,5,2,'#182e3a');box(x-30,e.boss?124:169,60*s.enemyHP/e.hp,5,2,'#dca07f');}g.restore();}}
+ const e=E.enemies(s)[s.index];if(e){const x=M.sceneEnemyX(s,e)+M.layout(s.stage).direction*(e.boss?35:0),rise=M.groundY(s.stage,x)-266;if(x>-70&&x<870){g.save();g.translate(0,rise);facing(x,()=>{drawEnemy(x,231,e);enemyDetails(x,e);});g.fillStyle='#edf0da';g.font='bold 12px system-ui';g.textAlign='center';g.fillText((e.boss?'BOSS · ':'')+e.name,x,e.boss?116:160);g.textAlign='left';if(s.phase==='fight'){box(x-30,e.boss?124:169,60,5,2,'#182e3a');box(x-30,e.boss?124:169,60*s.enemyHP/e.hp,5,2,'#dca07f');}g.restore();}}
  if(s.stage>0){const gear=E.equipment(s,'weapon');if(gear.index>=0){const color=gear.index>=18?E.ZONES_EXTRA[gear.index-18].color:V.gearColor(gear.index);oval(M.layout(s.stage).heroX,266,28,5,color+'33');}}
  const heroX=M.layout(s.stage).heroX;facing(heroX,()=>hero(heroX,s.phase==='falling'?100+130*s.saved.expedition.fall/E.goal(s):230));g.restore();
  if(e&&e.boss&&s.phase==='fight'){const color=s.stage>=3?E.ZONES_EXTRA[e.rank-18].color:V.THEMES[V.realm(s.stage,e.zone)].color;box(216,16,368,48,10,'#142534dd',color+'66');g.fillStyle=color;g.font='bold 13px system-ui';g.textAlign='center';g.fillText((s.stage===2?'覚醒 BOSS · ':'区間 BOSS · ')+e.name,400,36);box(234,45,332,7,3,'#070e19');box(234,45,332*s.enemyHP/e.hp,7,3,color);g.textAlign='left';}
- if(paused||s.phase==='won'){rect(0,0,800,340,'#132031bd');g.fillStyle='#f0d8a2';g.textAlign='center';g.font='bold 30px system-ui';g.fillText(paused?'一時停止中':s.stage>=3?(s.stage===6?'輪を越えた、その先へ。':s.stage===5?'勇者、故郷へ。':'階段は、まだ続く。'):s.stage===2?'往復、踏破。':s.stage===1?'討伐完了！ 故郷へ帰ろう':'勇者、ゴールへ。',400,161);g.font='16px system-ui';g.fillText(paused?'下の「再開する」で続けられます':s.stage===1?'魔力が高まり、帰り道の魔物が強化された。':s.stage<6?'下のボタンから、次の冒険へ':'装備は、次の冒険にも残ります。',400,198);g.textAlign='left';}
+ if(paused||s.phase==='won'){rect(0,0,800,340,'#132031bd');g.fillStyle='#f0d8a2';g.textAlign='center';g.font='bold 30px system-ui';g.fillText(paused?'一時停止中':s.stage>=3?(s.stage===6?'輪を越えた、その先へ。':s.stage===5?'おかえり、勇者。通常クリア！':'階段は、まだ続く。'):s.stage===2?'往復、踏破。':s.stage===1?'討伐完了！ 故郷へ帰ろう':'勇者、ゴールへ。',400,161);g.font='16px system-ui';g.fillText(paused?'下の「再開する」で続けられます':s.stage===1?'魔力が高まり、帰り道の魔物が強化された。':s.stage===5?'冒険は達成。黒幕への挑戦は、任意の追加目標です。':s.stage<6?'下のボタンから、次の冒険へ':'装備は、次の冒険にも残ります。',400,198);g.textAlign='left';}
 }
 by('start').addEventListener('click',()=>{paused=false;E.play(s);last=0;accumulator=0;update();});
 by('stop').addEventListener('click',()=>{E.stop(s);paused=false;last=0;accumulator=0;update();});
@@ -388,7 +440,7 @@ for(const value of [1,2,4])by('speed-'+value).addEventListener('click',()=>{
 });
 
 let saveClock=0;
-function frame(now){const elapsed=last?Math.max(0,(now-last)/1000):0,dt=Math.min(.1,elapsed);last=now;if(!paused&&!document.hidden){if(E.tickTime)E.tickTime(s,elapsed);saveClock+=elapsed;if(saveClock>=5){save();saveClock=0;}accumulator=Math.min(.4,accumulator+dt*(s.phase==='falling'?1:speed));
+function frame(now){const elapsed=last?Math.max(0,(now-last)/1000):0,dt=Math.min(.1,elapsed);last=now;if(!document.hidden){if(s.phase==='won')recapProgress=gentle?1:Math.min(1,recapProgress+dt/1.8);if(!paused&&growthAge>0){growthAge=Math.max(0,growthAge-dt);if(!growthAge)by('growth-notice').textContent='';}}if(!paused&&!document.hidden){if(E.tickTime)E.tickTime(s,elapsed);saveClock+=elapsed;if(saveClock>=5){save();saveClock=0;}accumulator=Math.min(.4,accumulator+dt*(s.phase==='falling'?1:speed));
  // Fixed simulation ticks keep battle outcomes identical at each playback speed.
  for(let ticks=0;accumulator>=1/60-1e-9&&ticks<24;ticks++){E.step(s,1/60);accumulator=Math.max(0,accumulator-1/60);visualTime+=1/60;}}update();render();requestAnimationFrame(frame);}
 update();render();requestAnimationFrame(frame);
