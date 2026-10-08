@@ -44,4 +44,24 @@ C.play(reload);C.step(reload,.1);assert(!C.select(reload,0),'no stage switching 
 // Deterministic high-drop route also completes, without unbounded rewards or upgrades.
 const lucky=C.create(old,()=>0);C.select(lucky,1);C.play(lucky);finish(lucky,500000);C.play(lucky);finish(lucky,700000);
 assert(lucky.saved.weapons.concat(lucky.saved.armors).every(x=>x<=C.MAX_UPGRADE));
+// A challenge starts when the player departs: stop/reload/replay all count once.
+for(const stage of [0,1,2]){
+ const manual=C.create({wins:1,stageWins:[1,1,1],selected:stage,started:[false,false,false]},()=>1);
+ const initial=C.record(manual,'attempts');C.play(manual);assert.equal(C.record(manual,'attempts'),initial);
+ C.stop(manual);assert.equal(C.record(manual,'attempts'),initial,'stopping alone is not a new challenge');
+ C.play(manual);assert.equal(C.record(manual,'attempts'),initial+1,'manual restart counted');
+ const loaded=C.create(JSON.parse(JSON.stringify(manual.saved)),()=>1);C.play(loaded);
+ assert.equal(C.record(loaded,'attempts'),initial+2,'reload and departure counted');
+ loaded.phase='fallen';loaded.timer=.01;C.step(loaded,.1);
+ assert.equal(C.record(loaded,'attempts'),initial+3,'automatic restart counted exactly once');
+ assert.equal(loaded.x,0);assert.equal(loaded.hp,60);
+ C.stop(loaded);C.select(loaded,stage===0?1:0);C.select(loaded,stage);C.play(loaded);
+ assert.equal(C.record(loaded,'attempts'),initial+4,'stage switching cannot bypass count');
+ loaded.phase='won';C.select(loaded,stage);C.play(loaded);
+ assert.equal(C.record(loaded,'attempts'),initial+5,'replay from stage selection counted');
+}
+assert(C.clean({wins:1,best:1000}).started[0],'legacy completed tutorial marked as previously started');
+assert.equal(C.clean({wins:1,stageBest:[1000,250,0]}).started[1],true);
+assert.equal(C.clean({started:['true',1,null]}).started[0],false,'invalid flags rejected');
+console.log('PASS: manual restart, reload, automatic restart, stage switching and replay count each departure once; old saves migrate.');
 console.log('PASS: original tutorial unchanged, legacy migration, locked routes, malformed saves, 18 zone bosses, exponential growth, guaranteed gear, no-drop outbound/return completion, death retention and reload.');
