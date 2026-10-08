@@ -9,7 +9,7 @@ const snapshot=JSON.stringify(s);E.step(s,.1);assert.equal(JSON.stringify(s),sna
 const one=E.create({weapon:12,armor:12});E.start(one);one.x=100;E.step(one,.1);E.step(one,.1);E.step(one,.1);E.step(one,.1);E.step(one,.1);assert.equal(one.hp,60,'one-hit kill has no retaliation');
 const bad=E.create();E.start(bad);const before=JSON.stringify(bad);E.step(bad,NaN);E.step(bad,-1);assert.equal(JSON.stringify(bad),before);
 const fight=E.create();E.start(fight);fight.x=100;E.step(fight,.1);for(let i=0;i<4;i++)E.step(fight,.1);assert.equal(fight.hp,50);assert.equal(fight.enemyHP,14);
-const M=require('../docs/games/hero-again/motion.js');
+const M=require('../docs/games/hero-again/motion.js'),C=require('../docs/games/hero-again/campaign.js');
 const enemy=E.ENEMIES[0];
 assert.equal(M.enemyX({phase:'walk',x:0},enemy),830,'enemy enters from right edge');
 assert(M.enemyX({phase:'walk',x:50},enemy)<M.enemyX({phase:'walk',x:0},enemy));
@@ -30,7 +30,7 @@ class TestImage{
 const ctx=new Proxy({drawImage:(...args)=>{drawn.push(args);}}, {get:(o,k)=>o[k]||((...args)=>{for(const a of args)if(typeof a==='number')assert(Number.isFinite(a),'finite Canvas argument: '+k);}),set:(o,k,v)=>(o[k]=v,true)});
 function el(id){return elements[id]||(elements[id]={textContent:'',disabled:false,setAttribute:()=>{},getContext:()=>ctx,addEventListener:(key,fn)=>{handlers[id+':'+key]=fn;}});}
 const doc={hidden:false,getElementById:el,addEventListener:(key,fn)=>{handlers[key]=fn;}};
-vm.runInNewContext(fs.readFileSync('docs/games/hero-again/game.js','utf8'),{Image:TestImage,window:{HeroAgain:E,HeroMotion:M,addEventListener:()=>{}},document:doc,localStorage:{getItem:()=>'{bad json',setItem:()=>{}},requestAnimationFrame:fn=>{raf=fn;},console});
+vm.runInNewContext(fs.readFileSync('docs/games/hero-again/game.js','utf8'),{Image:TestImage,window:{HeroAgain:C,HeroMotion:M,addEventListener:()=>{}},document:doc,localStorage:{getItem:()=>'{bad json',setItem:()=>{}},requestAnimationFrame:fn=>{raf=fn;},console});
 assert(elements['save-note'].textContent.includes('読み込めません'));handlers['start:click']();raf(100);raf(1100);const shown=elements.distance.textContent;
 doc.hidden=true;handlers.visibilitychange();raf(100000);assert.equal(elements.distance.textContent,shown);assert.equal(elements.phase.textContent,'一時停止中');
 doc.hidden=false;raf(200000);assert.equal(elements.distance.textContent,shown);handlers['pause:click']();raf(300000);assert.equal(elements.distance.textContent,shown,'resume must not catch up elapsed hidden time');raf(300100);assert.notEqual(elements.distance.textContent,shown);
@@ -39,7 +39,7 @@ console.log('PASS: bounded/corrupt saves, death/restart and retained equipment, 
 function playback(multiplier){
  const nodes={},events={};let frame,current;
  function node(id){return nodes[id]||(nodes[id]={textContent:'',disabled:false,setAttribute:(k,v)=>{nodes[id][k]=v;},getContext:()=>ctx,addEventListener:(k,fn)=>{events[id+':'+k]=fn;}});}
- const engine={...E,step:(state,dt)=>{current=state;E.step(state,dt);}};
+ const engine={...C,step:(state,dt)=>{current=state;C.step(state,dt);}};
  const document={hidden:false,getElementById:node,addEventListener:()=>{}};
  vm.runInNewContext(fs.readFileSync('docs/games/hero-again/game.js','utf8'),{Image:TestImage,window:{HeroAgain:engine,HeroMotion:M,addEventListener:()=>{}},document,localStorage:{getItem:()=>null,setItem:()=>{}},requestAnimationFrame:fn=>{frame=fn;}});
  events['speed-'+multiplier+':click']();assert.equal(nodes['speed-'+multiplier]['aria-pressed'],'true');
@@ -72,7 +72,7 @@ assert.deepEqual([.01,.11,.21,.31,.41].map(M.runFrame),[0,1,2,3,0],'run cycle in
 const visualNodes={},visualEvents={};let visualRaf;
 function visualEl(id){return visualNodes[id]||(visualNodes[id]={textContent:'',disabled:false,setAttribute:()=>{},getContext:()=>ctx,addEventListener:(k,fn)=>{visualEvents[id+':'+k]=fn;}});}
 const imageStart=images.length;
-vm.runInNewContext(fs.readFileSync('docs/games/hero-again/game.js','utf8'),{Image:TestImage,window:{HeroAgain:E,HeroMotion:M,addEventListener:()=>{}},document:{hidden:false,getElementById:visualEl,addEventListener:()=>{}},localStorage:{getItem:()=>null,setItem:()=>{}},requestAnimationFrame:fn=>{visualRaf=fn;}});
+vm.runInNewContext(fs.readFileSync('docs/games/hero-again/game.js','utf8'),{Image:TestImage,window:{HeroAgain:C,HeroMotion:M,addEventListener:()=>{}},document:{hidden:false,getElementById:visualEl,addEventListener:()=>{}},localStorage:{getItem:()=>null,setItem:()=>{}},requestAnimationFrame:fn=>{visualRaf=fn;}});
 const visualImages=images.slice(imageStart);
 for(const image of visualImages){
  const file=fs.readFileSync('docs/games/hero-again/'+image.path);
@@ -102,3 +102,20 @@ assert(!drawn.slice(failureStart).some(a=>a[0].path.includes('hero-')),'missing 
 const bg=visualImages.find(im=>im.path.includes('moon-forest'));bg.onerror();
 const bgStart=drawn.length;visualRaf(900);assert.equal(drawn.length,bgStart,'missing forest uses Canvas fallback');
 console.log('PASS: four distinct loaded run frames, panorama bounds, asset dimensions, independent animation/background failures.');
+
+require('./hero-campaign.cjs');
+
+// Render every long-route enemy and boss through the production Canvas UI.
+for(const stage of [1,2]){
+ const state=C.create({wins:1,stageWins:[1,1,0],selected:stage},()=>1),nodes={},events={};let frame;
+ function node(id){return nodes[id]||(nodes[id]={textContent:'',disabled:false,setAttribute:()=>{},getContext:()=>ctx,addEventListener:(k,fn)=>{events[id+':'+k]=fn;}});}
+ const api={...C,create:()=>state};
+ vm.runInNewContext(fs.readFileSync('docs/games/hero-again/game.js','utf8'),{Image:TestImage,window:{HeroAgain:api,HeroMotion:M,addEventListener:()=>{}},document:{hidden:false,getElementById:node,addEventListener:()=>{}},localStorage:{getItem:()=>null,setItem:()=>{}},requestAnimationFrame:fn=>{frame=fn;}});
+ C.start(state);
+ for(let i=0;i<C.enemies(state).length;i++){
+  state.index=i;const e=C.enemies(state)[i];state.x=e.x;state.phase='fight';state.enemyHP=e.hp;state.timer=10;frame(100+i*17);
+ }
+ assert(nodes.distance.textContent.includes('42.195km'));
+ events['stop:click']();assert.equal(state.phase,'ready');assert.equal(nodes['stage-0'].disabled,false);events['stage-0:click']();assert.equal(state.stage,0);
+}
+console.log('PASS: all outbound/return enemy types and bosses render with finite Canvas arguments; stage controls and distance labels.');
