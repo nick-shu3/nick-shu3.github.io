@@ -22,7 +22,7 @@ const zones=[
  {stage:5,end:SKY,name:'故郷の最後の門',color:'#efc99a',sky:'#9caec2',floor:'#a99475',env:[0,0,0,0],gear:'all',enemy:['終門の騎士','封環の竜'],boss:'終門の王',hint:'帰り道を閉ざす王。これが最後の階段だ。'},
  {stage:6,end:100,name:'刻印の向こう',color:'#c7a9ed',sky:'#211d37',floor:'#665978',env:[.35,.35,.35,.35],gear:'all',enemy:['記録の守り手','環の使い'],boss:'環の書記官',hint:'旅のあちこちにあった刻印がつながる。試練を記録していた者が待っている。'}
 ].map((z,i)=>({...z,rank:18+i,type:i%6,begin:0}));
-// Begin positions are local to each stage, never exposed by the presentation API.
+// Positions are local to each chapter; upcoming endpoints stay hidden in the UI.
 for(let i=0;i<zones.length;i++)zones[i].begin=i&&zones[i-1].stage===zones[i].stage?zones[i-1].end:0;
 const names=['チュートリアル','往路 · 42.195km','復路 · 裏42.195km','地底からの脱出','空へ続く階段','最後の下り階段','刻印の向こう'];
 const labels={heat:'耐熱の護符',cold:'防寒の外套',oxygen:'息吹の器',pressure:'耐圧の帯',all:'環境調和の鎧'};

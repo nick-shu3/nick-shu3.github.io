@@ -17,6 +17,21 @@ assert.equal(M.enemyX({phase:'walk',x:100},enemy),M.enemyX({phase:'fight',x:100}
 assert.equal(M.enemyX({phase:'walk',x:100},E.ENEMIES[1]),830,'next enemy also enters at right edge');
 assert.equal(M.enemyX({phase:'fallen',x:100},enemy),245,'enemy stays at contact after death');
 assert.notEqual(M.stride(.1),M.stride(.3));
+// Travel direction must remain consistent with enemy approach and staircase placement.
+for(const stage of [0,1,2,3,4,5,6]){
+ const view=M.layout(stage),spawn=M.sceneEnemyX({stage,phase:'walk',x:0},enemy),near=M.sceneEnemyX({stage,phase:'walk',x:50},enemy),contact=M.sceneEnemyX({stage,phase:'fight',x:100},enemy);
+ assert((spawn-view.heroX)*view.direction>600,'enemy spawns ahead, beyond screen edge');
+ assert((near-spawn)*view.direction<0,'enemy approaches the hero from the travel direction');
+ assert.equal((contact-view.heroX)*view.direction,60,'contact spacing unchanged');
+ assert.equal(contact,M.sceneEnemyX({stage,phase:'walk',x:100},enemy),'no contact teleport');
+ assert.equal(M.groundY(stage,view.heroX),266,'hero stands on the path');
+ if(stage===3||stage===4)assert(M.groundY(stage,contact)<266,'enemies ahead are higher on ascent');
+ if(stage===5)assert(M.groundY(stage,contact)>266,'enemies ahead are lower on descent');
+}
+assert.equal(M.layout(2).heroX,615,'return hero stands on right');
+assert(M.sceneEnemyX({stage:2,phase:'walk',x:0},enemy)<0,'return enemies enter from left');
+console.log('PASS: outbound/return direction, contact spacing, ascent/descent ground placement.');
+
 const fs=require('node:fs'),vm=require('node:vm'),elements={},handlers={};let raf;
 const images=[],drawn=[];
 class TestImage{

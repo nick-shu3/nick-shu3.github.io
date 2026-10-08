@@ -72,7 +72,7 @@ function start(s){
  }
  s.saved.started[s.stage]=true;
  if(s.stage===0){T.start(s);s.lastDeath=s.saved.death[0];return;}
- s.x=0;s.index=0;s.kills=0;s.level=1;s.hp=60;s.enemyHP=0;s.timer=0;s.flash=0;s.phase='walk';s.lastDeath=s.saved.death[s.stage];emit(s,STAGES[s.stage]+'へ出発。装備・素材・撃破記録を引き継ぎます。');
+ s.x=0;s.index=0;s.kills=0;s.level=1;s.hp=60;s.enemyHP=0;s.timer=0;s.flash=0;s.phase='walk';s.lastDeath=s.saved.death[s.stage];emit(s,s.stage===2?'討伐を終え、故郷への帰路へ。魔力の高まりにより、モンスターが強化されています。装備・素材・撃破記録は引き継ぎます。':STAGES[s.stage]+'へ出発。装備・素材・撃破記録を引き継ぎます。');
 }
 function select(s,id){
  if(!Number.isInteger(id)||id<0||id>unlocked(s)||!['ready','won'].includes(s.phase))return false;
@@ -123,7 +123,7 @@ function step(s,dt){
  if(s.phase==='walk'){
   s.x=Math.min(e?e.x:DISTANCE,s.x+dt*65);s.saved.stageBest[s.stage]=Math.max(record(s,'best'),Math.floor(s.x));
   if(e&&s.x>=e.x){s.phase='fight';s.enemyHP=e.hp;s.timer=.35;emit(s,(e.boss?'区間ボス：':'')+e.name+'が現れた！');}
-  else if(s.x>=DISTANCE){s.phase='won';s.saved.stageWins[s.stage]=Math.min(1000000,record(s,'wins')+1);emit(s,s.stage===1?'往路踏破！ 復路の裏ステージが解放されました。':'往復84.390kmを踏破！ 災厄の王を倒し、故郷へ帰り着きました。');}
+  else if(s.x>=DISTANCE){s.phase='won';s.saved.stageWins[s.stage]=Math.min(1000000,record(s,'wins')+1);emit(s,s.stage===1?'討伐完了！ 故郷への帰路が解放されました。魔力の高まりにより、帰り道のモンスターが強化されています。':'往復84.390kmを踏破！ 災厄の王を倒し、故郷へ帰り着きました。');}
   return;
  }
  s.timer-=dt;if(s.timer>0)return;s.timer=.7;s.flash=.18;const st=stats(s),hit=Math.max(1,st.attack-e.defense);s.enemyHP=Math.max(0,s.enemyHP-hit);
