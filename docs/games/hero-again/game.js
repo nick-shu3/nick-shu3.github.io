@@ -280,6 +280,8 @@ function vectorLandscape(){
 }
 function render(){
  landscape();
+ // Long-route artwork has a lower road; move actors, never battle coordinates.
+ g.save();if(s.stage>0&&atlasArt&&atlasArt.ready)g.translate(0,20);
  if(s.lastDeath>0){const x=185+s.lastDeath-s.x;if(x>-20&&x<820){box(x-2,207,4,60,2,'#d6b780');poly([[x+2,208],[x+26,214],[x+2,223]],'#b86964','#643e45');g.fillStyle='#edd8ad';g.font='12px system-ui';g.fillText('前回',x-12,195);}}
  const goalX=185+E.goal(s)-s.x;if(goalX<870){
   box(goalX+12,158,66,106,3,'#78928c','#344b4e');box(goalX,135,21,129,3,'#8ea49a','#344b4e');box(goalX+68,135,21,129,3,'#8ea49a','#344b4e');
@@ -290,7 +292,7 @@ function render(){
  }
  const e=E.enemies(s)[s.index];if(e){const x=window.HeroMotion.enemyX(s,e);if(x<870){drawEnemy(x,231,e);g.fillStyle='#edf0da';g.font='bold 12px system-ui';g.textAlign='center';g.fillText((e.boss?'BOSS · ':'')+e.name,x,e.boss?116:160);g.textAlign='left';if(s.phase==='fight'){box(x-30,e.boss?124:169,60,5,2,'#182e3a');box(x-30,e.boss?124:169,60*s.enemyHP/e.hp,5,2,'#dca07f');}}}
  if(s.stage>0){const gear=E.equipment(s,'weapon');if(gear.index>=0){const color=V.gearColor(gear.index);oval(window.HeroMotion.HERO_X,266,28,5,color+'33');}}
- hero(window.HeroMotion.HERO_X,230);
+ hero(window.HeroMotion.HERO_X,230);g.restore();
  if(e&&e.boss&&s.phase==='fight'){const color=V.THEMES[V.realm(s.stage,e.zone)].color;box(216,16,368,48,10,'#142534dd',color+'66');g.fillStyle=color;g.font='bold 13px system-ui';g.textAlign='center';g.fillText((s.stage===2?'覚醒 BOSS · ':'区間 BOSS · ')+e.name,400,36);box(234,45,332,7,3,'#070e19');box(234,45,332*s.enemyHP/e.hp,7,3,color);g.textAlign='left';}
  if(paused||s.phase==='won'){rect(0,0,800,340,'#132031bd');g.fillStyle='#f0d8a2';g.textAlign='center';g.font='bold 30px system-ui';g.fillText(paused?'一時停止中':s.stage===2?'往復、踏破。':'勇者、ゴールへ。',400,161);g.font='16px system-ui';g.fillText(paused?'下の「再開する」で続けられます':s.stage<2?'下のボタンから、次のステージへ':'装備は、次の冒険にも残ります。',400,198);g.textAlign='left';}
 }
