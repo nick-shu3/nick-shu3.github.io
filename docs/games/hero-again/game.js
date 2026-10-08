@@ -1,38 +1,44 @@
 'use strict';
 (()=> {
 const E=window.HeroAgain,V=window.HeroScenery,by=id=>document.getElementById(id),canvas=by('scene'),g=canvas.getContext('2d'),KEY='shu3.hero-again.v1';
-let saved=null,storageOK=true;
+let saved=null,storageOK=true,backupRaw='';
 const gentle=window.matchMedia?window.matchMedia('(prefers-reduced-motion: reduce)').matches:false;
-let atlasArt=null,gearStamp='';
-try{const raw=localStorage.getItem(KEY);if(raw&&raw.length<=8192)saved=JSON.parse(raw);}catch(_){storageOK=false;}
-const s=E.create(saved);let paused=false,last=0,seen=-1,lastSave='',visualTime=0,speed=1,accumulator=0;
-function save(){const value=JSON.stringify(s.saved);if(value===lastSave)return;try{localStorage.setItem(KEY,value);lastSave=value;}catch(_){storageOK=false;by('save-note').textContent='保存できません。この画面を開いている間だけ記録が残ります。';}}
+let atlasArt=null,gearStamp='',endingSeen=false;
+try{const raw=localStorage.getItem(KEY);if(raw&&raw.length<=32768){saved=JSON.parse(raw);if(saved&&typeof saved==='object'&&!Array.isArray(saved)&&!saved.expedition)backupRaw=raw;}}catch(_){storageOK=false;}
+const s=E.create(saved);let paused=s.stage>=3&&['walk','fight','fallen','falling'].includes(s.phase),last=0,seen=-1,lastSave='',visualTime=0,speed=1,accumulator=0;
+function save(){if(E.checkpoint)E.checkpoint(s);const value=JSON.stringify(s.saved);if(value===lastSave)return;try{if(backupRaw){if(!localStorage.getItem(KEY+'.before-expedition'))localStorage.setItem(KEY+'.before-expedition',backupRaw);backupRaw='';}localStorage.setItem(KEY,value);lastSave=value;}catch(_){storageOK=false;by('save-note').textContent='保存できません。この画面を開いている間だけ記録が残ります。';}}
 if(!storageOK)by('save-note').textContent='保存を読み込めませんでした。新しい冒険として開始します。';
 function number(value){return Math.round(value).toLocaleString('ja-JP');}
 function distance(value){return s.stage===0?number(value)+'m':(value/1000).toFixed(3)+'km';}
+function distanceResult(n){return (n/1000).toLocaleString('ja-JP',{maximumFractionDigits:3})+'km';}
 function update(){
- const st=E.stats(s),active=['walk','fight','fallen'].includes(s.phase),zone=E.zone(s);
+ const st=E.stats(s),active=['walk','fight','fallen','falling'].includes(s.phase),zone=E.zone(s),hiddenRoute=s.stage>=3;
+ by('progress').hidden=hiddenRoute;by('environment-panel').hidden=!hiddenRoute;
+ by('environment').textContent=E.environment?E.environment(s):'';by('resistance').textContent=E.gearEffects?E.gearEffects(s):'';by('stamina').textContent=number(s.stamina||0);
+ const result=E.result?E.result(s):null;by('ending-panel').hidden=!result;
+ if(result)by('ending-result').textContent=[result.trueClear?'真のエンディング':'通常クリア', '入門 '+distanceResult(result.tutorial),'マラソン往復 '+distanceResult(result.marathon),'落下 '+distanceResult(result.fall),'地底から空への登坂 '+distanceResult(result.ascent),'空からの下降 '+distanceResult(result.descent),'刻印の向こう '+distanceResult(result.secret),'物語の踏破経路合計 '+distanceResult(result.total),'記録開始後の総移動 '+distanceResult(result.totalRecorded),'記録開始後の実歩行（再挑戦含む） '+distanceResult(result.walkRecorded),'活動時間（実時間） '+Math.floor(result.playSeconds/60)+'分 '+Math.floor(result.playSeconds%60)+'秒','記録開始後の撃破 '+number(result.kills)+'体 ／ 死亡 '+number(result.deaths)+'回','ラスボス：撃破 ／ 黒幕：'+(result.trueClear?'撃破':'未撃破'),result.historical?'更新前の活動時間・実歩行・撃破・死亡履歴は復元できません。':''].join('\n');
  by('hp').textContent=number(s.hp)+' / '+number(st.maxHP);by('health').max=st.maxHP;by('health').value=s.hp;
- by('distance').textContent=distance(s.x)+' / '+distance(E.goal(s));by('progress').max=E.goal(s);by('progress').value=s.x;
+ by('distance').textContent=hiddenRoute?'景色を頼りに進む':distance(s.x)+' / '+distance(E.goal(s));by('progress').max=hiddenRoute?1:E.goal(s);by('progress').value=hiddenRoute?0:s.x;
  by('level').textContent=s.level;by('attack').textContent=number(st.attack);by('defense').textContent=number(st.defense);by('xp').textContent=(2-s.kills%2)+'体';
  const gears=['weapon','armor'].map(key=>E.equipment(s,key));
  for(let i=0;i<2;i++)by(i===0?'weapon':'armor').textContent=gears[i].name+' +'+gears[i].level;
  const stamp=gears.map(g=>g.name+':'+g.index+':'+g.level).join('|');if(stamp!==gearStamp){gearStamp=stamp;gears.forEach((gear,i)=>gearIcon(i===0?'weapon':'armor',gear));}
- by('attempt').textContent='挑戦 '+E.record(s,'attempts')+'回目';by('best').textContent='最長 '+distance(E.record(s,'best'));by('wins').textContent='踏破 '+E.record(s,'wins')+'回';
- by('phase').textContent=paused?'一時停止中':({ready:'出発の準備',walk:'ゴールを目指して',fight:'魔物と戦闘中',fallen:'次の勇者へ…',won:'ゴール到達！'})[s.phase];
+ by('attempt').textContent='挑戦 '+E.record(s,'attempts')+'回目';by('best').textContent=hiddenRoute?'道の先は、まだ見えない':'最長 '+distance(E.record(s,'best'));by('wins').textContent='踏破 '+E.record(s,'wins')+'回';
+ by('phase').textContent=paused?'一時停止中':({ready:'出発の準備',walk:'ゴールを目指して',fight:'魔物と戦闘中',fallen:'次の勇者へ…',falling:'足元が崩れた！',won:'ゴール到達！'})[s.phase];
  by('pause').disabled=!active;by('pause').textContent=paused?'再開する':'一時停止';by('stop').disabled=!active;
- by('start').disabled=!['ready','won'].includes(s.phase);by('start').textContent=s.phase==='won'?(s.stage===0?'往路42.195kmへ進む':s.stage===1?'裏・復路42.195kmへ進む':'装備を引き継いでもう一度'):'冒険をはじめる';
- for(let i=0;i<3;i++){by('stage-'+i).disabled=active||i>E.unlocked(s);by('stage-'+i).setAttribute('aria-pressed',String(i===s.stage));}
- by('stage-guide').textContent=E.STAGES[s.stage]+' ／ '+(E.unlocked(s)===0?'入門クリアで往路が解放。':E.unlocked(s)===1?'往路クリアで裏・復路が解放。':'往路・復路ともに解放済み。');
- by('zone').textContent=zone?'区間'+(zone.index+1)+' / 9 · '+zone.name:'チュートリアル';
- by('boss-distance').textContent=zone?zone.boss.name+'まで '+distance(Math.max(0,zone.boss.x-s.x)):'ゴールまで '+distance(Math.max(0,E.goal(s)-s.x));
+ by('start').disabled=!['ready','won'].includes(s.phase);by('start').textContent=s.phase==='won'?(s.stage===0?'往路42.195kmへ進む':s.stage===1?'裏・復路42.195kmへ進む':s.stage===2?'めでたし、めでたし…':s.stage===3?'空へ続く階段へ':s.stage===4?'最後の下り階段へ':s.stage===5?'刻印の向こうに挑む':'装備を引き継いでもう一度'):'冒険をはじめる';
+ for(let i=0;i<(E.ZONES_EXTRA?7:3);i++){if(i>=3)by('stage-'+i).hidden=i>E.unlocked(s);by('stage-'+i).disabled=active||i>E.unlocked(s);by('stage-'+i).setAttribute('aria-pressed',String(i===s.stage));}
+ by('stage-guide').textContent=E.STAGES[s.stage]+' ／ '+(hiddenRoute?'道の長さは、帰還したあとに。':(E.unlocked(s)===0?'入門クリアで往路が解放。':E.unlocked(s)===1?'往路クリアで裏・復路が解放。':'往路・復路ともに解放済み。'));
+ by('zone').textContent=zone?(hiddenRoute?zone.name:'区間'+(zone.index+1)+' / 9 · '+zone.name):'チュートリアル';
+ by('boss-distance').textContent=hiddenRoute?zone.hint:zone?zone.boss.name+'まで '+distance(Math.max(0,zone.boss.x-s.x)):'ゴールまで '+distance(Math.max(0,E.goal(s)-s.x));
  by('gear-guide').textContent=s.stage===0?'入門では武器か鎧が +1（各 +12 まで）。':'一番強い装備を自動装備。素材で武器・防具を自動強化（各 +200 まで）。';
  by('materials').textContent='強化素材 '+number(s.saved.materials);
- by('guarantee').textContent=zone?'区間撃破 '+number(s.saved.counts[zone.rank])+'体 ／ 次の確定報酬まで '+(5-s.saved.counts[zone.rank]%5)+'体':'往路から装備ドロップが追加されます。';
+ by('guarantee').textContent=hiddenRoute?'環境装備は累計撃破の確定報酬でも育ちます。':zone?'区間撃破 '+number(s.saved.counts[zone.rank])+'体 ／ 次の確定報酬まで '+(5-s.saved.counts[zone.rank]%5)+'体':'往路から装備ドロップが追加されます。';
+ if(result&&s.phase==='won'&&s.stage>=5&&!endingSeen){endingSeen=true;if(typeof by('ending-panel').scrollIntoView==='function')by('ending-panel').scrollIntoView({behavior:gentle?'auto':'smooth',block:'start'});}
  if(seen!==s.serial){seen=s.serial;by('message').textContent=s.event||'装備は引き継ぎ。レベルと身体能力は、倒れると初期値に戻ります。';save();}
 }
 function gearIcon(key,gear){
- const c=by(key+'-art').getContext('2d'),color=V.gearColor(gear.index),rare=gear.name.includes('王印'),tier=gear.index<0?0:1+Math.floor(gear.index/3);
+ const c=by(key+'-art').getContext('2d'),color=gear.index>=18?E.ZONES_EXTRA[gear.index-18].color:V.gearColor(gear.index),rare=gear.name.includes('王印'),tier=gear.index<0?0:1+Math.floor(gear.index/3);
  c.clearRect(0,0,96,96);c.save();c.translate(48,48);
  function shape(points,fill){c.beginPath();c.moveTo(...points[0]);for(const point of points.slice(1))c.lineTo(...point);c.closePath();c.fillStyle=fill;c.fill();c.strokeStyle='#172b36';c.lineWidth=2;c.stroke();}
  c.beginPath();c.arc(0,0,36,0,Math.PI*2);c.strokeStyle=color+'55';c.lineWidth=1;c.stroke();
@@ -209,6 +215,7 @@ function monster(x,y,e){
  g.restore();
 }
 function landscape(){
+ if(s.stage>=3){expeditionLandscape();return;}
  if(s.stage>0){
   if(!atlasArt)atlasArt=art('assets/journey-atlas.webp',1932,814);
   if(atlasArt.ready){journeyLandscape();return;}
@@ -254,7 +261,7 @@ function journeyLandscape(){
  if(s.stage===2){rect(0,0,800,340,'#30234616');}
 }
 function bossAura(x,e){
- const theme=V.THEMES[V.realm(s.stage,e.zone)],pulse=gentle?0:Math.sin(visualTime*3)*2;
+ const theme=s.stage>=3?E.ZONES_EXTRA[e.rank-18]:V.THEMES[V.realm(s.stage,e.zone)],pulse=gentle?0:Math.sin(visualTime*3)*2;
  oval(x,266,44+pulse,9,theme.color+'20',theme.color+'66');
  for(let i=0;i<4;i++){const angle=visualTime*.6+i*Math.PI/2;oval(x+Math.cos(angle)*39,244+Math.sin(angle)*15,2,2,theme.color);}
  // Each boss carries its realm's sigil, not a floating generic crown.
@@ -278,12 +285,38 @@ function vectorLandscape(){
   if(i%5===0){oval(x+7,252,3,2,'#e1c285');}
  }
 }
+function homeLandmark(){
+ for(let i=0;i<3;i++){const x=510+i*85,y=229-i%2*16;box(x,y,66,45,3,'#c5b493','#536355');poly([[x-8,y],[x+33,y-31],[x+74,y]],'#91646b','#493e4d');box(x+24,y+21,18,24,3,'#485f62');box(x+8,y+8,12,12,2,'#f1daa0');}
+}
+function expeditionLandscape(){
+ if(s.stage===6&&s.phase==='won'){rect(0,0,800,340,'#849cae');oval(655,88,38,38,'#efd49d');rect(0,210,800,130,'#94a681');homeLandmark();return;}
+ const z=E.zone(s),position=Math.max(0,Math.min(1,(s.x-z.begin)/(z.end-z.begin)));
+ rect(0,0,800,340,z.sky);const prev=E.ZONES_EXTRA[z.index-1];
+ if(prev&&prev.stage===s.stage&&position<.08&&!gentle){g.save();g.globalAlpha=1-position/.08;rect(0,0,800,340,prev.sky);g.restore();}
+ if(s.stage===3){
+  for(let i=0;i<12;i++){const x=(i*89+31)%800;poly([[x-80,0],[x-22,70+(i%3)*35],[x+36,35],[x+80,0]],z.floor);}
+  if(z.index<3){for(let i=0;i<10;i++){const x=(i*103+visualTime*9)%800;oval(x,140+(i*23)%100,2,2,z.color+'99');}oval(570,190,80,20,z.color+'44');}
+  else if(z.index===3){for(let i=0;i<8;i++)line([[i*113,110],[i*113+10,225]],'#91cdd766',2);}
+  else{for(let i=0;i<9;i++)line([[i*104,0],[i*104-15,100],[i*104+12,145]],'#649665',4);oval(640,88,z.index===5?72:28,z.index===5?72:28,'#f3edc05c');}
+ }else if(s.stage===6){for(let i=0;i<4;i++){g.beginPath();g.arc(580,145,40+i*24,0,Math.PI*2);g.strokeStyle=z.color+'44';g.lineWidth=2;g.stroke();}}
+ else{
+  const altitude=s.stage===4?s.x:30000-s.x;
+  if(altitude>19000){oval(420,1520,1450,1390,'#559da8','#abcdd7');oval(400,1415,1350,1250,'#346f87');}
+  for(let i=0;i<9;i++){const x=((i*131-visualTime*5)%970+970)%970-60,y=altitude>8000?190+i%3*18:70+i%3*25;oval(x,y,74,18,'#e4eff155');}
+  if(altitude<8000)for(let i=0;i<5;i++)poly([[i*230-90,250],[i*230+30,130],[i*230+130,250]],'#668b82');
+  if(z.env[1]>.5&&!gentle)for(let i=0;i<20;i++)oval((i*73)%800,((i*39+visualTime*20)%250),1,1,'#eaf5ed99');
+ }
+ rect(0,264,800,76,z.floor);const offset=(visualTime*20)%60;
+ for(let i=-1;i<15;i++){const x=i*60-offset,y=269+(s.stage===5?-1:1)*(i%2)*4;line([[x,y],[x+50,y],[x+50,y+10],[x+60,y+10]],'#e4d9c5aa',3);}
+ if(s.stage===5&&s.phase==='won')homeLandmark();
+ if(s.phase==='falling'){rect(0,0,800,340,'#100c1ed0');for(let i=0;i<8;i++)line([[i*105,0],[i*105,340]],'#f0ce8544',2);g.fillStyle='#f2d5a1';g.font='bold 20px system-ui';g.textAlign='center';g.fillText('めでたし、めでたし……？',400,95);g.textAlign='left';}
+}
 function render(){
  landscape();
  // Long-route artwork has a lower road; move actors, never battle coordinates.
- g.save();if(s.stage>0&&atlasArt&&atlasArt.ready)g.translate(0,20);
- if(s.lastDeath>0){const x=185+s.lastDeath-s.x;if(x>-20&&x<820){box(x-2,207,4,60,2,'#d6b780');poly([[x+2,208],[x+26,214],[x+2,223]],'#b86964','#643e45');g.fillStyle='#edd8ad';g.font='12px system-ui';g.fillText('前回',x-12,195);}}
- const goalX=185+E.goal(s)-s.x;if(goalX<870){
+ g.save();if(s.stage>0&&s.stage<3&&atlasArt&&atlasArt.ready)g.translate(0,20);
+ if(s.stage<3&&s.lastDeath>0){const x=185+s.lastDeath-s.x;if(x>-20&&x<820){box(x-2,207,4,60,2,'#d6b780');poly([[x+2,208],[x+26,214],[x+2,223]],'#b86964','#643e45');g.fillStyle='#edd8ad';g.font='12px system-ui';g.fillText('前回',x-12,195);}}
+ const goalX=185+E.goal(s)-s.x;if(s.stage<3&&goalX<870){
   box(goalX+12,158,66,106,3,'#78928c','#344b4e');box(goalX,135,21,129,3,'#8ea49a','#344b4e');box(goalX+68,135,21,129,3,'#8ea49a','#344b4e');
   for(let i=0;i<3;i++){box(goalX+i*8,127,6,14,1,'#acb6a0');box(goalX+68+i*8,127,6,14,1,'#acb6a0');}
   box(goalX+30,213,31,51,14,'#263e46','#b3baa0');box(goalX+37,180,10,18,4,'#f2d597');box(goalX+6,151,8,15,3,'#f2d597');box(goalX+75,151,8,15,3,'#f2d597');
@@ -291,23 +324,24 @@ function render(){
   g.fillStyle='#f1dcac';g.font='bold 12px system-ui';g.fillText('GOAL',goalX+24,147);
  }
  const e=E.enemies(s)[s.index];if(e){const x=window.HeroMotion.enemyX(s,e);if(x<870){drawEnemy(x,231,e);g.fillStyle='#edf0da';g.font='bold 12px system-ui';g.textAlign='center';g.fillText((e.boss?'BOSS · ':'')+e.name,x,e.boss?116:160);g.textAlign='left';if(s.phase==='fight'){box(x-30,e.boss?124:169,60,5,2,'#182e3a');box(x-30,e.boss?124:169,60*s.enemyHP/e.hp,5,2,'#dca07f');}}}
- if(s.stage>0){const gear=E.equipment(s,'weapon');if(gear.index>=0){const color=V.gearColor(gear.index);oval(window.HeroMotion.HERO_X,266,28,5,color+'33');}}
- hero(window.HeroMotion.HERO_X,230);g.restore();
- if(e&&e.boss&&s.phase==='fight'){const color=V.THEMES[V.realm(s.stage,e.zone)].color;box(216,16,368,48,10,'#142534dd',color+'66');g.fillStyle=color;g.font='bold 13px system-ui';g.textAlign='center';g.fillText((s.stage===2?'覚醒 BOSS · ':'区間 BOSS · ')+e.name,400,36);box(234,45,332,7,3,'#070e19');box(234,45,332*s.enemyHP/e.hp,7,3,color);g.textAlign='left';}
- if(paused||s.phase==='won'){rect(0,0,800,340,'#132031bd');g.fillStyle='#f0d8a2';g.textAlign='center';g.font='bold 30px system-ui';g.fillText(paused?'一時停止中':s.stage===2?'往復、踏破。':'勇者、ゴールへ。',400,161);g.font='16px system-ui';g.fillText(paused?'下の「再開する」で続けられます':s.stage<2?'下のボタンから、次のステージへ':'装備は、次の冒険にも残ります。',400,198);g.textAlign='left';}
+ if(s.stage>0){const gear=E.equipment(s,'weapon');if(gear.index>=0){const color=gear.index>=18?E.ZONES_EXTRA[gear.index-18].color:V.gearColor(gear.index);oval(window.HeroMotion.HERO_X,266,28,5,color+'33');}}
+ hero(window.HeroMotion.HERO_X,s.phase==='falling'?100+130*s.saved.expedition.fall/E.goal(s):230);g.restore();
+ if(e&&e.boss&&s.phase==='fight'){const color=s.stage>=3?E.ZONES_EXTRA[e.rank-18].color:V.THEMES[V.realm(s.stage,e.zone)].color;box(216,16,368,48,10,'#142534dd',color+'66');g.fillStyle=color;g.font='bold 13px system-ui';g.textAlign='center';g.fillText((s.stage===2?'覚醒 BOSS · ':'区間 BOSS · ')+e.name,400,36);box(234,45,332,7,3,'#070e19');box(234,45,332*s.enemyHP/e.hp,7,3,color);g.textAlign='left';}
+ if(paused||s.phase==='won'){rect(0,0,800,340,'#132031bd');g.fillStyle='#f0d8a2';g.textAlign='center';g.font='bold 30px system-ui';g.fillText(paused?'一時停止中':s.stage>=3?(s.stage===6?'輪を越えた、その先へ。':s.stage===5?'勇者、故郷へ。':'階段は、まだ続く。'):s.stage===2?'往復、踏破。':'勇者、ゴールへ。',400,161);g.font='16px system-ui';g.fillText(paused?'下の「再開する」で続けられます':s.stage<6?'下のボタンから、次の冒険へ':'装備は、次の冒険にも残ります。',400,198);g.textAlign='left';}
 }
 by('start').addEventListener('click',()=>{paused=false;E.play(s);last=0;accumulator=0;update();});
 by('stop').addEventListener('click',()=>{E.stop(s);paused=false;last=0;accumulator=0;update();});
-for(let i=0;i<3;i++)by('stage-'+i).addEventListener('click',()=>{if(E.select(s,i)){paused=false;last=0;accumulator=0;update();}});
+for(let i=0;i<(E.ZONES_EXTRA?7:3);i++)by('stage-'+i).addEventListener('click',()=>{if(E.select(s,i)){paused=false;last=0;accumulator=0;update();}});
 by('pause').addEventListener('click',()=>{if(document.hidden)return;paused=!paused;last=0;update();});
-document.addEventListener('visibilitychange',()=>{if(document.hidden&&['walk','fight','fallen'].includes(s.phase)){paused=true;last=0;save();update();}});
+document.addEventListener('visibilitychange',()=>{if(document.hidden&&['walk','fight','fallen','falling'].includes(s.phase)){paused=true;last=0;save();update();}});
 window.addEventListener('pagehide',save);
 for(const value of [1,2,4])by('speed-'+value).addEventListener('click',()=>{
  speed=value;last=0;
  for(const option of [1,2,4])by('speed-'+option).setAttribute('aria-pressed',String(option===speed));
 });
 
-function frame(now){const dt=last?Math.min(.1,Math.max(0,(now-last)/1000)):0;last=now;if(!paused&&!document.hidden){accumulator=Math.min(.4,accumulator+dt*speed);
+let saveClock=0;
+function frame(now){const elapsed=last?Math.max(0,(now-last)/1000):0,dt=Math.min(.1,elapsed);last=now;if(!paused&&!document.hidden){if(E.tickTime)E.tickTime(s,elapsed);saveClock+=elapsed;if(saveClock>=5){save();saveClock=0;}accumulator=Math.min(.4,accumulator+dt*(s.phase==='falling'?1:speed));
  // Fixed simulation ticks keep battle outcomes identical at each playback speed.
  for(let ticks=0;accumulator>=1/60-1e-9&&ticks<24;ticks++){E.step(s,1/60);accumulator=Math.max(0,accumulator-1/60);visualTime+=1/60;}}update();render();requestAnimationFrame(frame);}
 update();render();requestAnimationFrame(frame);

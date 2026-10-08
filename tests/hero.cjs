@@ -138,3 +138,5 @@ const atlasDraws=drawn.filter(a=>a[0].path==='assets/journey-atlas.webp');assert
 assert.equal(new Set(atlasDraws.map(a=>Math.floor(a[1]/644)+3*Math.floor(a[2]/(814/3)))).size,9,'all nine backgrounds actually rendered');
 for(const [im,sx,sy,sw,sh,...dest] of atlasDraws){assert(sx>=0&&sy>=0&&sx+sw<=im.naturalWidth&&sy+sh<=im.naturalHeight);assert(dest.every(Number.isFinite));}
 console.log('PASS: local nine-realm atlas, outbound/reverse scenery, bounded per-cell crops, equipment icons and all boss scenes.');
+
+require('./hero-expedition.cjs');
