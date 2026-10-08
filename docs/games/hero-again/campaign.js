@@ -38,6 +38,7 @@ function clean(raw){
  return {...base,version:2,selected:integer(r.selected,0,unlocked,0),stageWins:wins,
   stageBest:[base.best,...numbers(r.stageBest,3,0,DISTANCE,0).slice(1)],
   stageAttempts:[base.attempts,...numbers(r.stageAttempts,3,1,1000000,1).slice(1)],
+  started:Array.from({length:3},(_,i)=>Array.isArray(r.started)&&typeof r.started[i]==='boolean'?r.started[i]:i===0?base.best>0||base.wins>0||base.attempts>1:(Array.isArray(r.stageBest)&&Number.isFinite(r.stageBest[i])&&r.stageBest[i]>0)||wins[i]>0),
   death:numbers(r.death,3,0,DISTANCE,0),materials:integer(r.materials,0,1000000000,0),
   weapons:numbers(r.weapons,18,-1,MAX_UPGRADE,-1),armors:numbers(r.armors,18,-1,MAX_UPGRADE,-1),
   rareWeapons:flags(r.rareWeapons),rareArmors:flags(r.rareArmors),bosses:flags(r.bosses),counts:numbers(r.counts,18,0,1000000,0)};
@@ -65,6 +66,11 @@ function equipment(s,key){
 }
 function stats(s){if(s.stage===0)return T.stats(s);return {maxHP:60+(s.level-1)*8,attack:8+(s.level-1)*2+equipment(s,'weapon').power,defense:2+(s.level-1)+equipment(s,'armor').power};}
 function start(s){
+ if(s.saved.started[s.stage]){
+  if(s.stage===0){s.saved.attempts=Math.min(1000000,s.saved.attempts+1);s.saved.stageAttempts[0]=s.saved.attempts;}
+  else s.saved.stageAttempts[s.stage]=Math.min(1000000,record(s,'attempts')+1);
+ }
+ s.saved.started[s.stage]=true;
  if(s.stage===0){T.start(s);s.lastDeath=s.saved.death[0];return;}
  s.x=0;s.index=0;s.kills=0;s.level=1;s.hp=60;s.enemyHP=0;s.timer=0;s.flash=0;s.phase='walk';s.lastDeath=s.saved.death[s.stage];emit(s,STAGES[s.stage]+'へ出発。装備・素材・撃破記録を引き継ぎます。');
 }
@@ -75,7 +81,6 @@ function select(s,id){
 function play(s){
  if(!['ready','won'].includes(s.phase))return;
  if(s.phase==='won'&&s.stage<2){select(s,s.stage+1);start(s);return;}
- if(s.phase==='won'){s.saved.stageAttempts[s.stage]=Math.min(1000000,s.saved.stageAttempts[s.stage]+1);}
  start(s);
 }
 function stop(s){if(!['walk','fight','fallen'].includes(s.phase))return; s.phase='ready';s.x=0;s.index=0;s.kills=0;s.level=1;s.hp=60;s.enemyHP=0;s.flash=0;emit(s,'冒険を中断しました。装備と素材は保存され、再出発はステージ入口からです。');}
@@ -113,7 +118,7 @@ function step(s,dt){
   if(previous!=='won'&&s.phase==='won')emit(s,'チュートリアル踏破！ 往路42.195kmが解放されました。');return;
  }
  dt=Math.min(dt,.1);s.flash=Math.max(0,s.flash-dt);
- if(s.phase==='fallen'){s.timer-=dt;if(s.timer<=0){s.saved.stageAttempts[s.stage]=Math.min(1000000,record(s,'attempts')+1);start(s);}return;}
+ if(s.phase==='fallen'){s.timer-=dt;if(s.timer<=0){start(s);}return;}
  const e=enemies(s)[s.index];
  if(s.phase==='walk'){
   s.x=Math.min(e?e.x:DISTANCE,s.x+dt*65);s.saved.stageBest[s.stage]=Math.max(record(s,'best'),Math.floor(s.x));
