@@ -32,8 +32,9 @@ class TestImage{constructor(){this.naturalWidth=360;this.naturalHeight=420;}set 
 const context=new Proxy({translate:(...args)=>seen.push(args),drawImage:()=>{}},{get:(o,k)=>o[k]||(()=>{}),set:(o,k,v)=>(o[k]=v,true)});
 function element(id){return elements[id]||(elements[id]={textContent:'',setAttribute:()=>{},getContext:()=>context,addEventListener:()=>{}});}
 vm.runInNewContext(fs.readFileSync('docs/games/hero-again/bosses.js','utf8'),{window:elements,Image:TestImage});
-vm.runInNewContext(fs.readFileSync('docs/games/hero-again/game.js','utf8'),{window:{HeroAgain:{...E,create:()=>state,step:()=>{}},HeroBosses:elements.HeroBosses,HeroMotion:M,HeroScenery:V,addEventListener:()=>{}},document:{hidden:false,getElementById:element,addEventListener:()=>{}},Image:TestImage,localStorage:{getItem:()=>null,setItem:()=>{}},requestAnimationFrame:fn=>{nextFrame=fn;}});
+const draws=[],bosses={...elements.HeroBosses,draw:(...args)=>{draws.push({age:args[4],attack:args[6]});return elements.HeroBosses.draw(...args);}};
+vm.runInNewContext(fs.readFileSync('docs/games/hero-again/game.js','utf8'),{window:{HeroAgain:{...E,create:()=>state,step:()=>{}},HeroBosses:bosses,HeroMotion:M,HeroScenery:V,addEventListener:()=>{}},document:{hidden:false,getElementById:element,addEventListener:()=>{}},Image:TestImage,localStorage:{getItem:()=>null,setItem:()=>{}},requestAnimationFrame:fn=>{nextFrame=fn;}});
 nextFrame(100);for(let i=1;i<=8;i++)nextFrame(100+i*100);
-seen.length=0;state.serial++;state.hp--;state.flash=.18;nextFrame(1000);nextFrame(1100);
-assert(seen.some(([dx])=>dx<0&&dx>-14),'combat event triggers forward counterattack instead of restarting entry');
+draws.length=0;state.serial++;state.hp--;state.flash=.18;nextFrame(1000);nextFrame(1100);
+assert(draws.some(p=>p.age>.65&&p.attack>0),'combat event triggers counterattack instead of restarting entry');
 console.log('PASS: real battle log updates preserve boss entry and trigger counterattack.');
