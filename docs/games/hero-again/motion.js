@@ -7,7 +7,8 @@ function enemyX(state,enemy){
  return SPAWN_X+(CONTACT_X-SPAWN_X)*progress;
 }
 function stride(time){return Math.sin(time*14)*.7;}
-const api={HERO_X,CONTACT_X,SPAWN_X,enemyX,stride};
+function runFrame(time){return Math.floor(time*10)%4;}
+const api={HERO_X,CONTACT_X,SPAWN_X,enemyX,stride,runFrame};
 if(typeof module!=='undefined'&&module.exports){module.exports=api;return;}
 window.HeroMotion=api;
 })();

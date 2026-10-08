@@ -45,26 +45,34 @@ function limb(x,y,angle,length,color,width=10){
  box(-width/2,0,width,length,3,color,'#233442');line([[0,3],[0,length-4]],'#ffffff35',2);
  box(-width/2-2,length-4,width+7,9,3,'#354552','#1b2b38');g.restore();
 }
-// Normal local PNG asset; a failed load keeps the original Canvas hero available.
-const heroArt=new Image();let heroArtReady=false;
-heroArt.onload=()=>{heroArtReady=heroArt.naturalWidth===1254&&heroArt.naturalHeight===1254;};
-heroArt.onerror=()=>{heroArtReady=false;};
-heroArt.src='assets/hero-v2.png';
-const heroFrames=[
- {sx:0,sy:0,ax:350,feet:620},
- {sx:627,sy:0,ax:360,feet:618},
- {sx:0,sy:627,ax:400,feet:574},
- {sx:627,sy:627,ax:300,feet:581}
+// Images stay local; rejected/failed assets retain the Canvas fallbacks.
+function art(path,width,height){
+ const image=new Image(),asset={image,ready:false};
+ image.onload=()=>{asset.ready=image.naturalWidth===width&&image.naturalHeight===height;};
+ image.onerror=()=>{asset.ready=false;};image.src=path;return asset;
+}
+const heroArt=art('assets/hero-v2.png',1254,1254);
+const runArt=art('assets/hero-run.webp',1254,1254);
+const reverseArt=art('assets/hero-reverse.webp',1536,1024);
+const forestArt=art('assets/moon-forest.webp',1942,809);
+const idleFrame={asset:heroArt,sx:0,sy:0,sw:627,sh:627,ax:350,feet:620,scale:.19};
+const attackFrame={asset:heroArt,sx:627,sy:627,sw:627,sh:627,ax:300,feet:581,scale:.19};
+// Forward stride, passing step, opposite stride, opposite passing step.
+const runFrames=[
+ {asset:heroArt,sx:627,sy:0,sw:627,sh:627,ax:360,feet:618,scale:.19},
+ {asset:runArt,sx:627,sy:0,sw:627,sh:627,ax:350,feet:619,scale:.19},
+ {asset:reverseArt,sx:0,sy:0,sw:1536,sh:1024,ax:970,feet:996,scale:.114},
+ {asset:runArt,sx:627,sy:627,sw:627,sh:627,ax:305,feet:581,scale:.19}
 ];
 function hero(x,y){
- if(!heroArtReady){vectorHero(x,y);return;}
  const running=s.phase==='walk';
- const frame=heroFrames[s.flash?3:running?1+Math.floor(visualTime*8)%2:0];
- const scale=.19,bob=running?-Math.abs(Math.sin(visualTime*14))*3:0;
+ if(!heroArt.ready||(running&&(!runArt.ready||!reverseArt.ready))){vectorHero(x,y);return;}
+ const frame=s.flash?attackFrame:running?runFrames[window.HeroMotion.runFrame(visualTime)]:idleFrame;
+ const scale=frame.scale,bob=running?-Math.abs(Math.sin(visualTime*Math.PI*5))*2:0;
  oval(x,266,27,6,'#102a3059');
  g.save();g.translate(x,y);
  if(s.phase==='fallen'){g.translate(0,20);g.rotate(-1.3);}
- g.drawImage(heroArt,frame.sx,frame.sy,627,627,-frame.ax*scale,36-frame.feet*scale+bob,627*scale,627*scale);
+ g.drawImage(frame.asset.image,frame.sx,frame.sy,frame.sw,frame.sh,-frame.ax*scale,36-frame.feet*scale+bob,frame.sw*scale,frame.sh*scale);
  if(s.flash){line([[40,-35],[51,-25],[57,-13]],'#f8dc93',3);}
  g.restore();
 }
@@ -137,6 +145,22 @@ function monster(x,y,e){
  g.restore();
 }
 function landscape(){
+ if(!forestArt.ready){vectorLandscape();return;}
+ // Pan inside the panorama: no repeated moon, seam or jump at a tile boundary.
+ const progress=Math.max(0,Math.min(1,s.x/E.GOAL));
+ g.drawImage(forestArt.image,253*progress,0,1689,809,0,0,800,340);
+ // The nearest details move faster than the forest to give the road depth.
+ for(let i=0;i<18;i++){
+  const x=((i*59-s.x*.85)%1062+1062)%1062-65;
+  if(i%3===0){oval(x,290+i%2*12,5,2,'#373e4499');oval(x-1,289+i%2*12,4,1.5,'#b3a58b99');}
+  if(i%2===0){line([[x,322],[x-5,314],[x-3,323],[x+5,313]],'#244d44',2);}
+ }
+ for(let i=0;i<7;i++){
+  const x=((i*139-s.x*.25)%973+973)%973-25;
+  oval(x,170+(i*29)%65+Math.sin(visualTime*.9+i)*3,1.2,1.2,'#f0d080b0');
+ }
+}
+function vectorLandscape(){
  rect(0,0,800,340,'#1d354b');rect(0,126,800,80,'#294757');
  for(let i=0;i<20;i++)oval((i*97+43)%800,20+(i*41)%108, i%4===0?1.4:.8,i%4===0?1.4:.8,'#e4d5ad94');
  oval(666,58,47,47,'#e9d6a20a');oval(666,58,36,36,'#e9d6a213');oval(666,58,27,27,'#f0dda8');oval(657,52,5,5,'#cbbd902e');oval(677,66,3,3,'#cbbd9040');
