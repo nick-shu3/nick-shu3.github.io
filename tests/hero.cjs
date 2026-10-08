@@ -9,7 +9,7 @@ const snapshot=JSON.stringify(s);E.step(s,.1);assert.equal(JSON.stringify(s),sna
 const one=E.create({weapon:12,armor:12});E.start(one);one.x=100;E.step(one,.1);E.step(one,.1);E.step(one,.1);E.step(one,.1);E.step(one,.1);assert.equal(one.hp,60,'one-hit kill has no retaliation');
 const bad=E.create();E.start(bad);const before=JSON.stringify(bad);E.step(bad,NaN);E.step(bad,-1);assert.equal(JSON.stringify(bad),before);
 const fight=E.create();E.start(fight);fight.x=100;E.step(fight,.1);for(let i=0;i<4;i++)E.step(fight,.1);assert.equal(fight.hp,50);assert.equal(fight.enemyHP,14);
-const M=require('../docs/games/hero-again/motion.js'),C=require('../docs/games/hero-again/campaign.js');
+const V=require('../docs/games/hero-again/scenery.js'),M=require('../docs/games/hero-again/motion.js'),C=require('../docs/games/hero-again/campaign.js');
 const enemy=E.ENEMIES[0];
 assert.equal(M.enemyX({phase:'walk',x:0},enemy),830,'enemy enters from right edge');
 assert(M.enemyX({phase:'walk',x:50},enemy)<M.enemyX({phase:'walk',x:0},enemy));
@@ -23,6 +23,7 @@ class TestImage{
  constructor(){this.naturalWidth=1254;this.naturalHeight=1254;images.push(this);}
  set src(value){this.path=value;
  if(value.endsWith('hero-reverse.webp')){this.naturalWidth=1536;this.naturalHeight=1024;}
+ if(value.endsWith('journey-atlas.webp')){this.naturalWidth=1932;this.naturalHeight=814;}
  if(value.endsWith('moon-forest.webp')){this.naturalWidth=1942;this.naturalHeight=809;}
  }
 }
@@ -30,7 +31,7 @@ class TestImage{
 const ctx=new Proxy({drawImage:(...args)=>{drawn.push(args);}}, {get:(o,k)=>o[k]||((...args)=>{for(const a of args)if(typeof a==='number')assert(Number.isFinite(a),'finite Canvas argument: '+k);}),set:(o,k,v)=>(o[k]=v,true)});
 function el(id){return elements[id]||(elements[id]={textContent:'',disabled:false,setAttribute:()=>{},getContext:()=>ctx,addEventListener:(key,fn)=>{handlers[id+':'+key]=fn;}});}
 const doc={hidden:false,getElementById:el,addEventListener:(key,fn)=>{handlers[key]=fn;}};
-vm.runInNewContext(fs.readFileSync('docs/games/hero-again/game.js','utf8'),{Image:TestImage,window:{HeroAgain:C,HeroMotion:M,addEventListener:()=>{}},document:doc,localStorage:{getItem:()=>'{bad json',setItem:()=>{}},requestAnimationFrame:fn=>{raf=fn;},console});
+vm.runInNewContext(fs.readFileSync('docs/games/hero-again/game.js','utf8'),{Image:TestImage,window:{HeroAgain:C,HeroMotion:M,HeroScenery:V,addEventListener:()=>{}},document:doc,localStorage:{getItem:()=>'{bad json',setItem:()=>{}},requestAnimationFrame:fn=>{raf=fn;},console});
 assert(elements['save-note'].textContent.includes('読み込めません'));handlers['start:click']();raf(100);raf(1100);const shown=elements.distance.textContent;
 doc.hidden=true;handlers.visibilitychange();raf(100000);assert.equal(elements.distance.textContent,shown);assert.equal(elements.phase.textContent,'一時停止中');
 doc.hidden=false;raf(200000);assert.equal(elements.distance.textContent,shown);handlers['pause:click']();raf(300000);assert.equal(elements.distance.textContent,shown,'resume must not catch up elapsed hidden time');raf(300100);assert.notEqual(elements.distance.textContent,shown);
@@ -41,7 +42,7 @@ function playback(multiplier){
  function node(id){return nodes[id]||(nodes[id]={textContent:'',disabled:false,setAttribute:(k,v)=>{nodes[id][k]=v;},getContext:()=>ctx,addEventListener:(k,fn)=>{events[id+':'+k]=fn;}});}
  const engine={...C,step:(state,dt)=>{current=state;C.step(state,dt);}};
  const document={hidden:false,getElementById:node,addEventListener:()=>{}};
- vm.runInNewContext(fs.readFileSync('docs/games/hero-again/game.js','utf8'),{Image:TestImage,window:{HeroAgain:engine,HeroMotion:M,addEventListener:()=>{}},document,localStorage:{getItem:()=>null,setItem:()=>{}},requestAnimationFrame:fn=>{frame=fn;}});
+ vm.runInNewContext(fs.readFileSync('docs/games/hero-again/game.js','utf8'),{Image:TestImage,window:{HeroAgain:engine,HeroMotion:M,HeroScenery:V,addEventListener:()=>{}},document,localStorage:{getItem:()=>null,setItem:()=>{}},requestAnimationFrame:fn=>{frame=fn;}});
  events['speed-'+multiplier+':click']();assert.equal(nodes['speed-'+multiplier]['aria-pressed'],'true');
  events['start:click']();frame(100);
  for(let i=1;i<=4800/multiplier;i++)frame(100+i*1000/60);
@@ -72,7 +73,7 @@ assert.deepEqual([.01,.11,.21,.31,.41].map(M.runFrame),[0,1,2,3,0],'run cycle in
 const visualNodes={},visualEvents={};let visualRaf;
 function visualEl(id){return visualNodes[id]||(visualNodes[id]={textContent:'',disabled:false,setAttribute:()=>{},getContext:()=>ctx,addEventListener:(k,fn)=>{visualEvents[id+':'+k]=fn;}});}
 const imageStart=images.length;
-vm.runInNewContext(fs.readFileSync('docs/games/hero-again/game.js','utf8'),{Image:TestImage,window:{HeroAgain:C,HeroMotion:M,addEventListener:()=>{}},document:{hidden:false,getElementById:visualEl,addEventListener:()=>{}},localStorage:{getItem:()=>null,setItem:()=>{}},requestAnimationFrame:fn=>{visualRaf=fn;}});
+vm.runInNewContext(fs.readFileSync('docs/games/hero-again/game.js','utf8'),{Image:TestImage,window:{HeroAgain:C,HeroMotion:M,HeroScenery:V,addEventListener:()=>{}},document:{hidden:false,getElementById:visualEl,addEventListener:()=>{}},localStorage:{getItem:()=>null,setItem:()=>{}},requestAnimationFrame:fn=>{visualRaf=fn;}});
 const visualImages=images.slice(imageStart);
 for(const image of visualImages){
  const file=fs.readFileSync('docs/games/hero-again/'+image.path);
@@ -110,7 +111,8 @@ for(const stage of [1,2]){
  const state=C.create({wins:1,stageWins:[1,1,0],selected:stage},()=>1),nodes={},events={};let frame;
  function node(id){return nodes[id]||(nodes[id]={textContent:'',disabled:false,setAttribute:()=>{},getContext:()=>ctx,addEventListener:(k,fn)=>{events[id+':'+k]=fn;}});}
  const api={...C,create:()=>state};
- vm.runInNewContext(fs.readFileSync('docs/games/hero-again/game.js','utf8'),{Image:TestImage,window:{HeroAgain:api,HeroMotion:M,addEventListener:()=>{}},document:{hidden:false,getElementById:node,addEventListener:()=>{}},localStorage:{getItem:()=>null,setItem:()=>{}},requestAnimationFrame:fn=>{frame=fn;}});
+ vm.runInNewContext(fs.readFileSync('docs/games/hero-again/game.js','utf8'),{Image:TestImage,window:{HeroAgain:api,HeroMotion:M,HeroScenery:V,addEventListener:()=>{}},document:{hidden:false,getElementById:node,addEventListener:()=>{}},localStorage:{getItem:()=>null,setItem:()=>{}},requestAnimationFrame:fn=>{frame=fn;}});
+ const atlas=images.at(-1);assert.equal(atlas.path,'assets/journey-atlas.webp');atlas.onload();
  C.start(state);
  for(let i=0;i<C.enemies(state).length;i++){
   state.index=i;const e=C.enemies(state)[i];state.x=e.x;state.phase='fight';state.enemyHP=e.hp;state.timer=10;frame(100+i*17);
@@ -119,3 +121,20 @@ for(const stage of [1,2]){
  events['stop:click']();assert.equal(state.phase,'ready');assert.equal(nodes['stage-0'].disabled,false);events['stage-0:click']();assert.equal(state.stage,0);
 }
 console.log('PASS: all outbound/return enemy types and bosses render with finite Canvas arguments; stage controls and distance labels.');
+
+// All atlas crops stay inside their own cell, including reverse travel and edges.
+for(const index of Array.from({length:9},(_,i)=>i))for(const progress of [0,.5,1])for(const returning of [false,true]){
+ const crop=V.crop(index,1932,814,progress,returning),left=index%3*644,top=Math.floor(index/3)*814/3;
+ assert(crop.sx>=left&&crop.sx+crop.sw<=left+644);
+ assert(crop.sy>=Math.floor(top)&&crop.sy+crop.sh<=top+814/3);
+ assert(Object.values(crop).every(Number.isFinite));
+}
+assert.deepEqual(Array.from({length:9},(_,i)=>V.realm(2,i)),[8,7,6,5,4,3,2,1,0]);
+assert.equal(V.zoneProgress(42195,8),1);assert.equal(V.zoneProgress(40000,8),0);
+assert.equal(new Set(V.THEMES.map(t=>t.color)).size,9,'nine different realm palettes');
+const atlasFile=fs.readFileSync('docs/games/hero-again/assets/journey-atlas.webp');
+assert.equal(atlasFile.toString('ascii',0,4),'RIFF');assert.equal(atlasFile.readUInt16LE(26)&0x3fff,1932);assert.equal(atlasFile.readUInt16LE(28)&0x3fff,814);
+const atlasDraws=drawn.filter(a=>a[0].path==='assets/journey-atlas.webp');assert(atlasDraws.length>0,'production UI draws the atlas');
+assert.equal(new Set(atlasDraws.map(a=>Math.floor(a[1]/644)+3*Math.floor(a[2]/(814/3)))).size,9,'all nine backgrounds actually rendered');
+for(const [im,sx,sy,sw,sh,...dest] of atlasDraws){assert(sx>=0&&sy>=0&&sx+sw<=im.naturalWidth&&sy+sh<=im.naturalHeight);assert(dest.every(Number.isFinite));}
+console.log('PASS: local nine-realm atlas, outbound/reverse scenery, bounded per-cell crops, equipment icons and all boss scenes.');

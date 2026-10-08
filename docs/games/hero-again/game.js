@@ -1,7 +1,9 @@
 'use strict';
 (()=> {
-const E=window.HeroAgain,by=id=>document.getElementById(id),canvas=by('scene'),g=canvas.getContext('2d'),KEY='shu3.hero-again.v1';
+const E=window.HeroAgain,V=window.HeroScenery,by=id=>document.getElementById(id),canvas=by('scene'),g=canvas.getContext('2d'),KEY='shu3.hero-again.v1';
 let saved=null,storageOK=true;
+const gentle=window.matchMedia?window.matchMedia('(prefers-reduced-motion: reduce)').matches:false;
+let atlasArt=null,gearStamp='';
 try{const raw=localStorage.getItem(KEY);if(raw&&raw.length<=8192)saved=JSON.parse(raw);}catch(_){storageOK=false;}
 const s=E.create(saved);let paused=false,last=0,seen=-1,lastSave='',visualTime=0,speed=1,accumulator=0;
 function save(){const value=JSON.stringify(s.saved);if(value===lastSave)return;try{localStorage.setItem(KEY,value);lastSave=value;}catch(_){storageOK=false;by('save-note').textContent='保存できません。この画面を開いている間だけ記録が残ります。';}}
@@ -13,7 +15,9 @@ function update(){
  by('hp').textContent=number(s.hp)+' / '+number(st.maxHP);by('health').max=st.maxHP;by('health').value=s.hp;
  by('distance').textContent=distance(s.x)+' / '+distance(E.goal(s));by('progress').max=E.goal(s);by('progress').value=s.x;
  by('level').textContent=s.level;by('attack').textContent=number(st.attack);by('defense').textContent=number(st.defense);by('xp').textContent=(2-s.kills%2)+'体';
- for(const key of ['weapon','armor']){const gear=E.equipment(s,key);by(key).textContent=gear.name+' +'+gear.level;}
+ const gears=['weapon','armor'].map(key=>E.equipment(s,key));
+ for(let i=0;i<2;i++)by(i===0?'weapon':'armor').textContent=gears[i].name+' +'+gears[i].level;
+ const stamp=gears.map(g=>g.name+':'+g.index+':'+g.level).join('|');if(stamp!==gearStamp){gearStamp=stamp;gears.forEach((gear,i)=>gearIcon(i===0?'weapon':'armor',gear));}
  by('attempt').textContent='挑戦 '+E.record(s,'attempts')+'回目';by('best').textContent='最長 '+distance(E.record(s,'best'));by('wins').textContent='踏破 '+E.record(s,'wins')+'回';
  by('phase').textContent=paused?'一時停止中':({ready:'出発の準備',walk:'ゴールを目指して',fight:'魔物と戦闘中',fallen:'次の勇者へ…',won:'ゴール到達！'})[s.phase];
  by('pause').disabled=!active;by('pause').textContent=paused?'再開する':'一時停止';by('stop').disabled=!active;
@@ -26,6 +30,28 @@ function update(){
  by('materials').textContent='強化素材 '+number(s.saved.materials);
  by('guarantee').textContent=zone?'区間撃破 '+number(s.saved.counts[zone.rank])+'体 ／ 次の確定報酬まで '+(5-s.saved.counts[zone.rank]%5)+'体':'往路から装備ドロップが追加されます。';
  if(seen!==s.serial){seen=s.serial;by('message').textContent=s.event||'装備は引き継ぎ。レベルと身体能力は、倒れると初期値に戻ります。';save();}
+}
+function gearIcon(key,gear){
+ const c=by(key+'-art').getContext('2d'),color=V.gearColor(gear.index),rare=gear.name.includes('王印'),tier=gear.index<0?0:1+Math.floor(gear.index/3);
+ c.clearRect(0,0,96,96);c.save();c.translate(48,48);
+ function shape(points,fill){c.beginPath();c.moveTo(...points[0]);for(const point of points.slice(1))c.lineTo(...point);c.closePath();c.fillStyle=fill;c.fill();c.strokeStyle='#172b36';c.lineWidth=2;c.stroke();}
+ c.beginPath();c.arc(0,0,36,0,Math.PI*2);c.strokeStyle=color+'55';c.lineWidth=1;c.stroke();
+ if(key==='weapon'){
+  c.rotate(.55);shape([[-5,13],[-7,-21],[0,-36],[7,-21],[5,13]],color);
+  shape([[0,-31],[-2,10],[3,10],[3,-22]],'#f6f3df');
+  c.fillStyle=rare?'#f1ce76':'#b89a65';c.fillRect(-17,11,34,6);c.fillRect(-4,17,8,15);
+  shape([[-5,32],[0,37],[5,32],[0,28]],color);
+  if(tier>=2){shape([[-17,12],[-20,4],[-12,11]],color);shape([[17,12],[20,4],[12,11]],color);}
+  if(tier>=4)shape([[-6,-15],[0,-23],[6,-15],[0,-7]],rare?'#ffe0a1':'#e9c688');
+ }else{
+  shape([[-16,-28],[-31,-14],[-21,1],[-13,-4],[-17,29],[17,29],[13,-4],[21,1],[31,-14],[16,-28],[7,-20],[-7,-20]],color);
+  shape([[-10,-15],[10,-15],[13,15],[0,25],[-13,15]],'#436775');
+  shape([[0,-10],[7,1],[0,13],[-7,1]],rare?'#ffe1a1':color);
+  c.strokeStyle='#f4e8c2';c.lineWidth=2;c.beginPath();c.moveTo(-22,-15);c.lineTo(-13,-20);c.moveTo(22,-15);c.lineTo(13,-20);c.stroke();
+  if(tier>=3){shape([[-21,-20],[-30,-27],[-29,-13],[-18,-13]],'#c9b680');shape([[21,-20],[30,-27],[29,-13],[18,-13]],'#c9b680');}
+ }
+ if(rare){c.fillStyle='#f2d185';for(const [x,y] of [[-31,-31],[31,-31]]){c.beginPath();c.moveTo(x,y-5);c.lineTo(x+3,y);c.lineTo(x,y+5);c.lineTo(x-3,y);c.closePath();c.fill();}}
+ c.restore();
 }
 function rect(x,y,w,h,c){g.fillStyle=c;g.fillRect(Math.round(x),Math.round(y),w,h);}
 function oval(x,y,rx,ry,color,outline){
@@ -148,7 +174,7 @@ function drawEnemy(x,y,e){
    poly([[22,-5],[31,-38],[37,-30],[28,4]],'#d7d6c1','#273944');box(15,0,17,5,1,'#c7a669');
   }g.restore();
  }
- g.restore();if(e.boss){poly([[x-12,139],[x-14,126],[x-6,130],[x,121],[x+6,130],[x+14,126],[x+12,139]],'#e9c87b','#625041');}
+ g.restore();if(e.boss)bossAura(x,e);
 }
 function monster(x,y,e){
  oval(x,266,e.type===1?31:28,6,'#102a3059');
@@ -183,6 +209,10 @@ function monster(x,y,e){
  g.restore();
 }
 function landscape(){
+ if(s.stage>0){
+  if(!atlasArt)atlasArt=art('assets/journey-atlas.webp',1932,814);
+  if(atlasArt.ready){journeyLandscape();return;}
+ }
  if(!forestArt.ready){vectorLandscape();return;}
  // Pan inside the panorama: no repeated moon, seam or jump at a tile boundary.
  const progress=Math.max(0,Math.min(1,s.x/E.goal(s)));
@@ -201,6 +231,36 @@ function landscape(){
   const x=((i*139-s.x*.25)%973+973)%973-25;
   oval(x,170+(i*29)%65+Math.sin(visualTime*.9+i)*3,1.2,1.2,'#f0d080b0');
  }
+}
+function journeyLandscape(){
+ const zone=E.zone(s),realm=V.realm(s.stage,zone.index),theme=V.THEMES[realm],progress=V.zoneProgress(s.x,zone.index);
+ function panel(index,p){const crop=V.crop(index,1932,814,p,s.stage===2);g.drawImage(atlasArt.image,crop.sx,crop.sy,crop.sw,crop.sh,0,0,800,340);}
+ panel(realm,progress);
+ // A distance-based dissolve avoids jumping or using wall-clock catch-up after pause.
+ const blend=Math.min(1,Math.max(0,(s.x-zone.index*5000)/120));
+ if(!gentle&&zone.index>0&&blend<1){g.save();g.globalAlpha=1-blend;panel(V.realm(s.stage,zone.index-1),1);g.restore();}
+ // Small foreground details scroll faster than the distant panorama.
+ for(let i=0;i<14;i++){
+  const x=((i*67-s.x*.85)%938+938)%938-45;
+  oval(x,290+i%3*13,4+i%2,1.5,theme.road+'55');
+ }
+ if(!gentle)for(let i=0;i<14;i++){
+  const x=(i*137+Math.sin(visualTime*.6+i)*18)%800;
+  const drift=theme.particle==='snow'?visualTime*17:theme.particle==='ember'?-visualTime*22:visualTime*4;
+  const y=((i*37+drift)%240+240)%240+35;
+  if(theme.particle==='snow'){line([[x-2,y],[x+2,y]],'#eaf8fc99',1);line([[x,y-2],[x,y+2]],'#eaf8fc99',1);}
+  else oval(x,y,theme.particle==='petal'?2.2:1.2,theme.particle==='petal'?1:1.2,theme.color+'99');
+ }
+ if(s.stage===2){rect(0,0,800,340,'#30234616');}
+}
+function bossAura(x,e){
+ const theme=V.THEMES[V.realm(s.stage,e.zone)],pulse=gentle?0:Math.sin(visualTime*3)*2;
+ oval(x,266,44+pulse,9,theme.color+'20',theme.color+'66');
+ for(let i=0;i<4;i++){const angle=visualTime*.6+i*Math.PI/2;oval(x+Math.cos(angle)*39,244+Math.sin(angle)*15,2,2,theme.color);}
+ // Each boss carries its realm's sigil, not a floating generic crown.
+ const top=e.type===3||e.type===4?157:e.type===1?178:e.type===5?176:184;
+ poly([[x-12,top],[x-14,top-13],[x-6,top-9],[x,top-19],[x+6,top-9],[x+14,top-13],[x+12,top]],theme.color,'#625041');
+ if(e.type===3||e.type===4){line([[x-28,204],[x-35,244]],theme.color,4);line([[x+28,204],[x+35,244]],theme.color,4);}
 }
 function vectorLandscape(){
  rect(0,0,800,340,'#1d354b');rect(0,126,800,80,'#294757');
@@ -229,7 +289,9 @@ function render(){
   g.fillStyle='#f1dcac';g.font='bold 12px system-ui';g.fillText('GOAL',goalX+24,147);
  }
  const e=E.enemies(s)[s.index];if(e){const x=window.HeroMotion.enemyX(s,e);if(x<870){drawEnemy(x,231,e);g.fillStyle='#edf0da';g.font='bold 12px system-ui';g.textAlign='center';g.fillText((e.boss?'BOSS · ':'')+e.name,x,e.boss?116:160);g.textAlign='left';if(s.phase==='fight'){box(x-30,e.boss?124:169,60,5,2,'#182e3a');box(x-30,e.boss?124:169,60*s.enemyHP/e.hp,5,2,'#dca07f');}}}
+ if(s.stage>0){const gear=E.equipment(s,'weapon');if(gear.index>=0){const color=V.gearColor(gear.index);oval(window.HeroMotion.HERO_X,266,28,5,color+'33');}}
  hero(window.HeroMotion.HERO_X,230);
+ if(e&&e.boss&&s.phase==='fight'){const color=V.THEMES[V.realm(s.stage,e.zone)].color;box(216,16,368,48,10,'#142534dd',color+'66');g.fillStyle=color;g.font='bold 13px system-ui';g.textAlign='center';g.fillText((s.stage===2?'覚醒 BOSS · ':'区間 BOSS · ')+e.name,400,36);box(234,45,332,7,3,'#070e19');box(234,45,332*s.enemyHP/e.hp,7,3,color);g.textAlign='left';}
  if(paused||s.phase==='won'){rect(0,0,800,340,'#132031bd');g.fillStyle='#f0d8a2';g.textAlign='center';g.font='bold 30px system-ui';g.fillText(paused?'一時停止中':s.stage===2?'往復、踏破。':'勇者、ゴールへ。',400,161);g.font='16px system-ui';g.fillText(paused?'下の「再開する」で続けられます':s.stage<2?'下のボタンから、次のステージへ':'装備は、次の冒険にも残ります。',400,198);g.textAlign='left';}
 }
 by('start').addEventListener('click',()=>{paused=false;E.play(s);last=0;accumulator=0;update();});
