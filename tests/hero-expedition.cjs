@@ -22,7 +22,7 @@ const doc={hidden:false,getElementById:node,addEventListener:(k,f)=>{events[k]=f
 const api={...E,create:()=>live};
 vm.runInNewContext(fs.readFileSync('docs/games/hero-again/game.js','utf8'),{Image:Img,window:{HeroAgain:api,HeroMotion:M,HeroScenery:V,addEventListener:()=>{}},document:doc,localStorage:{getItem:()=>null,setItem:(k,v)=>written.push(v)},requestAnimationFrame:f=>{frame=f;}});
 assert.equal(nodes.phase.textContent,'一時停止中','restored expansion requires explicit resume');
-for(const id of ['distance','best','stage-guide','zone','boss-distance'])assert(!/\d/.test(nodes[id].textContent),'no positional digits in '+id);
+assert(nodes.distance.textContent.includes('ゴール ？km'));assert(nodes.distance.textContent.includes('現在 '+(s.x/1000).toFixed(3)+'km'));assert(nodes.zone.textContent.startsWith('区間1 · '));assert(!/\d/.test(nodes['boss-distance'].textContent),'upcoming endpoint hidden');assert.equal(nodes['completed-sections'].textContent,'踏破済みの区間はまだありません。');
 assert(nodes.progress.hidden);assert.equal(nodes.progress.value,0);assert(nodes['ending-panel'].hidden);
 events['pause:click']();frame(100);frame(200);assert.equal(s.saved.expedition.time,.1,'real activity time independent of speed');
 const firstMove=s.x;E.stop(s);assert.equal(s.phase,'ready');E.play(s);assert.equal(s.x,firstMove,'manual stop resumes exact position');doc.hidden=true;events.visibilitychange();frame(10000);assert.equal(s.x,firstMove);doc.hidden=false;events['pause:click']();frame(20000);assert.equal(s.x,firstMove,'no offline catch-up');
@@ -50,6 +50,8 @@ for(const stage of [3,4,5,6]){
   const localDoc={hidden:false,getElementById:id=>localNodes[id]||(localNodes[id]={textContent:'',setAttribute:()=>{},getContext:()=>finiteCtx,addEventListener:()=>{}}),addEventListener:()=>{}};
   vm.runInNewContext(fs.readFileSync('docs/games/hero-again/game.js','utf8'),{Image:Img,window:{HeroAgain:{...E,create:()=>copy},HeroMotion:M,HeroScenery:V,addEventListener:()=>{}},document:localDoc,localStorage:{getItem:()=>null,setItem:()=>{}},requestAnimationFrame:f=>{drawFrame=f;}});drawFrame(100);
   assert(localNodes.progress.hidden);assert(!/\d/.test(localNodes['boss-distance'].textContent));
+  const chapter=E.ZONES_EXTRA.filter(q=>q.stage===stage),section=chapter.indexOf(z)+1;assert(localNodes.zone.textContent.startsWith('区間'+section+' · '));assert(!localNodes.zone.textContent.includes(' / '),'section total hidden');assert(localNodes.distance.textContent.includes('ゴール ？km'));assert(localNodes.distance.textContent.includes((copy.x/1000).toFixed(3)+'km'));
+  for(const done of chapter)assert(localNodes['completed-sections'].textContent.includes(((done.end-done.begin)/1000).toFixed(3)+'km 踏破'),'cleared segment length revealed');
  }
  console.log('PASS: expansion stage '+stage+' no random drops, '+(s.saved.expedition.deaths-startDeaths)+' deaths; environment/boss rendering and reload.');
  if(stage<6)E.play(s);
@@ -60,7 +62,7 @@ const toxic=E.clean({wins:1,stageWins:[1,1,1],expedition:{selected:Infinity,weap
 const forged=E.clean({...legacy,expedition:{selected:3,checkpoints:[5,9,15,16]}});assert.equal(forged.expedition.checkpoints[0],0,'unearned checkpoint rejected');
 const env=E.create(legacy,()=>1);env.stage=3;E.start(env);for(let i=0;i<51;i++)E.step(env,.1);const weakDefense=E.stats(env).defense;env.saved.expedition.resist.pressure=4;assert(E.stats(env).defense>weakDefense,'pressure equipment affects defense');env.saved.expedition.resist.heat=0;const hp=env.hp;E.step(env,.1);const rawLoss=hp-env.hp;env.saved.expedition.resist.heat=4;const hp2=env.hp;E.step(env,.1);assert(hp2-env.hp<rawLoss,'heat equipment reduces continuous damage');
 assert(E.ZONES_EXTRA.find(z=>z.name==='青の輪郭').env[1]<E.ZONES_EXTRA.find(z=>z.name==='風の止む空').env[1],'upper stratosphere cold eases while oxygen decreases');
-console.log('PASS: legacy parity, false ending/fall, hidden positional UI/ARIA, no offline catch-up, real elapsed time, 17 bosses, normal/true ending, actual distance ledgers, save migration/validation and equipment effects.');
+console.log('PASS: legacy parity, false ending/fall, current distance/section UI with hidden destination/total count, no offline catch-up, real elapsed time, 17 bosses, normal/true ending, actual distance ledgers, save migration/validation and equipment effects.');
 
 const skyRaw={...legacy,expedition:{wins:[1,0,0,0],selected:4}};
 const coldA=E.create(skyRaw,()=>1),coldB=E.create(skyRaw,()=>1);E.start(coldA);E.start(coldB);coldB.saved.expedition.resist.cold=4;E.step(coldA,.1);E.step(coldB,.1);assert(coldB.x>coldA.x,'cold protection restores movement speed');

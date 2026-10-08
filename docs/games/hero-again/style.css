@@ -11,3 +11,5 @@ body{background:radial-gradient(ellipse at 50% 0,#243a4d 0,#131d30 65%)}h1{color
 [hidden]{display:none!important}#environment-panel,#ending-panel{margin-top:18px;padding:18px;border:1px solid #748780;border-radius:14px;background:#223641}#environment-panel p{font-size:13px;line-height:1.8}#ending-result{font:inherit;white-space:pre-wrap;overflow-wrap:anywhere;line-height:1.9;color:#eed7a3;font-size:14px}.stage-select{grid-template-columns:repeat(auto-fit,minmax(110px,1fr))}
 
 #resistance{white-space:pre-line}#ending-panel{scroll-margin-top:18px;background:linear-gradient(135deg,#30483d,#223446);border:2px solid #ccb57b}#ending-panel h2{font-size:24px;color:#efd5a2}#ending-result{padding:16px;background:#142b32;border-radius:10px;border-left:3px solid #d5bb79;font-variant-numeric:tabular-nums}
+
+#route-history{margin-top:18px;padding:16px 18px;border:1px solid #526c73;border-radius:14px;background:#1c303a}#completed-sections{white-space:pre-line;color:#d8c795;font-size:13px;line-height:1.8;overflow-wrap:anywhere}.journey>.row{flex-wrap:wrap;gap:6px}.journey>.row span{white-space:normal}
