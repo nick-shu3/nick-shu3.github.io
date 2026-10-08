@@ -21,7 +21,10 @@ const fs=require('node:fs'),vm=require('node:vm'),elements={},handlers={};let ra
 const images=[],drawn=[];
 class TestImage{
  constructor(){this.naturalWidth=1254;this.naturalHeight=1254;images.push(this);}
- set src(value){this.path=value;}
+ set src(value){this.path=value;
+ if(value.endsWith('hero-reverse.webp')){this.naturalWidth=1536;this.naturalHeight=1024;}
+ if(value.endsWith('moon-forest.webp')){this.naturalWidth=1942;this.naturalHeight=809;}
+ }
 }
 
 const ctx=new Proxy({drawImage:(...args)=>{drawn.push(args);}}, {get:(o,k)=>o[k]||((...args)=>{for(const a of args)if(typeof a==='number')assert(Number.isFinite(a),'finite Canvas argument: '+k);}),set:(o,k,v)=>(o[k]=v,true)});
@@ -56,11 +59,46 @@ assert.equal(png.subarray(0,8).toString('hex'),'89504e470d0a1a0a');
 assert.equal(png.readUInt32BE(16),1254);assert.equal(png.readUInt32BE(20),1254);
 assert.equal(png[25],6,'RGBA sprite preserves transparency');
 assert.equal(images[0].path,'assets/hero-v2.png');
-images[0].onload();raf(400200);assert(drawn.length>0,'loaded image rendered');
-for(const [,sx,sy,sw,sh,dx,dy,dw,dh] of drawn){
- assert(sx>=0&&sy>=0&&sx+sw<=1254&&sy+sh<=1254,'sprite stays within PNG');
+for(const image of images.slice(0,3))image.onload();raf(400200);assert(drawn.length>0,'loaded image rendered');
+for(const [image,sx,sy,sw,sh,dx,dy,dw,dh] of drawn){
+ assert(sx>=0&&sy>=0&&sx+sw<=image.naturalWidth&&sy+sh<=image.naturalHeight,'sprite stays within PNG');
  assert([dx,dy,dw,dh].every(Number.isFinite));assert(dw>0&&dh>0);
 }
 const count=drawn.length;images[0].onerror();raf(400300);
 assert.equal(drawn.length,count,'failed image falls back without drawing broken image');
 console.log('PASS: local transparent PNG, finite sprite rendering, bounded source frames, image failure fallback.');
+
+assert.deepEqual([.01,.11,.21,.31,.41].map(M.runFrame),[0,1,2,3,0],'run cycle includes both strides and passing steps');
+const visualNodes={},visualEvents={};let visualRaf;
+function visualEl(id){return visualNodes[id]||(visualNodes[id]={textContent:'',disabled:false,setAttribute:()=>{},getContext:()=>ctx,addEventListener:(k,fn)=>{visualEvents[id+':'+k]=fn;}});}
+const imageStart=images.length;
+vm.runInNewContext(fs.readFileSync('docs/games/hero-again/game.js','utf8'),{Image:TestImage,window:{HeroAgain:E,HeroMotion:M,addEventListener:()=>{}},document:{hidden:false,getElementById:visualEl,addEventListener:()=>{}},localStorage:{getItem:()=>null,setItem:()=>{}},requestAnimationFrame:fn=>{visualRaf=fn;}});
+const visualImages=images.slice(imageStart);
+for(const image of visualImages){
+ const file=fs.readFileSync('docs/games/hero-again/'+image.path);
+ if(image.path.endsWith('.png')){
+  assert.equal(file.readUInt32BE(16),image.naturalWidth);assert.equal(file.readUInt32BE(20),image.naturalHeight);
+ }else{
+  assert.equal(file.toString('ascii',0,4),'RIFF');assert.equal(file.toString('ascii',8,12),'WEBP');
+  const extended=file.toString('ascii',12,16)==='VP8X';
+  const width=extended?file.readUIntLE(24,3)+1:file.readUInt16LE(26)&0x3fff;
+  const height=extended?file.readUIntLE(27,3)+1:file.readUInt16LE(28)&0x3fff;
+  assert.equal(width,image.naturalWidth);assert.equal(height,image.naturalHeight);
+  if(!image.path.includes('moon-forest'))assert(file[20]&16,'WebP alpha channel preserved');
+ }
+ image.onload();
+}
+const drawStart=drawn.length;visualEvents['start:click']();visualRaf(100);
+for(let i=1;i<=36;i++)visualRaf(100+i*1000/60);
+const cycle=drawn.slice(drawStart).filter(args=>!args[0].path.includes('moon-forest'));
+assert.equal(new Set(cycle.map(a=>a[0].path+':'+a[1]+':'+a[2])).size,4,'all four run images actually reach Canvas');
+for(const [im,sx,sy,sw,sh,...dest] of drawn.slice(drawStart)){
+ assert(sx>=0&&sy>=0&&sx+sw<=im.naturalWidth&&sy+sh<=im.naturalHeight,'all loaded assets stay in bounds');
+ assert(dest.every(Number.isFinite));
+}
+const failed=visualImages.find(im=>im.path.includes('reverse'));failed.onerror();
+const failureStart=drawn.length;visualRaf(800);
+assert(!drawn.slice(failureStart).some(a=>a[0].path.includes('hero-')),'missing run image uses animated Canvas fallback');
+const bg=visualImages.find(im=>im.path.includes('moon-forest'));bg.onerror();
+const bgStart=drawn.length;visualRaf(900);assert.equal(drawn.length,bgStart,'missing forest uses Canvas fallback');
+console.log('PASS: four distinct loaded run frames, panorama bounds, asset dimensions, independent animation/background failures.');
