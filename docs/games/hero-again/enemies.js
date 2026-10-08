@@ -44,12 +44,17 @@ function load(){
  }
  return images;
 }
+function size(e,stage){
+ const v=variant(e,stage);if(!v)return null;
+ const [, ,sw,sh]=FRAMES[v.key][v.tier],scale=1.4*Math.min((v.height+v.tier*3)/sh,(v.width+v.tier*3)/sw);
+ return {width:sw*scale,height:sh*scale};
+}
 function draw(g,images,e,x,stage,time,phase,attack,reduced){
  const v=variant(e,stage),asset=v&&images[v.sheet];if(!asset||!asset.ready)return false;
  const image=asset.image,frame=FRAMES[v.key]?.[v.tier];if(!frame)return false;
  const [sx,sy,sw,sh]=frame;if(sx<0||sy<0||sw<=0||sh<=0||sx+sw>image.naturalWidth||sy+sh>image.naturalHeight)return false;
- const p=pose(v.style,time,phase==='walk',attack,reduced),scale=Math.min((v.height+v.tier*3)/sh,(v.width+v.tier*3)/sw),height=sh*scale,width=sw*scale;
- g.save();g.translate(x,266);g.beginPath();g.ellipse(0,0,25+v.tier*2,5,0,0,Math.PI*2);g.fillStyle='#102a3059';g.fill();
+ const p=pose(v.style,time,phase==='walk',attack,reduced),{height,width}=size(e,stage);
+ g.save();g.translate(x,266);g.beginPath();g.ellipse(0,0,(25+v.tier*2)*1.4,5,0,0,Math.PI*2);g.fillStyle='#102a3059';g.fill();
  g.translate(p.dx,p.dy);g.rotate(p.angle);g.scale(p.sx,p.sy);
  if(stage===2){g.shadowColor='#b77cfa';g.shadowBlur=reduced?3:4+Math.sin(time*3)*1.5;}
  // Slimes remain blue in every chapter; only named elemental variants shift hue.
@@ -60,6 +65,6 @@ function draw(g,images,e,x,stage,time,phase,attack,reduced){
  g.drawImage(image,sx,sy,sw,sh,-width/2,-height,width,height);
  g.restore();return true;
 }
-const api={FAMILIES,FRAMES,family,tier,variant,pose,load,draw};
+const api={FAMILIES,FRAMES,family,tier,variant,pose,size,load,draw};
 if(typeof module==='object'&&module.exports)module.exports=api;else window.HeroEnemies=api;
 })();

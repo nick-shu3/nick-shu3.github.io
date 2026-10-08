@@ -16,7 +16,7 @@ assert(count>500);
 assert.deepEqual(Array.from({length:9},(_,rank)=>N.tier({rank},1)),[0,0,0,1,1,1,2,2,2]);
 assert.equal(N.tier({rank:9},2),2);assert.equal(N.tier({rank:17},2),3);assert.equal(N.tier({rank:18},3),2);assert.equal(N.tier({rank:34},6),3);
 let draws=0;
-const context=new Proxy({drawImage:(im,sx,sy,sw,sh,dx,dy,dw,dh)=>{draws++;assert(sx>=0&&sy>=0&&sx+sw<=im.naturalWidth&&sy+sh<=im.naturalHeight);assert(dw>0&&dh>0&&dw<=128&&dh<=100);}}, {get:(o,k)=>o[k]||((...args)=>{for(const a of args)if(typeof a==='number')assert(Number.isFinite(a),k);}),set:(o,k,v)=>(o[k]=v,true)});
+const context=new Proxy({drawImage:(im,sx,sy,sw,sh,dx,dy,dw,dh)=>{draws++;assert(sx>=0&&sy>=0&&sx+sw<=im.naturalWidth&&sy+sh<=im.naturalHeight);assert(dw>0&&dh>0&&dw<=180&&dh<=140);}}, {get:(o,k)=>o[k]||((...args)=>{for(const a of args)if(typeof a==='number')assert(Number.isFinite(a),k);}),set:(o,k,v)=>(o[k]=v,true)});
 for(const [key,item] of Object.entries(N.FAMILIES)){
  const bytes=fs.readFileSync('docs/games/hero-again/assets/enemy-'+key+'.webp');assert.equal(bytes.subarray(0,4).toString(),'RIFF');assert.equal(bytes.subarray(8,12).toString(),'WEBP');
  assert.equal(bytes.subarray(12,16).toString(),'VP8X');assert(bytes[20]&16,'transparent alpha');
