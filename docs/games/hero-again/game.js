@@ -426,7 +426,7 @@ function render(){
   g.fillStyle='#f1dcac';g.font='bold 12px system-ui';g.fillText('GOAL',goalX+24,147);
  }
  const e=E.enemies(s)[s.index];
- const actor=e?[s.stage,s.serial,s.index,e.name].join(':'):'';
+ const actor=e?[s.stage,s.index,e.name].join(':'):'';
  if(actor!==bossActor){bossActor=actor;bossEntered=-1;bossAttackUntil=0;bossPreviousHP=s.hp;}
  else if(s.phase==='fight'&&s.flash>0&&s.hp<bossPreviousHP)bossAttackUntil=visualTime+.28;
  bossPreviousHP=s.hp;
