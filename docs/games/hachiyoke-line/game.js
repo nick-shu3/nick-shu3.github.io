@@ -114,6 +114,17 @@ if(typeof module!=='undefined'&&module.exports){module.exports=api;return;}
 root.Hachiyoke=api;
 const canvas=document.getElementById('game'),ctx=canvas.getContext('2d'),stages=root.HachiyokeStages;
 const $=id=>document.getElementById(id),stageButtons=[...document.querySelectorAll('#stages button')];
+// Local storybook assets. Native drawing remains available while loading or on error.
+const art={};
+if(typeof root.Image==='function')for(const name of ['forest','cub-normal','cub-happy','cub-worried','cub-sad','bee','nest']){
+  const img=new root.Image();img.src='assets/'+name+'.webp?v=7';art[name]=img;
+}
+function drawSprite(name,x,y,width,height){
+  const img=art[name];if(!img||!img.complete||!(img.naturalWidth>0)||!(img.naturalHeight>0))return false;
+  const scale=Math.min(width/img.naturalWidth,height/img.naturalHeight),w=img.naturalWidth*scale,h=img.naturalHeight*scale;
+  ctx.drawImage(img,x-w/2,y-h/2,w,h);return true;
+}
+
 let unlocked=1;
 try{const saved=Number(root.localStorage.getItem('hachiyoke-unlocked-v1'));if(Number.isInteger(saved))unlocked=clamp(saved,1,stages.length);}catch(_error){/* Private browsing may disable storage. */}
 let stageIndex=0,stage=stages[stageIndex],model=new Model(stage);
@@ -148,7 +159,7 @@ function updateUI(){
     $('finish').disabled=!['ready','draw'].includes(phase);
     $('result').hidden=!['won','lost'].includes(phase);
     $('next').hidden=phase!=='won'||stageIndex===stages.length-1;
-    if(['won','lost'].includes(phase)){$('result-tag').textContent=phase==='won'?'SHELTER COMPLETE':'TRY ANOTHER LINE';$('result-title').textContent=phase==='won'?stage.defendSeconds+'秒、守りきった！':'もうひと工夫！';$('result-detail').textContent=phase==='won'?(stageIndex===stages.length-1?'全5ステージクリア！みんなを守れました。':'森の子は無事。次のステージへ進めます。'):'蜂が森の子に触れました。隙間なく囲ってみよう。';}
+    if(['won','lost'].includes(phase)){$('result-portrait').src='assets/cub-'+(phase==='won'?'happy':'sad')+'.webp?v=7';$('result-portrait').alt=phase==='won'?'喜ぶ森の子':'もう一度挑戦する森の子';$('result-tag').textContent=phase==='won'?'SHELTER COMPLETE':'TRY ANOTHER LINE';$('result-title').textContent=phase==='won'?stage.defendSeconds+'秒、守りきった！':'もうひと工夫！';$('result-detail').textContent=phase==='won'?(stageIndex===stages.length-1?'全5ステージクリア！みんなを守れました。':'森の子は無事。次のステージへ進めます。'):'蜂が森の子に触れました。隙間なく囲ってみよう。';}
   }
   const value=phase==='draw'?Math.max(0,stage.drawSeconds-model.elapsed):phase==='defend'?Math.max(0,stage.defendSeconds-model.elapsed):phase==='ready'?stage.drawSeconds:0;
   const tenth=Math.ceil(value*10);if(tenth!==lastSecond){lastSecond=tenth;$('timer').textContent=(phase==='ready'||phase==='draw'?'描画 ':'防衛 ')+(tenth/10).toFixed(1)+'秒';}
@@ -160,6 +171,8 @@ function ellipse(x,y,rx,ry,rot,color){ctx.beginPath();ctx.ellipse(x,y,rx,ry,rot,
 function outlinedOval(x,y,rx,ry,rot,fill,stroke,width=1.5){ellipse(x,y,rx,ry,rot,fill);ctx.strokeStyle=stroke;ctx.lineWidth=width;ctx.stroke();}
 function curve(points,color,width=1.5){ctx.beginPath();ctx.moveTo(points[0],points[1]);ctx.quadraticCurveTo(points[2],points[3],points[4],points[5]);ctx.strokeStyle=color;ctx.lineWidth=width;ctx.lineCap='round';ctx.stroke();}
 function drawForest(){
+  const img=art.forest;
+  if(img&&img.complete&&img.naturalWidth>0){ctx.drawImage(img,0,0,360,480);return;}
   ctx.fillStyle='#f2f1df';ctx.fillRect(0,0,360,480);
   for(let y=16;y<480;y+=24)for(let x=12;x<360;x+=24)ellipse(x,y,.9,.5,-.3,'#e1e4ce');
   // Decorative foliage only: it is never an obstacle or part of collision geometry.
@@ -174,6 +187,9 @@ function drawForest(){
   }
 }
 function drawNest(n){
+  if(drawSprite('nest',n.x,n.y,48,56)){
+    ctx.font='600 10px system-ui';ctx.fillStyle='#685633';ctx.textAlign='center';ctx.fillText('蜂の巣',n.x,n.y-34);return;
+  }
   ellipse(n.x,n.y+29,26,4,0,'#d0d6b7');
   outlinedOval(n.x,n.y,24,28,0,'#e0ac56','#856338',2);
   ellipse(n.x-6,n.y-11,12,8,-.35,'#f2c97c');
@@ -186,6 +202,10 @@ function drawNest(n){
 }
 function drawForestChild(t){
   const x=t.x,y=t.y,phase=model.phase;
+  const expression=phase==='won'?'happy':phase==='lost'?'sad':['draw','defend'].includes(phase)?'worried':'normal';
+  if(drawSprite('cub-'+expression,x,y-3,44,50)){
+    ctx.font='600 10px system-ui';ctx.fillStyle='#49613d';ctx.textAlign='center';ctx.fillText('森の子',x,y+35);return;
+  }
   ellipse(x,y+22,23,4,0,'#d2d8ba');
   outlinedOval(x-12,y-12,7,7,0,'#bb875e','#745540');outlinedOval(x+12,y-12,7,7,0,'#bb875e','#745540');
   circle(x-12,y-12,3.5,'#e9c7a0');circle(x+12,y-12,3.5,'#e9c7a0');
@@ -217,6 +237,7 @@ function drawForestChild(t){
   ctx.font='600 10px system-ui';ctx.fillStyle='#566b45';ctx.textAlign='center';ctx.fillText('森の子',x,y+43);
 }
 function drawBee(b,now){
+  if(drawSprite('bee',b.x,b.y,24,20))return;
   const flutter=Math.sin(now*.04+b.delay)*.3;
   ellipse(b.x,b.y+9,8,2,0,'#45513418');
   outlinedOval(b.x-3,b.y-5,5,3.5,-.6+flutter,'#fffdf1e6','#839d9980',.8);
@@ -244,7 +265,7 @@ function render(now){
   ctx.setTransform(canvas.width/stage.width,0,0,canvas.height/stage.height,0,0);
   drawForest();
   // Visual no-draw rings match the protected geometric regions.
-  if(['ready','draw'].includes(model.phase))for(const c of [...stage.targets,...nests(stage)]){ctx.beginPath();ctx.arc(c.x,c.y,c.radius+stage.lineWidth/2+8,0,Math.PI*2);ctx.strokeStyle='#abbba1';ctx.setLineDash([3,5]);ctx.lineWidth=1;ctx.stroke();ctx.setLineDash([]);}
+  if(['ready','draw'].includes(model.phase))for(const c of [...stage.targets,...nests(stage)]){ctx.beginPath();ctx.arc(c.x,c.y,c.radius+stage.lineWidth/2+8,0,Math.PI*2);ctx.strokeStyle='#758a60';ctx.setLineDash([3,5]);ctx.lineWidth=1;ctx.stroke();ctx.setLineDash([]);}
   for(const n of nests(stage))drawNest(n);
   drawShelter();
   for(const t of stage.targets)drawForestChild(t);

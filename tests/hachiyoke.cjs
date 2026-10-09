@@ -51,15 +51,16 @@ assert.equal(simulate(twoSources),'lost','one horizontal wall does not stop bees
 console.log('PASS: five winnable stages, ink clipping, exhausted ink, multiple nests, and incomplete defenses.');
 // Exercise the actual browser event handlers without substituting physics logic.
 const vm=require('node:vm'),fs=require('node:fs');
-for(const width of [280,428]){
+for(const width of [280,428])for(const artReady of [false,true]){
  const elements={},listeners={},frames=[],saved={};let hidden=false,focused=true;
- const drawnStrokes=new Set();
- const context=new Proxy({}, {get:(o,k)=>o[k]||(o[k]=(...args)=>{for(const a of args)if(typeof a==='number')assert(Number.isFinite(a),k+' finite');if(k==='stroke'){drawnStrokes.add(o.strokeStyle);if(['#4a6550','#779069','#b5c89a'].includes(o.strokeStyle))assert(o.lineWidth<=stages[0].lineWidth,'shelter rendering stays inside collision width');}}),set:(o,k,v)=>(o[k]=v,true)});
- for(const id of ['game','phase','timer','message','finish','retry','again','next','stage-title','stage-hint','ink-remaining','ink-fill','result','result-tag','result-title','result-detail','pause-overlay','resume'])elements[id]={textContent:'',hidden:false,disabled:false,style:{},events:{},addEventListener(k,fn){this.events[k]=fn;}};
+ const drawnStrokes=new Set(),drawnImages=new Set();
+ const context=new Proxy({}, {get:(o,k)=>o[k]||(o[k]=(...args)=>{for(const a of args)if(typeof a==='number')assert(Number.isFinite(a),k+' finite');if(k==='drawImage')drawnImages.add(args[0].src);if(k==='stroke'){drawnStrokes.add(o.strokeStyle);if(['#4a6550','#779069','#b5c89a'].includes(o.strokeStyle))assert(o.lineWidth<=stages[0].lineWidth,'shelter rendering stays inside collision width');}}),set:(o,k,v)=>(o[k]=v,true)});
+ for(const id of ['game','phase','timer','message','finish','retry','again','next','stage-title','stage-hint','ink-remaining','ink-fill','result','result-tag','result-title','result-detail','result-portrait','pause-overlay','resume'])elements[id]={textContent:'',hidden:false,disabled:false,style:{},events:{},addEventListener(k,fn){this.events[k]=fn;}};
  const buttons=stages.map(()=>({disabled:false,events:{},attrs:{},addEventListener(k,fn){this.events[k]=fn;},setAttribute(k,v){this.attrs[k]=v;},removeAttribute(k){delete this.attrs[k];}}));
  Object.assign(elements.game,{width:360,height:480,getContext:()=>context,getBoundingClientRect:()=>({left:0,top:0,width,height:width*4/3}),setPointerCapture(){}});
  const document={getElementById:id=>elements[id],querySelectorAll:()=>buttons,get hidden(){return hidden;},hasFocus:()=>focused,addEventListener:(k,fn)=>listeners[k]=fn};
  const sandbox={document,window:{devicePixelRatio:2,addEventListener:(k,fn)=>listeners[k]=fn},localStorage:{getItem:k=>saved[k],setItem:(k,v)=>saved[k]=v},HachiyokeStages:stages,requestAnimationFrame:fn=>frames.push(fn),console};
+ if(artReady)sandbox.Image=class{constructor(){this.complete=true;this.naturalWidth=256;this.naturalHeight=256;}};
  vm.runInNewContext(fs.readFileSync('docs/games/hachiyoke-line/game.js','utf8'),sandbox);
  let now=1;function tick(){frames.shift()(now);now+=1000/60;}
  function pen(type,x,y){elements.game.events[type]({isPrimary:true,button:0,pointerId:1,clientX:x*width/360,clientY:y*width/360,preventDefault(){}});}
@@ -79,7 +80,7 @@ for(const width of [280,428]){
  tick();assert.equal(elements.timer.textContent,'防衛 10.0秒','resume does not catch up background time');
  focused=true;for(let i=0;i<605;i++)tick();assert.equal(elements.result.hidden,false);assert.equal(elements['result-title'].textContent,'10秒、守りきった！');
  assert.equal(saved['hachiyoke-unlocked-v1'],'2');assert.equal(buttons[1].disabled,false);assert.equal(buttons[2].disabled,true);assert.equal(elements.next.hidden,false);
- for(const color of ['#4a6550','#779069','#b5c89a','#d5b15d'])assert(drawnStrokes.has(color),'forest shelter and success expression rendered');
+ for(const color of ['#4a6550','#779069','#b5c89a',...(!artReady?['#d5b15d']:[])])assert(drawnStrokes.has(color),'forest shelter and success expression rendered');
  buttons[2].events.click();assert.match(elements['stage-title'].textContent,/^1 · /,'locked stage cannot be entered');
  elements.again.events.click();assert.equal(elements.result.hidden,true);assert.equal(elements.finish.disabled,false);
  elements.finish.events.click();for(let i=0;i<400;i++)tick();assert.equal(elements['result-title'].textContent,'もうひと工夫！');
@@ -87,6 +88,8 @@ for(const width of [280,428]){
  assert.equal(elements['ink-remaining'].textContent,'線のこり 290');assert.equal(elements['ink-fill'].style.width,'100%');
  pen('pointerdown',20,200);pen('pointermove',340,200);pen('pointerup',340,200);tick();
  assert.equal(elements['ink-remaining'].textContent,'線のこり 0');assert.equal(elements['ink-fill'].style.width,'0%');
+ if(artReady)for(const name of ['forest','nest','cub-normal','cub-worried','cub-happy','cub-sad','bee'])assert(drawnImages.has('assets/'+name+'.webp?v=7'),'loaded asset rendered: '+name);
+ assert.match(elements['result-portrait'].src,/cub-sad/);
  buttons[0].events.click();assert.match(elements['stage-title'].textContent,/^1 · /);
 }
 console.log('PASS: narrow/wide pointer scaling, Canvas coordinates, finish, background pause, unlock, stage selection, win/loss overlay and retry. Real browser rendering is not covered.');
