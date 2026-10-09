@@ -13,3 +13,13 @@ header span{color:#8b7b5d}.eyebrow{color:#8a795a}.badge{background:#edf0df;borde
 .result{background:#f8f4e8cc}.result>div{background:#fffaf0;border-color:#cbbf9f;box-shadow:0 10px 35px #475b3520,inset 0 0 0 6px #f2eedf}
 .result>div::before{content:"";display:block;width:26px;height:18px;margin:0 auto 15px;background:#89a268;border-radius:0 100% 0 100%;transform:rotate(-20deg)}
 .pause-overlay{background:#f8f4e8eb}.pause-overlay>div{padding:24px 16px;background:#fffaf0;border:1px solid #d4c9b0;border-radius:22px;box-shadow:0 8px 24px #475b3514}
+
+/* Soft forest palette shared with the current illustrated cover. */
+:root{--ink:#25442f;--leaf:#49733b;--paper:#f5f5e6;--honey:#f2cf77}
+body{background-color:var(--paper);background-image:radial-gradient(ellipse at top,#e4edcc 0,transparent 65%),radial-gradient(#a0b87c22 .7px,transparent .7px)}
+.board{border-color:#9cb580;box-shadow:0 7px 0 #d3dfbb,0 16px 35px #4b6b2514}
+.hud,.ink{background:#e0ebce;border-color:#aabc8c}
+.stages button[aria-current="step"]{background:#446e34;border-color:#446e34}
+.result>div{background:#fffef3;border-color:#b2c58f;box-shadow:0 10px 35px #475b3520,inset 0 0 0 6px #ecf1da}
+
+.result>div::before{display:none}.result-portrait{display:block;width:96px;height:96px;object-fit:contain;margin:0 auto 8px}.result>div{padding-top:18px}.result h2{margin:8px 0}
