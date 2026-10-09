@@ -23,3 +23,5 @@ body{background-color:var(--paper);background-image:radial-gradient(ellipse at t
 .result>div{background:#fffef3;border-color:#b2c58f;box-shadow:0 10px 35px #475b3520,inset 0 0 0 6px #ecf1da}
 
 .result>div::before{display:none}.result-portrait{display:block;width:96px;height:96px;object-fit:contain;margin:0 auto 8px}.result>div{padding-top:18px}.result h2{margin:8px 0}
+
+.result>div{max-height:100%;overflow:auto;overscroll-behavior:contain}.result-portrait{width:72px;height:72px}.result p{margin:8px 0}.result #next{margin:8px 0 6px}.result #again{margin-top:8px}
