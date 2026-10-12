@@ -23,7 +23,7 @@ JSONのbodyは編集者が確認した静的本文です。ブラウザーで入
 4. タイトルは実測した疑問・展開を具体的に。設定・勝率・内部抽選は未確認のまま断定しない。
 5. 機種ガイドの関連実戦、日付まとめ、実戦一覧、トップの最新記事を更新。
 6. `python3 scripts/slot-tankyu/build.py` でHTMLを生成し、`python3 scripts/slot-tankyu/check.py` でリンク・アンカー・メタ情報・共有画像・生成結果の一致を確認。
-7. PNG共有画像は1200×630。必要ならPillowと日本語フォントを用意して `python3 scripts/slot-tankyu/share_images.py --font /path/to/font.otf` で再生成。フォントは公開HTMLに配信しない。
+7. PNG共有画像は1200×630。必要ならPillowと日本語フォントを用意して `python3 scripts/slot-tankyu/share_images.py --font /path/to/font.otf` で再生成。フォントは公開HTMLに配信しない。見出しの単語が途中で切れる場合は、ページJSONの `share_lines` に最大4行の文字列配列を指定する。各行は共有画像の横幅内に収める。
 8. 下記検査と表示確認後、ユーザー承認を得てPRを作り、最新HEADのverify成功後に公開。
 
 ## 表記ルール
