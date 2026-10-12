@@ -1,0 +1,31 @@
+{
+  "path": "docs/slot-tankyu/machines/takoslot/index.html",
+  "title": "タコスロ｜技術介入と実戦データの記録ガイド",
+  "description": "ユニメモの分母、ボーナス内訳、技術介入結果の記録方法を整理。打ち方・設定示唆の解析は調査中です。",
+  "body": "<section id=\"available\"><h2>現在読める内容</h2><div class=\"panel\"><p>技術介入の実戦成績とユニメモの読み方を記録しています。打ち方の手順・設定示唆・狙い目の機種解析は未整備です。</p></div></section><section id=\"count\"><h2>記録するときの確認事項</h2><ul><li>総プレイ数と通常時プレイ数を分け、表示確率の分母を確認する。</li><li>BIG・REG、白7BIG・タコBIGを分けて残す。</li><li>タコゲーム回数、共通役、14枚取得・9枚取得の回数を記録する。</li><li>収支と技術介入の結果を分け、短い実戦だけで設定を断定しない。</li></ul><p class=\"hint\">本人の記録方法を整理したものです。機種仕様・技術介入手順を確定する攻略情報ではありません。</p></section><section class=\"related\" id=\"records\"><h2>関連する実戦記録</h2><a class=\"card\" href=\"../../records/2026-10-12/takoslot/\"><span class=\"tag\">2026年10月12日・機種別実戦</span><h3>技術介入8/9回成功。1,177G実戦で＋720枚 →</h3><p>日付ごとの結果・判断・データを別記事で記録しています。</p></a></section><section id=\"sources\"><h2>根拠と更新</h2><p>根拠：2026年10月12日の本人のユニメモと実戦報告。終了画面番号・BGMの示唆、打ち方の手順は未照合です。</p><p>2026年10月12日：日付付き実戦を別記事へ移し、機種ガイドとしての入口を整理。</p></section>",
+  "type": "guide",
+  "label": "機種ガイド",
+  "status": "公開中・攻略情報は調査中",
+  "updated": "2026年10月12日",
+  "toc": [
+    {
+      "id": "available",
+      "label": "掲載範囲"
+    },
+    {
+      "id": "count",
+      "label": "記録の確認"
+    },
+    {
+      "id": "records",
+      "label": "関連実戦"
+    },
+    {
+      "id": "sources",
+      "label": "根拠・更新"
+    }
+  ],
+  "breadcrumbs": [],
+  "short_title": "タコスロ｜技術介入と実戦データの記録ガイド",
+  "share_image": "share-guide-tako.png"
+}

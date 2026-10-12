@@ -1,0 +1,35 @@
+{
+  "path": "docs/slot-tankyu/machines/new-machine/index.html",
+  "title": "機種名｜読者が確認できる内容",
+  "short_title": "機種名",
+  "description": "機種名の設定推測を重要度順に整理。条件・評価理由・記録方法・確認元を項目ごとに掲載。",
+  "type": "guide",
+  "label": "機種ガイド",
+  "status": "公開中・確認継続中",
+  "updated": "YYYY年MM月DD日",
+  "share_image": "share-home.png",
+  "breadcrumbs": [],
+  "toc": [
+    {
+      "id": "setting",
+      "label": "重要度一覧"
+    },
+    {
+      "id": "element-example",
+      "label": "条件と根拠"
+    },
+    {
+      "id": "data",
+      "label": "設定別データ"
+    },
+    {
+      "id": "related",
+      "label": "関連実戦"
+    },
+    {
+      "id": "sources",
+      "label": "出典・履歴"
+    }
+  ],
+  "body": "<div class=\"notice\">掲載済みの項目と、未整備の狙い目・やめどきを明記する。</div><section id=\"setting\"><h2>設定推測の重要度一覧</h2><p class=\"hint\">重要度は独自評価、根拠の種類とは別です。確認済みの項目をS→A→B→Cの順に並べる。</p><div class=\"panel\"><table><thead><tr><th>重要度</th><th>項目</th><th>詳細</th></tr></thead><tbody><tr><td>評価保留</td><td>項目名を記載</td><td><a href=\"#element-example\">詳細 →</a></td></tr></tbody></table></div></section><section id=\"element-example\" class=\"detail\"><h2>項目名：条件と根拠</h2><p class=\"tag\">根拠：未確認</p><h3>分かっていること</h3><p>演出の種類・示唆内容・有効な区間・除外条件を記載する。未確認の条件は断定しない。</p><h3>重要度の理由</h3><p>設定候補をどこまで絞れるか、実戦で確認できるかを記載する。重要度は勝率や設定期待度を表さない。</p><h3>記録方法</h3><p>確認タイミング・モード・演出・回数・母数・写真の有無を記載する。</p><h3>確認元と注意点</h3><p>資料名・該当箇所・確認日・公式/解析/実戦の区分を記載する。</p><p><a href=\"#setting\">↑ 一覧へ戻る</a></p></section><section id=\"data\"><h2>設定別データ</h2><p>照合済みの数値のみ掲載。分母・区間・単位・出典を併記する。未確認なら表を作らず、その旨を記載する。</p></section><section id=\"related\"><h2>関連実戦</h2><p>機種別の実戦記事へリンクする。日付付き実戦の全文をここに蓄積しない。</p></section><section id=\"sources\"><h2>出典・更新履歴</h2><p>資料名・確認日・対象項目・訂正内容を記載する。</p></section>"
+}

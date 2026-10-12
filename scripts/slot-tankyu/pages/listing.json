@@ -1,0 +1,14 @@
+{
+  "path": "docs/slot-tankyu/records/index.html",
+  "title": "実戦記録",
+  "description": "日付ごとのまとめから、機種別の実戦記事へ。結果・判断・観察を分けて蓄積します。",
+  "body": "<section><a class=\"card\" href=\"2026-10-12/\"><span class=\"tag\">2026年10月12日</span><h3>リコリコで苦戦、タコスロで上積み →</h3><p>2機種で＋1,028枚。リコリコとタコスロの実戦を別記事で読む。</p></a></section>",
+  "type": "listing",
+  "label": "実戦記録一覧",
+  "status": "公開中",
+  "updated": "2026年10月12日",
+  "toc": [],
+  "breadcrumbs": [],
+  "short_title": "実戦記録",
+  "share_image": "share-listing.png"
+}
