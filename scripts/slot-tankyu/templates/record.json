@@ -1,0 +1,40 @@
+{
+  "path": "docs/slot-tankyu/records/YYYY-MM-DD/new-machine/index.html",
+  "title": "機種名｜実測した疑問や展開を示す見出し",
+  "short_title": "機種別実戦",
+  "description": "実戦日と機種名、当日の展開、読者に残したい観察を具体的に記載する。",
+  "type": "record",
+  "label": "機種別実戦記録",
+  "status": "実戦終了・設定不明",
+  "updated": "YYYY年MM月DD日",
+  "share_image": "share-home.png",
+  "breadcrumbs": [
+    {
+      "path": "docs/slot-tankyu/records/index.html",
+      "title": "実戦記録"
+    }
+  ],
+  "toc": [
+    {
+      "id": "result",
+      "label": "結果・発見"
+    },
+    {
+      "id": "story",
+      "label": "主要場面"
+    },
+    {
+      "id": "judgment",
+      "label": "判断・所感"
+    },
+    {
+      "id": "data",
+      "label": "詳細データ"
+    },
+    {
+      "id": "sources",
+      "label": "確認元"
+    }
+  ],
+  "body": "<section id=\"result\"><h2>結果と今回の発見</h2><div class=\"stats\"><div class=\"stat\"><b>未確認</b><span>この機種の収支</span></div><div class=\"stat\"><b>未確認</b><span>通常ゲーム数</span></div><div class=\"stat\"><b>未確認</b><span>初当たり回数</span></div></div><p>読者に残したい発見を1つ書く。実測と仕様の推測を分ける。</p></section><section id=\"story\"><h2>実戦の主要場面</h2><div class=\"panel\"><h3>1．最初の展開</h3><p>時点・状況・観察結果を記載する。</p><h3>2．判断した場面</h3><p>判断材料と、そのときの選択を記載する。</p><h3>3．結末</h3><p>展開と結果を記載する。写真を使う場合は利用条件と説明文を確認する。</p></div></section><section id=\"judgment\"><h2>判断と所感</h2><p>実戦時の判断と後から分かったことを区別する。収支と設定評価を分け、判断できなければ設定不明とする。</p></section><section id=\"data\"><h2>実戦データ</h2><table><thead><tr><th>項目</th><th>結果</th></tr></thead><tbody><tr><td>投資</td><td>未確認</td></tr><tr><td>回収</td><td>未確認</td></tr><tr><td>収支</td><td>未確認</td></tr><tr><td>総ゲーム数</td><td>未確認</td></tr><tr><td>通常ゲーム数</td><td>未確認</td></tr></tbody></table><details><summary>全データ・途中経過を見る</summary><p>当選回数・確率の分母・技術介入・示唆・各時点の経過を照合して掲載する。最終値と途中値を分ける。</p></details></section><section id=\"sources\"><h2>確認元と未確認事項</h2><p>本人記録の取得時点・集計条件・未記録項目・訂正を残す。原画像を掲載しない場合もその旨を明記する。</p></section><section class=\"related\"><h2>関連ページ</h2><p>同じ機種のガイドと当日まとめへリンクする。他機種の数値は当日まとめでのみ合算する。</p></section>"
+}
