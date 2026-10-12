@@ -43,3 +43,7 @@ Gitleaks redacted、`node tests/security.cjs`、`node tests/security-regression.
 SNS各社でのカード表示は別途確認する。OGPが存在するだけではSNS上の描画成功や拡散を保証しない。
 
 公開運用は週約1時間を目安に、一つの実戦メモから記事・ガイド更新へ展開します。
+
+## Search Consoleの所有権確認
+
+トップのpages/home.jsonにgoogle_site_verificationを保持し、生成時にトップのheadへ公開用確認メタタグを出力します。Googleにログインする認証情報ではありません。記事の更新時にもこの設定を維持してください。外部スクリプト・計測通信・CSP変更は追加していません。Search Consoleで確認できるのはGoogle検索の表示/クリック等であり、サイト全体のPV計測とは別です。
