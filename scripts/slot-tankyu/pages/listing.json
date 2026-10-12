@@ -2,7 +2,7 @@
   "path": "docs/slot-tankyu/records/index.html",
   "title": "実戦記録",
   "description": "日付ごとのまとめから、機種別の実戦記事へ。結果・判断・観察を分けて蓄積します。",
-  "body": "<section><a class=\"card\" href=\"2026-10-12/\"><span class=\"tag\">2026年10月12日</span><h3>リコリコで苦戦、タコスロで上積み →</h3><p>2機種で＋1,028枚。リコリコとタコスロの実戦を別記事で読む。</p></a></section>",
+  "body": "<section><a class=\"card\" href=\"2026-10-12/\"><span class=\"tag\">2026年10月12日</span><h3>リコリコで苦戦、タコスロで上積み →</h3><p>2機種で＋1,028枚。リコリコとタコスロの実戦を別記事で読む。</p></a><a class=\"card\" href=\"2025-03-02/\"><span class=\"tag\">2025年3月2日／過去実戦</span><h3>東京喰種で初完走。赫眼70Gとその後 →</h3><p>アメブロ記事を再編集。設定6と判断した表示を記録し、最終収支は＋1,000枚ちょっと。</p></a></section>",
   "type": "listing",
   "label": "実戦記録一覧",
   "status": "公開中",
