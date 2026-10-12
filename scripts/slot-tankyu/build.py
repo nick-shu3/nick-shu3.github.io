@@ -1,6 +1,6 @@
 #!/usr/bin/env python3
 """Build the static Slot Tankyu pages from reviewed editorial JSON. No dependencies."""
-import html,json,posixpath,re
+import hashlib,html,json,posixpath,re
 from pathlib import Path
 
 ROOT=Path(__file__).resolve().parents[2]
@@ -16,7 +16,7 @@ def build(page):
     # Content is curated static markup, never runtime user input. Reject active markup.
     if re.search(r'<\s*(script|iframe|object|embed|form)\b|\bon\w+\s*=|javascript\s*:',body,re.I):raise ValueError('Active content in editorial source')
     guard=relative('docs/security',path)
-    css=relative('docs/slot-tankyu/assets/editorial.css',path)
+    css=relative('docs/slot-tankyu/assets/editorial.css',path)+'?v='+hashlib.sha256((ROOT/'docs/slot-tankyu/assets/editorial.css').read_bytes()).hexdigest()[:12]
     share=page.get('share_image','share-'+page['type']+'.png')
     if not re.fullmatch(r'[a-z0-9-]+\.png',share):raise ValueError('Invalid share image')
     canonical=BASE+path.removesuffix('index.html')
