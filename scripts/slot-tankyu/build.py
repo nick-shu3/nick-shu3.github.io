@@ -15,6 +15,16 @@ def build(page):
     body=page['body']
     # Content is curated static markup, never runtime user input. Reject active markup.
     if re.search(r'<\s*(script|iframe|object|embed|form)\b|\bon\w+\s*=|javascript\s*:',body,re.I):raise ValueError('Active content in editorial source')
+    # Curated local photographs open at full size using ordinary browser navigation.
+    # No image viewer scripts, remote requests or runtime HTML parsing are needed.
+    def enlarge_photo(match):
+        visual=match[2]
+        source=re.search(r'<img\b[^>]*\bsrc="([^"]+)"',visual)
+        if not source or '<a ' in visual:return match[0]
+        href=source[1]
+        if not re.fullmatch(r'(?:\.\./)*assets/[a-zA-Z0-9_./-]+\.(?:jpg|jpeg|png|webp)',href):raise ValueError('Invalid local photo path')
+        return match[1]+'<a class="photo-enlarge" href="'+esc(href)+'" aria-label="写真を大きく表示">'+visual+'<span class="photo-enlarge-label">タップして拡大 ↗</span></a>'+match[3]
+    body=re.sub(r'(<figure\b[^>]*>)(.*?)(<figcaption\b[^>]*>)',enlarge_photo,body,flags=re.S)
     guard=relative('docs/security',path)
     css=relative('docs/slot-tankyu/assets/editorial.css',path)+'?v='+hashlib.sha256((ROOT/'docs/slot-tankyu/assets/editorial.css').read_bytes()).hexdigest()[:12]
     share=page.get('share_image','share-'+page['type']+'.png')
