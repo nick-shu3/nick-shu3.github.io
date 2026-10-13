@@ -40,7 +40,7 @@ def build(page):
     for crumb in page.get('breadcrumbs',[]):crumbs+=' <span>／</span> <a href="'+esc(relative(crumb['path'],path))+'">'+esc(crumb['title'])+'</a>'
     crumbs+=' <span>／</span> <span>'+esc(page.get('short_title',page['title']))+'</span></nav>'
     toc=''
-    if page.get('toc'):toc='<nav class="toc" aria-label="ページ内目次">'+''.join('<a href="#'+esc(x['id'])+'">'+esc(x['label'])+'</a>' for x in page['toc'])+'</nav>'
+    if page.get('toc') and page['type']!='home':toc='<nav class="toc" aria-label="ページ内目次">'+''.join('<a href="#'+esc(x['id'])+'">'+esc(x['label'])+'</a>' for x in page['toc'])+'</nav>'
     themes={'tokyo-ghoul':'ghoul','lycoris-recoil':'lycoris','takoslot':'tako'}
     theme=next((v for k,v in themes.items() if k in path.split('/')),'home' if page['type']=='home' else 'general')
     hero_title=esc(page['title'])
@@ -51,7 +51,7 @@ def build(page):
         photo=relative('docs/slot-tankyu/assets/records/2025-03-02/tokyo-ghoul/remaining-1792.jpg',path)
         record=relative('docs/slot-tankyu/records/2025-03-02/tokyo-ghoul/index.html',path)
         home_visual=f'<a class="hero-visual" href="{record}"><img src="{photo}" width="800" height="600" alt="東京喰種の実戦で残り1,792枚を表示した液晶"><span class="photo-label">実戦の一枚</span><span class="photo-caption"><small>東京喰種 / 2025.03.02</small><strong>赫眼70G。その先の初完走。</strong><span>実戦記事を読む ↗</span></span></a>'
-        hero_actions='<div class="hero-actions"><a class="button-primary" href="#latest">実戦を読む <span>↗</span></a><a class="button-secondary" href="#guides">設定推測を調べる</a></div>'
+        hero_actions='<nav class="home-entries" aria-label="読みたい内容から選ぶ">'+''.join('<a href="'+esc(href)+'"><strong>'+esc(label)+' <span aria-hidden="true">→</span></strong><small>'+esc(description)+'</small></a>' for href,label,description in [('#guides','機種ガイド','終了画面・設定示唆の意味'),(records,'実戦記録','機種ごとの結果・写真・振り返り'),(new_machines,'新台カレンダー','導入予定日と機種を確認'),(news,'業界ニュース','稼働動向・メーカーの動き'),(league,'777リーグ','収録日と動画の公開状況')])+'</nav>'
     title=esc(page['title']+'｜スロ探究');desc=esc(page['description'])
     verification=''
     if 'google_site_verification' in page:
