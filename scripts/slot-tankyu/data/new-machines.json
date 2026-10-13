@@ -1,0 +1,126 @@
+{
+  "checked_at": "2026-10-13",
+  "source_updated_at": "2026-10-12",
+  "machines": [
+    {
+      "date": "2026-10-19",
+      "name": "P 新世紀エヴァンゲリオン -319 RED-",
+      "maker": "ビスティ",
+      "kind": "パチンコ",
+      "schedule_url": "https://www.p-world.co.jp/database/machine/introduce_calendar.cgi?type=Pachi",
+      "official_url": null,
+      "verification": "日程資料で確認",
+      "checked_at": "2026-10-13"
+    },
+    {
+      "date": "2026-10-19",
+      "name": "L魔法少女にあこがれて",
+      "maker": "ニューギン",
+      "kind": "パチスロ",
+      "schedule_url": "https://www.p-world.co.jp/database/machine/introduce_calendar.cgi?type=Pachi",
+      "official_url": "https://www.newgin.co.jp/",
+      "verification": "メーカーの導入日と照合",
+      "checked_at": "2026-10-13"
+    },
+    {
+      "date": "2026-10-19",
+      "name": "L海人",
+      "maker": "岡崎産業",
+      "kind": "パチスロ",
+      "schedule_url": "https://www.p-world.co.jp/database/machine/introduce_calendar.cgi?type=Pachi",
+      "official_url": null,
+      "verification": "日程資料で確認",
+      "checked_at": "2026-10-13"
+    },
+    {
+      "date": "2026-11-02",
+      "name": "L ソードアート・オンライン オルタナティブ ガンゲイル・オンライン",
+      "maker": "京楽",
+      "kind": "パチスロ",
+      "schedule_url": "https://www.p-world.co.jp/database/machine/introduce_calendar.cgi?type=Pachi",
+      "official_url": null,
+      "verification": "日程資料で確認",
+      "checked_at": "2026-10-13"
+    },
+    {
+      "date": "2026-11-02",
+      "name": "L聖闘士星矢 黄金十二宮",
+      "maker": "サンスリー",
+      "kind": "パチスロ",
+      "schedule_url": "https://www.p-world.co.jp/database/machine/introduce_calendar.cgi?type=Pachi",
+      "official_url": null,
+      "verification": "日程資料で確認",
+      "checked_at": "2026-10-13"
+    },
+    {
+      "date": "2026-11-02",
+      "name": "スマスロ ラグナドール",
+      "maker": "ミズホ",
+      "kind": "パチスロ",
+      "schedule_url": "https://www.p-world.co.jp/database/machine/introduce_calendar.cgi?type=Pachi",
+      "official_url": null,
+      "verification": "日程資料で確認",
+      "checked_at": "2026-10-13"
+    },
+    {
+      "date": "2026-11-02",
+      "name": "スロット Vivy -Fluorite Eye’s Song-",
+      "maker": "大都技研",
+      "kind": "パチスロ",
+      "schedule_url": "https://www.p-world.co.jp/database/machine/introduce_calendar.cgi?type=Pachi",
+      "official_url": null,
+      "verification": "日程資料で確認",
+      "checked_at": "2026-10-13"
+    },
+    {
+      "date": "2026-11-02",
+      "name": "L牙狼 闇を照らす者",
+      "maker": "サンセイR&D",
+      "kind": "パチスロ",
+      "schedule_url": "https://www.p-world.co.jp/database/machine/introduce_calendar.cgi?type=Pachi",
+      "official_url": null,
+      "verification": "日程資料で確認",
+      "checked_at": "2026-10-13"
+    },
+    {
+      "date": "2026-11-02",
+      "name": "e 獣王 獅子の一撃",
+      "maker": "サミー",
+      "kind": "パチンコ",
+      "schedule_url": "https://www.p-world.co.jp/database/machine/introduce_calendar.cgi?type=Pachi",
+      "official_url": "https://www.sammy.co.jp/japanese/news/detail/?id=309",
+      "verification": "発売発表確認・日程は二次資料",
+      "checked_at": "2026-10-13"
+    },
+    {
+      "date": "2026-11-16",
+      "name": "スマート沖スロ ハイハイシオサイRe",
+      "maker": "パイオニア",
+      "kind": "パチスロ",
+      "schedule_url": "https://www.p-world.co.jp/database/machine/introduce_calendar.cgi?type=Pachi",
+      "official_url": null,
+      "verification": "日程資料で確認",
+      "checked_at": "2026-10-13"
+    },
+    {
+      "date": "2026-12-07",
+      "name": "e シャングリラ・フロンティア",
+      "maker": "サミー",
+      "kind": "パチンコ",
+      "schedule_url": "https://www.p-world.co.jp/database/machine/introduce_calendar.cgi?type=Pachi",
+      "official_url": null,
+      "verification": "日程資料で確認",
+      "checked_at": "2026-10-13"
+    },
+    {
+      "date": "2026-12-07",
+      "name": "スマスロ 快盗天使ツインエンジェル2",
+      "maker": "サミー",
+      "kind": "パチスロ",
+      "schedule_url": "https://www.p-world.co.jp/database/machine/introduce_calendar.cgi?type=Pachi",
+      "official_url": null,
+      "verification": "日程資料で確認",
+      "checked_at": "2026-10-13"
+    }
+  ]
+}
