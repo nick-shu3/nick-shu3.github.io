@@ -2,10 +2,10 @@
   "path": "docs/slot-tankyu/machines/new-machine/index.html",
   "title": "機種名｜読者が確認できる内容",
   "short_title": "機種名",
-  "description": "機種名の設定推測を重要度順に整理。条件・評価理由・記録方法・確認元を項目ごとに掲載。",
+  "description": "[機種名]の[演出・数値]はどう見る？示唆の意味と有効な条件を、重要度順に確認できます。",
   "type": "guide",
   "label": "機種ガイド",
-  "status": "公開中・確認継続中",
+  "status": "機種ガイド",
   "updated": "YYYY年MM月DD日",
   "share_image": "share-home.png",
   "breadcrumbs": [],
@@ -31,5 +31,12 @@
       "label": "出典・履歴"
     }
   ],
-  "body": "<div class=\"notice\">掲載済みの項目と、未整備の狙い目・やめどきを明記する。</div><section id=\"setting\"><h2>設定推測の重要度一覧</h2><p class=\"hint\">重要度は独自評価、根拠の種類とは別です。確認済みの項目をS→A→B→Cの順に並べる。</p><div class=\"panel\"><table><thead><tr><th>重要度</th><th>項目</th><th>詳細</th></tr></thead><tbody><tr><td>評価保留</td><td>項目名を記載</td><td><a href=\"#element-example\">詳細 →</a></td></tr></tbody></table></div></section><section id=\"element-example\" class=\"detail\"><h2>項目名：条件と根拠</h2><p class=\"tag\">根拠：未確認</p><h3>分かっていること</h3><p>演出の種類・示唆内容・有効な区間・除外条件を記載する。未確認の条件は断定しない。</p><h3>重要度の理由</h3><p>設定候補をどこまで絞れるか、実戦で確認できるかを記載する。重要度は勝率や設定期待度を表さない。</p><h3>記録方法</h3><p>確認タイミング・モード・演出・回数・母数・写真の有無を記載する。</p><h3>確認元と注意点</h3><p>資料名・該当箇所・確認日・公式/解析/実戦の区分を記載する。</p><p><a href=\"#setting\">↑ 一覧へ戻る</a></p></section><section id=\"data\"><h2>設定別データ</h2><p>照合済みの数値のみ掲載。分母・区間・単位・出典を併記する。未確認なら表を作らず、その旨を記載する。</p></section><section id=\"related\"><h2>関連実戦</h2><p>機種別の実戦記事へリンクする。日付付き実戦の全文をここに蓄積しない。</p></section><section id=\"sources\"><h2>出典・更新履歴</h2><p>資料名・確認日・対象項目・訂正内容を記載する。</p></section>"
+  "body": "<section id=\"setting\"><h2>設定推測の重要度一覧</h2><p class=\"hint\">重要度はスロ探究の独自評価です。勝率や設定期待度を示すものではありません。</p><table><thead><tr><th>重要度</th><th>項目</th><th>詳細</th></tr></thead><tbody><tr><td>[S/A/B/Cまたは評価保留]</td><td>[演出・数値の名前]</td><td><a href=\"#element-example\">詳細 →</a></td></tr></tbody></table></section><section id=\"element-example\" class=\"detail\"><h2>[項目名]の意味と有効な条件</h2><p class=\"tag\">根拠：[公式情報／解析情報／実戦／未確認]</p><h3>示唆の意味</h3><p>[示唆内容と、出現場面・モードなどの適用条件]</p><h3>判断するときの注意点</h3><p>[候補を絞れる範囲、他の演出との違い、判断できないこと]</p><h3>重要度の理由</h3><p>[設定候補を絞る強さと、実戦での確認しやすさ]</p><h3>記録しておきたいこと</h3><p>[モード・演出・回数・母数など、次に比較するための項目]</p><p class=\"hint\">出典：[資料名・該当箇所・確認日]</p><p><a href=\"#setting\">↑ 一覧へ戻る</a></p></section><section id=\"data\"><h2>設定別データの見方</h2><p>[区間・分母・単位が一致した数値の比較と、その数値だけでは判断できないこと]</p></section><section id=\"related\"><h2>実戦ではどうだった？</h2><p>[同機種の記事へのリンクと、その日の具体的な見どころ]</p></section><section id=\"sources\"><h2>出典と訂正</h2><p>[資料名・確認日と、読者の判断に影響する訂正内容]</p></section>",
+  "editor_notes": [
+    "本文は読者向けに書き、作業手順・照合中の報告・公開予定は本文に混ぜない。",
+    "見出しと紹介文は、何が起きたか・何が分かるかを先に伝える。",
+    "未確認事項は、この情報では何を判断できないかを具体的に説明する。",
+    "写真は該当場面の直後に置く。画像の表示枚数と収支を区別し、撮影者・出典を確認する。",
+    "画像・本文の角括弧プレースホルダーはすべて実際の内容に置き換えてから公開する。"
+  ]
 }

@@ -2,11 +2,11 @@
   "path": "docs/slot-tankyu/records/2025-03-02/index.html",
   "title": "東京喰種で初完走。2025年3月2日の実戦",
   "short_title": "2025年3月2日",
-  "description": "東京喰種の過去実戦。設定6と判断した獲得枚数表示、赫眼70G、初エンディングを記録した機種別記事への入口。",
+  "description": "666枚表示に驚き、赫眼70Gから東京喰種で初完走。完走後のハマりも経験し、最終は＋1,000枚ちょっととなった一日。",
   "type": "daily",
   "label": "当日の実戦まとめ／過去実戦",
   "status": "実戦終了・概数収支",
-  "updated": "2026年10月12日",
+  "updated": "2026年10月13日",
   "share_image": "share-daily-20250302.png",
   "breadcrumbs": [
     {
@@ -15,5 +15,5 @@
     }
   ],
   "toc": [],
-  "body": "<section><h2>当日の記録</h2><table><thead><tr><th>機種</th><th>収支</th><th>実戦記事</th></tr></thead><tbody><tr><td>東京喰種</td><td>＋1,000枚ちょっと（概数）</td><td><a href=\"tokyo-ghoul/\">詳細 →</a></td></tr></tbody></table><p class=\"hint\">掲載対象は東京喰種1機種。正確な投資・回収は未記録のため、収支は原文の概数をそのまま掲載しています。</p></section><section><a class=\"card\" href=\"tokyo-ghoul/\"><span class=\"tag\">アメブロ過去記事を再編集</span><h3>【まさかの設定6！】ようやく東京喰種をぶっ壊したお話 →</h3><p>赫眼70Gから初完走。その後の約2,000枚の飲まれまで記録。</p></a><p><a href=\"../\">実戦記録一覧へ →</a></p></section>"
+  "body": "<section><h2>当日の記録</h2><table><thead><tr><th>機種</th><th>収支</th><th>実戦記事</th></tr></thead><tbody><tr><td>東京喰種</td><td>＋1,000枚ちょっと（概数）</td><td><a href=\"tokyo-ghoul/\">詳細 →</a></td></tr></tbody></table><p class=\"hint\">この日の収支は「＋1,000枚ちょっと」。正確な投資・回収の内訳は残っていないため、概数です。</p></section><section><a class=\"card\" href=\"tokyo-ghoul/\"><span class=\"tag\">666枚表示・赫眼70G・初完走</span><h3>【まさかの設定6！】ようやく東京喰種をぶっ壊したお話 →</h3><p>赫眼70Gから初完走。その後の約2,000枚の飲まれまで記録。</p></a><p><a href=\"../\">実戦記録一覧へ →</a></p></section>"
 }
