@@ -36,5 +36,12 @@
       "label": "確認元"
     }
   ],
-  "body": "<section id=\"result\"><h2>結果と今回の発見</h2><div class=\"stats\"><div class=\"stat\"><b>未確認</b><span>この機種の収支</span></div><div class=\"stat\"><b>未確認</b><span>通常ゲーム数</span></div><div class=\"stat\"><b>未確認</b><span>初当たり回数</span></div></div><p>読者に残したい発見を1つ書く。実測と仕様の推測を分ける。</p></section><section id=\"story\"><h2>実戦の主要場面</h2><div class=\"panel\"><h3>1．最初の展開</h3><p>時点・状況・観察結果を記載する。</p><h3>2．判断した場面</h3><p>判断材料と、そのときの選択を記載する。</p><h3>3．結末</h3><p>展開と結果を記載する。写真を使う場合は利用条件と説明文を確認する。</p></div></section><section id=\"judgment\"><h2>判断と所感</h2><p>実戦時の判断と後から分かったことを区別する。収支と設定評価を分け、判断できなければ設定不明とする。</p></section><section id=\"data\"><h2>実戦データ</h2><table><thead><tr><th>項目</th><th>結果</th></tr></thead><tbody><tr><td>投資</td><td>未確認</td></tr><tr><td>回収</td><td>未確認</td></tr><tr><td>収支</td><td>未確認</td></tr><tr><td>総ゲーム数</td><td>未確認</td></tr><tr><td>通常ゲーム数</td><td>未確認</td></tr></tbody></table><details><summary>全データ・途中経過を見る</summary><p>当選回数・確率の分母・技術介入・示唆・各時点の経過を照合して掲載する。最終値と途中値を分ける。</p></details></section><section id=\"sources\"><h2>確認元と未確認事項</h2><p>本人記録の取得時点・集計条件・未記録項目・訂正を残す。原画像を掲載しない場合もその旨を明記する。</p></section><section class=\"related\"><h2>関連ページ</h2><p>同じ機種のガイドと当日まとめへリンクする。他機種の数値は当日まとめでのみ合算する。</p></section>"
+  "body": "<section id=\"result\"><h2>[当日の結末と発見]</h2><div class=\"stats\"><div class=\"stat\"><b>[収支／不明]</b><span>最終収支</span></div><div class=\"stat\"><b>[G数／不明]</b><span>通常ゲーム数</span></div><div class=\"stat\"><b>[回数／不明]</b><span>初当たり</span></div></div><p>[当日の展開と印象に残った出来事]</p></section><section id=\"story\"><h2>実戦の主要場面</h2><h3>1．[最初の展開]</h3><p>[時点・状況・観察したこと]</p><h3>2．[判断した場面]</h3><p>[判断材料と、そのときの選択]</p><h3>3．[結末]</h3><p>[結果と所感。写真は場面に合わせ、説明文で表示値の意味を補足]</p></section><section id=\"judgment\"><h2>[この実戦から考えたこと]</h2><p>[出玉と設定評価を分けた所感。判断できない内容と理由]</p></section><section id=\"data\"><h2>実戦データ</h2><table><thead><tr><th>項目</th><th>結果</th></tr></thead><tbody><tr><td>投資</td><td>[枚数／不明]</td></tr><tr><td>回収</td><td>[枚数／不明]</td></tr><tr><td>収支</td><td>[枚数／不明]</td></tr><tr><td>総ゲーム数</td><td>[G数／不明]</td></tr><tr><td>通常ゲーム数</td><td>[G数／不明]</td></tr></tbody></table><details><summary>全データ・当選の経過を見る</summary><p>[各時点の数値、当選契機、技術介入、設定示唆。確率には分母を併記]</p></details></section><section id=\"sources\"><h2>データの集計範囲</h2><p>[実戦日・取得時点・集計条件。記録不足によって判断できない内容]</p></section><section class=\"related\"><h2>関連ページ</h2><p>[同機種ガイドと当日まとめへのリンク]</p></section>",
+  "editor_notes": [
+    "本文は読者向けに書き、作業手順・照合中の報告・公開予定は本文に混ぜない。",
+    "見出しと紹介文は、何が起きたか・何が分かるかを先に伝える。",
+    "未確認事項は、この情報では何を判断できないかを具体的に説明する。",
+    "写真は該当場面の直後に置く。画像の表示枚数と収支を区別し、撮影者・出典を確認する。",
+    "画像・本文の角括弧プレースホルダーはすべて実際の内容に置き換えてから公開する。"
+  ]
 }

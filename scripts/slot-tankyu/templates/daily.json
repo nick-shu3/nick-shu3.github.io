@@ -2,7 +2,7 @@
   "path": "docs/slot-tankyu/records/YYYY-MM-DD/index.html",
   "title": "当日の出来事｜YYYY年MM月DD日実戦まとめ",
   "short_title": "日付",
-  "description": "実戦日と打った機種、当日の展開を短く記載する。機種ごとの全データは各実戦記事に掲載。",
+  "description": "[実戦日]。[機種と当日の見どころ]。一日の収支と、機種別の記事を読めます。",
   "type": "daily",
   "label": "当日の実戦まとめ",
   "status": "実戦終了",
@@ -24,5 +24,12 @@
       "label": "機種別記事"
     }
   ],
-  "body": "<section id=\"result\"><h2>当日の収支</h2><table><thead><tr><th>機種</th><th>収支</th><th>実戦記事</th></tr></thead><tbody><tr><td>機種名</td><td>未確認</td><td>記事作成後にリンクを配置</td></tr><tr><td>合計</td><td>未確定</td><td>未確定値を合算しない</td></tr></tbody></table><p class=\"hint\">本人申告・実測・集計対象・枚/金額の単位を明記する。</p></section><section id=\"articles\"><h2>この日の実戦</h2><div class=\"panel\"><p class=\"tag\">1機種目</p><h3>機種名：具体的な出来事</h3><p>展開と発見を短く記載し、機種別実戦記事へリンクする。2機種目以降も実戦順に同じ構造で追加する。</p></div><p>全データと機種固有の判断は機種別の記事に掲載する。</p></section>"
+  "body": "<section id=\"result\"><h2>当日の収支</h2><table><thead><tr><th>機種</th><th>収支</th><th>実戦記事</th></tr></thead><tbody><tr><td>[機種名]</td><td>[枚数／不明]</td><td>[機種別記事へのリンク]</td></tr><tr><td>合計</td><td>[枚数／不明]</td><td>[集計対象]</td></tr></tbody></table><p class=\"hint\">[概数・不明値がある場合、合計を解釈するための注意点]</p></section><section id=\"articles\"><h2>この日の実戦</h2><div class=\"panel\"><p class=\"tag\">1機種目</p><h3>[機種名と具体的な出来事]</h3><p>[展開と発見、機種別記事へのリンク]</p></div></section>",
+  "editor_notes": [
+    "本文は読者向けに書き、作業手順・照合中の報告・公開予定は本文に混ぜない。",
+    "見出しと紹介文は、何が起きたか・何が分かるかを先に伝える。",
+    "未確認事項は、この情報では何を判断できないかを具体的に説明する。",
+    "写真は該当場面の直後に置く。画像の表示枚数と収支を区別し、撮影者・出典を確認する。",
+    "画像・本文の角括弧プレースホルダーはすべて実際の内容に置き換えてから公開する。"
+  ]
 }
