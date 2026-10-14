@@ -7,6 +7,10 @@ HERE = Path(__file__).resolve().parent
 def esc(value):
     return html.escape(str(value), quote=True)
 
+def date_label(value):
+    date = datetime.date.fromisoformat(value) if isinstance(value, str) else value
+    return f"{date.year}年{date.month}月{date.day}日"
+
 def render(data):
     checked = datetime.date.fromisoformat(data['checked_at'])
     rows = sorted(data['rows'], key=lambda row: (row['date'], row['round']))
@@ -30,17 +34,20 @@ def render(data):
                 raise ValueError('Source links must use HTTPS')
         badge = 'done' if row['status'] == '終了' else 'pending' if row['status'] == '終了確認待ち' else 'planned'
         league = 'RED' if row['round'].startswith('RED') else 'BLUE' if row['round'].startswith('BLUE') else 'ルーキー'
-        broadcast = esc(row['broadcast_date'] or row['broadcast_status'])
+        broadcast = esc(date_label(row['broadcast_date']) if row['broadcast_date'] else row['broadcast_status'])
         if row.get('video_url'):
             broadcast += '<br><a href="'+esc(row['video_url'])+'">動画を見る ↗</a>'
         evidence = '<a href="'+esc(row['schedule_source'])+'">日程資料 ↗</a>'
         if row.get('evidence_url'):
             evidence += '<br><a href="'+esc(row['evidence_url'])+'">収録の確認元 ↗</a>'
+        if row.get('evidence_method'):
+            evidence += '<br><small>投稿を二次資料経由で確認</small>'
+        status_note = '<br><small>'+esc(row['status_note'])+'</small>' if row.get('status_note') else ''
         if row.get('venue_note'):
             evidence += '<br><small>会場は公式照合待ち</small>'
-        cell = '<tr><th scope="row"><time datetime="'+row['date']+'">'+date.strftime('%m/%d')+'（'+'月火水木金土日'[date.weekday()]+'）</time></th><td><span class="league-label league-'+league.lower()+'">'+esc(row['round'])+'</span></td><td>'+esc(row['venue'])+'</td><td><span class="league-status '+badge+'">'+esc(row['status'])+'</span></td><td>'+broadcast+'</td><td>'+evidence+'</td></tr>'
+        cell = '<tr><th scope="row"><time datetime="'+row['date']+'">'+f'{date.month}/{date.day}'+'（'+'月火水木金土日'[date.weekday()]+'）</time></th><td><span class="league-label league-'+league.lower()+'">'+esc(row['round'])+'</span></td><td>'+esc(row['venue'])+'</td><td><span class="league-status '+badge+'">'+esc(row['status'])+'</span>'+status_note+'</td><td>'+broadcast+'</td><td>'+evidence+'</td></tr>'
         months.setdefault(date.strftime('%Y-%m'), []).append(cell)
-    body = '<div class="notice">実戦日（収録日）と放送・動画配信日は別です。「終了」は収録の実施を確認できた回。「終了確認待ち」は予定日が過ぎているものの、実施の裏付けが足りない回です。確認基準日：'+esc(data['checked_at'])+'（日本時間）。</div>'
+    body = '<div class="notice">実戦日（収録日）と放送・動画配信日は別です。「終了」は収録の実施を確認できた回。「終了確認待ち」は予定日が過ぎているものの、実施の裏付けが足りない回です。確認基準日：'+esc(date_label(data['checked_at']))+'。</div>'
     source = data['video_announcement_url']
     if not source.startswith('https://'):
         raise ValueError('Announcement must use HTTPS')
@@ -50,7 +57,7 @@ def render(data):
             raise ValueError('Release times must use Japan time')
         return dt
     start = release_time(data['battle_release_start'])
-    body += '<section id="video-start"><h2>本編の動画公開はいつ？</h2><div class="panel"><p><strong>4thシーズンのバトル本編は'+start.strftime('%Y年%m月%d日')+'（'+'月火水木金土日'[start.weekday()]+'）'+start.strftime('%H:%M')+'から公開予定</strong></p><p>それに先立ち、10月15日から隔日で各チームの決起集会を公開。チームの雰囲気や今シーズンの作戦をチェックできます。</p><p class="hint">日時は日本時間。本編全体の公開開始日です。各回戦・各動画の公開日は、下の日程表で別に確認してください。</p></div></section>'
+    body += '<section id="video-start"><h2>本編の動画公開はいつ？</h2><div class="panel"><p><strong>4thシーズンのバトル本編は'+date_label(start)+'（'+'月火水木金土日'[start.weekday()]+'）'+start.strftime('%H:%M')+'から公開予定</strong></p><p>それに先立ち、10月15日から隔日で各チームの決起集会を公開。チームの雰囲気や今シーズンの作戦をチェックできます。</p><p class="hint">本編全体の公開開始日です。各回戦・各動画の公開日は、下の日程表で別に確認してください。</p></div></section>'
     rally_cells = []
     rally_dates = set()
     for rally in sorted(data['rallies'], key=lambda r: r['release_at']):
@@ -61,11 +68,11 @@ def render(data):
         url = rally['channel_url']
         if not url.startswith('https://www.youtube.com/'):
             raise ValueError('Channel links must use YouTube HTTPS')
-        label = dt.strftime('%m/%d')+'（'+'月火水木金土日'[dt.weekday()]+'）'+dt.strftime('%H:%M')
+        label = f'{dt.month}/{dt.day}'+'（'+'月火水木金土日'[dt.weekday()]+'）'+dt.strftime('%H:%M')
         rally_cells.append('<tr><th scope="row"><time datetime="'+esc(rally['release_at'])+'">'+label+'</time></th><td>'+esc(rally['team'])+'</td><td><a href="'+esc(url)+'">'+esc(rally['channel'])+' ↗</a></td></tr>')
-    body += '<section id="rallies"><h2>チーム決起集会の公開予定</h2><p>2026年10月15日〜29日、いずれも20:00公開予定です。リンクから公開チャンネルを開けます。</p><div class="tablewrap" tabindex="0" role="region" aria-label="チーム決起集会の動画公開予定表"><table><caption>777リーグ4th・チーム決起集会（日本時間）</caption><thead><tr><th scope="col">公開予定</th><th scope="col">チーム</th><th scope="col">公開チャンネル</th></tr></thead><tbody>'+''.join(rally_cells)+'</tbody></table></div><p class="hint">チャンネルへのリンクです。各動画の直接リンクは公開後に確認します。予定は変更される場合があります。</p><p><a href="'+esc(source)+'">告知元：777リーグ公式X ↗</a>（2026年10月14日の告知／確認日：'+esc(data['video_checked_at'])+'）</p></section>'
+    body += '<section id="rallies"><h2>チーム決起集会の公開予定</h2><p>2026年10月15日〜29日、いずれも20:00公開予定です。リンクから公開チャンネルを開けます。</p><div class="tablewrap" tabindex="0" role="region" aria-label="チーム決起集会の動画公開予定表"><table><caption>777リーグ4th・チーム決起集会</caption><thead><tr><th scope="col">公開予定</th><th scope="col">チーム</th><th scope="col">公開チャンネル</th></tr></thead><tbody>'+''.join(rally_cells)+'</tbody></table></div><p class="hint">チャンネルへのリンクです。各動画の直接リンクは公開後に確認します。予定は変更される場合があります。</p><p><a href="'+esc(source)+'">告知元：777リーグ公式X ↗</a>（2026年10月14日の告知／確認日：'+esc(date_label(data['video_checked_at']))+'）</p></section>'
     upcoming = next((row for row in rows if row['status'] == '予定' and datetime.date.fromisoformat(row['date']) >= checked), None)
-    next_text = esc(upcoming['date']+' '+upcoming['round'])+'<br>'+esc(upcoming['venue'])+'（収録予定）' if upcoming else '直近の収録予定は確認待ちです。'
+    next_text = esc(date_label(upcoming['date'])+' '+upcoming['round'])+'<br>'+esc(upcoming['venue'])+'（収録予定）' if upcoming else '直近の収録予定は確認待ちです。'
     body += '<section id="next"><h2>直近の実戦予定</h2><div class="panel"><p><strong>'+next_text+'</strong></p><p class="hint">予定は二次資料を参照しています。来場前に公式の日程・店舗案内を確認してください。</p></div></section>'
     toc = [{'id':'video-start','label':'本編の公開開始'},{'id':'rallies','label':'決起集会の公開予定'},{'id':'next','label':'直近の実戦予定'}]
     for month, cells in months.items():
