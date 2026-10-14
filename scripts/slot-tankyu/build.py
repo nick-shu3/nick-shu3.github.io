@@ -20,7 +20,7 @@ def build(page):
     toc_items=list(page.get('toc',[]))
     if comment:
         if re.search(r'\bid=[\"\']author-comment[\"\']',body):raise ValueError('Duplicate author comment section')
-        section='<section id="author-comment" class="panel" aria-labelledby="author-comment-title"><p class="eyebrow">シュウ３のひとこと</p><h2 id="author-comment-title">シュウ３のコメント</h2><p class="hint">シュウ３本人の感想</p><blockquote style="margin:0">'+''.join('<p>'+esc(x)+'</p>' for x in comment)+'</blockquote></section>'
+        section='<section id="author-comment" class="panel" aria-labelledby="author-comment-title"><h2 id="author-comment-title">シュウ３のコメント</h2><blockquote style="margin:0">'+''.join('<p>'+esc(x)+'</p>' for x in comment)+'</blockquote></section>'
         source_section=re.search(r'<section\b[^>]*\bid="sources"[^>]*>',body)
         if source_section:body=body[:source_section.start()]+section+body[source_section.start():]
         else:body+=section
