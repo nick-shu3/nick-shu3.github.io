@@ -328,5 +328,59 @@
       "evidence_url": null,
       "evidence_note": null
     }
+  ],
+  "video_checked_at": "2026-10-14",
+  "video_announcement_url": "https://x.com/777_LEAGUE/status/2110204262278119909",
+  "video_announcement_note": "2026年10月14日の公式X告知と公開スケジュール画像（提供資料）",
+  "battle_release_start": "2026-11-01T20:00:00+09:00",
+  "rallies": [
+    {
+      "release_at": "2026-10-15T20:00:00+09:00",
+      "team": "フェイスメガタイガース",
+      "channel": "頂－ITADAKI－",
+      "channel_url": "https://www.youtube.com/@itadaki_ch"
+    },
+    {
+      "release_at": "2026-10-17T20:00:00+09:00",
+      "team": "テンガイゴールデンメインズ",
+      "channel": "ライテンちゃんねる",
+      "channel_url": "https://www.youtube.com/@raiten_ch"
+    },
+    {
+      "release_at": "2026-10-19T20:00:00+09:00",
+      "team": "ガーデンユナイテッド",
+      "channel": "パチンコ・スロット ガーデンチャンネル",
+      "channel_url": "https://www.youtube.com/channel/UCZXm_j4cIA-XzE1QVzoJrHg"
+    },
+    {
+      "release_at": "2026-10-21T20:00:00+09:00",
+      "team": "123エンターテイナーズ",
+      "channel": "123TV",
+      "channel_url": "https://www.youtube.com/channel/UC99XOUAd9ni4Mj3DAaVUBGw"
+    },
+    {
+      "release_at": "2026-10-23T20:00:00+09:00",
+      "team": "アルマダイナム",
+      "channel": "ダイナム公式チャンネル",
+      "channel_url": "https://www.youtube.com/@dynamjp"
+    },
+    {
+      "release_at": "2026-10-25T20:00:00+09:00",
+      "team": "キコーナサンクス",
+      "channel": "キコーナチャンネル",
+      "channel_url": "https://www.youtube.com/channel/UCNvMlbFo7uIAG2gRQGmQKDQ"
+    },
+    {
+      "release_at": "2026-10-27T20:00:00+09:00",
+      "team": "D’ステーションヒーローズ",
+      "channel": "日直島田の自由時間",
+      "channel_url": "https://www.youtube.com/channel/UC02SKMfsAneHIGVjq1s0f7g"
+    },
+    {
+      "release_at": "2026-10-29T20:00:00+09:00",
+      "team": "マルハンフォースエナジー",
+      "channel": "マルハンチャンネル",
+      "channel_url": "https://www.youtube.com/channel/UCeeEc2br-GvNd3QAp4DIeoQ"
+    }
   ]
 }
