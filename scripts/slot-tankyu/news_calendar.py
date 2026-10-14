@@ -63,9 +63,10 @@ def news_page(data):
         body+='<section id="'+identifier+'"><h2>'+esc(issue['date'])+'の注目ニュース</h2><p class="hint">新台・ホール再編・業界動向・イベントを選んで掲載。速報の全件一覧ではありません。</p>'
         for n,item in enumerate(issue['articles'],1):
             if item['id'] in seen or not re.fullmatch(r'[a-z0-9-]+',item['id']):raise ValueError('Invalid or duplicate news ID')
-            seen.add(item['id']);datetime.date.fromisoformat(item['published_at'])
+            seen.add(item['id']);published=datetime.date.fromisoformat(item['published_at'])
+            published_label=f'{published.year}年{published.month}月{published.day}日'
             if not item['sources']:raise ValueError('News needs sources')
-            body+='<article class="panel news-item" id="'+item['id']+'"><span class="tag">'+esc(item['category'])+'</span><h3>'+esc(item['title'])+'</h3><p class="hint">公表・掲載日：<time datetime="'+item['published_at']+'">'+item['published_at']+'</time><br>出来事：'+esc(item['event_date'])+'</p><div class="news-fact"><h4>確認できた事実</h4><p>'+esc(item['facts'])+'</p>'
+            body+='<article class="panel news-item" id="'+item['id']+'"><span class="tag">'+esc(item['category'])+'</span><h3>'+esc(item['title'])+'</h3><p class="hint">公表・掲載日：<time datetime="'+item['published_at']+'">'+published_label+'</time><br>出来事：'+esc(item['event_date'])+'</p><div class="news-fact"><h4>確認できた事実</h4><p>'+esc(item['facts'])+'</p>'
             if item.get('metrics'):
                 body+='<div class="tablewrap"><table><caption>パチンコとパチスロのDI比較</caption><thead><tr><th scope="col">項目</th><th scope="col">パチンコ</th><th scope="col">パチスロ</th></tr></thead><tbody>'
                 for metric in item['metrics']:
