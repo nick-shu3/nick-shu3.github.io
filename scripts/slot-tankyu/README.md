@@ -102,3 +102,5 @@ SNS各社でのカード表示は別途確認する。OGPが存在するだけ�
 - python3 scripts/slot-tankyu/news_calendar.py → build.py → check.pyで生成・検査する。日程表とニュースは静的情報であり、ページを開くだけで自動更新はしない。
 
 - 決起集会は `rallies`、本編全体の公開開始は `battle_release_start` に記録。収録データの `broadcast_date` に本編開始日を一括転記しない。動画告知の確認日と収録情報の基準日は別に保持する。
+
+- 読者向けの日付表示は月・日をゼロ埋めしない（例：2026年11月1日、1/1）。データ・HTMLのdatetime属性は標準のISO形式を保持する。「日時は日本時間」の注記は掲載しない。

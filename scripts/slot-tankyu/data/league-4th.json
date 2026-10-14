@@ -1,6 +1,6 @@
 {
   "season": "4th / 2026–2027",
-  "checked_at": "2026-10-13",
+  "checked_at": "2026-10-14",
   "official_url": "https://p-gabu.jp/sc/666/777league/",
   "rows": [
     {
@@ -13,7 +13,9 @@
       "video_url": null,
       "schedule_source": "https://pachislot-memo.online/777league4th-schedule",
       "evidence_url": null,
-      "evidence_note": null
+      "evidence_note": null,
+      "status_checked_at": "2026-10-14",
+      "status_review_note": "同会場の別番組の終了報告が混在するため、8月31日の777リーグ収録終了の根拠として採用しない"
     },
     {
       "date": "2026-09-02",
@@ -31,13 +33,15 @@
       "date": "2026-09-03",
       "round": "RED第2回戦",
       "venue": "テンガイ与次郎店",
-      "status": "終了確認待ち",
+      "status": "終了",
       "broadcast_date": null,
       "broadcast_status": "未確認",
       "video_url": null,
       "schedule_source": "https://pachislot-memo.online/777league4th-schedule",
-      "evidence_url": null,
-      "evidence_note": null
+      "evidence_url": "https://search.yahoo.co.jp/realtime/search?p=%23%E3%83%9E%E3%83%AB%E3%83%8F%E3%83%B3%E3%83%95%E3%82%A9%E3%83%BC%E3%82%B9%E3%82%A8%E3%83%8A%E3%82%B8%E3%83%BC",
+      "evidence_note": "9月3日のRED第2回戦・テンガイ与次郎での世譜イブキの収録終了報告を検索掲載内容で確認",
+      "evidence_method": "公式・出演者の投稿内容を二次資料経由で確認",
+      "status_checked_at": "2026-10-14"
     },
     {
       "date": "2026-09-04",
@@ -67,37 +71,43 @@
       "date": "2026-09-30",
       "round": "RED第4回戦",
       "venue": "マルハンメガシティ伊勢崎",
-      "status": "終了確認待ち",
+      "status": "終了",
       "broadcast_date": null,
       "broadcast_status": "未確認",
       "video_url": null,
       "schedule_source": "https://pachislot-memo.online/777league4th-schedule",
-      "evidence_url": null,
-      "evidence_note": null
+      "evidence_url": "https://free-wifi-password-recovery.twstalker.com/maruhan_east/status/2105473475750351070",
+      "evidence_note": "マルハン東日本広報の「昨日はホーム戦の初戦が無事終わり」「明日の収録店舗は蒲田7」の報告を照合。9月30日の伊勢崎収録の終了を確認",
+      "evidence_method": "公式・出演者の投稿内容を二次資料経由で確認",
+      "status_checked_at": "2026-10-14"
     },
     {
       "date": "2026-10-02",
       "round": "RED第5回戦",
       "venue": "マルハンメガシティ2000蒲田7",
-      "status": "終了確認待ち",
+      "status": "終了",
       "broadcast_date": null,
       "broadcast_status": "未確認",
       "video_url": null,
       "schedule_source": "https://pachislot-memo.online/777league4th-schedule",
-      "evidence_url": null,
-      "evidence_note": null
+      "evidence_url": "https://www13.twstalker.com/usamiiin/status/2105979301388841064",
+      "evidence_note": "出演者・兎味ペロリナの蒲田7での777リーグ収録終了報告を確認",
+      "evidence_method": "公式・出演者の投稿内容を二次資料経由で確認",
+      "status_checked_at": "2026-10-14"
     },
     {
       "date": "2026-10-05",
       "round": "BLUE第3回戦",
       "venue": "新！ガーデン八潮",
-      "status": "終了確認待ち",
+      "status": "終了",
       "broadcast_date": null,
       "broadcast_status": "未確認",
       "video_url": null,
       "schedule_source": "https://pachislot-memo.online/777league4th-schedule",
-      "evidence_url": null,
-      "evidence_note": null
+      "evidence_url": "https://www.sotwe.com/hashtag/%E6%96%B0%E3%82%AC%E3%83%BC%E3%83%87%E3%83%B3%E5%85%AB%E6%BD%AE%E5%BA%97",
+      "evidence_note": "出演者・黒木ねねの八潮での収録終了報告と公式BLUE第3回戦の収録告知を照合",
+      "evidence_method": "公式・出演者の投稿内容を二次資料経由で確認",
+      "status_checked_at": "2026-10-14"
     },
     {
       "date": "2026-10-07",
@@ -121,7 +131,9 @@
       "video_url": null,
       "schedule_source": "https://pachislot-memo.online/777league4th-schedule",
       "evidence_url": null,
-      "evidence_note": null
+      "evidence_note": null,
+      "status_note": "終了報告は未確認",
+      "status_checked_at": "2026-10-14"
     },
     {
       "date": "2026-10-21",
