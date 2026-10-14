@@ -1,17 +1,7 @@
 {
-  "checked_at": "2026-10-13",
-  "source_updated_at": "2026-10-12",
+  "checked_at": "2026-10-14",
+  "source_updated_at": "2026-10-14",
   "machines": [
-    {
-      "date": "2026-10-19",
-      "name": "P 新世紀エヴァンゲリオン -319 RED-",
-      "maker": "ビスティ",
-      "kind": "パチンコ",
-      "schedule_url": "https://www.p-world.co.jp/database/machine/introduce_calendar.cgi?type=Pachi",
-      "official_url": null,
-      "verification": "日程資料で確認",
-      "checked_at": "2026-10-13"
-    },
     {
       "date": "2026-10-19",
       "name": "L魔法少女にあこがれて",
@@ -83,30 +73,10 @@
       "checked_at": "2026-10-13"
     },
     {
-      "date": "2026-11-02",
-      "name": "e 獣王 獅子の一撃",
-      "maker": "サミー",
-      "kind": "パチンコ",
-      "schedule_url": "https://www.p-world.co.jp/database/machine/introduce_calendar.cgi?type=Pachi",
-      "official_url": "https://www.sammy.co.jp/japanese/news/detail/?id=309",
-      "verification": "発売発表確認・日程は二次資料",
-      "checked_at": "2026-10-13"
-    },
-    {
       "date": "2026-11-16",
       "name": "スマート沖スロ ハイハイシオサイRe",
       "maker": "パイオニア",
       "kind": "パチスロ",
-      "schedule_url": "https://www.p-world.co.jp/database/machine/introduce_calendar.cgi?type=Pachi",
-      "official_url": null,
-      "verification": "日程資料で確認",
-      "checked_at": "2026-10-13"
-    },
-    {
-      "date": "2026-12-07",
-      "name": "e シャングリラ・フロンティア",
-      "maker": "サミー",
-      "kind": "パチンコ",
       "schedule_url": "https://www.p-world.co.jp/database/machine/introduce_calendar.cgi?type=Pachi",
       "official_url": null,
       "verification": "日程資料で確認",
@@ -121,6 +91,26 @@
       "official_url": null,
       "verification": "日程資料で確認",
       "checked_at": "2026-10-13"
+    },
+    {
+      "date": "2026-12-07",
+      "name": "スマスロゼーガペインETR",
+      "maker": "山佐ネクスト",
+      "kind": "パチスロ",
+      "schedule_url": "https://www.p-world.co.jp/database/machine/introduce_calendar.cgi?type=Pachi",
+      "official_url": "https://yamasa-next.co.jp/",
+      "verification": "製品掲載・発売発表確認／導入日は二次資料",
+      "checked_at": "2026-10-14"
+    },
+    {
+      "date": "2026-12-07",
+      "name": "L アカマター",
+      "maker": "オーイズミ",
+      "kind": "パチスロ",
+      "schedule_url": "https://www.p-world.co.jp/database/machine/introduce_calendar.cgi?type=Pachi",
+      "official_url": "https://oizumi.co.jp/wp-content/uploads/2026/09/aa25c54786413885a2223874e1354a57.pdf",
+      "verification": "製品掲載・発売発表確認／導入日は二次資料",
+      "checked_at": "2026-10-14"
     }
   ]
 }

@@ -19,13 +19,13 @@ def calendar_page(data):
     groups={};seen=set()
     for item in sorted(data['machines'],key=lambda x:(x['date'],x['kind'],x['name'])):
         date=datetime.date.fromisoformat(item['date'])
-        if item['kind'] not in {'パチンコ','パチスロ'}:raise ValueError('Invalid machine kind')
+        if item['kind'] not in {'パチスロ'}:raise ValueError('Invalid machine kind')
         key=(item['date'],item['name'])
         if key in seen:raise ValueError('Duplicate release')
         seen.add(key)
         if datetime.date.fromisoformat(item['checked_at'])>checked:raise ValueError('Future verification')
         groups.setdefault(date.strftime('%Y-%m'),[]).append(item)
-    body='<div class="notice">全国の導入開始予定を整理しています。各店舗の新台入替日・設置状況とは別です。地域や店舗で日程が前後する場合があります。掲載は確認できた'+str(len(seen))+'機種で、全新台の網羅ではありません。</div>'
+    body='<div class="notice">パチスロの全国導入開始予定を整理しています。各店舗の新台入替日・設置状況とは別です。地域や店舗で日程が前後する場合があります。掲載は確認できた'+str(len(seen))+'機種で、全新台の網羅ではありません。</div>'
     body+='<p class="hint">情報基準日：'+esc(data['checked_at'])+' ／ 日程資料の表示更新日：'+esc(data['source_updated_at'])+'。カレンダーの色が付いた日を選ぶと、その日の機種一覧へ移動します。</p>'
     toc=[]
     for month,items in groups.items():
@@ -53,7 +53,7 @@ def calendar_page(data):
         body+='</section>'
     body+='<section id="reading"><h2>導入予定を見るときの確認事項</h2><ul><li>メーカーの発売発表日と、導入開始予定日は別です。</li><li>この日付だけでは、近隣店舗に設置されるかは分かりません。</li><li>同じ版権でも別スペック・別型式があるため、正式な機種名を確認しましょう。</li></ul><p>'+link('https://www.p-world.co.jp/database/machine/introduce_calendar.cgi?type=Pachi','P-WORLD 新台スケジュール')+' ／ <a href="../news/">業界ニュースを読む →</a></p></section>'
     toc.append({'id':'reading','label':'日程の見方'})
-    return page('new-machines','new-machines','新台カレンダー｜パチンコ・パチスロ導入予定','次の新台はいつ？ 月別カレンダーから導入予定日と機種名を確認。全国の予定と、店舗ごとの入替日を分けて読みます。','新台カレンダー',body,toc,['新台カレンダー','パチンコ・パチスロ','導入予定日から探す'],data['checked_at'])
+    return page('new-machines','new-machines','新台カレンダー｜パチスロ導入予定','次の新台はいつ？ 月別カレンダーから導入予定日と機種名を確認。全国の予定と、店舗ごとの入替日を分けて読みます。','新台カレンダー',body,toc,['新台カレンダー','パチスロの導入予定','日付から機種を探す'],data['checked_at'])
 
 def news_page(data):
     datetime.date.fromisoformat(data['checked_at']);seen=set();toc=[]
