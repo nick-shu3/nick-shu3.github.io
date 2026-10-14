@@ -13,6 +13,20 @@ def build(page):
     path=page['path']
     if not path.startswith('docs/slot-tankyu/') or '..' in path.split('/') or not path.endswith('/index.html'):raise ValueError('Invalid page path')
     body=page['body']
+    # Optional first-person comments are plain text, escaped at build time.
+    comment=page.get('author_comment',[])
+    if not isinstance(comment,list) or any(not isinstance(x,str) or not x.strip() for x in comment):
+        raise ValueError('Author comment must contain nonempty plain-text paragraphs')
+    toc_items=list(page.get('toc',[]))
+    if comment:
+        if re.search(r'\bid=[\"\']author-comment[\"\']',body):raise ValueError('Duplicate author comment section')
+        section='<section id="author-comment" class="panel" aria-labelledby="author-comment-title"><p class="eyebrow">シュウ３のひとこと</p><h2 id="author-comment-title">シュウ３のコメント</h2><p class="hint">シュウ３本人の感想</p><blockquote style="margin:0">'+''.join('<p>'+esc(x)+'</p>' for x in comment)+'</blockquote></section>'
+        source_section=re.search(r'<section\b[^>]*\bid="sources"[^>]*>',body)
+        if source_section:body=body[:source_section.start()]+section+body[source_section.start():]
+        else:body+=section
+        item={'id':'author-comment','label':'シュウ３のコメント'}
+        source_index=next((i for i,x in enumerate(toc_items) if x['id']=='sources'),len(toc_items))
+        toc_items.insert(source_index,item)
     # Content is curated static markup, never runtime user input. Reject active markup.
     if re.search(r'<\s*(script|iframe|object|embed|form)\b|\bon\w+\s*=|javascript\s*:',body,re.I):raise ValueError('Active content in editorial source')
     # Curated local photographs open at full size using ordinary browser navigation.
@@ -40,7 +54,7 @@ def build(page):
     for crumb in page.get('breadcrumbs',[]):crumbs+=' <span>／</span> <a href="'+esc(relative(crumb['path'],path))+'">'+esc(crumb['title'])+'</a>'
     crumbs+=' <span>／</span> <span>'+esc(page.get('short_title',page['title']))+'</span></nav>'
     toc=''
-    if page.get('toc') and page['type']!='home':toc='<nav class="toc" aria-label="ページ内目次">'+''.join('<a href="#'+esc(x['id'])+'">'+esc(x['label'])+'</a>' for x in page['toc'])+'</nav>'
+    if toc_items and page['type']!='home':toc='<nav class="toc" aria-label="ページ内目次">'+''.join('<a href="#'+esc(x['id'])+'">'+esc(x['label'])+'</a>' for x in toc_items)+'</nav>'
     themes={'tokyo-ghoul':'ghoul','lycoris-recoil':'lycoris','takoslot':'tako'}
     theme=next((v for k,v in themes.items() if k in path.split('/')),'home' if page['type']=='home' else 'general')
     hero_title=esc(page['title'])
