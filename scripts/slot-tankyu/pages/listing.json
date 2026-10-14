@@ -2,11 +2,11 @@
   "path": "docs/slot-tankyu/records/index.html",
   "title": "実戦記録",
   "description": "機種から実戦記事を選ぶか、日付から当日のまとめを読むことができます。写真・数値・設定示唆を機種別に振り返ります。",
-  "body": "<section id=\"machines\"><h2>機種から実戦を読む</h2><div class=\"machine-grid\"><a class=\"card machine-card tone-ghoul\" href=\"2025-03-02/tokyo-ghoul/\"><span class=\"tag\">機種別実戦</span><h3>東京喰種 →</h3><p>赫眼70Gから初完走。設定6の本人記録と、その後のハマり。</p></a><a class=\"card machine-card tone-lycoris\" href=\"2026-10-12/lycoris-recoil/\"><span class=\"tag\">機種別実戦</span><h3>リコリス・リコイル →</h3><p>終了画面の弱示唆2回。上位RUSH Wで挽回し＋308枚。</p></a><a class=\"card machine-card tone-tako\" href=\"2026-10-12/takoslot/\"><span class=\"tag\">機種別実戦</span><h3>タコスロ →</h3><p>技術介入8/9回成功。短時間実戦で＋720枚。</p></a></div></section><section id=\"dates\"><h2>日付から当日のまとめを読む</h2><a class=\"card\" href=\"2026-10-12/\"><span class=\"tag\">2026年10月12日</span><h3>リコリコで苦戦、タコスロで上積み →</h3><p>2機種で＋1,028枚。リコリコとタコスロの実戦を別記事で読む。</p></a><a class=\"card\" href=\"2025-03-02/\"><span class=\"tag\">2025年3月2日／過去実戦</span><h3>東京喰種で初完走。赫眼70Gとその後 →</h3><p>666枚表示に驚き、赫眼70Gで初完走。完走後のハマりを経て、最終は＋1,000枚ちょっと。</p></a></section>",
+  "body": "<section id=\"machines\"><h2>機種から実戦を読む</h2><a class=\"card tone-tako\" href=\"2026-10-14/takoslot/\"><span class=\"tag\">タコスロ／2026年10月14日</span><h3>通常820Gで＋249枚、14枚取得19/21回 →</h3><p>投資200枚・回収449枚。BIG3回・REG4回の実戦。</p></a><div class=\"machine-grid\"><a class=\"card machine-card tone-ghoul\" href=\"2025-03-02/tokyo-ghoul/\"><span class=\"tag\">機種別実戦</span><h3>東京喰種 →</h3><p>赫眼70Gから初完走。設定6の本人記録と、その後のハマり。</p></a><a class=\"card machine-card tone-lycoris\" href=\"2026-10-12/lycoris-recoil/\"><span class=\"tag\">機種別実戦</span><h3>リコリス・リコイル →</h3><p>終了画面の弱示唆2回。上位RUSH Wで挽回し＋308枚。</p></a><a class=\"card machine-card tone-tako\" href=\"2026-10-12/takoslot/\"><span class=\"tag\">機種別実戦</span><h3>タコスロ →</h3><p>技術介入8/9回成功。短時間実戦で＋720枚。</p></a></div></section><section id=\"dates\"><h2>日付から当日のまとめを読む</h2><a class=\"card\" href=\"2026-10-14/\"><span class=\"tag\">2026年10月14日</span><h3>タコスロの実戦記録 →</h3><p>提供記録は1機種、差枚＋249枚。</p></a><a class=\"card\" href=\"2026-10-12/\"><span class=\"tag\">2026年10月12日</span><h3>リコリコで苦戦、タコスロで上積み →</h3><p>2機種で＋1,028枚。リコリコとタコスロの実戦を別記事で読む。</p></a><a class=\"card\" href=\"2025-03-02/\"><span class=\"tag\">2025年3月2日／過去実戦</span><h3>東京喰種で初完走。赫眼70Gとその後 →</h3><p>666枚表示に驚き、赫眼70Gで初完走。完走後のハマりを経て、最終は＋1,000枚ちょっと。</p></a></section>",
   "type": "listing",
   "label": "実戦記録一覧",
   "status": "日付別・機種別",
-  "updated": "2026年10月13日",
+  "updated": "2026年10月14日",
   "toc": [
     {
       "id": "machines",
