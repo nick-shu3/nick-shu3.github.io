@@ -60,6 +60,37 @@
       "date": "2026-10-14",
       "articles": [
         {
+          "id": "umamusume-slot-announcement-2026",
+          "category": "新機種・速報",
+          "title": "【速報】ウマ娘がスマスロに。育成と継承を軸に2027年稼働予定",
+          "published_at": "2026-10-14",
+          "event_date": "プレス発表会・公式ティザー公開：2026年10月14日",
+          "facts": "京楽産業．は10月14日、「ぱちスロ ウマ娘 プリティーダービー」の公式ティザーサイトを公開しました。同日の発表会を報じたORICON NEWSとGAME Watchによると、2027年の稼働を予定。育成したウマ娘の能力がAT性能に反映され、次のATへ能力を継承するゲーム性が紹介されています。具体的な導入日は、今回確認した資料では未確認です。",
+          "analysis": "注目したいのは、通常時の育成がATの展開につながる点。原作の「育てる楽しさ」が遊技でどう表現されるか、詳しいゲームフローの発表を待ちたいところです。現時点で設定推測要素や出玉性能を評価できる情報は、今回の確認範囲では揃っていません。",
+          "sources": [
+            {
+              "kind": "メーカー公式（ティザー公開を確認）",
+              "label": "京楽・10月14日付ティザー公開のお知らせ",
+              "url": "https://www.kyoraku.co.jp/news/detail/899"
+            },
+            {
+              "kind": "メーカー公式（機種ティザー）",
+              "label": "ぱちスロ ウマ娘 プリティーダービー",
+              "url": "https://www.kyoraku.co.jp/product_site/2026/l_umamusume/"
+            },
+            {
+              "kind": "報道媒体（稼働予定・ゲーム性）",
+              "label": "GAME Watch・2027年稼働予定と育成型ATの紹介",
+              "url": "https://game.watch.impress.co.jp/docs/news/2148007.html"
+            },
+            {
+              "kind": "報道媒体（発表会・稼働予定）",
+              "label": "ORICON NEWS・ウマ娘のパチスロ化発表",
+              "url": "https://www.oricon.co.jp/news/2486363/full/"
+            }
+          ]
+        },
+        {
           "id": "slot-market-september-2026",
           "category": "稼働動向",
           "title": "新台の稼働力は前年より上昇。ホールの景況感とは分けて読む",
