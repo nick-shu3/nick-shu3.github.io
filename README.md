@@ -31,6 +31,7 @@ PC・スマートフォンのブラウザで利用できます。各作品の制
 | ページ | 掲載内容 |
 | --- | --- |
 | [機種ガイド](https://nick-shu3.github.io/docs/slot-tankyu/#guides) | 東京喰種、リコリス・リコイル、タコスロ。設定推測・示唆の条件や実戦データの読み方 |
+| [スロ番組ウォッチ](https://nick-shu3.github.io/docs/slot-tankyu/watch/) | 番組の見どころをネタバレなしで紹介し、本人の感想を添える |
 | [実戦記録](https://nick-shu3.github.io/docs/slot-tankyu/records/) | 機種ごとの結果・実戦写真・判断の振り返り。複数機種の収支合計は当日まとめに掲載 |
 | [777リーグ](https://nick-shu3.github.io/docs/slot-tankyu/league/777league/) | 4thの収録日・終了状況、決起集会の公開予定、本編の公開開始日を一覧化 |
 | [新台カレンダー](https://nick-shu3.github.io/docs/slot-tankyu/new-machines/) | パチスロの全国導入予定。店舗ごとの導入日とは区別 |
