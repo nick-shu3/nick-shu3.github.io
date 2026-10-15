@@ -2,6 +2,7 @@
 """Build reviewed news summaries and release calendar; no runtime data fetching."""
 import calendar, datetime, html, json, re
 from pathlib import Path
+from editorial_views import date_label
 from urllib.parse import urlsplit
 
 HERE=Path(__file__).resolve().parent
@@ -12,7 +13,7 @@ def link(url,label):
         raise ValueError('Invalid editorial source URL')
     return '<a href="'+esc(url)+'">'+esc(label)+' ↗</a>'
 def page(path,kind,title,description,label,body,toc,share_lines,checked):
-    return {'path':'docs/slot-tankyu/'+path+'/index.html','type':kind,'title':title,'short_title':label,'description':description,'label':label,'updated':checked,'status':'情報基準日：'+checked,'body':body,'toc':toc,'breadcrumbs':[],'share_image':'share-'+kind+'.png','share_lines':share_lines}
+    return {'path':'docs/slot-tankyu/'+path+'/index.html','type':kind,'title':title,'short_title':label,'description':description,'label':label,'updated':checked,'status':'情報基準日：'+date_label(checked),'body':body,'toc':toc,'breadcrumbs':[],'share_image':'share-'+kind+'.png','share_lines':share_lines}
 
 def calendar_page(data):
     checked=datetime.date.fromisoformat(data['checked_at'])
@@ -44,7 +45,7 @@ def calendar_page(data):
                 else:body+='<span class="calendar-day">'+str(day)+'</span>'
         body+='</div>'
         for date,day_items in byday.items():
-            body+='<div id="date-'+date+'" class="release-date"><h3>'+date.replace('-','/')+' 導入開始予定</h3><p class="hint">表は横にスクロールできます。メーカーで導入日まで確認した機種と、日程資料のみで確認した機種を区別しています。</p><div class="tablewrap" tabindex="0" role="region" aria-label="'+esc(date)+'の機種一覧"><table class="release-table"><thead><tr><th scope="col">種別</th><th scope="col">機種</th><th scope="col">メーカー</th><th scope="col">確認状況・出典</th></tr></thead><tbody>'
+            body+='<div id="date-'+date+'" class="release-date"><h3>'+date_label(date)+' 導入開始予定</h3><p class="hint">表は横にスクロールできます。メーカーで導入日まで確認した機種と、日程資料のみで確認した機種を区別しています。</p><div class="tablewrap" tabindex="0" role="region" aria-label="'+esc(date)+'の機種一覧"><table class="release-table"><thead><tr><th scope="col">種別</th><th scope="col">機種</th><th scope="col">メーカー</th><th scope="col">確認状況・出典</th></tr></thead><tbody>'
             for item in day_items:
                 sources=link(item['schedule_url'],'日程資料')
                 if item['official_url']:sources+=' ／ '+link(item['official_url'],'メーカー公式')
@@ -59,8 +60,8 @@ def news_page(data):
     datetime.date.fromisoformat(data['checked_at']);seen=set();toc=[]
     body='<div class="notice">ニュースの事実と、読者への影響を考えるスロ探究の考察を分けています。掲載日と出来事の日付も区別し、原文は確認元のリンクから読めます。</div>'
     for issue in sorted(data['issues'],key=lambda x:x['date'],reverse=True):
-        datetime.date.fromisoformat(issue['date']);identifier='issue-'+issue['date'];toc.append({'id':identifier,'label':issue['date']+'号'})
-        body+='<section id="'+identifier+'"><h2>'+esc(issue['date'])+'の注目ニュース</h2><p class="hint">新台・ホール再編・業界動向・イベントを選んで掲載。速報の全件一覧ではありません。</p>'
+        datetime.date.fromisoformat(issue['date']);identifier='issue-'+issue['date'];toc.append({'id':identifier,'label':date_label(issue['date'])+'号'})
+        body+='<section id="'+identifier+'"><h2>'+esc(date_label(issue['date']))+'の注目ニュース</h2><p class="hint">パチスロに関わる注目記事を掲載しています。</p>'
         for n,item in enumerate(issue['articles'],1):
             if item['id'] in seen or not re.fullmatch(r'[a-z0-9-]+',item['id']):raise ValueError('Invalid or duplicate news ID')
             seen.add(item['id']);published=datetime.date.fromisoformat(item['published_at'])
@@ -68,17 +69,17 @@ def news_page(data):
             if not item['sources']:raise ValueError('News needs sources')
             body+='<article class="panel news-item" id="'+item['id']+'"><span class="tag">'+esc(item['category'])+'</span><h3>'+esc(item['title'])+'</h3><p class="hint">公表・掲載日：<time datetime="'+item['published_at']+'">'+published_label+'</time><br>出来事：'+esc(item['event_date'])+'</p><div class="news-fact"><h4>確認できた事実</h4><p>'+esc(item['facts'])+'</p>'
             if item.get('metrics'):
-                body+='<div class="tablewrap"><table><caption>パチンコとパチスロのDI比較</caption><thead><tr><th scope="col">項目</th><th scope="col">パチンコ</th><th scope="col">パチスロ</th></tr></thead><tbody>'
+                body+='<details><summary>パチンコとパチスロのDI比較を開く</summary><div class="tablewrap"><table><caption>パチンコとパチスロのDI比較</caption><thead><tr><th scope="col">項目</th><th scope="col">パチンコ</th><th scope="col">パチスロ</th></tr></thead><tbody>'
                 for metric in item['metrics']:
                     body+='<tr><th scope="row">'+esc(metric['label'])+'</th><td>'+esc(metric['pachinko'])+'</td><td>'+esc(metric['slot'])+'</td></tr>'
-                body+='</tbody></table></div><p class="hint">'+esc(item['metric_note'])+'</p>'
+                body+='</tbody></table></div></details><p class="hint">'+esc(item['metric_note'])+'</p>'
             body+='</div><div class="news-analysis"><h4>読者への影響・考察</h4><p>'+esc(item['analysis'])+'</p></div><details><summary>確認元・情報の区分</summary><ul>'
             for source in item['sources']:body+='<li>'+esc(source['kind'])+'：'+link(source['url'],source['label'])+'</li>'
             body+='</ul></details></article>'
         body+='</section>'
-    body+='<section id="policy"><h2>情報の見方</h2><p>メーカー・企業・団体の発表を優先し、媒体の記事を参照した場合はその区分を示します。調査原本や公式告知が未照合のものは、媒体の報道として扱っています。</p><p>業界全体の動向は、個別店舗の設定や収益を保証しません。制度や仕様の変更は適用時期まで確認して読むことが大切です。</p><p><a href="../new-machines/">新台カレンダーへ →</a> ／ <a href="../about/">スロ探究の編集方針 →</a></p></section>'
+    body+='<section id="policy"><h2>情報の見方</h2><p>確認元には公式発表・報道の区分を示しています。</p><p>業界全体の動向は、個別店舗の設定や収益を保証しません。制度や仕様の変更は適用時期まで確認して読むことが大切です。</p><p><a href="../new-machines/">新台カレンダーへ →</a> ／ <a href="../about/">スロ探究の編集方針 →</a></p></section>'
     toc.append({'id':'policy','label':'情報の見方'})
-    return page('news','industry-news','業界ニュース｜事実と考察で読むパチンコ・パチスロ','新台の発表、ホールの再編、業界の動きを短く整理。発表された事実と読者への影響を分けて読むニュースまとめです。','業界ニュース',body,toc,['パチンコ・パチスロ','業界ニュース','事実と考察で読む'],data['checked_at'])
+    return page('news','industry-news','パチスロニュース｜事実と考察で読む業界の動き','パチスロの新台発表、ホールの再編、業界の動きを短く整理。発表された事実と読者への影響を分けて読むニュースまとめです。','業界ニュース',body,toc,['パチスロニュース','業界の動き','事実と考察で読む'],data['checked_at'])
 
 if __name__=='__main__':
     for name,renderer,target in [('new-machines',calendar_page,'new-machines'),('industry-news',news_page,'industry-news')]:

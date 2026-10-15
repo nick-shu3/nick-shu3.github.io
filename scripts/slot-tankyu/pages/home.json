@@ -2,7 +2,7 @@
   "path": "docs/slot-tankyu/index.html",
   "title": "シュウ３が実戦中に知りたいことを、ここに。",
   "description": "設定示唆ややめどき、写真付きの実戦記録をまとめています。新台情報・業界ニュース・777リーグの日程もチェックできます。",
-  "body": "<section id=\"latest\"><p class=\"section-kicker\">01 / PLAY REPORT</p><h2>最新の実戦・今回の発見</h2><div class=\"grid\"><a class=\"card report-card tone-tako\" href=\"records/2026-10-15/takoslot/\"><div class=\"card-art\" aria-hidden=\"true\"><small>スマスロ タコスロ</small><strong>TAKOSLOT</strong><span>実戦レポート</span><i>TK</i></div><div class=\"card-copy\"><span class=\"tag\">タコスロ／2026年10月15日</span><h3>通常561Gで＋51枚。今日も今日とて、勝ち逃げです →</h3><p>14枚取得8/11回。目押しの反省も、また打ちたい気持ちも。</p></div></a><a class=\"card report-card tone-tako\" href=\"records/2026-10-14/takoslot/\"><div class=\"card-art\" aria-hidden=\"true\"><small>スマスロ タコスロ</small><strong>TAKOSLOT</strong><span>実戦レポート</span><i>TK</i></div><div class=\"card-copy\"><span class=\"tag\">タコスロ／2026年10月14日</span><h3>通常820Gで＋249枚、14枚取得19/21回 →</h3><p>投資200枚・回収449枚。最終ユニメモと技術介入の結果を読む。</p></div></a><a class=\"card report-card tone-lycoris\" href=\"records/2026-10-12/lycoris-recoil/\"><div class=\"report-thumb\"><img src=\"assets/records/2026-10-12/lycoris-recoil/rush-w-50.jpg\" width=\"1536\" height=\"1152\" loading=\"lazy\" alt=\"ラッシュW 50Gの実機画面\"></div><div class=\"card-copy\"><span class=\"tag\">リコリコ／2026年10月12日</span><h3>750G表示でも600G＋αで当選 →</h3><p>駆け抜けが続いた前半から、リプレイで上位CZを突破。ラッシュWで挽回した一日の流れを写真で振り返る。</p></div></a><a class=\"card report-card tone-tako\" href=\"records/2026-10-12/takoslot/\"><div class=\"card-art\" aria-hidden=\"true\"><small>スマスロ タコスロ</small><strong>TAKOSLOT</strong><span>実戦レポート</span><i>TK</i></div><div class=\"card-copy\"><span class=\"tag\">タコスロ／2026年10月12日</span><h3>技術介入8/9回成功。＋720枚 →</h3><p>BIG5回・REG6回の短時間実戦。14枚取得8回、9枚取得1回の結果と最終グラフを読む。</p></div></a></div></section><section id=\"archive\"><p class=\"section-kicker\">02 / ARCHIVE</p><h2>過去実戦から読む</h2><a class=\"card archive-card tone-ghoul\" href=\"records/2025-03-02/tokyo-ghoul/\"><img src=\"assets/records/2025-03-02/tokyo-ghoul/ending.jpg\" width=\"800\" height=\"600\" loading=\"lazy\" alt=\"東京喰種の初エンディングの実機写真\"><div class=\"card-copy\"><span class=\"tag\">東京喰種／2025年3月2日</span><h3>【まさかの設定6！】ようやく東京喰種をぶっ壊したお話 →</h3><p>赫眼70Gから初完走。その後に約2,000枚を使った実戦を振り返る。</p></div></a></section><section id=\"guides\"><p class=\"section-kicker\">03 / MACHINE GUIDE</p><h2>機種ガイド</h2><p class=\"hint\">見たい演出や数値を一覧から選び、示唆の意味・有効な条件・判断時の注意点を確認できます。</p><div class=\"machine-grid\"><a class=\"card machine-card tone-ghoul\" href=\"machines/tokyo-ghoul/\"><span class=\"machine-mark\" aria-hidden=\"true\">TG</span><span class=\"tag\">設定推測16項目・設定別データ</span><h3>L東京喰種 →</h3><p>重要度順の設定推測一覧・設定別データ・終了後の確認事項。</p></a><a class=\"card machine-card tone-lycoris\" href=\"machines/lycoris-recoil/\"><span class=\"machine-mark\" aria-hidden=\"true\">LC</span><span class=\"tag\">終了画面・トロフィー・設定示唆</span><h3>リコリス・リコイル →</h3><p>モード別終了画面、トロフィー、プロローグ、エピソード、ランプ。</p></a><a class=\"card machine-card tone-tako\" href=\"machines/takoslot/\"><span class=\"machine-mark\" aria-hidden=\"true\">TK</span><span class=\"tag\">ユニメモ・技術介入の成績</span><h3>タコスロ →</h3><p>ボーナス確率の分母と14枚取得率の読み方。実戦の結果も確認できます。</p></a></div></section><section id=\"records\"><p class=\"section-kicker\">04 / DAILY LOG</p><h2>日付から実戦を読む</h2><a class=\"card daily-card\" href=\"records/2026-10-15/\"><span class=\"tag\">当日のまとめ</span><h3>2026年10月15日：タコスロで＋51枚 →</h3><p>投資150枚・回収201枚、通常561Gの実戦。</p></a><a class=\"card daily-card\" href=\"records/2026-10-12/\"><span class=\"tag\">当日のまとめ</span><h3>2026年10月12日：2機種で＋1,028枚 →</h3><p>リコリコ＋308枚、タコスロ＋720枚。各機種の見どころと一日の収支を振り返る。</p></a><p><a href=\"records/\">実戦記録一覧 →</a></p></section><section id=\"about\"><p class=\"section-kicker\">05 / ABOUT</p><h2>シュウ３とスロ探究</h2><p>仕事や生活と両立しながら、好きな機種を楽しんで深く知る。実戦と資料を照らし合わせ、分かったことと分からないことを残す個人メディアです。</p><p><a href=\"about/\">根拠の扱い・編集方針を見る →</a></p></section><section id=\"league\"><h2>777リーグを追う</h2><a class=\"card daily-card\" href=\"league/777league/\"><span class=\"tag\">4th / 2026–2027</span><h3>実戦日・終了状況・放送日を一覧で見る →</h3><p>収録予定と動画の公開日は別々に確認。月別の表から、次の実戦と終わった回を探せます。</p></a></section><section id=\"updates\"><h2>新台と業界の動きを読む</h2><div class=\"grid\"><a class=\"card\" href=\"new-machines/\"><span class=\"tag\">導入予定</span><h3>新台カレンダー →</h3><p>月別のカレンダーから、パチスロの導入予定日と機種を確認。</p></a><a class=\"card\" href=\"news/\"><span class=\"tag\">事実と考察</span><h3>業界ニュース →</h3><p>新台発表・ホール再編・業界動向を短く整理。読者への影響と確認元も掲載。</p></a></div></section><section id=\"watch\"><h2>スロ番組ウォッチ</h2><a class=\"card daily-card\" href=\"watch/\"><span class=\"tag\">ネタバレなしの紹介・感想</span><h3>見ていたら、打ちたくなった。 →</h3><p>タコスロの出目解説や、777リーグの決起集会を視聴メモと率直な感想で紹介。</p></a></section>",
+  "body": "<section id=\"latest\"><p class=\"section-kicker\">01 / LATEST</p><h2>新着記事・更新情報</h2><p class=\"hint\">日付は実戦日・紹介日・内容更新日を区別しています。公開日が不明なものは推定していません。</p><!-- latest-feed --></section><section id=\"guides\"><p class=\"section-kicker\">02 / MACHINE GUIDE</p><h2>機種から探す</h2><p class=\"hint\">見たい演出や数値を一覧から選び、示唆の意味・有効な条件・判断時の注意点を確認できます。</p><div class=\"machine-grid\"><a class=\"card machine-card tone-ghoul\" href=\"machines/tokyo-ghoul/\"><span class=\"machine-mark\" aria-hidden=\"true\">TG</span><span class=\"tag\">設定推測16項目・設定別データ</span><h3>L東京喰種 →</h3><p>重要度順の設定推測一覧・設定別データ・終了後の確認事項。</p></a><a class=\"card machine-card tone-lycoris\" href=\"machines/lycoris-recoil/\"><span class=\"machine-mark\" aria-hidden=\"true\">LC</span><span class=\"tag\">終了画面・トロフィー・設定示唆</span><h3>リコリス・リコイル →</h3><p>モード別終了画面、トロフィー、プロローグ、エピソード、ランプ。</p></a><a class=\"card machine-card tone-tako\" href=\"machines/takoslot/\"><span class=\"machine-mark\" aria-hidden=\"true\">TK</span><span class=\"tag\">ユニメモ・技術介入の成績</span><h3>タコスロ →</h3><p>ボーナス確率の分母と14枚取得率の読み方。実戦の結果も確認できます。</p></a></div></section><section id=\"archive\"><p class=\"section-kicker\">03 / PLAY REPORT</p><h2>写真付きのおすすめ実戦</h2><a class=\"card archive-card tone-ghoul\" href=\"records/2025-03-02/tokyo-ghoul/\"><img src=\"assets/records/2025-03-02/tokyo-ghoul/ending.jpg\" width=\"800\" height=\"600\" loading=\"lazy\" alt=\"東京喰種の初エンディングの実機写真\"><div class=\"card-copy\"><span class=\"tag\">おすすめの過去実戦／東京喰種／2025年3月2日</span><h3>【まさかの設定6！】ようやく東京喰種をぶっ壊したお話 →</h3><p>赫眼70Gから初完走。その後に約2,000枚を使った実戦を振り返る。</p></div></a><a class=\"card archive-card tone-lycoris\" href=\"records/2026-10-12/lycoris-recoil/\"><img src=\"assets/records/2026-10-12/lycoris-recoil/rush-w-50.jpg\" width=\"1536\" height=\"1152\" loading=\"lazy\" alt=\"ラッシュW 50Gの実機画面\"><div class=\"card-copy\"><span class=\"tag\">リコリコ／2026年10月12日</span><h3>750G表示でも600G＋αで当選 →</h3><p>駆け抜けが続いた前半から、リプレイで上位CZを突破。ラッシュWで挽回した一日の流れを写真で振り返る。</p></div></a></section><section id=\"records\"><h2>日付から実戦を読む</h2><p class=\"hint\">直近3日分。過去の記録は全件一覧から読めます。</p><!-- recent-daily --><p><a href=\"records/#dates\">日付別の実戦をすべて見る →</a></p></section><section id=\"updates\"><p class=\"section-kicker\">04 / SCHEDULE &amp; TOPICS</p><h2>直近の予定と、気になる話題</h2><!-- schedule-preview --><div class=\"grid\"><div id=\"league\" class=\"panel\"><h3>777リーグ</h3><p>収録予定と動画の公開日は別々に確認できます。</p><p><a href=\"league/777league/\">月別の日程・終了確認待ちを見る →</a></p></div><div id=\"watch\" class=\"panel\"><h3>番組・ニュース</h3><p><a href=\"watch/\">スロ番組ウォッチ →</a></p><p><a href=\"news/\">パチスロのニュース →</a></p></div></div></section><section id=\"about\"><p class=\"section-kicker\">05 / ABOUT</p><h2>シュウ３とスロ探究</h2><p>仕事や生活と両立しながら、好きな機種を楽しんで深く知る。実戦と資料を照らし合わせ、分かったことと分からないことを残す個人メディアです。</p><p><a href=\"about/\">根拠の扱い・編集方針を見る →</a></p></section>",
   "type": "home",
   "label": "スロ探究",
   "status": "設定示唆・実戦・新台情報",
@@ -10,31 +10,27 @@
   "toc": [
     {
       "id": "latest",
-      "label": "最新記事"
+      "label": "新着記事・更新情報"
     },
     {
       "id": "guides",
-      "label": "機種ガイド"
+      "label": "機種から探す"
+    },
+    {
+      "id": "archive",
+      "label": "おすすめ実戦"
     },
     {
       "id": "records",
-      "label": "実戦記録"
+      "label": "日付から探す"
+    },
+    {
+      "id": "updates",
+      "label": "予定と話題"
     },
     {
       "id": "about",
       "label": "このサイト"
-    },
-    {
-      "id": "league",
-      "label": "777リーグ"
-    },
-    {
-      "id": "updates",
-      "label": "新台・ニュース"
-    },
-    {
-      "id": "watch",
-      "label": "スロ番組ウォッチ"
     }
   ],
   "breadcrumbs": [],
