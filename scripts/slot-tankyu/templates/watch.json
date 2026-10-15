@@ -31,7 +31,7 @@
   "share_lines": [
     "［結末に触れない見出し］"
   ],
-  "body": "<section id=\"video\"><h2>今回の動画</h2><p>［確認したチャンネル名］</p><p><a href=\"https://www.youtube.com/watch?v=VIDEO_ID\">［結末を伏せた動画名］をYouTubeで見る ↗</a></p></section><section id=\"overview\"><h2>どんな動画？</h2><p>［確認できた範囲で2〜3文の紹介］</p><p class=\"hint\">［本人視聴メモ由来ならここにも明記］</p></section><section id=\"sources\"><h2>紹介元</h2><p>［公式動画へのリンク、紹介日。公開日は確認できた場合だけ別記］</p></section>",
+  "body": "<section id=\"video\"><h2>今回の動画</h2><p>［確認したチャンネル名］</p><p><a href=\"https://www.youtube.com/watch?v=VIDEO_ID\" target=\"_blank\" rel=\"noopener noreferrer\">［結末を伏せた動画名］をYouTubeで見る ↗</a></p></section><section id=\"overview\"><h2>どんな動画？</h2><p>［確認できた範囲で2〜3文の紹介］</p><p class=\"hint\">［本人視聴メモ由来ならここにも明記］</p></section><section id=\"sources\"><h2>紹介元</h2><p>［公式動画へのリンク、紹介日。公開日は確認できた場合だけ別記］</p></section>",
   "editor_notes": [
     "勝敗・最終差枚・展開・見せ場の時間位置は伏せる。",
     "公開日は推定しない。紹介日と別に扱う。",

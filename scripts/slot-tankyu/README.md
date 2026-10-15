@@ -131,3 +131,5 @@ SNS各社でのカード表示は別途確認する。OGPが存在するだけ�
 - 新規記事の根拠表・別実行による独立検証・生成・安全・表示検査・公開承認は通常手順に従う。
 
 777リーグ関連の視聴記事は、`data/league-4th.json` の該当 `rallies` に `watch_slug`（watch配下の記事ID）を追加し、`league_schedule.py` → `build.py` → `check.py` で再生成する。公式チャンネルリンクとサイト内の感想リンクを分け、収録実施・動画公開の確認日を導線追加だけで更新しない。記事側からリーグ日程表にも戻れるようにする。
+
+「YouTubeで見る」の動画ボタンは `target="_blank" rel="noopener noreferrer"` を指定し、新しいタブで開く。新規記事でも `templates/watch.json` の指定を維持する。
