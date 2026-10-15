@@ -27,5 +27,23 @@
   ],
   "breadcrumbs": [],
   "short_title": "タコスロ｜技術介入と実戦データの記録ガイド",
-  "share_image": "share-guide-tako.png"
+  "share_image": "share-guide-tako.png",
+  "quick_links": [
+    {
+      "id": "available",
+      "label": "このガイドで分かること"
+    },
+    {
+      "id": "count",
+      "label": "ユニメモ・技術介入の記録"
+    },
+    {
+      "id": "records",
+      "label": "実戦記録"
+    },
+    {
+      "id": "sources",
+      "label": "判断できる範囲"
+    }
+  ]
 }

@@ -31,5 +31,27 @@
   ],
   "breadcrumbs": [],
   "short_title": "リコリコ｜設定示唆の重要度一覧とモード別終了画面",
-  "share_image": "share-guide-lycoris.png"
+  "share_image": "share-guide-lycoris.png",
+  "quick_links": [
+    {
+      "id": "signal-screen",
+      "label": "終了画面"
+    },
+    {
+      "id": "signal-trophy",
+      "label": "トロフィー"
+    },
+    {
+      "id": "signal-prologue",
+      "label": "プロローグ"
+    },
+    {
+      "id": "signal-episode",
+      "label": "エピソード"
+    },
+    {
+      "id": "signal-lamp",
+      "label": "ランプ"
+    }
+  ]
 }

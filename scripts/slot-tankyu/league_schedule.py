@@ -2,6 +2,7 @@
 """Render reviewed league schedule data into the common static page source."""
 import datetime, html, json, re
 from pathlib import Path
+from editorial_views import presentation_date
 
 HERE = Path(__file__).resolve().parent
 def esc(value):
@@ -11,9 +12,15 @@ def date_label(value):
     date = datetime.date.fromisoformat(value) if isinstance(value, str) else value
     return f"{date.year}年{date.month}月{date.day}日"
 
-def render(data):
+def render(data, as_of=None):
     checked = datetime.date.fromisoformat(data['checked_at'])
-    rows = sorted(data['rows'], key=lambda row: (row['date'], row['round']))
+    reference = datetime.date.fromisoformat(as_of) if isinstance(as_of,str) else as_of or presentation_date()
+    if reference < checked:raise ValueError('Presentation reference precedes source check')
+    rows = sorted((dict(row) for row in data['rows']), key=lambda row: (row['date'], row['round']))
+    for row in rows:
+        if row['status']=='予定' and datetime.date.fromisoformat(row['date']) < reference:
+            row['status']='終了確認待ち'
+            row['status_note']='予定日経過。収録実施・延期・中止は未確認。'
     seen = set()
     months = {}
     for row in rows:
@@ -47,7 +54,7 @@ def render(data):
             evidence += '<br><small>会場は公式照合待ち</small>'
         cell = '<tr><th scope="row"><time datetime="'+row['date']+'">'+f'{date.month}/{date.day}'+'（'+'月火水木金土日'[date.weekday()]+'）</time></th><td><span class="league-label league-'+league.lower()+'">'+esc(row['round'])+'</span></td><td>'+esc(row['venue'])+'</td><td><span class="league-status '+badge+'">'+esc(row['status'])+'</span>'+status_note+'</td><td>'+broadcast+'</td><td>'+evidence+'</td></tr>'
         months.setdefault(date.strftime('%Y-%m'), []).append(cell)
-    body = '<div class="notice">実戦日（収録日）と放送・動画配信日は別です。「終了」は収録の実施を確認できた回。「終了確認待ち」は予定日が過ぎているものの、実施の裏付けが足りない回です。確認基準日：'+esc(date_label(data['checked_at']))+'。</div>'
+    body = '<div class="notice">実戦日（収録日）と放送・動画配信日は別です。「終了」は収録の実施を確認できた回。「終了確認待ち」は予定日が過ぎているものの、実施の裏付けが足りない回です。収録情報の確認日：'+esc(date_label(data['checked_at']))+'。予定表示の基準日：'+date_label(reference)+'。基準日までに予定日が過ぎた回は、実施の確認がなければ確認待ちに整理しています。収録情報を再確認したことを意味しません。</div>'
     source = data['video_announcement_url']
     if not source.startswith('https://'):
         raise ValueError('Announcement must use HTTPS')
@@ -68,25 +75,34 @@ def render(data):
         url = rally['channel_url']
         if not url.startswith('https://www.youtube.com/'):
             raise ValueError('Channel links must use YouTube HTTPS')
-        label = f'{dt.month}/{dt.day}'+'（'+'月火水木金土日'[dt.weekday()]+'）'+dt.strftime('%H:%M')
+        label = date_label(dt)+'（'+'月火水木金土日'[dt.weekday()]+'）'+dt.strftime('%H:%M')
         note = ''
         if rally.get('watch_slug'):
             slug = rally['watch_slug']
             if not isinstance(slug, str) or not re.fullmatch(r'[a-z0-9]+(?:-[a-z0-9]+)*', slug):
                 raise ValueError('Invalid watch article slug')
-            note = '<br><a href="../../watch/'+esc(slug)+'/">視聴メモ・感想 →</a>'
-        rally_cells.append('<tr><th scope="row"><time datetime="'+esc(rally['release_at'])+'">'+label+'</time></th><td>'+esc(rally['team'])+note+'</td><td><a href="'+esc(url)+'">'+esc(rally['channel'])+' ↗</a></td></tr>')
+            note = '<br><a href="../../watch/'+esc(slug)+'/">サイト内の視聴メモ・感想 →</a>'
+        rally_cells.append('<tr><th scope="row"><time datetime="'+esc(rally['release_at'])+'">'+label+'</time></th><td>'+esc(rally['team'])+note+'</td><td><a href="'+esc(url)+'">'+'公式チャンネル：'+esc(rally['channel'])+' ↗</a></td></tr>')
     body += '<section id="rallies"><h2>チーム決起集会の公開予定</h2><p>2026年10月15日〜29日、いずれも20:00公開予定です。リンクから公開チャンネルを開けます。</p><div class="tablewrap" tabindex="0" role="region" aria-label="チーム決起集会の動画公開予定表"><table><caption>777リーグ4th・チーム決起集会</caption><thead><tr><th scope="col">公開予定</th><th scope="col">チーム</th><th scope="col">公開チャンネル</th></tr></thead><tbody>'+''.join(rally_cells)+'</tbody></table></div><p class="hint">チャンネルへのリンクです。各動画の直接リンクは公開後に確認します。予定は変更される場合があります。</p><p><a href="'+esc(source)+'">告知元：777リーグ公式X ↗</a>（2026年10月14日の告知／確認日：'+esc(date_label(data['video_checked_at']))+'）</p></section>'
-    upcoming = next((row for row in rows if row['status'] == '予定' and datetime.date.fromisoformat(row['date']) >= checked), None)
-    next_text = esc(date_label(upcoming['date'])+' '+upcoming['round'])+'<br>'+esc(upcoming['venue'])+'（収録予定）' if upcoming else '直近の収録予定は確認待ちです。'
-    body += '<section id="next"><h2>直近の実戦予定</h2><div class="panel"><p><strong>'+next_text+'</strong></p><p class="hint">予定は二次資料を参照しています。来場前に公式の日程・店舗案内を確認してください。</p></div></section>'
-    toc = [{'id':'video-start','label':'本編の公開開始'},{'id':'rallies','label':'決起集会の公開予定'},{'id':'next','label':'直近の実戦予定'}]
+    upcoming = [row for row in rows if row['status']=='予定' and datetime.date.fromisoformat(row['date']) >= reference]
+    pending = [row for row in rows if row['status']=='終了確認待ち']
+    body += '<section id="next"><h2>次の収録予定</h2><p class="hint">予定表示の基準日：'+date_label(reference)+'。二次資料による日程です。来場前に公式の日程・店舗案内を確認してください。</p>'
+    if upcoming:
+        body += '<ul class="schedule-list">'+''.join('<li><a href="#month-'+row['date'][:7]+'">'+date_label(row['date'])+' '+esc(row['round'])+'</a> — '+esc(row['venue'])+'（収録予定）</li>' for row in upcoming[:3])+'</ul>'
+    else:body += '<p>今後の収録予定は確認待ちです。</p>'
+    body += '<p><a href="#pending">過去の終了確認待ちを見る ↓</a></p></section><section id="pending"><h2>終了確認待ち</h2><p>予定日だけでは収録終了と判断できません。実施・延期・中止の裏付けが不足する回を分けています。</p>'
+    body += '<ul>'+''.join('<li><a href="#month-'+row['date'][:7]+'">'+date_label(row['date'])+' '+esc(row['round'])+'</a> — 終了確認待ち</li>' for row in pending)+'</ul>' if pending else '<p>該当する回はありません。</p>'
+    body += '</section>'
+    toc = [{'id':'next','label':'次の収録予定'},{'id':'pending','label':'終了確認待ち'},{'id':'video-start','label':'本編の公開開始'},{'id':'rallies','label':'決起集会の公開予定'}]
     for month, cells in months.items():
         identifier = 'month-'+month
         label = str(int(month[-2:]))+'月'
         toc.append({'id':identifier,'label':label})
         body += '<section id="'+identifier+'"><h2>'+month[:4]+'年'+label+'の実戦日・放送日</h2><p class="hint">表は横にスクロールできます。終了状況と放送日は別々に確認してください。</p><div class="tablewrap league-table-wrap" tabindex="0" role="region" aria-label="'+label+'の日程表"><table class="league-schedule"><caption>'+month[:4]+'年'+label+'・777リーグ4th</caption><thead><tr><th scope="col">実戦日</th><th scope="col">リーグ・回戦</th><th scope="col">会場</th><th scope="col">実戦状況</th><th scope="col">放送・配信日</th><th scope="col">確認元</th></tr></thead><tbody>'+''.join(cells)+'</tbody></table></div></section>'
     body += '<section id="sources"><h2>日程と公開日の見方</h2><ul><li>放送・配信日の「未確認」は、未放送・未発表と断定する意味ではありません。各回の公式動画・告知を照合できていない状態です。</li><li>前編・中編・後編など複数本に分かれる場合は、確認できた動画ごとに公開日と視聴リンクを記載します。</li><li>この表は2026年8〜12月の確認できた27件です。シーズン全日程を網羅した表ではありません。</li><li>収録終了は勝敗や動画公開を意味しません。結果のネタバレはこの表に載せていません。</li></ul><p><a href="https://p-gabu.jp/sc/666/777league/">777リーグ公式サイト ↗</a> ／ <a href="https://p-gabu.jp/sc/666/777league/schedule/">公式収録スケジュール ↗</a> ／ <a href="https://pachislot-memo.online/777league4th-schedule">収録日の参考資料：スロメモ ↗</a></p><p class="hint">スロ探究が整理した非公式の日程一覧です。会場・日程は二次資料からの参考情報として掲載し、収録の確認元を分けています。</p></section>'
+    start=body.index('<section id="next">');end=body.index('<section id="month-',start)
+    schedules=body[start:end];body=body[:start]+body[end:]
+    insert=body.index('<section id="video-start">');body=body[:insert]+schedules+body[insert:]
     toc.append({'id':'sources','label':'表の見方・出典'})
     return {'path':'docs/slot-tankyu/league/777league/index.html','type':'league','label':'777.LEAGUE / 4th 2026–2027','title':'777リーグ｜実戦日・終了状況・放送日一覧','short_title':'777リーグの日程','description':'777リーグ4thの決起集会と本編の動画公開予定、収録日・終了状況を一覧で確認。公開チャンネルへのリンクもまとめています。','updated':max(data['checked_at'],data['video_checked_at']),'status':'4thシーズン・非公式まとめ','breadcrumbs':[],'toc':toc,'body':body,'share_image':'share-league-4th.png','share_lines':['777リーグ 4th','実戦日・終了状況','放送・配信日一覧']}
 

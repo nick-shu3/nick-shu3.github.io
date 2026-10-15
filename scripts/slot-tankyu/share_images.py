@@ -3,11 +3,13 @@
 import argparse,json,re
 from pathlib import Path
 from PIL import Image,ImageDraw,ImageFont
+from editorial_views import visible_dates
 
 def main():
-    parser=argparse.ArgumentParser();parser.add_argument('--font',type=Path,required=True);args=parser.parse_args()
+    parser=argparse.ArgumentParser();parser.add_argument('--font',type=Path,required=True);parser.add_argument('--page',action='append',help='Optional page source stem; repeat to regenerate selected images only');args=parser.parse_args()
     root=Path(__file__).resolve().parents[2];directory=Path(__file__).parent/'pages'
     for path in sorted(directory.glob('*.json')):
+        if args.page and path.stem not in args.page:continue
         page=json.loads(path.read_text());im=Image.new('RGB',(1200,630),'#10141b');draw=ImageDraw.Draw(im)
         draw.rectangle((0,0,17,630),fill='#ff8990');draw.line((70,135,1130,135),fill='#36404f',width=2)
         draw.text((70,40),'スロ探究',font=ImageFont.truetype(str(args.font),54),fill='#f5f5f2')
@@ -25,7 +27,7 @@ def main():
             if not isinstance(lines,list) or not lines or any(not isinstance(x,str) or not x or draw.textlength(x,font=font)>1060 for x in lines):raise ValueError('Invalid share lines')
         if len(lines)>4:raise ValueError('Share title too long')
         for i,line in enumerate(lines):draw.text((70,220+i*74),line,font=font,fill='#f5f5f2')
-        draw.text((70,550),'シュウ３  /  '+page['updated'],font=ImageFont.truetype(str(args.font),26),fill='#bac3d0')
+        draw.text((70,550),'シュウ３  /  '+visible_dates(page['updated']),font=ImageFont.truetype(str(args.font),26),fill='#bac3d0')
         target=root/'docs/slot-tankyu/assets'/page['share_image'];im.save(target,optimize=True)
         print(target.relative_to(root))
 if __name__=='__main__':main()
