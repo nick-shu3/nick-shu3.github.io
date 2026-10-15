@@ -1,6 +1,6 @@
 #!/usr/bin/env python3
 """Render reviewed league schedule data into the common static page source."""
-import datetime, html, json
+import datetime, html, json, re
 from pathlib import Path
 
 HERE = Path(__file__).resolve().parent
@@ -69,7 +69,13 @@ def render(data):
         if not url.startswith('https://www.youtube.com/'):
             raise ValueError('Channel links must use YouTube HTTPS')
         label = f'{dt.month}/{dt.day}'+'（'+'月火水木金土日'[dt.weekday()]+'）'+dt.strftime('%H:%M')
-        rally_cells.append('<tr><th scope="row"><time datetime="'+esc(rally['release_at'])+'">'+label+'</time></th><td>'+esc(rally['team'])+'</td><td><a href="'+esc(url)+'">'+esc(rally['channel'])+' ↗</a></td></tr>')
+        note = ''
+        if rally.get('watch_slug'):
+            slug = rally['watch_slug']
+            if not isinstance(slug, str) or not re.fullmatch(r'[a-z0-9]+(?:-[a-z0-9]+)*', slug):
+                raise ValueError('Invalid watch article slug')
+            note = '<br><a href="../../watch/'+esc(slug)+'/">視聴メモ・感想 →</a>'
+        rally_cells.append('<tr><th scope="row"><time datetime="'+esc(rally['release_at'])+'">'+label+'</time></th><td>'+esc(rally['team'])+note+'</td><td><a href="'+esc(url)+'">'+esc(rally['channel'])+' ↗</a></td></tr>')
     body += '<section id="rallies"><h2>チーム決起集会の公開予定</h2><p>2026年10月15日〜29日、いずれも20:00公開予定です。リンクから公開チャンネルを開けます。</p><div class="tablewrap" tabindex="0" role="region" aria-label="チーム決起集会の動画公開予定表"><table><caption>777リーグ4th・チーム決起集会</caption><thead><tr><th scope="col">公開予定</th><th scope="col">チーム</th><th scope="col">公開チャンネル</th></tr></thead><tbody>'+''.join(rally_cells)+'</tbody></table></div><p class="hint">チャンネルへのリンクです。各動画の直接リンクは公開後に確認します。予定は変更される場合があります。</p><p><a href="'+esc(source)+'">告知元：777リーグ公式X ↗</a>（2026年10月14日の告知／確認日：'+esc(date_label(data['video_checked_at']))+'）</p></section>'
     upcoming = next((row for row in rows if row['status'] == '予定' and datetime.date.fromisoformat(row['date']) >= checked), None)
     next_text = esc(date_label(upcoming['date'])+' '+upcoming['round'])+'<br>'+esc(upcoming['venue'])+'（収録予定）' if upcoming else '直近の収録予定は確認待ちです。'
