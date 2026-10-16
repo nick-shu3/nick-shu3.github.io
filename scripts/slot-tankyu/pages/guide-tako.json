@@ -45,5 +45,26 @@
       "id": "sources",
       "label": "判断できる範囲"
     }
+  ],
+  "guide_digest": [
+    {
+      "id": "available",
+      "label": "実戦データの読み方",
+      "paragraphs": [
+        0
+      ],
+      "link_label": "掲載内容を確認",
+      "source_sha256": "4870337b667f8584610c98fc4b35f1420569eec0aba8cd4276f06043c8f68e62"
+    },
+    {
+      "id": "sources",
+      "label": "判断できる範囲",
+      "paragraphs": [
+        0,
+        1
+      ],
+      "link_label": "データの出どころを確認",
+      "source_sha256": "4d0b7e3552e443aef1dc19f50ace54fcb5355f4b2188eac2894c767d3ffc5ed4"
+    }
   ]
 }

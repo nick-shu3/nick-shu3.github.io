@@ -54,5 +54,27 @@
     "L東京喰種",
     "設定推測ガイド",
     "終了画面・設定別確率"
+  ],
+  "guide_digest": [
+    {
+      "id": "factor-trophy",
+      "label": "トロフィー・獲得枚数",
+      "paragraphs": [
+        0
+      ],
+      "link_label": "出現条件・他の判別要素を確認",
+      "source_sha256": "e42f70cb3cca72c6f8d4622323c1a59ad43f8231f02696fcb877b61c63f58c28"
+    },
+    {
+      "id": "quit",
+      "label": "やめどき",
+      "paragraphs": [
+        1,
+        2,
+        3
+      ],
+      "link_label": "終了後の確認フローを読む",
+      "source_sha256": "de83ac8fd14a59c770a8ffef01154ec2523f3ba5f3183d3d470dcb85b4b31418"
+    }
   ]
 }

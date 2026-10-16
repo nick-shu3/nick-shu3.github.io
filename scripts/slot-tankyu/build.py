@@ -2,7 +2,7 @@
 """Build the static Slot Tankyu pages from reviewed editorial JSON. No dependencies."""
 import hashlib,html,json,posixpath,re
 from pathlib import Path
-from editorial_views import visible_dates, date_label, latest_feed, daily_list, schedule_preview, machine_navigation, guide_shortcuts
+from editorial_views import visible_dates, date_label, latest_feed, daily_list, schedule_preview, machine_navigation, guide_shortcuts, guide_digest
 
 ROOT=Path(__file__).resolve().parents[2]
 SOURCE=Path(__file__).parent/'pages'
@@ -43,6 +43,11 @@ def build(page):
     body+=machine_navigation(page)
     # Content is curated static markup, never runtime user input. Reject active markup.
     if re.search(r'<\s*(script|iframe|object|embed|form)\b|\bon\w+\s*=|javascript\s*:',body,re.I):raise ValueError('Active content in editorial source')
+    digest=guide_digest(page)
+    guide_controls=guide_shortcuts(page)
+    # Native scroll containers remain keyboard reachable, without runtime scripts.
+    body=re.sub(r'<div\b([^>]*\bclass="[^"]*\btablewrap\b[^"]*"[^>]*)>',
+                r'<div\1 tabindex="0" role="region" aria-label="データ表（横スクロール対応）">',body)
     # Curated local photographs open at full size using ordinary browser navigation.
     # No image viewer scripts, remote requests or runtime HTML parsing are needed.
     def enlarge_photo(match):
@@ -70,6 +75,9 @@ def build(page):
     crumbs+=' <span>／</span> <span>'+esc(page.get('short_title',page['title']))+'</span></nav>'
     toc=''
     if toc_items and page['type']!='home':toc='<nav class="toc" aria-label="ページ内目次">'+''.join('<a href="#'+esc(x['id'])+'">'+esc(x['label'])+'</a>' for x in toc_items)+'</nav>'
+    if page['type']=='guide':
+        guide_controls='<details class="guide-index"><summary>掲載項目から探す</summary>'+guide_controls+toc+'</details>'
+        toc=''
     themes={'tokyo-ghoul':'ghoul','lycoris-recoil':'lycoris','takoslot':'tako'}
     theme=next((v for k,v in themes.items() if k in path.split('/') or page.get('machine_slug')==k),'home' if page['type']=='home' else 'general')
     hero_title=esc(page['title'])
@@ -86,7 +94,7 @@ def build(page):
         if path!='docs/slot-tankyu/index.html' or not isinstance(value,str) or not re.fullmatch(r'[A-Za-z0-9_-]{1,128}',value):raise ValueError('Invalid site verification value')
         verification='<meta name="google-site-verification" content="'+esc(value)+'">'
     return f'''<!doctype html>
-<html lang="ja" class="standalone-pending"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1"><meta name="referrer" content="strict-origin-when-cross-origin"><meta http-equiv="Content-Security-Policy" content="{CSP}"><link rel="stylesheet" href="{guard}/standalone.css?v=1"><script src="{guard}/standalone.js?v=1"></script><link rel="stylesheet" href="{css}">{verification}<title>{title}</title><meta name="description" content="{desc}"><link rel="canonical" href="./"><meta property="og:type" content="{'article' if page['type'] in ('record','watch') and path!='docs/slot-tankyu/watch/index.html' else 'website'}"><meta property="og:title" content="{title}"><meta property="og:description" content="{desc}"><meta property="og:url" content="{canonical}"><meta property="og:site_name" content="スロ探究"><meta property="og:image" content="{BASE+'docs/slot-tankyu/assets/'+share}"><meta name="twitter:card" content="summary_large_image"></head><body class="page-{esc(page['type'])} theme-{theme}"><a class="skip-link" href="#main-content">本文へ</a><noscript>JavaScriptを有効にして、ブラウザで直接開いてください。</noscript><header class="site-header"><a class="brand" href="{top}"><span class="brand-symbol" aria-hidden="true">探</span><span class="brand-text">スロ<span>探究</span><span class="brand-caption"><small>SLOT TANKYU</small><small class="brand-author">by シュウ３</small></span></span></a><nav aria-label="サイト内目次">{site_nav}</nav></header><main id="main-content" tabindex="-1">{crumbs}<div class="hero"><div class="hero-copy"><p class="eyebrow">{esc(page['label'])}</p><h1>{hero_title}</h1><p class="lead">{esc(page['description'])}</p><div class="meta"><span>{esc(visible_dates(page['status']))}</span><span>最終更新：{esc(visible_dates(page['updated']))}</span></div>{hero_actions}</div>{home_visual}</div>{guide_shortcuts(page)}{toc}{body}</main><footer><p>スロ探究 by シュウ３／非公式の個人研究サイト</p><p><a href="{about}">根拠の扱い・編集方針</a> ｜ <a href="{records}">実戦記録</a></p></footer></body></html>'''
+<html lang="ja" class="standalone-pending"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1"><meta name="referrer" content="strict-origin-when-cross-origin"><meta http-equiv="Content-Security-Policy" content="{CSP}"><link rel="stylesheet" href="{guard}/standalone.css?v=1"><script src="{guard}/standalone.js?v=1"></script><link rel="stylesheet" href="{css}">{verification}<title>{title}</title><meta name="description" content="{desc}"><link rel="canonical" href="./"><meta property="og:type" content="{'article' if page['type'] in ('record','watch') and path!='docs/slot-tankyu/watch/index.html' else 'website'}"><meta property="og:title" content="{title}"><meta property="og:description" content="{desc}"><meta property="og:url" content="{canonical}"><meta property="og:site_name" content="スロ探究"><meta property="og:image" content="{BASE+'docs/slot-tankyu/assets/'+share}"><meta name="twitter:card" content="summary_large_image"></head><body class="page-{esc(page['type'])} theme-{theme}"><a class="skip-link" href="#main-content">本文へ</a><noscript>JavaScriptを有効にして、ブラウザで直接開いてください。</noscript><header class="site-header"><a class="brand" href="{top}"><span class="brand-symbol" aria-hidden="true">探</span><span class="brand-text">スロ<span>探究</span><span class="brand-caption"><small class="brand-author">by シュウ３</small></span></span></a><nav aria-label="サイト内目次">{site_nav}</nav></header><main id="main-content" tabindex="-1">{crumbs}<div class="hero"><div class="hero-copy"><p class="eyebrow">{esc(page['label'])}</p><h1>{hero_title}</h1><p class="lead">{esc(page['description'])}</p><div class="meta"><span>{esc(visible_dates(page['status']))}</span><span>最終更新：{esc(visible_dates(page['updated']))}</span></div>{hero_actions}</div>{home_visual}</div>{digest}{guide_controls}{toc}{body}</main><footer><p>スロ探究 by シュウ３／非公式の個人研究サイト</p><p><a href="{about}">根拠の扱い・編集方針</a> ｜ <a href="{records}">実戦記録</a></p></footer></body></html>'''
 
 def main():
     for source in sorted(SOURCE.glob('*.json')):
