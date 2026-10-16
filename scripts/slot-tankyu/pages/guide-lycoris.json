@@ -53,5 +53,25 @@
       "id": "signal-lamp",
       "label": "ランプ"
     }
+  ],
+  "guide_digest": [
+    {
+      "id": "signal-screen",
+      "label": "設定判別はモードと画面をセットで",
+      "paragraphs": [
+        0
+      ],
+      "link_label": "画面別の示唆と条件を確認",
+      "source_sha256": "13004c5cfd29528101bf704f08f7d9ee757a2cc3437c9d31f0e79b11ceaccdfc"
+    },
+    {
+      "id": "exit",
+      "label": "やめどき",
+      "paragraphs": [
+        0
+      ],
+      "link_label": "終了状況ごとの注意点を確認",
+      "source_sha256": "566b370ac96ae3e43ed367f79bef9c3bc50ff21d3a45f3f443e42b174934a622"
+    }
   ]
 }

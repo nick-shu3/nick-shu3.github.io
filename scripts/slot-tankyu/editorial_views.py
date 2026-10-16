@@ -1,5 +1,6 @@
 """Shared static navigation and date presentation. No runtime requests or new facts."""
-import datetime, html, json, re
+import datetime, hashlib, html, json, re
+from html.parser import HTMLParser
 from pathlib import Path
 from urllib.parse import urlsplit
 
@@ -123,3 +124,76 @@ def guide_shortcuts(page):
         if not re.fullmatch(r'[a-z0-9-]+',item['id']) or 'id="'+item['id']+'"' not in page['body']:
             raise ValueError('Guide shortcut must target existing content')
     return '<nav class="guide-shortcuts" aria-label="見たい情報へ直接進む"><p>見たい情報へ</p><div>'+''.join('<a href="#'+esc(i['id'])+'">'+esc(i['label'])+' →</a>' for i in links)+'</div></nav>'
+
+
+class GuideParagraphs(HTMLParser):
+    """Locate complete source paragraphs, without rewriting text or inline links."""
+    VOID = {'area','base','br','col','embed','hr','img','input','link','meta','param','source','track','wbr'}
+
+    def __init__(self, source):
+        super().__init__(convert_charrefs=False)
+        self.source = source
+        self.offsets = [0]
+        for line in source.splitlines(keepends=True):
+            self.offsets.append(self.offsets[-1] + len(line))
+        self.stack = []
+        self.paragraph = None
+        self.by_id = {}
+        self.feed(source)
+
+    def source_offset(self):
+        line, column = self.getpos()
+        return self.offsets[line - 1] + column
+
+    def handle_starttag(self, tag, attrs):
+        if tag == 'p':
+            if self.paragraph is not None:
+                raise ValueError('Nested guide paragraph')
+            self.paragraph = (self.source_offset(), [i for _,i in self.stack if i])
+        if tag not in self.VOID:
+            self.stack.append((tag,dict(attrs).get('id')))
+
+    def handle_startendtag(self, tag, attrs):
+        pass
+
+    def handle_endtag(self, tag):
+        if tag == 'p' and self.paragraph is not None:
+            start, identifiers = self.paragraph
+            end = self.source.index('>',self.source_offset()) + 1
+            markup = self.source[start:end]
+            for identifier in identifiers:
+                self.by_id.setdefault(identifier,[]).append(markup)
+            self.paragraph = None
+        for index in range(len(self.stack)-1,-1,-1):
+            if self.stack[index][0] == tag:
+                del self.stack[index:]
+                break
+
+
+def guide_digest(page):
+    """Show selected existing paragraphs verbatim; never generate new advice."""
+    items = page.get('guide_digest',[])
+    if not items:
+        return ''
+    if page['type'] != 'guide' or not isinstance(items,list) or len(items)>3:
+        raise ValueError('Digest is limited to guide pages')
+    paragraphs = GuideParagraphs(page['body']).by_id
+    cards = []
+    for item in items:
+        target = item['id']
+        if target not in paragraphs or not re.fullmatch(r'[a-z0-9-]+',target):
+            raise ValueError('Digest needs existing guide content')
+        selected = item['paragraphs']
+        if not isinstance(selected,list) or not selected or len(selected)>3:
+            raise ValueError('Digest needs one to three complete paragraphs')
+        if any(type(i) is not int or i<0 or i>=len(paragraphs[target]) for i in selected):
+            raise ValueError('Digest paragraph does not exist')
+        content = ''.join(paragraphs[target][i] for i in selected)
+        if hashlib.sha256(content.encode()).hexdigest() != item.get('source_sha256'):
+            raise ValueError('Digest source changed; review its conditions before updating')
+        if re.search(r'\bid\s*=',content):
+            raise ValueError('Digest must not duplicate source IDs')
+        # Original paragraphs keep their conditions, emphasis and source links.
+        content = visible_dates(content)
+        cards.append('<article class="digest-item"><h3>'+esc(item['label'])+'</h3>'+content+'<a class="digest-link" href="#'+esc(target)+'">'+esc(item['link_label'])+' →</a></article>')
+    return '<section id="guide-digest" class="guide-digest" aria-labelledby="guide-digest-title"><h2 id="guide-digest-title">まず確認すること</h2><div class="digest-grid">'+''.join(cards)+'</div></section>'
