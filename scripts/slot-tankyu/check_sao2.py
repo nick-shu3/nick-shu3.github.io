@@ -1,6 +1,6 @@
 #!/usr/bin/env python3
 """New SAO2 guide invariants. Static checks do not certify source facts or rendering."""
-import json, subprocess
+import json, re, subprocess
 from pathlib import Path
 from html.parser import HTMLParser
 from build import build, ROOT
@@ -50,6 +50,16 @@ def check_sao2(page):
     paths=subprocess.check_output(['git','ls-tree','-r','--name-only',BASE,'scripts/slot-tankyu/pages'],cwd=ROOT,text=True).splitlines()
     for path in paths:
         if path.endswith('/home.json'):continue
+        if path.endswith('/listing.json'):
+            old=json.loads(subprocess.check_output(['git','show',BASE+':'+path],cwd=ROOT))
+            current=json.loads((ROOT/path).read_text())
+            card=r'<a class="card tone-sao2" href="2026-10-17/sao2/">.*?</a>'
+            assert len(re.findall(card,current['body']))==1
+            current['body']=re.sub(card,'',current['body'])
+            assert current['updated']=='2026年10月17日'
+            current['updated']=old['updated']
+            assert current==old,path
+            continue
         assert (ROOT/path).read_bytes()==subprocess.check_output(['git','show',BASE+':'+path],cwd=ROOT),path
 if __name__=='__main__':
     check_sao2(json.loads((Path(__file__).parent/'pages/guide-sao2.json').read_text()))

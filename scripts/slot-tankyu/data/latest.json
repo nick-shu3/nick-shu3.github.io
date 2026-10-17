@@ -3,6 +3,15 @@
   "same_day_order": "同日はデータ登録順。時刻や公開順を推定しない。",
   "entries": [
     {
+      "source": "record-sao2-20261017",
+      "anchor": "",
+      "date": "2026-10-17",
+      "date_kind": "内容更新日",
+      "group": "play-20261017",
+      "category": "実戦",
+      "reason": "本人確認・承認済みの10月17日SAO2実戦原稿の内容更新日。実戦日とは別フィールド。公開完了日時は作業記録へ別記。"
+    },
+    {
       "source": "guide-sao2",
       "anchor": "",
       "date": "2026-10-17",

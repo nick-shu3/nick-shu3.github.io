@@ -2,7 +2,7 @@
 """Focused R01–R09 regressions, including preservation against the reviewed base.
 Run after all generators. This is a static check, never browser certification.
 """
-import copy, datetime, json, re, subprocess
+import copy, datetime, hashlib, json, re, subprocess
 from html.parser import HTMLParser
 from pathlib import Path
 from build import build, ROOT, SOURCE
@@ -43,7 +43,19 @@ def main():
     # R01/R02: category coverage, ordering, duplicate grouping, section hierarchy.
     latest=latest_feed(home['path']);links=Content(latest).links
     assert len(links)==6
-    assert all(c in latest for c in ['実戦','番組紹介','ニュース'])
+    # New records can naturally move older news below the six-item window.
+    # Verify the complete cross-category source and exact ordered window instead.
+    feed=json.loads((HERE/'data/latest.json').read_text())
+    assert {'実戦','番組紹介','ニュース','機種ガイド'} <= {e['category'] for e in feed['entries']}
+    selected=[]; groups=set()
+    for entry in sorted(feed['entries'],key=lambda e:e['date'],reverse=True):
+        if entry['group'] in groups:continue
+        groups.add(entry['group']);selected.append(entry)
+        if len(selected)==feed['limit']:break
+    assert len(links)==len(selected)
+    for link,entry in zip(links,selected):
+        target=catalog[entry['source']]['path'].removeprefix('docs/slot-tankyu/').removesuffix('index.html')
+        assert link['href']==target+('#'+entry['anchor'] if entry.get('anchor') else '')
     dates=re.findall(r'内容更新日：<time datetime="([^"]+)',latest)
     assert dates==sorted(dates,reverse=True)
     assert not any('/index.html' in a['href'] for a in links)
@@ -84,6 +96,11 @@ def main():
     for name,p in catalog.items():
         if name=='guide-sao2':
             check_sao2(p)
+            continue
+        # New 2026-10-17 sources are fixed to the independently reviewed edition.
+        additions={'record-sao2-20261017': '20f595ea29a24fcc8eab1bf031bee452bacd826db385983ad89f9da946c75b0d', 'daily-20261017': '8da16be03d0dd6455c213a5e2d010f71b580bb125b598d8093ce607f88229e35'}
+        if name in additions:
+            assert hashlib.sha256((SOURCE/(name+'.json')).read_bytes()).hexdigest()==additions[name],name
             continue
         old=base_page(name)
         assert p.get('author_comment')==old.get('author_comment'),name
