@@ -78,7 +78,7 @@ def build(page):
     if page['type']=='guide':
         guide_controls='<details class="guide-index"><summary>掲載項目から探す</summary>'+guide_controls+toc+'</details>'
         toc=''
-    themes={'tokyo-ghoul':'ghoul','lycoris-recoil':'lycoris','takoslot':'tako'}
+    themes={'tokyo-ghoul':'ghoul','lycoris-recoil':'lycoris','takoslot':'tako','sao2':'sao2'}
     theme=next((v for k,v in themes.items() if k in path.split('/') or page.get('machine_slug')==k),'home' if page['type']=='home' else 'general')
     hero_title=esc(page['title'])
     home_visual=''

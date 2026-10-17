@@ -3,6 +3,15 @@
   "same_day_order": "同日はデータ登録順。時刻や公開順を推定しない。",
   "entries": [
     {
+      "source": "guide-sao2",
+      "anchor": "",
+      "date": "2026-10-17",
+      "date_kind": "内容更新日",
+      "group": "guide-sao2",
+      "category": "機種ガイド",
+      "reason": "SAO2機種ガイド新規作成の内容更新日。公開前のローカル原稿であり、初回公開日は公開時に別記録。"
+    },
+    {
       "source": "record-tako-20261015",
       "anchor": "",
       "date": "2026-10-15",
