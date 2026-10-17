@@ -50,6 +50,24 @@ def check_sao2(page):
     paths=subprocess.check_output(['git','ls-tree','-r','--name-only',BASE,'scripts/slot-tankyu/pages'],cwd=ROOT,text=True).splitlines()
     for path in paths:
         if path.endswith('/home.json'):continue
+        if path.endswith('/league-4th.json'):
+            old=json.loads(subprocess.check_output(['git','show',BASE+':'+path],cwd=ROOT))
+            current=json.loads((ROOT/path).read_text())
+            addition='<br><a href="../../watch/tengai-golden-manes-rally/">サイト内の視聴メモ・感想 →</a>'
+            assert current['body'].count(addition)==1
+            current['body']=current['body'].replace(addition,'')
+            assert current==old,path
+            continue
+        if path.endswith('/watch-listing.json'):
+            old=json.loads(subprocess.check_output(['git','show',BASE+':'+path],cwd=ROOT))
+            current=json.loads((ROOT/path).read_text())
+            card=r'<a class="card report-card" href="tengai-golden-manes-rally/">.*?</a>'
+            assert len(re.findall(card,current['body']))==1
+            current['body']=re.sub(card,'',current['body'])
+            assert current['updated']=='2026年10月18日'
+            current['updated']=old['updated']
+            assert current==old,path
+            continue
         if path.endswith('/listing.json'):
             old=json.loads(subprocess.check_output(['git','show',BASE+':'+path],cwd=ROOT))
             current=json.loads((ROOT/path).read_text())

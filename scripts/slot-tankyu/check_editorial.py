@@ -71,7 +71,12 @@ def main():
     # News, schedule and calendar source facts are byte-for-byte unchanged.
     for name in ['industry-news','league-4th','new-machines']:
         path='scripts/slot-tankyu/data/'+name+'.json'
-        assert (ROOT/path).read_bytes()==original(path),name
+        if name=='league-4th':
+            current=json.loads((ROOT/path).read_text()); prior=json.loads(original(path))
+            rally=next(r for r in current['rallies'] if r['team']=='テンガイゴールデンメインズ')
+            assert rally.pop('watch_slug')=='tengai-golden-manes-rally'
+            assert current==prior,'Only the authorized watch backlink may change'
+        else:assert (ROOT/path).read_bytes()==original(path),name
     league=json.loads((HERE/'data/league-4th.json').read_text());frozen=copy.deepcopy(league)
     for reference,first in [('2026-10-14','2026年10月14日'),('2026-10-15','2026年10月21日'),('2026-10-16','2026年10月21日')]:
         body=render(league,reference)['body']; upcoming=section(body,'next')
@@ -98,7 +103,7 @@ def main():
             check_sao2(p)
             continue
         # New 2026-10-17 sources are fixed to the independently reviewed edition.
-        additions={'record-sao2-20261017': '20f595ea29a24fcc8eab1bf031bee452bacd826db385983ad89f9da946c75b0d', 'daily-20261017': '8da16be03d0dd6455c213a5e2d010f71b580bb125b598d8093ce607f88229e35'}
+        additions={'watch-tengai-golden-manes': 'f21f33428691055dba7190e95524a1f864cf115221bc1cf6e7aafd99ef806cc8', 'record-sao2-20261017': '20f595ea29a24fcc8eab1bf031bee452bacd826db385983ad89f9da946c75b0d', 'daily-20261017': '8da16be03d0dd6455c213a5e2d010f71b580bb125b598d8093ce607f88229e35'}
         if name in additions:
             assert hashlib.sha256((SOURCE/(name+'.json')).read_bytes()).hexdigest()==additions[name],name
             continue

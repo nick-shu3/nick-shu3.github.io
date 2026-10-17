@@ -3,6 +3,15 @@
   "same_day_order": "同日はデータ登録順。時刻や公開順を推定しない。",
   "entries": [
     {
+      "source": "watch-tengai-golden-manes",
+      "anchor": "",
+      "date": "2026-10-18",
+      "date_kind": "紹介日",
+      "group": "watch-tengai",
+      "category": "番組紹介",
+      "reason": "記事sourcesの紹介日。動画公開日2026年10月17日、バトル本編予定2026年11月1日とは別。本人の今回掲載承認後に作成。"
+    },
+    {
       "source": "record-sao2-20261017",
       "anchor": "",
       "date": "2026-10-17",
