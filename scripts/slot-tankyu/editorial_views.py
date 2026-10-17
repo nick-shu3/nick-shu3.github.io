@@ -104,7 +104,7 @@ def schedule_preview(origin):
     return result+'<p><a href="new-machines/">新台カレンダー →</a> ／ <a href="league/777league/#next">収録予定・終了確認待ち →</a></p></div>'
 
 def machine_navigation(page):
-    catalog=pages(); slugs={'tokyo-ghoul':'東京喰種','lycoris-recoil':'リコリス・リコイル','takoslot':'タコスロ'}
+    catalog=pages(); slugs={'tokyo-ghoul':'東京喰種','lycoris-recoil':'リコリス・リコイル','takoslot':'タコスロ','sao2':'SAO2'}
     slug=page.get('machine_slug') or next((s for s in slugs if s in page['path'].split('/')),None)
     if slug not in slugs or page['type'] not in {'guide','record','watch'}:
         return ''

@@ -9,6 +9,7 @@ from build import build, ROOT, SOURCE
 from editorial_views import latest_feed, pages, visible_dates, daily_list, date_label, machine_navigation
 from league_schedule import render
 from news_calendar import calendar_page, news_page
+from check_sao2 import check_sao2
 
 BASE='a029189013abbc2705fab452ec8172f3795e9c82'
 HERE=Path(__file__).resolve().parent
@@ -81,6 +82,9 @@ def main():
     assert '設定別データ' not in catalog['guide-tokyo']['title']
     # R06: full supplied paragraphs and all prior record body are preserved.
     for name,p in catalog.items():
+        if name=='guide-sao2':
+            check_sao2(p)
+            continue
         old=base_page(name)
         assert p.get('author_comment')==old.get('author_comment'),name
         if p['type']=='record':assert p['body']==old['body'],name
