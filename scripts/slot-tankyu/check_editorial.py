@@ -9,7 +9,7 @@ from build import build, ROOT, SOURCE
 from editorial_views import latest_feed, pages, visible_dates, daily_list, date_label, machine_navigation
 from league_schedule import render
 from news_calendar import calendar_page, news_page
-from check_sao2 import check_sao2
+from check_sao2 import check_sao2, MAINTENANCE_PAGE_CANDIDATES
 
 BASE='a029189013abbc2705fab452ec8172f3795e9c82'
 HERE=Path(__file__).resolve().parent
@@ -69,7 +69,9 @@ def main():
         assert 'href="'+link in output,link
     recent=sorted((p['path'].split('/')[3] for p in catalog.values() if p['type']=='daily'),reverse=True)[:3]
     assert re.findall(r'datetime="([^"]+)"',section(output,'records'))==recent
-    # News, schedule and calendar source facts are byte-for-byte unchanged.
+    # News and schedule retain their previous invariants. Only the exact local
+    # calendar candidate is admitted. Content review is recorded separately;
+    # matching a pin does not certify source facts or rendering by itself.
     for name in ['industry-news','league-4th','new-machines']:
         path='scripts/slot-tankyu/data/'+name+'.json'
         if name=='league-4th':
@@ -77,6 +79,8 @@ def main():
             rally=next(r for r in current['rallies'] if r['team']=='テンガイゴールデンメインズ')
             assert rally.pop('watch_slug')=='tengai-golden-manes-rally'
             assert current==prior,'Only the authorized watch backlink may change'
+        elif name=='new-machines':
+            assert hashlib.sha256((ROOT/path).read_bytes()).hexdigest()=='2842af93b04fabebfacf4e9a34c4940a1a14d51ecc02b18d76159def4eb856e9',name
         else:assert (ROOT/path).read_bytes()==original(path),name
     league=json.loads((HERE/'data/league-4th.json').read_text());frozen=copy.deepcopy(league)
     for reference,first in [('2026-10-14','2026年10月14日'),('2026-10-15','2026年10月21日'),('2026-10-16','2026年10月21日')]:
@@ -91,12 +95,22 @@ def main():
     try:render(invalid)
     except ValueError:pass
     else:raise AssertionError('Finished status without evidence accepted')
-    # R04/R05: only existing destinations; preserve every existing table cell.
+    # R04/R05: exact maintenance editions, existing destinations and all prior
+    # table cells survive in order. Only the two documented wording corrections
+    # below may replace existing cells; added tables do not waive preservation.
+    corrected_cells={
+        'guide-tokyo':{'100G以内CZ':'100G＋α以内CZ','100G以内CZ当選率':'100G＋α以内CZ当選率'},
+        'guide-lycoris':{'真島が社内で通話（Time will tell①）':'真島が通話（Time will tell①）'},
+    }
     for name in ['guide-tokyo','guide-lycoris','guide-tako']:
         d=catalog[name];old=base_page(name)
-        assert Content(d['body']).cells==Content(old['body']).cells
+        assert hashlib.sha256((SOURCE/(name+'.json')).read_bytes()).hexdigest()==MAINTENANCE_PAGE_CANDIDATES[name+'.json'],name
+        existing=iter(Content(d['body']).cells)
+        for cell in Content(old['body']).cells:
+            expected=corrected_cells.get(name,{}).get(cell,cell)
+            assert any(candidate==expected for candidate in existing),(name,cell)
         for i in d['quick_links']:assert 'id="'+i['id']+'"' in d['body']
-    assert all('設定別' not in i['label'] and '終了画面' not in i['label'] for i in catalog['guide-tako']['quick_links'])
+    assert {i['id'] for i in catalog['guide-tako']['quick_links']}=={'available','setting','bt-replay','bb-screen','records'}
     assert '設定別データ' not in catalog['guide-tokyo']['title']
     # R06: full supplied paragraphs and all prior record body are preserved.
     for name,p in catalog.items():

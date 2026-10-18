@@ -1,16 +1,28 @@
 {
   "path": "docs/slot-tankyu/machines/takoslot/index.html",
-  "title": "タコスロ｜技術介入と実戦データの記録ガイド",
-  "description": "ユニメモのボーナス確率はどのゲーム数で見る？14枚取得率はどう読む？短時間実戦の例とともに、数字を振り返るポイントを解説します。",
-  "body": "<section id=\"available\"><h2>ユニメモで、出玉と技術介入の成績を見る</h2><div class=\"panel\"><p>「当たりは軽かったか」「14枚を何回取れたか」。ユニメモでは、ボーナス結果と技術介入の成績を別々に振り返れます。このページでは、数字を見るときの分母と記録のポイントを説明します。</p></div></section><section id=\"count\"><h2>記録するときの確認事項</h2><figure class=\"record-photo\"><div class=\"graph-window\"><img src=\"../../assets/records/2026-10-12/takoslot/final-graph.jpg\" width=\"709\" height=\"1536\" loading=\"lazy\" alt=\"2026年10月12日のタコスロ実戦のユニメモグラフ\"></div><figcaption>ユニメモのグラフ表示例。線の上昇だけで高設定とは判断できません。ボーナス回数・通常ゲーム数・技術介入の成績も合わせて振り返りましょう。 <a href=\"../../records/2026-10-12/takoslot/\">＋720枚の実戦データを読む →</a></figcaption></figure><ul><li>総プレイ数と通常時プレイ数を分け、表示確率の分母を確認する。</li><li>BIG・REG、白7BIG・タコBIGを分けて残す。</li><li>タコゲーム回数、共通役、14枚取得・9枚取得の回数を記録する。</li><li>収支と技術介入の結果を分け、短い実戦だけで設定を断定しない。</li></ul><p class=\"hint\">本人の記録方法を整理したものです。機種仕様・技術介入手順を確定する攻略情報ではありません。</p></section><section class=\"related\" id=\"records\"><h2>関連する実戦記録</h2><a class=\"card\" href=\"../../records/2026-10-15/takoslot/\"><span class=\"tag\">2026年10月15日・機種別実戦</span><h3>通常561Gで＋51枚、14枚取得8/11回 →</h3><p>BIG2回・REG0回。時間を見て勝ち逃げした実戦と本人のコメント。</p></a><a class=\"card\" href=\"../../records/2026-10-14/takoslot/\"><span class=\"tag\">2026年10月14日・機種別実戦</span><h3>通常820Gで＋249枚、14枚取得19/21回 →</h3><p>投資200枚・回収449枚。合算1/117.1と技術介入90.5％の記録。</p></a><a class=\"card\" href=\"../../records/2026-10-12/takoslot/\"><span class=\"tag\">2026年10月12日・機種別実戦</span><h3>技術介入8/9回成功。1,177G実戦で＋720枚 →</h3><p>BIG5回・REG6回、14枚取得8回・9枚取得1回。最終グラフと一緒に、短時間実戦の結果を振り返ります。</p></a></section><section id=\"sources\"><h2>データの出どころと、判断できる範囲</h2><p>参照したデータは、2026年10月12日・14日・15日のシュウ３のユニメモです。終了画面番号やBGMの回数だけでは、設定の高低を判断できません。</p><p class=\"hint\">このページは実戦データの読み方を扱います。目押し位置などの打ち方、設定示唆の対応表、天井狙いの基準を説明するページではありません。</p></section>",
+  "title": "タコスロ｜設定推測・BT中の確認と実戦記録",
+  "description": "設定別ボーナス・通常時小役、BT中のリプレイ＋TACO GAME、BB終了画面を条件付きで確認。ユニメモと技術介入の記録も分けて整理します。",
+  "body": "<section id=\"available\"><h2>設定推測とユニメモ記録の要点</h2><div class=\"panel\"><p>スマスロ タコスロはユニバーサルブロスのBT機。設定は1・2・5・6の4段階です。ボーナス・通常時小役・BT中の抽選・BB終了画面を分けて記録し、短い実戦だけで設定を断定しないようにしましょう。</p><p>ボーナスと通常時小役は通常時G、リプレイ＋TACO GAMEはBONUS GAME（BT）中のGが分母です。総プレイ数や14枚取得率と混ぜないでください。</p></div></section><section id=\"setting\"><h2>設定別ボーナス・通常時小役</h2><p>設定別のBB・RBと通常時小役は下表のとおり。ユニメモの通常時プレイ数と回数を組にして残します。数回の当たりや小役の偏りだけでは設定を絞れません。</p><div class=\"tablewrap\"><table><thead><tr><th scope=\"col\">設定</th><th scope=\"col\">BB</th><th scope=\"col\">RB</th><th scope=\"col\">合算</th></tr></thead><tbody><tr><td>1</td><td>1/324.4</td><td>1/352.3</td><td>1/168.9</td></tr><tr><td>2</td><td>1/318.1</td><td>1/336.1</td><td>1/163.4</td></tr><tr><td>5</td><td>1/309.1</td><td>1/312.1</td><td>1/155.3</td></tr><tr><td>6</td><td>1/297.9</td><td>1/300.6</td><td>1/149.6</td></tr></tbody></table></div><div class=\"tablewrap\"><table><thead><tr><th scope=\"col\">設定</th><th scope=\"col\">プラム</th><th scope=\"col\">スイカ合算</th><th scope=\"col\">チェリー合算</th></tr></thead><tbody><tr><td>1</td><td>1/9.8</td><td>1/60.0</td><td>1/22.9</td></tr><tr><td>2</td><td>1/9.7</td><td>1/56.2</td><td>1/21.9</td></tr><tr><td>5</td><td>1/9.4</td><td>1/53.0</td><td>1/21.0</td></tr><tr><td>6</td><td>1/9.0</td><td>1/50.0</td><td>1/20.1</td></tr></tbody></table></div><p>チェリー合算はA・Bの成立とCの入賞から算出する値で、全内部フラグの成立合計ではありません。AとBは出目だけでは区別できません。ユニメモはプラム・スイカ合算・チェリー合算を自動集計し、条件達成後はスイカA/B・チェリーBも確認できます。</p><p class=\"hint\">解析情報：<a href=\"https://1geki.jp/slot/l_taco/0/\">一撃・設定差と終了画面</a>、<a href=\"https://pachimaga.com/free/mach/maker-s/universalbros/066515.php\">パチマガスロマガFREE・設定判別／通常時小役</a>。数値はメーカー公式の公表値と混同しません。</p></section><section id=\"bt-replay\"><h2>BT中のリプレイ＋TACO GAME</h2><p>分母はBONUS GAME（BT）中の消化G数。通常時Gや、リプレイ成立回数で割る確率ではありません。</p><div class=\"tablewrap\"><table><thead><tr><th scope=\"col\">設定</th><th scope=\"col\">リプレイ＋TACO GAME</th></tr></thead><tbody><tr><td>1</td><td>1/728.2</td></tr><tr><td>2</td><td>1/728.2</td></tr><tr><td>5</td><td>1/366.1</td></tr><tr><td>6</td><td>1/242.7</td></tr></tbody></table></div><p>確認手順は中・右を止め、リプレイがテンパイしたら、左枠上に鉢巻付き白7をビタ押し。上段白7停止が成功形です。そのときタコランプが点灯すれば、一撃では同時当選濃厚!?としています。</p><p><strong>成立した当該Gで手順を成功させた場合だけ有効です。</strong>当該Gで失敗し、次のリプレイで成功させても点灯しません。手順失敗・未確認を非当選として数えず、成功回数・失敗回数も別に記録してください。検出漏れがある実測頻度は、上表と同条件では比較できません。</p><p class=\"hint\"><a href=\"https://1geki.jp/slot/l_taco/61/\">一撃・擬似リプレイハズシの手順と注意</a>。スロマガは成功時の同時成立を「確定」と表記していますが、ここでは一撃の確度表現を保持します。</p></section><section id=\"bb-screen\"><h2>BB終了画面：夕方・夜と入賞条件</h2><p>BB終了時に背景と、そのBBでのTACO GAME入賞有無を一緒に残します。「夜」だけと、入賞なしでの「夜」は分けてください。</p><div class=\"tablewrap\"><table><thead><tr><th scope=\"col\">画面・条件</th><th scope=\"col\">解析媒体の説明</th></tr></thead><tbody><tr><td>夕方</td><td>基本パターン</td></tr><tr><td>夜</td><td>高設定示唆</td></tr><tr><td>そのBBでTACO GAMEが一度も入賞せず、夜</td><td>一撃：設定2以上濃厚!?／スロマガ：設定2以上濃厚</td></tr></tbody></table></div><p>夜の出現率は高設定ほど高いとされています。具体的な設定別出現率は今回の参照箇所では未確認です。14枚取得の成否と、TACO GAMEへの入賞有無は別条件。夜だけで設定5・6とは判断できません。</p><p class=\"hint\"><a href=\"https://1geki.jp/slot/l_taco/0/\">一撃・BB終了画面</a>、<a href=\"https://pachimaga.com/free/mach/maker-s/universalbros/066515.php\">パチマガスロマガFREE・BB終了画面</a>。両媒体の確度表記の違いを残しており、メーカー公式の確定示唆とは扱いません。</p></section><section id=\"count\"><h2>記録するときの確認事項</h2><figure class=\"record-photo\"><div class=\"graph-window\"><img src=\"../../assets/records/2026-10-12/takoslot/final-graph.jpg\" width=\"709\" height=\"1536\" loading=\"lazy\" alt=\"2026年10月12日のタコスロ実戦のユニメモグラフ\"></div><figcaption>ユニメモのグラフ表示例。線の上昇だけで高設定とは判断できません。ボーナス回数・通常ゲーム数・技術介入の成績も合わせて振り返りましょう。 <a href=\"../../records/2026-10-12/takoslot/\">＋720枚の実戦データを読む →</a></figcaption></figure><ul><li>総プレイ数と通常時プレイ数を分け、表示確率の分母を確認する。</li><li>BIG・REG、白7BIG・タコBIGを分けて残す。</li><li>タコゲーム回数、共通役、14枚取得・9枚取得の回数を記録する。</li><li>収支と技術介入の結果を分け、短い実戦だけで設定を断定しない。</li></ul><p class=\"hint\">この節は本人の記録方法の整理です。目押し手順と設定推測の公表解析は上の各節で区別しています。</p></section><section class=\"related\" id=\"records\"><h2>関連する実戦記録</h2><a class=\"card\" href=\"../../records/2026-10-15/takoslot/\"><span class=\"tag\">2026年10月15日・機種別実戦</span><h3>通常561Gで＋51枚、14枚取得8/11回 →</h3><p>BIG2回・REG0回。時間を見て勝ち逃げした実戦と本人のコメント。</p></a><a class=\"card\" href=\"../../records/2026-10-14/takoslot/\"><span class=\"tag\">2026年10月14日・機種別実戦</span><h3>通常820Gで＋249枚、14枚取得19/21回 →</h3><p>投資200枚・回収449枚。合算1/117.1と技術介入90.5％の記録。</p></a><a class=\"card\" href=\"../../records/2026-10-12/takoslot/\"><span class=\"tag\">2026年10月12日・機種別実戦</span><h3>技術介入8/9回成功。1,177G実戦で＋720枚 →</h3><p>BIG5回・REG6回、14枚取得8回・9枚取得1回。最終グラフと一緒に、短時間実戦の結果を振り返ります。</p></a></section><section id=\"sources\"><h2>確認元・更新履歴</h2><ul><li><a href=\"https://www.universal-777.com/product/slot/taco_2026/\">メーカー公式・スマスロ タコスロ</a>：正式名・メーカー・BT機の同定。</li><li><a href=\"https://1geki.jp/slot/l_taco/0/\">一撃・設定差と終了画面</a>／<a href=\"https://1geki.jp/slot/l_taco/61/\">BB中の確認手順</a>：資料最終更新2026年9月18日。</li><li><a href=\"https://pachimaga.com/free/mach/maker-s/universalbros/066515.php\">パチマガスロマガFREE</a>：資料最終更新2026年9月11日。</li></ul><p>公表解析の今回確認日は2026年10月19日。以前から公開されていた未掲載項目の補足で、新解析の公表日ではありません。実戦例は2026年10月12日・14日・15日の本人ユニメモに基づきます。</p><p>設定推測要素は解析媒体の情報です。収支や技術介入成績から設定を逆算せず、成立・入賞・目押し成功の違いと集計区間を揃えてください。</p><ul><li>2026年10月19日：設定別ボーナス・通常時小役、BT中の抽選と確認条件、BB終了背景の条件を補足。</li><li>2026年10月15日：ユニメモと技術介入の記録を整理。</li></ul></section>",
   "type": "guide",
   "label": "機種ガイド",
   "status": "機種ガイド",
-  "updated": "2026年10月15日",
+  "updated": "2026年10月19日",
   "toc": [
     {
       "id": "available",
-      "label": "掲載範囲"
+      "label": "要点"
+    },
+    {
+      "id": "setting",
+      "label": "ボーナス・小役"
+    },
+    {
+      "id": "bt-replay",
+      "label": "BT中リプレイ"
+    },
+    {
+      "id": "bb-screen",
+      "label": "BB終了画面"
     },
     {
       "id": "count",
@@ -22,49 +34,52 @@
     },
     {
       "id": "sources",
-      "label": "根拠・更新"
+      "label": "確認元・更新"
     }
   ],
   "breadcrumbs": [],
-  "short_title": "タコスロ｜技術介入と実戦データの記録ガイド",
+  "short_title": "タコスロ｜設定推測・BT中の確認と実戦記録",
   "share_image": "share-guide-tako.png",
   "quick_links": [
     {
       "id": "available",
-      "label": "このガイドで分かること"
+      "label": "要点"
     },
     {
-      "id": "count",
-      "label": "ユニメモ・技術介入の記録"
+      "id": "setting",
+      "label": "ボーナス・小役"
+    },
+    {
+      "id": "bt-replay",
+      "label": "BT中リプレイ"
+    },
+    {
+      "id": "bb-screen",
+      "label": "BB終了画面"
     },
     {
       "id": "records",
-      "label": "実戦記録"
-    },
-    {
-      "id": "sources",
-      "label": "判断できる範囲"
+      "label": "関連実戦"
     }
   ],
   "guide_digest": [
     {
       "id": "available",
-      "label": "実戦データの読み方",
+      "label": "区間を分けて数える",
+      "paragraphs": [
+        1
+      ],
+      "link_label": "条件を確認",
+      "source_sha256": "919d0fb19d7dcaf99dfe87a2b48ab101124709aae7dee4b2882d73c21313f2e3"
+    },
+    {
+      "id": "bb-screen",
+      "label": "夜と入賞の条件",
       "paragraphs": [
         0
       ],
-      "link_label": "掲載内容を確認",
-      "source_sha256": "4870337b667f8584610c98fc4b35f1420569eec0aba8cd4276f06043c8f68e62"
-    },
-    {
-      "id": "sources",
-      "label": "判断できる範囲",
-      "paragraphs": [
-        0,
-        1
-      ],
-      "link_label": "データの出どころを確認",
-      "source_sha256": "4d0b7e3552e443aef1dc19f50ace54fcb5355f4b2188eac2894c767d3ffc5ed4"
+      "link_label": "条件を確認",
+      "source_sha256": "00d73cd75f40595c2990d9e57b7f22bb743d371e1b3769bbee753579d2ce2972"
     }
   ]
 }
