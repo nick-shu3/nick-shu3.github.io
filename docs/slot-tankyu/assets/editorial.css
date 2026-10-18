@@ -34,14 +34,11 @@ section{margin:48px 0;scroll-margin-top:24px}
 .skip-link{position:absolute;top:8px;left:16px;z-index:10;padding:10px 16px;border-radius:var(--radius-sm);background:var(--accent);color:var(--bg);transform:translateY(-180%)}
 .skip-link:focus{transform:translateY(0)}
 
-/* Identity: compact wordmark, visible author, understated navigation. */
-.site-header{display:flex;align-items:center;justify-content:space-between;gap:32px;padding-block:23px 19px;border-bottom:1px solid var(--line)}
-.brand{display:flex;align-items:center;gap:13px;flex-shrink:0;color:var(--ink);text-decoration:none}
-.brand-symbol{display:grid;place-items:center;width:46px;height:46px;border:1px solid var(--accent);border-radius:2px;background:var(--panel);color:var(--accent);font-size:26px;font-weight:800}
-.brand-text{display:block;font-size:25px;font-weight:800;line-height:1.2;letter-spacing:.035em}
-.brand-text>span:not(.brand-caption){color:var(--accent)}
-.brand-caption{display:flex;align-items:center;gap:11px;margin-top:6px}
-.brand-caption .brand-author{font-size:12px;letter-spacing:.035em;font-weight:500;color:var(--muted)}
+/* Identity: approved B1 wordmark, compact artwork, readable independent byline. */
+.site-header{display:flex;align-items:center;justify-content:space-between;gap:32px;padding-block:16px 14px;border-bottom:1px solid var(--line)}
+.brand{display:inline-flex;flex-direction:column;align-items:flex-start;gap:3px;flex-shrink:0;max-width:100%;color:var(--ink);text-decoration:none}
+.brand-logo{display:block;width:240px;height:auto}
+.brand-author{padding-left:5px;font-size:13px;line-height:1.5;letter-spacing:.035em;color:var(--muted)}
 .site-header nav{display:flex;align-items:center;flex-wrap:wrap;justify-content:flex-end;column-gap:21px;row-gap:2px}
 .site-header nav a{position:relative;display:inline-flex;align-items:center;min-height:44px;font-size:13px;font-weight:650;text-decoration:none;color:var(--muted)}
 .site-header nav a:hover,.site-header nav a.is-current{color:var(--ink)}
@@ -181,7 +178,7 @@ footer{border-top:1px solid var(--line);padding-block:27px 42px;color:var(--mute
 @media(max-width:800px){.machine-grid{grid-template-columns:1fr}.machine-card{padding:24px}.machine-card h3{font-size:23px}.machine-card p{margin-top:0}.setting-visual,.signal-comparison{grid-template-columns:1fr}.archive-card{grid-template-columns:minmax(0,.9fr) minmax(0,1.1fr)}.archive-card .card-copy{padding:20px}.archive-card h3{font-size:20px}.digest-grid{grid-template-columns:1fr}.digest-item+.digest-item{border-left:0;border-top:1px solid var(--line)}}
 @media(max-width:640px){
   :root{--space:18px;--radius:6px}
-  .site-header,main,footer{padding-inline:20px}main{border-inline:0}.site-header{padding-block:19px 10px;gap:12px}.brand-symbol{width:40px;height:40px;font-size:24px}.brand-text{font-size:23px}.brand-caption{margin-top:5px}.site-header nav{column-gap:18px}.site-header nav a{font-size:13px;min-height:44px}
+  .site-header,main,footer{padding-inline:20px}main{border-inline:0}.site-header{padding-block:14px 10px;gap:12px}.site-header nav{column-gap:18px}.site-header nav a{font-size:13px;min-height:44px}
   main{padding-top:6px}.breadcrumbs{margin-top:14px;font-size:11px}.hero{padding-block:20px 26px}.page-home .hero{padding-block:16px 19px}.page-home h1{font-size:27px}.page-home .lead{font-size:15px;line-height:1.9}.lead{font-size:16px}.meta{gap:5px 14px;line-height:1.9}
   .home-entries{grid-template-columns:repeat(2,minmax(0,1fr));gap:0 16px;margin-top:17px}.home-entries a{padding-block:10px}.home-entries strong{font-size:14px}.home-entries small{font-size:13px}.page-home #latest{margin-top:24px}
   section,.page-home section{margin-block:38px}h2{font-size:23px;margin-bottom:18px}h3{font-size:20px}.section-kicker{font-size:12px;margin-bottom:7px}
