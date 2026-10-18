@@ -158,7 +158,8 @@ summary::marker{color:var(--red)}details{border-top:1px solid var(--line);margin
 .tablewrap{width:100%;overflow-x:auto;overscroll-behavior-x:contain;scrollbar-color:var(--line) var(--panel);border:1px solid var(--line);border-radius:var(--radius-sm);margin:20px 0}
 .panel.tablewrap{padding:0;border-radius:var(--radius)}
 table{width:100%;border-collapse:collapse;font-size:14px;line-height:1.8;font-variant-numeric:lining-nums tabular-nums}
-th,td{padding:15px 17px;text-align:left;vertical-align:top;border-bottom:1px solid var(--line-soft);overflow-wrap:anywhere}
+th,td{padding:15px 17px;text-align:left;vertical-align:top;border-bottom:1px solid var(--line-soft);overflow-wrap:normal;word-break:normal}
+.table-number{white-space:nowrap}
 thead{background:var(--raised)}tbody tr:nth-child(even){background:#ffffff03}th{font-weight:650;color:var(--muted);font-size:13px}tbody th{color:var(--ink)}tbody tr:last-child>*{border-bottom:0}td:first-child{font-weight:600}
 caption{text-align:left;font-size:13px;color:var(--muted);padding:12px 15px;background:var(--panel)}
 .data{min-width:540px}.data td{white-space:nowrap}.data td:first-child{white-space:normal}.data td,.data th{text-align:center}.data td:first-child,.data th:first-child{text-align:left}

@@ -48,6 +48,9 @@ def build(page):
     # Native scroll containers remain keyboard reachable, without runtime scripts.
     body=re.sub(r'<div\b([^>]*\bclass="[^"]*\btablewrap\b[^"]*"[^>]*)>',
                 r'<div\1 tabindex="0" role="region" aria-label="データ表（横スクロール対応）">',body)
+    # Keep a probability/percentage intact; prose in adjacent cells may still wrap.
+    body=re.sub(r'(<(td|th)\b[^>]*>)(\s*[+＋−-]?\d[\d,]*(?:\.\d+)?(?:/\d[\d,]*(?:\.\d+)?)?%?\s*)(</\2>)',
+                r'\1<span class="table-number">\3</span>\4',body)
     # Curated local photographs open at full size using ordinary browser navigation.
     # No image viewer scripts, remote requests or runtime HTML parsing are needed.
     def enlarge_photo(match):
