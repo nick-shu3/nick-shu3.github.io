@@ -3,6 +3,15 @@
   "same_day_order": "同日はデータ登録順。時刻や公開順を推定しない。",
   "entries": [
     {
+      "source": "guide-shinuchi",
+      "anchor": "",
+      "date": "2026-10-18",
+      "date_kind": "内容更新日",
+      "group": "guide-shinuchi",
+      "category": "機種ガイド",
+      "reason": "メーカー同定と公開資料の照合に基づく真打 吉宗ガイドの内容更新日。実戦記録を含まない。"
+    },
+    {
       "source": "watch-tengai-golden-manes",
       "anchor": "",
       "date": "2026-10-18",
