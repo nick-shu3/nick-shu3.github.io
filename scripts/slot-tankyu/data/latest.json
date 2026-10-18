@@ -3,6 +3,15 @@
   "same_day_order": "同日はデータ登録順。時刻や公開順を推定しない。",
   "entries": [
     {
+      "source": "record-shinuchi-20261018",
+      "anchor": "",
+      "date": "2026-10-18",
+      "date_kind": "内容更新日",
+      "group": "play-20261018",
+      "category": "実戦",
+      "reason": "本人の完成稿確認・2026年10月18日22時30分の公開指示に基づく真打 吉宗実戦記事の内容更新日。実戦日と公開処理時刻は別。"
+    },
+    {
       "source": "guide-shinuchi",
       "anchor": "",
       "date": "2026-10-18",
