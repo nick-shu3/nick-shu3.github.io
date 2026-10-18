@@ -67,7 +67,8 @@ def main():
     assert len(re.findall('<img ',section(output,'archive')))==2
     for link in ['machines/tokyo-ghoul/','machines/lycoris-recoil/','machines/takoslot/','records/','new-machines/','news/','watch/','league/777league/','about/']:
         assert 'href="'+link in output,link
-    assert '2026-10-14/' in section(output,'records')
+    recent=sorted((p['path'].split('/')[3] for p in catalog.values() if p['type']=='daily'),reverse=True)[:3]
+    assert re.findall(r'datetime="([^"]+)"',section(output,'records'))==recent
     # News, schedule and calendar source facts are byte-for-byte unchanged.
     for name in ['industry-news','league-4th','new-machines']:
         path='scripts/slot-tankyu/data/'+name+'.json'
@@ -103,7 +104,7 @@ def main():
             check_sao2(p)
             continue
         # New sources are fixed to their independently reviewed edition.
-        additions={'guide-shinuchi': 'f7b15411f5439c6766544153241778fd0e3b11429f6954c625c821172f5f374e', 'watch-tengai-golden-manes': 'f21f33428691055dba7190e95524a1f864cf115221bc1cf6e7aafd99ef806cc8', 'record-sao2-20261017': '20f595ea29a24fcc8eab1bf031bee452bacd826db385983ad89f9da946c75b0d', 'daily-20261017': '8da16be03d0dd6455c213a5e2d010f71b580bb125b598d8093ce607f88229e35'}
+        additions={'record-shinuchi-20261018': 'da139b142aa0a7d92b1e188c49a72589892a0bbafe386880e4fb3493e8ce35cb', 'daily-20261018': '1fa5f7c24c22fafad4ad76499a82c354f0b5c43137090bb19008ab15c66f48c7', 'guide-shinuchi': 'f7b15411f5439c6766544153241778fd0e3b11429f6954c625c821172f5f374e', 'watch-tengai-golden-manes': 'f21f33428691055dba7190e95524a1f864cf115221bc1cf6e7aafd99ef806cc8', 'record-sao2-20261017': '20f595ea29a24fcc8eab1bf031bee452bacd826db385983ad89f9da946c75b0d', 'daily-20261017': '8da16be03d0dd6455c213a5e2d010f71b580bb125b598d8093ce607f88229e35'}
         if name in additions:
             assert hashlib.sha256((SOURCE/(name+'.json')).read_bytes()).hexdigest()==additions[name],name
             continue
@@ -131,6 +132,11 @@ def main():
         navigation=machine_navigation(p)
         for q in tako:
             if p['path']!=q['path']:assert q['title'] in ''.join(Content(navigation).text)
+    shinuchi=[p for p in catalog.values() if p.get('machine_slug')=='shinuchi-yoshimune' or '/shinuchi-yoshimune/' in p['path']]
+    assert {p['type'] for p in shinuchi}=={'guide','record'} and len(shinuchi)==2
+    for p in shinuchi:
+        for q in shinuchi:
+            if p['path']!=q['path']:assert q['title'] in ''.join(Content(machine_navigation(p)).text)
     # R08: all daily entries, including historical entries, no manual missing dates.
     daily={p['path'].split('/')[3] for p in catalog.values() if p['type']=='daily'}
     listing=daily_list(catalog['listing']['path'])

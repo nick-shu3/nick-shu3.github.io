@@ -74,7 +74,10 @@ def check_sao2(page):
             card=r'<a class="card tone-sao2" href="2026-10-17/sao2/">.*?</a>'
             assert len(re.findall(card,current['body']))==1
             current['body']=re.sub(card,'',current['body'])
-            assert current['updated']=='2026年10月17日'
+            shinuchi=r'<a class="card" href="2026-10-18/shinuchi-yoshimune/">.*?</a>'
+            assert len(re.findall(shinuchi,current['body']))==1
+            current['body']=re.sub(shinuchi,'',current['body'])
+            assert current['updated']=='2026年10月18日'
             current['updated']=old['updated']
             assert current==old,path
             continue

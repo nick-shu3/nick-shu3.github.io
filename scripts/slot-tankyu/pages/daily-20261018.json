@@ -1,0 +1,34 @@
+{
+  "path": "docs/slot-tankyu/records/2026-10-18/index.html",
+  "title": "2026年10月18日の実戦｜真打 吉宗で−2,496枚",
+  "description": "真打 吉宗の初打ち。投資3,076枚・回収580枚、総6,804Gの実戦を写真とダイトモで振り返ります。",
+  "body": "<section id=\"result\"><h2>掲載済みの実戦結果</h2><p>この日の掲載記録は真打 吉宗。投資3,076枚・回収580枚で、収支は−2,496枚でした。</p></section><section id=\"records\"><h2>機種別の実戦記事</h2><a class=\"card\" href=\"shinuchi-yoshimune/\"><span class=\"tag\">真打 吉宗／2026年10月18日</span><h3>AT間1,500Gの天井へ。それでも真高確率は面白かった →</h3><p>総6,804G、AT10回。前後半の当たり方と、初打ちの率直な感想。</p></a></section><p><a href=\"../\">実戦記録一覧へ →</a></p>",
+  "type": "daily",
+  "label": "当日の実戦まとめ",
+  "status": "実戦日：2026年10月18日",
+  "updated": "2026年10月18日",
+  "short_title": "2026年10月18日",
+  "share_image": "share-daily-20261018.png",
+  "share_lines": [
+    "2026年10月18日",
+    "真打 吉宗 初打ち",
+    "投資3,076枚・回収580枚",
+    "収支−2,496枚"
+  ],
+  "toc": [
+    {
+      "id": "result",
+      "label": "掲載記録の収支"
+    },
+    {
+      "id": "records",
+      "label": "機種別実戦"
+    }
+  ],
+  "breadcrumbs": [
+    {
+      "path": "docs/slot-tankyu/records/index.html",
+      "title": "実戦記録"
+    }
+  ]
+}
