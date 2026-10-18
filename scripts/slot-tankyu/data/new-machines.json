@@ -1,6 +1,6 @@
 {
-  "checked_at": "2026-10-14",
-  "source_updated_at": "2026-10-14",
+  "checked_at": "2026-10-19",
+  "source_updated_at": "2026-10-18",
   "machines": [
     {
       "date": "2026-10-19",
@@ -71,6 +71,16 @@
       "official_url": null,
       "verification": "日程資料で確認",
       "checked_at": "2026-10-13"
+    },
+    {
+      "date": "2026-11-02",
+      "name": "Lパチスロ ゴジラ対エヴァンゲリオン ２",
+      "maker": "ビスティ",
+      "kind": "パチスロ",
+      "schedule_url": "https://www.p-world.co.jp/database/machine/introduce_calendar.cgi?type=Pachi",
+      "official_url": "https://prtimes.jp/main/html/rd/p/000000052.000180393.html",
+      "verification": "発売元発表は11月予定／11月2日は日程資料で確認",
+      "checked_at": "2026-10-19"
     },
     {
       "date": "2026-11-16",

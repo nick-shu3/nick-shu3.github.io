@@ -1,10 +1,19 @@
 #!/usr/bin/env python3
 """New SAO2 guide invariants. Static checks do not certify source facts or rendering."""
-import json, re, subprocess
+import hashlib, json, re, subprocess
 from pathlib import Path
 from html.parser import HTMLParser
 from build import build, ROOT
 BASE='81e10253b432899ef15d611390b75f30b6460cfb'
+# Local maintenance candidates only. These pins bound the authorized source
+# changes. Content review is recorded separately; pins do not certify rendering.
+# Any edited candidate must be re-reviewed before updating its exact pin.
+MAINTENANCE_PAGE_CANDIDATES={
+    'guide-tokyo.json':'0736527e18fd7988a66a758bf792a9626bc8c2af60e286e51dfa457382bfa471',
+    'guide-lycoris.json':'398d4d850f9e21fc01842966c1b039a8f0d81a309d172721a0199f8d95f26dc7',
+    'guide-tako.json':'442b157e07d2e02ddbd2ed5d58ffbdaadd25a7a18289de9a420f65a031faa767',
+    'new-machines.json':'345f3e9b42dfbb9e1356933ab40c73f604fbc78769c98b2bdb29bbb8a51ee7c8',
+}
 class Cells(HTMLParser):
     def __init__(self,body):
         super().__init__();self.values=[];self.cell=None;self.feed(body)
@@ -50,13 +59,22 @@ def check_sao2(page):
     paths=subprocess.check_output(['git','ls-tree','-r','--name-only',BASE,'scripts/slot-tankyu/pages'],cwd=ROOT,text=True).splitlines()
     for path in paths:
         if path.endswith('/home.json'):continue
+        name=Path(path).name
+        if name in MAINTENANCE_PAGE_CANDIDATES:
+            assert hashlib.sha256((ROOT/path).read_bytes()).hexdigest()==MAINTENANCE_PAGE_CANDIDATES[name],path
+            continue
         if path.endswith('/league-4th.json'):
-            old=json.loads(subprocess.check_output(['git','show',BASE+':'+path],cwd=ROOT))
+            # Reproduce the page at the current presentation as_of date. The
+            # dated view may change, but schedule facts and checked_at may not.
+            from league_schedule import render
             current=json.loads((ROOT/path).read_text())
-            addition='<br><a href="../../watch/tengai-golden-manes-rally/">サイト内の視聴メモ・感想 →</a>'
-            assert current['body'].count(addition)==1
-            current['body']=current['body'].replace(addition,'')
-            assert current==old,path
+            data_path='scripts/slot-tankyu/data/league-4th.json'
+            data=json.loads((ROOT/data_path).read_text())
+            assert current==render(data),path
+            rally=next(r for r in data['rallies'] if r['team']=='テンガイゴールデンメインズ')
+            assert rally.pop('watch_slug')=='tengai-golden-manes-rally'
+            original=json.loads(subprocess.check_output(['git','show',BASE+':'+data_path],cwd=ROOT))
+            assert data==original,'Schedule facts or checked_at changed'
             continue
         if path.endswith('/watch-listing.json'):
             old=json.loads(subprocess.check_output(['git','show',BASE+':'+path],cwd=ROOT))
