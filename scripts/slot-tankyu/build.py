@@ -3,6 +3,7 @@
 import hashlib,html,json,posixpath,re
 from pathlib import Path
 from editorial_views import visible_dates, date_label, latest_feed, daily_list, schedule_preview, machine_navigation, guide_shortcuts, guide_digest
+from record_history import confirmed_history
 
 ROOT=Path(__file__).resolve().parents[2]
 SOURCE=Path(__file__).parent/'pages'
@@ -14,6 +15,8 @@ def build(page):
     path=page['path']
     if not path.startswith('docs/slot-tankyu/') or '..' in path.split('/') or not path.endswith('/index.html'):raise ValueError('Invalid page path')
     body=visible_dates(page['body'])
+    if '<!-- confirmed-tokyo-20261019 -->' in body:
+        body=body.replace('<!-- confirmed-tokyo-20261019 -->',confirmed_history())
     body=body.replace('<!-- latest-feed -->',latest_feed(path)) if '<!-- latest-feed -->' in body else body
     body=body.replace('<!-- recent-daily -->',daily_list(path,3))
     body=body.replace('<!-- all-daily -->',daily_list(path))
