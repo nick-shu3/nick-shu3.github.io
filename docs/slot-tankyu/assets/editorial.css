@@ -172,6 +172,13 @@ caption{text-align:left;font-size:13px;color:var(--muted);padding:12px 15px;back
 .news-item h3{font-size:clamp(21px,2.2vw,26px);line-height:1.7;margin-top:15px}.news-fact,.news-analysis{padding:1px 19px 5px;border-left:2px solid var(--line);margin:24px 0}.news-analysis{border-color:var(--accent);background:#efc18e08}.news-item h4{font-size:13px;letter-spacing:.035em;color:var(--accent);margin:13px 0 9px}.news-item p{margin-top:8px}.news-item .hint{color:var(--muted)}
 .keep-phrase{display:inline-block;max-width:100%}
 .tablewrap:focus-visible{outline:3px solid var(--accent);outline-offset:4px}
+.at-history{min-width:760px}
+.at-history th:first-child{position:sticky;left:0;background:var(--panel);z-index:1;white-space:nowrap}
+.at-history td:nth-child(2),.at-history td:nth-child(4){white-space:nowrap}
+.at-history td:last-child{min-width:230px;max-width:320px}
+.at-kind{display:inline-block;padding:2px 9px;border:1px solid currentColor;border-radius:6px;font-size:13px;font-weight:700;white-space:nowrap}
+.at-normal{color:#b6d8ff}.at-upper{color:#c9b6ff}.at-direct{color:#ffbdb6}.at-return{color:#8fe2c6}
+.at-history .at-setting{font-weight:700;color:#ffe39c;background:#302819}
 footer{border-top:1px solid var(--line);padding-block:27px 42px;color:var(--muted);font-size:12px;line-height:1.9}footer p{margin:6px 0}
 
 @media(min-width:1000px){.page-home #archive .archive-card:first-of-type .card-copy{padding:30px 35px}}
