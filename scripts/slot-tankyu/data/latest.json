@@ -3,6 +3,15 @@
   "same_day_order": "同日はデータ登録順。時刻や公開順を推定しない。",
   "entries": [
     {
+      "source": "record-tokyo-20261019",
+      "anchor": "",
+      "date": "2026-10-19",
+      "date_kind": "内容更新日",
+      "group": "play-20261019",
+      "category": "実戦",
+      "reason": "本人が確認した10月19日東京喰種完成稿の実装・公開指示に基づく内容更新日。実戦日・公開処理時刻と区別する。"
+    },
+    {
       "source": "record-shinuchi-20261018",
       "anchor": "",
       "date": "2026-10-18",
