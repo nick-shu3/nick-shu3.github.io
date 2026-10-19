@@ -89,13 +89,17 @@ def check_sao2(page):
         if path.endswith('/listing.json'):
             old=json.loads(subprocess.check_output(['git','show',BASE+':'+path],cwd=ROOT))
             current=json.loads((ROOT/path).read_text())
+            # Only the reviewed 2026-10-19 card and listing date may be added.
+            tokyo=r'<a class="card tone-ghoul" href="2026-10-19/tokyo-ghoul/">.*?</a>'
+            assert len(re.findall(tokyo,current['body']))==1
+            current['body']=re.sub(tokyo,'',current['body'])
             card=r'<a class="card tone-sao2" href="2026-10-17/sao2/">.*?</a>'
             assert len(re.findall(card,current['body']))==1
             current['body']=re.sub(card,'',current['body'])
             shinuchi=r'<a class="card" href="2026-10-18/shinuchi-yoshimune/">.*?</a>'
             assert len(re.findall(shinuchi,current['body']))==1
             current['body']=re.sub(shinuchi,'',current['body'])
-            assert current['updated']=='2026年10月18日'
+            assert current['updated']=='2026年10月19日'
             current['updated']=old['updated']
             assert current==old,path
             continue
