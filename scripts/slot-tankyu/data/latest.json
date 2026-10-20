@@ -3,6 +3,15 @@
   "same_day_order": "同日はデータ登録順。時刻や公開順を推定しない。",
   "entries": [
     {
+      "source": "column-chatgpt-slot-log-failure",
+      "anchor": "",
+      "date": "2026-10-21",
+      "date_kind": "記事公開日",
+      "group": "column-chatgpt-slot-log-failure",
+      "category": "コラム",
+      "reason": "本人の10月21日の公開指示と追加承認に基づく。実戦日は10月19日、記録ツールは作成中。"
+    },
+    {
       "source": "record-tokyo-20261019",
       "anchor": "",
       "date": "2026-10-20",
