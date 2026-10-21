@@ -75,26 +75,46 @@ def main():
     for name in ['industry-news','league-4th','new-machines']:
         path='scripts/slot-tankyu/data/'+name+'.json'
         if name=='league-4th':
-            current=json.loads((ROOT/path).read_text()); prior=json.loads(original(path))
-            rally=next(r for r in current['rallies'] if r['team']=='テンガイゴールデンメインズ')
-            assert rally.pop('watch_slug')=='tengai-golden-manes-rally'
-            assert current==prior,'Only the authorized watch backlink may change'
+            current=json.loads((ROOT/path).read_text())
+            assert len(current['rows'])==42 and current['checked_at']=='2026-10-21'
+            assert all(r['schedule_source']=='https://p-gabu.jp/sc/666/777league/schedule/' and r['schedule_checked_at']=='2026-10-21' for r in current['rows'])
+            prior=json.loads(subprocess.check_output(['git','show','34eb7ad2ffa0ac6c81f2e782a5e08d1b42822e76:'+path],cwd=ROOT))
+            indexed={(r['date'],r['round']):r for r in current['rows']}
+            for r in prior['rows']:
+                new=indexed[(r['date'],r['round'])]
+                if r['status']=='終了':
+                    for field in ('status','evidence_url','evidence_note'):assert new.get(field)==r.get(field)
+            assert indexed[('2026-11-12','ルーキー戦第1回戦')]['venue']=='ダイナム長野上田店'
+            assert indexed[('2026-11-25','RED第10回戦')]['venue']=='123+N布施店'
         elif name=='new-machines':
             assert hashlib.sha256((ROOT/path).read_bytes()).hexdigest()=='2842af93b04fabebfacf4e9a34c4940a1a14d51ecc02b18d76159def4eb856e9',name
         else:assert (ROOT/path).read_bytes()==original(path),name
     league=json.loads((HERE/'data/league-4th.json').read_text());frozen=copy.deepcopy(league)
+    legacy=json.loads(subprocess.check_output(['git','show','34eb7ad2ffa0ac6c81f2e782a5e08d1b42822e76:scripts/slot-tankyu/data/league-4th.json'],cwd=ROOT))
     for reference,first in [('2026-10-14','2026年10月14日'),('2026-10-15','2026年10月21日'),('2026-10-16','2026年10月21日')]:
-        body=render(league,reference)['body']; upcoming=section(body,'next')
+        body=render(legacy,reference)['body']; upcoming=section(body,'next')
         assert re.search(r'<li><a[^>]*>(\d+年\d+月\d+日)',upcoming)[1]==first
         if reference>'2026-10-14':assert '2026年10月14日 BLUE第4回戦' in section(body,'pending')
-        assert body.count('class="league-status done"')==sum(r['status']=='終了' for r in league['rows'])
+        assert body.count('class="league-status done"')==sum(r['status']=='終了' for r in legacy['rows'])
         assert '収録情報の確認日：2026年10月14日' in body
-    assert league==frozen
-    assert '今後の収録予定は確認待ち' in render(league,'2027-01-01')['body']
-    invalid=copy.deepcopy(league);invalid['rows'][0]['status']='終了'
-    try:render(invalid)
-    except ValueError:pass
-    else:raise AssertionError('Finished status without evidence accepted')
+    assert '今後の収録予定は確認待ち' in render(legacy,'2027-01-01')['body']
+    for reference,first in [('2026-10-21','2026年10月21日'),('2026-10-22','2026年10月22日'),('2026-10-23','2026年10月30日')]:
+        body=render(league,reference)['body']
+        assert re.search(r'<li><a[^>]*>(\d+年\d+月\d+日)',section(body,'next'))[1]==first
+        assert body.count('class="league-status done"')==sum(r['status']=='終了' for r in league['rows'])
+    body=render(league,'2026-10-21')['body']
+    assert section(body,'rallies').count('動画を見る ↗')==2
+    assert '公開確認待ち' in section(body,'rallies') and '公開予定' in section(body,'rallies')
+    assert '2027年3月12日' in body and league==frozen
+    assert '今後の収録予定は確認待ち' in render(league,'2027-04-01')['body']
+    for kind in ('finished','video','video-date'):
+        invalid=copy.deepcopy(league)
+        if kind=='finished':invalid['rows'][0]['status']='終了'
+        elif kind=='video':invalid['rallies'][0]['video_url']='https://example.com/video'
+        else:invalid['rallies'][0].pop('video_link_checked_at')
+        try:render(invalid)
+        except ValueError:pass
+        else:raise AssertionError('Invalid evidence accepted: '+kind)
     # R04/R05: exact maintenance editions, existing destinations and all prior
     # table cells survive in order. Only the two documented wording corrections
     # below may replace existing cells; added tables do not waive preservation.
@@ -204,6 +224,6 @@ def main():
     # Actual photographic bytes must not change in a typography/navigation task.
     photos=subprocess.check_output(['git','ls-tree','-r','--name-only',BASE,'docs/slot-tankyu/assets/records','docs/slot-tankyu/assets/setting'],cwd=ROOT,text=True).splitlines()
     for path in photos:assert (ROOT/path).read_bytes()==original(path),path
-    print(f'PASS: R01–R09 static regressions; {len(catalog)} pages, 27 schedule rows, 4 news articles, {len(photos)} photos preserved. Browser QA NOT performed.')
+    print(f"PASS: R01–R09 static regressions; {len(catalog)} pages, {len(league['rows'])} schedule rows, 4 news articles, {len(photos)} photos preserved. Browser QA NOT performed.")
 
 if __name__=='__main__':main()

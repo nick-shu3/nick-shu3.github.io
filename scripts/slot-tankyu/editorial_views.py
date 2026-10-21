@@ -116,7 +116,11 @@ def schedule_preview(origin):
     if future:
         row=future[0]
         result+='<p><strong>次の収録予定：'+date_label(row['date'])+' '+esc(row['round'])+'</strong><br>'+esc(row['venue'])+'</p>'
-    result+='<p class="hint">収録日と動画公開日は別です。二次資料による予定で変更の可能性があります。収録情報の確認日：'+date_label(league['checked_at'])+'。</p>'
+    result+='<p class="hint">収録日と動画公開日は別です。公式掲載の予定で、変更の可能性があります。日程確認日：'+date_label(league['checked_at'])+'。</p>'
+    upcoming_rallies=sorted((r for r in league['rallies'] if datetime.datetime.fromisoformat(r['release_at']).date()>=reference),key=lambda r:r['release_at'])
+    if upcoming_rallies:
+        rally=upcoming_rallies[0];dt=datetime.datetime.fromisoformat(rally['release_at'])
+        result+='<p><strong>決起集会の次の公開予定：'+date_label(dt.date())+' '+dt.strftime('%H:%M')+'</strong><br>'+esc(rally['team'])+'<br><a href="league/777league/#rallies">動画リンク・公開の確認状況 →</a></p>'
     return result+'<p><a href="new-machines/">新台カレンダー →</a> ／ <a href="league/777league/#next">収録予定・終了確認待ち →</a></p></div>'
 
 def machine_navigation(page):

@@ -1,6 +1,6 @@
 {
   "season": "4th / 2026–2027",
-  "checked_at": "2026-10-14",
+  "checked_at": "2026-10-21",
   "official_url": "https://p-gabu.jp/sc/666/777league/",
   "rows": [
     {
@@ -11,37 +11,44 @@
       "broadcast_date": null,
       "broadcast_status": "未確認",
       "video_url": null,
-      "schedule_source": "https://pachislot-memo.online/777league4th-schedule",
+      "schedule_source": "https://p-gabu.jp/sc/666/777league/schedule/",
       "evidence_url": null,
       "evidence_note": null,
       "status_checked_at": "2026-10-14",
-      "status_review_note": "同会場の別番組の終了報告が混在するため、8月31日の777リーグ収録終了の根拠として採用しない"
+      "status_review_note": "同会場の別番組の終了報告が混在するため、8月31日の777リーグ収録終了の根拠として採用しない",
+      "schedule_checked_at": "2026-10-21",
+      "schedule_source_type": "official"
     },
     {
       "date": "2026-09-02",
       "round": "BLUE第1回戦",
-      "venue": "Super D’station39大淀店",
+      "venue": "Super D'station大淀店",
       "status": "終了",
       "broadcast_date": null,
       "broadcast_status": "未確認",
       "video_url": null,
-      "schedule_source": "https://pachislot-memo.online/777league4th-schedule",
+      "schedule_source": "https://p-gabu.jp/sc/666/777league/schedule/",
       "evidence_url": "https://www.sotwe.com/hashtag/%E5%8F%B8%E8%8A%AD%E6%89%B6?lang=tr",
-      "evidence_note": "当日の収録告知・参加者の実戦後報告を確認"
+      "evidence_note": "当日の収録告知・参加者の実戦後報告を確認",
+      "schedule_checked_at": "2026-10-21",
+      "schedule_source_type": "official",
+      "status_checked_at": "2026-10-14"
     },
     {
       "date": "2026-09-03",
       "round": "RED第2回戦",
-      "venue": "テンガイ与次郎店",
+      "venue": "テンガイ・与次郎店",
       "status": "終了",
       "broadcast_date": null,
       "broadcast_status": "未確認",
       "video_url": null,
-      "schedule_source": "https://pachislot-memo.online/777league4th-schedule",
+      "schedule_source": "https://p-gabu.jp/sc/666/777league/schedule/",
       "evidence_url": "https://search.yahoo.co.jp/realtime/search?p=%23%E3%83%9E%E3%83%AB%E3%83%8F%E3%83%B3%E3%83%95%E3%82%A9%E3%83%BC%E3%82%B9%E3%82%A8%E3%83%8A%E3%82%B8%E3%83%BC",
       "evidence_note": "9月3日のRED第2回戦・テンガイ与次郎での世譜イブキの収録終了報告を検索掲載内容で確認",
       "evidence_method": "公式・出演者の投稿内容を二次資料経由で確認",
-      "status_checked_at": "2026-10-14"
+      "status_checked_at": "2026-10-14",
+      "schedule_checked_at": "2026-10-21",
+      "schedule_source_type": "official"
     },
     {
       "date": "2026-09-04",
@@ -51,9 +58,12 @@
       "broadcast_date": null,
       "broadcast_status": "未確認",
       "video_url": null,
-      "schedule_source": "https://pachislot-memo.online/777league4th-schedule",
+      "schedule_source": "https://p-gabu.jp/sc/666/777league/schedule/",
       "evidence_url": "https://search.yahoo.co.jp/realtime/search?p=%23%E3%83%A1%E3%82%AC%E3%83%95%E3%82%A7%E3%82%B91300%E6%B7%80%E5%B7%9D",
-      "evidence_note": "当日の公式収録告知と出演者の実戦後報告を確認"
+      "evidence_note": "当日の公式収録告知と出演者の実戦後報告を確認",
+      "schedule_checked_at": "2026-10-21",
+      "schedule_source_type": "official",
+      "status_checked_at": "2026-10-14"
     },
     {
       "date": "2026-09-10",
@@ -63,9 +73,12 @@
       "broadcast_date": null,
       "broadcast_status": "未確認",
       "video_url": null,
-      "schedule_source": "https://pachislot-memo.online/777league4th-schedule",
+      "schedule_source": "https://p-gabu.jp/sc/666/777league/schedule/",
       "evidence_url": "https://www.sotwe.com/777_league",
-      "evidence_note": "公式アカウントの当日収録・エンディング告知を確認"
+      "evidence_note": "公式アカウントの当日収録・エンディング告知を確認",
+      "schedule_checked_at": "2026-10-21",
+      "schedule_source_type": "official",
+      "status_checked_at": "2026-10-14"
     },
     {
       "date": "2026-09-30",
@@ -75,25 +88,29 @@
       "broadcast_date": null,
       "broadcast_status": "未確認",
       "video_url": null,
-      "schedule_source": "https://pachislot-memo.online/777league4th-schedule",
+      "schedule_source": "https://p-gabu.jp/sc/666/777league/schedule/",
       "evidence_url": "https://free-wifi-password-recovery.twstalker.com/maruhan_east/status/2105473475750351070",
       "evidence_note": "マルハン東日本広報の「昨日はホーム戦の初戦が無事終わり」「明日の収録店舗は蒲田7」の報告を照合。9月30日の伊勢崎収録の終了を確認",
       "evidence_method": "公式・出演者の投稿内容を二次資料経由で確認",
-      "status_checked_at": "2026-10-14"
+      "status_checked_at": "2026-10-14",
+      "schedule_checked_at": "2026-10-21",
+      "schedule_source_type": "official"
     },
     {
       "date": "2026-10-02",
       "round": "RED第5回戦",
-      "venue": "マルハンメガシティ2000蒲田7",
+      "venue": "マルハンメガシティ2000 蒲田 7",
       "status": "終了",
       "broadcast_date": null,
       "broadcast_status": "未確認",
       "video_url": null,
-      "schedule_source": "https://pachislot-memo.online/777league4th-schedule",
+      "schedule_source": "https://p-gabu.jp/sc/666/777league/schedule/",
       "evidence_url": "https://www13.twstalker.com/usamiiin/status/2105979301388841064",
       "evidence_note": "出演者・兎味ペロリナの蒲田7での777リーグ収録終了報告を確認",
       "evidence_method": "公式・出演者の投稿内容を二次資料経由で確認",
-      "status_checked_at": "2026-10-14"
+      "status_checked_at": "2026-10-14",
+      "schedule_checked_at": "2026-10-21",
+      "schedule_source_type": "official"
     },
     {
       "date": "2026-10-05",
@@ -103,49 +120,59 @@
       "broadcast_date": null,
       "broadcast_status": "未確認",
       "video_url": null,
-      "schedule_source": "https://pachislot-memo.online/777league4th-schedule",
+      "schedule_source": "https://p-gabu.jp/sc/666/777league/schedule/",
       "evidence_url": "https://www.sotwe.com/hashtag/%E6%96%B0%E3%82%AC%E3%83%BC%E3%83%87%E3%83%B3%E5%85%AB%E6%BD%AE%E5%BA%97",
       "evidence_note": "出演者・黒木ねねの八潮での収録終了報告と公式BLUE第3回戦の収録告知を照合",
       "evidence_method": "公式・出演者の投稿内容を二次資料経由で確認",
-      "status_checked_at": "2026-10-14"
+      "status_checked_at": "2026-10-14",
+      "schedule_checked_at": "2026-10-21",
+      "schedule_source_type": "official"
     },
     {
       "date": "2026-10-07",
       "round": "RED第6回戦",
-      "venue": "テンガイ戸島店",
+      "venue": "テンガイ・戸島店",
       "status": "終了",
       "broadcast_date": null,
       "broadcast_status": "未確認",
       "video_url": null,
-      "schedule_source": "https://pachislot-memo.online/777league4th-schedule",
+      "schedule_source": "https://p-gabu.jp/sc/666/777league/schedule/",
       "evidence_url": "https://search.yahoo.co.jp/realtime/search?ei=UTF-8&ifr=tl_hash&md=t&p=%23777%E3%83%AA%E3%83%BC%E3%82%B0&rkf=1",
-      "evidence_note": "当日の参加者による実戦後報告を確認"
+      "evidence_note": "当日の参加者による実戦後報告を確認",
+      "schedule_checked_at": "2026-10-21",
+      "schedule_source_type": "official",
+      "status_checked_at": "2026-10-14"
     },
     {
       "date": "2026-10-14",
       "round": "BLUE第4回戦",
       "venue": "ダイナム石川松任店",
-      "status": "予定",
+      "status": "終了確認待ち",
       "broadcast_date": null,
       "broadcast_status": "未確認",
       "video_url": null,
-      "schedule_source": "https://pachislot-memo.online/777league4th-schedule",
+      "schedule_source": "https://p-gabu.jp/sc/666/777league/schedule/",
       "evidence_url": null,
       "evidence_note": null,
-      "status_note": "終了報告は未確認",
-      "status_checked_at": "2026-10-14"
+      "status_note": "日程は公式ページで照合済み。終了報告の本文は未確認。",
+      "status_checked_at": "2026-10-21",
+      "schedule_checked_at": "2026-10-21",
+      "schedule_source_type": "official"
     },
     {
       "date": "2026-10-21",
       "round": "BLUE第5回戦",
-      "venue": "Super D’station高崎本店",
+      "venue": "Super D'station高崎本店",
       "status": "予定",
       "broadcast_date": null,
       "broadcast_status": "未確認",
       "video_url": null,
-      "schedule_source": "https://pachislot-memo.online/777league4th-schedule",
+      "schedule_source": "https://p-gabu.jp/sc/666/777league/schedule/",
       "evidence_url": null,
-      "evidence_note": null
+      "evidence_note": null,
+      "schedule_checked_at": "2026-10-21",
+      "schedule_source_type": "official",
+      "status_checked_at": "2026-10-14"
     },
     {
       "date": "2026-10-22",
@@ -155,9 +182,12 @@
       "broadcast_date": null,
       "broadcast_status": "未確認",
       "video_url": null,
-      "schedule_source": "https://pachislot-memo.online/777league4th-schedule",
+      "schedule_source": "https://p-gabu.jp/sc/666/777league/schedule/",
       "evidence_url": null,
-      "evidence_note": null
+      "evidence_note": null,
+      "schedule_checked_at": "2026-10-21",
+      "schedule_source_type": "official",
+      "status_checked_at": "2026-10-14"
     },
     {
       "date": "2026-10-30",
@@ -167,9 +197,12 @@
       "broadcast_date": null,
       "broadcast_status": "未確認",
       "video_url": null,
-      "schedule_source": "https://pachislot-memo.online/777league4th-schedule",
+      "schedule_source": "https://p-gabu.jp/sc/666/777league/schedule/",
       "evidence_url": null,
-      "evidence_note": null
+      "evidence_note": null,
+      "schedule_checked_at": "2026-10-21",
+      "schedule_source_type": "official",
+      "status_checked_at": "2026-10-14"
     },
     {
       "date": "2026-11-02",
@@ -179,9 +212,12 @@
       "broadcast_date": null,
       "broadcast_status": "未確認",
       "video_url": null,
-      "schedule_source": "https://pachislot-memo.online/777league4th-schedule",
+      "schedule_source": "https://p-gabu.jp/sc/666/777league/schedule/",
       "evidence_url": null,
-      "evidence_note": null
+      "evidence_note": null,
+      "schedule_checked_at": "2026-10-21",
+      "schedule_source_type": "official",
+      "status_checked_at": "2026-10-14"
     },
     {
       "date": "2026-11-05",
@@ -191,9 +227,12 @@
       "broadcast_date": null,
       "broadcast_status": "未確認",
       "video_url": null,
-      "schedule_source": "https://pachislot-memo.online/777league4th-schedule",
+      "schedule_source": "https://p-gabu.jp/sc/666/777league/schedule/",
       "evidence_url": null,
-      "evidence_note": null
+      "evidence_note": null,
+      "schedule_checked_at": "2026-10-21",
+      "schedule_source_type": "official",
+      "status_checked_at": "2026-10-14"
     },
     {
       "date": "2026-11-06",
@@ -203,33 +242,42 @@
       "broadcast_date": null,
       "broadcast_status": "未確認",
       "video_url": null,
-      "schedule_source": "https://pachislot-memo.online/777league4th-schedule",
+      "schedule_source": "https://p-gabu.jp/sc/666/777league/schedule/",
       "evidence_url": null,
-      "evidence_note": null
+      "evidence_note": null,
+      "schedule_checked_at": "2026-10-21",
+      "schedule_source_type": "official",
+      "status_checked_at": "2026-10-14"
     },
     {
       "date": "2026-11-10",
       "round": "BLUE第9回戦",
-      "venue": "Super D’station大淀店",
+      "venue": "Super D'station大淀店",
       "status": "予定",
       "broadcast_date": null,
       "broadcast_status": "未確認",
       "video_url": null,
-      "schedule_source": "https://pachislot-memo.online/777league4th-schedule",
+      "schedule_source": "https://p-gabu.jp/sc/666/777league/schedule/",
       "evidence_url": null,
-      "evidence_note": null
+      "evidence_note": null,
+      "schedule_checked_at": "2026-10-21",
+      "schedule_source_type": "official",
+      "status_checked_at": "2026-10-14"
     },
     {
       "date": "2026-11-12",
       "round": "ルーキー戦第1回戦",
-      "venue": "未定",
+      "venue": "ダイナム長野上田店",
       "status": "予定",
       "broadcast_date": null,
       "broadcast_status": "未確認",
       "video_url": null,
-      "schedule_source": "https://pachislot-memo.online/777league4th-schedule",
+      "schedule_source": "https://p-gabu.jp/sc/666/777league/schedule/",
       "evidence_url": null,
-      "evidence_note": null
+      "evidence_note": null,
+      "schedule_checked_at": "2026-10-21",
+      "schedule_source_type": "official",
+      "status_checked_at": "2026-10-14"
     },
     {
       "date": "2026-11-24",
@@ -239,22 +287,27 @@
       "broadcast_date": null,
       "broadcast_status": "未確認",
       "video_url": null,
-      "schedule_source": "https://pachislot-memo.online/777league4th-schedule",
+      "schedule_source": "https://p-gabu.jp/sc/666/777league/schedule/",
       "evidence_url": null,
-      "evidence_note": null
+      "evidence_note": null,
+      "schedule_checked_at": "2026-10-21",
+      "schedule_source_type": "official",
+      "status_checked_at": "2026-10-14"
     },
     {
       "date": "2026-11-25",
       "round": "RED第10回戦",
-      "venue": "会場確認待ち",
+      "venue": "123+N布施店",
       "status": "予定",
       "broadcast_date": null,
       "broadcast_status": "未確認",
       "video_url": null,
-      "schedule_source": "https://pachislot-memo.online/777league4th-schedule",
+      "schedule_source": "https://p-gabu.jp/sc/666/777league/schedule/",
       "evidence_url": null,
       "evidence_note": null,
-      "venue_note": "二次資料のRED戦と会場法人の組み合わせに不整合があるため、公式照合まで会場を断定しない。"
+      "schedule_checked_at": "2026-10-21",
+      "schedule_source_type": "official",
+      "status_checked_at": "2026-10-14"
     },
     {
       "date": "2026-12-02",
@@ -264,21 +317,27 @@
       "broadcast_date": null,
       "broadcast_status": "未確認",
       "video_url": null,
-      "schedule_source": "https://pachislot-memo.online/777league4th-schedule",
+      "schedule_source": "https://p-gabu.jp/sc/666/777league/schedule/",
       "evidence_url": null,
-      "evidence_note": null
+      "evidence_note": null,
+      "schedule_checked_at": "2026-10-21",
+      "schedule_source_type": "official",
+      "status_checked_at": "2026-10-14"
     },
     {
       "date": "2026-12-03",
       "round": "RED第11回戦",
-      "venue": "テンガイ与次郎店",
+      "venue": "テンガイ・与次郎店",
       "status": "予定",
       "broadcast_date": null,
       "broadcast_status": "未確認",
       "video_url": null,
-      "schedule_source": "https://pachislot-memo.online/777league4th-schedule",
+      "schedule_source": "https://p-gabu.jp/sc/666/777league/schedule/",
       "evidence_url": null,
-      "evidence_note": null
+      "evidence_note": null,
+      "schedule_checked_at": "2026-10-21",
+      "schedule_source_type": "official",
+      "status_checked_at": "2026-10-14"
     },
     {
       "date": "2026-12-10",
@@ -288,9 +347,12 @@
       "broadcast_date": null,
       "broadcast_status": "未確認",
       "video_url": null,
-      "schedule_source": "https://pachislot-memo.online/777league4th-schedule",
+      "schedule_source": "https://p-gabu.jp/sc/666/777league/schedule/",
       "evidence_url": null,
-      "evidence_note": null
+      "evidence_note": null,
+      "schedule_checked_at": "2026-10-21",
+      "schedule_source_type": "official",
+      "status_checked_at": "2026-10-14"
     },
     {
       "date": "2026-12-15",
@@ -300,9 +362,12 @@
       "broadcast_date": null,
       "broadcast_status": "未確認",
       "video_url": null,
-      "schedule_source": "https://pachislot-memo.online/777league4th-schedule",
+      "schedule_source": "https://p-gabu.jp/sc/666/777league/schedule/",
       "evidence_url": null,
-      "evidence_note": null
+      "evidence_note": null,
+      "schedule_checked_at": "2026-10-21",
+      "schedule_source_type": "official",
+      "status_checked_at": "2026-10-14"
     },
     {
       "date": "2026-12-16",
@@ -312,9 +377,12 @@
       "broadcast_date": null,
       "broadcast_status": "未確認",
       "video_url": null,
-      "schedule_source": "https://pachislot-memo.online/777league4th-schedule",
+      "schedule_source": "https://p-gabu.jp/sc/666/777league/schedule/",
       "evidence_url": null,
-      "evidence_note": null
+      "evidence_note": null,
+      "schedule_checked_at": "2026-10-21",
+      "schedule_source_type": "official",
+      "status_checked_at": "2026-10-14"
     },
     {
       "date": "2026-12-21",
@@ -324,9 +392,12 @@
       "broadcast_date": null,
       "broadcast_status": "未確認",
       "video_url": null,
-      "schedule_source": "https://pachislot-memo.online/777league4th-schedule",
+      "schedule_source": "https://p-gabu.jp/sc/666/777league/schedule/",
       "evidence_url": null,
-      "evidence_note": null
+      "evidence_note": null,
+      "schedule_checked_at": "2026-10-21",
+      "schedule_source_type": "official",
+      "status_checked_at": "2026-10-14"
     },
     {
       "date": "2026-12-23",
@@ -336,9 +407,237 @@
       "broadcast_date": null,
       "broadcast_status": "未確認",
       "video_url": null,
-      "schedule_source": "https://pachislot-memo.online/777league4th-schedule",
+      "schedule_source": "https://p-gabu.jp/sc/666/777league/schedule/",
       "evidence_url": null,
-      "evidence_note": null
+      "evidence_note": null,
+      "schedule_checked_at": "2026-10-21",
+      "schedule_source_type": "official",
+      "status_checked_at": "2026-10-14"
+    },
+    {
+      "status": "予定",
+      "broadcast_date": null,
+      "broadcast_status": "未確認",
+      "video_url": null,
+      "evidence_url": null,
+      "evidence_note": null,
+      "date": "2027-01-06",
+      "round": "BLUE第14回戦",
+      "venue": "Super D'station新開地店",
+      "schedule_source": "https://p-gabu.jp/sc/666/777league/schedule/",
+      "schedule_checked_at": "2026-10-21",
+      "schedule_source_type": "official",
+      "status_checked_at": "2026-10-21"
+    },
+    {
+      "status": "予定",
+      "broadcast_date": null,
+      "broadcast_status": "未確認",
+      "video_url": null,
+      "evidence_url": null,
+      "evidence_note": null,
+      "date": "2027-01-08",
+      "round": "RED第14回戦",
+      "venue": "マルハンメガシティ市原",
+      "schedule_source": "https://p-gabu.jp/sc/666/777league/schedule/",
+      "schedule_checked_at": "2026-10-21",
+      "schedule_source_type": "official",
+      "status_checked_at": "2026-10-21"
+    },
+    {
+      "status": "予定",
+      "broadcast_date": null,
+      "broadcast_status": "未確認",
+      "video_url": null,
+      "evidence_url": null,
+      "evidence_note": null,
+      "date": "2027-01-14",
+      "round": "RED第15回戦",
+      "venue": "テンガイ・戸島店",
+      "schedule_source": "https://p-gabu.jp/sc/666/777league/schedule/",
+      "schedule_checked_at": "2026-10-21",
+      "schedule_source_type": "official",
+      "status_checked_at": "2026-10-21"
+    },
+    {
+      "status": "予定",
+      "broadcast_date": null,
+      "broadcast_status": "未確認",
+      "video_url": null,
+      "evidence_url": null,
+      "evidence_note": null,
+      "date": "2027-01-15",
+      "round": "BLUE第15回戦",
+      "venue": "ダイナム長野上田店",
+      "schedule_source": "https://p-gabu.jp/sc/666/777league/schedule/",
+      "schedule_checked_at": "2026-10-21",
+      "schedule_source_type": "official",
+      "status_checked_at": "2026-10-21"
+    },
+    {
+      "status": "予定",
+      "broadcast_date": null,
+      "broadcast_status": "未確認",
+      "video_url": null,
+      "evidence_url": null,
+      "evidence_note": null,
+      "date": "2027-01-18",
+      "round": "RED第16回戦",
+      "venue": "キコーナ加古川店",
+      "schedule_source": "https://p-gabu.jp/sc/666/777league/schedule/",
+      "schedule_checked_at": "2026-10-21",
+      "schedule_source_type": "official",
+      "status_checked_at": "2026-10-21"
+    },
+    {
+      "status": "予定",
+      "broadcast_date": null,
+      "broadcast_status": "未確認",
+      "video_url": null,
+      "evidence_url": null,
+      "evidence_note": null,
+      "date": "2027-01-20",
+      "round": "BLUE第16回戦",
+      "venue": "新！ガーデン八潮",
+      "schedule_source": "https://p-gabu.jp/sc/666/777league/schedule/",
+      "schedule_checked_at": "2026-10-21",
+      "schedule_source_type": "official",
+      "status_checked_at": "2026-10-21"
+    },
+    {
+      "status": "予定",
+      "broadcast_date": null,
+      "broadcast_status": "未確認",
+      "video_url": null,
+      "evidence_url": null,
+      "evidence_note": null,
+      "date": "2027-01-26",
+      "round": "ルーキー戦第2回戦",
+      "venue": "ガーデン東大宮",
+      "schedule_source": "https://p-gabu.jp/sc/666/777league/schedule/",
+      "schedule_checked_at": "2026-10-21",
+      "schedule_source_type": "official",
+      "status_checked_at": "2026-10-21"
+    },
+    {
+      "status": "予定",
+      "broadcast_date": null,
+      "broadcast_status": "未確認",
+      "video_url": null,
+      "evidence_url": null,
+      "evidence_note": null,
+      "date": "2027-01-28",
+      "round": "RED第17回戦",
+      "venue": "グランキコーナ堺店",
+      "schedule_source": "https://p-gabu.jp/sc/666/777league/schedule/",
+      "schedule_checked_at": "2026-10-21",
+      "schedule_source_type": "official",
+      "status_checked_at": "2026-10-21"
+    },
+    {
+      "status": "予定",
+      "broadcast_date": null,
+      "broadcast_status": "未確認",
+      "video_url": null,
+      "evidence_url": null,
+      "evidence_note": null,
+      "date": "2027-02-01",
+      "round": "BLUE第17回戦",
+      "venue": "Super D'station高崎本店",
+      "schedule_source": "https://p-gabu.jp/sc/666/777league/schedule/",
+      "schedule_checked_at": "2026-10-21",
+      "schedule_source_type": "official",
+      "status_checked_at": "2026-10-21"
+    },
+    {
+      "status": "予定",
+      "broadcast_date": null,
+      "broadcast_status": "未確認",
+      "video_url": null,
+      "evidence_url": null,
+      "evidence_note": null,
+      "date": "2027-02-03",
+      "round": "BLUE第18回戦",
+      "venue": "新！ガーデン亀戸",
+      "schedule_source": "https://p-gabu.jp/sc/666/777league/schedule/",
+      "schedule_checked_at": "2026-10-21",
+      "schedule_source_type": "official",
+      "status_checked_at": "2026-10-21"
+    },
+    {
+      "status": "予定",
+      "broadcast_date": null,
+      "broadcast_status": "未確認",
+      "video_url": null,
+      "evidence_url": null,
+      "evidence_note": null,
+      "date": "2027-02-09",
+      "round": "RED第18回戦",
+      "venue": "テンガイ・与次郎店",
+      "schedule_source": "https://p-gabu.jp/sc/666/777league/schedule/",
+      "schedule_checked_at": "2026-10-21",
+      "schedule_source_type": "official",
+      "status_checked_at": "2026-10-21"
+    },
+    {
+      "status": "予定",
+      "broadcast_date": null,
+      "broadcast_status": "未確認",
+      "video_url": null,
+      "evidence_url": null,
+      "evidence_note": null,
+      "date": "2027-02-10",
+      "round": "RED第19回戦",
+      "venue": "マルハンメガシティ2000 蒲田 7",
+      "schedule_source": "https://p-gabu.jp/sc/666/777league/schedule/",
+      "schedule_checked_at": "2026-10-21",
+      "schedule_source_type": "official",
+      "status_checked_at": "2026-10-21"
+    },
+    {
+      "status": "予定",
+      "broadcast_date": null,
+      "broadcast_status": "未確認",
+      "video_url": null,
+      "evidence_url": null,
+      "evidence_note": null,
+      "date": "2027-02-24",
+      "round": "BLUE第19回戦",
+      "venue": "ダイナム長野上田店",
+      "schedule_source": "https://p-gabu.jp/sc/666/777league/schedule/",
+      "schedule_checked_at": "2026-10-21",
+      "schedule_source_type": "official",
+      "status_checked_at": "2026-10-21"
+    },
+    {
+      "status": "予定",
+      "broadcast_date": null,
+      "broadcast_status": "未確認",
+      "video_url": null,
+      "evidence_url": null,
+      "evidence_note": null,
+      "date": "2027-03-02",
+      "round": "BLUE第20回戦",
+      "venue": "メガフェイス1500宗像",
+      "schedule_source": "https://p-gabu.jp/sc/666/777league/schedule/",
+      "schedule_checked_at": "2026-10-21",
+      "schedule_source_type": "official",
+      "status_checked_at": "2026-10-21"
+    },
+    {
+      "status": "予定",
+      "broadcast_date": null,
+      "broadcast_status": "未確認",
+      "video_url": null,
+      "evidence_url": null,
+      "evidence_note": null,
+      "date": "2027-03-12",
+      "round": "RED第20回戦",
+      "venue": "123+N布施店",
+      "schedule_source": "https://p-gabu.jp/sc/666/777league/schedule/",
+      "schedule_checked_at": "2026-10-21",
+      "schedule_source_type": "official",
+      "status_checked_at": "2026-10-21"
     }
   ],
   "video_checked_at": "2026-10-14",
@@ -351,14 +650,20 @@
       "team": "フェイスメガタイガース",
       "channel": "頂－ITADAKI－",
       "channel_url": "https://www.youtube.com/@itadaki_ch",
-      "watch_slug": "face-mega-tigers-rally"
+      "watch_slug": "face-mega-tigers-rally",
+      "video_url": "https://www.youtube.com/watch?v=-Dfr-57rNFE",
+      "video_link_checked_at": "2026-10-15",
+      "video_evidence": "既存紹介記事と独立レビューによる確認。今回のYouTube本文再取得はできていない。"
     },
     {
       "release_at": "2026-10-17T20:00:00+09:00",
       "team": "テンガイゴールデンメインズ",
       "channel": "ライテンちゃんねる",
       "channel_url": "https://www.youtube.com/@raiten_ch",
-      "watch_slug": "tengai-golden-manes-rally"
+      "watch_slug": "tengai-golden-manes-rally",
+      "video_url": "https://www.youtube.com/watch?v=gvdjRDYu2ek",
+      "video_link_checked_at": "2026-10-18",
+      "video_evidence": "既存紹介記事と独立レビューによる確認。今回のYouTube本文再取得はできていない。"
     },
     {
       "release_at": "2026-10-19T20:00:00+09:00",
@@ -396,5 +701,9 @@
       "channel": "マルハンチャンネル",
       "channel_url": "https://www.youtube.com/channel/UCeeEc2br-GvNd3QAp4DIeoQ"
     }
-  ]
+  ],
+  "schedule_source_type": "official",
+  "previous_schedule_note": "10月14日版は二次資料を参照。10月21日に公式日程の掲載分42件へ照合・更新。過去の終了根拠は個別の確認日を保持。",
+  "video_reviewed_at": "2026-10-21",
+  "video_review_note": "公式X・YouTubeの一部は取得不可。日付だけで動画公開済みにしない。既存確認分2本のみ動画へのリンクを掲載。"
 }
