@@ -112,7 +112,7 @@ def render(data, as_of=None):
     schedules=body[start:end];body=body[:start]+body[end:]
     insert=body.index('<section id="video-start">');body=body[:insert]+schedules+body[insert:]
     toc.append({'id':'sources','label':'表の見方・出典'})
-    return {'path':'docs/slot-tankyu/league/777league/index.html','type':'league','label':'777.LEAGUE / 4th 2026–2027','title':'777リーグ｜実戦日・終了状況・放送日一覧','short_title':'777リーグの日程','description':'777リーグ4thの2027年3月までの公式収録予定42件、終了状況、決起集会の動画リンク・公開確認状況を一覧で確認できます。','updated':max(data['checked_at'],data['video_checked_at']),'status':'4thシーズン・非公式まとめ','breadcrumbs':[],'toc':toc,'body':body,'share_image':'share-league-4th.png','share_lines':['777リーグ 4th','実戦日・終了状況','放送・配信日一覧']}
+    return {'path':'docs/slot-tankyu/league/777league/index.html','type':'league','label':'777.LEAGUE / 4th 2026–2027','title':'777リーグ｜実戦日・終了状況・放送日一覧','short_title':'777リーグの日程','description':'777リーグ4thの2027年3月までの公式収録予定42件、終了状況、決起集会の動画リンク・公開確認状況を一覧で確認できます。','updated':max(data['checked_at'],data['video_checked_at'],*(r.get('status_checked_at',data['checked_at']) for r in data['rows'])),'status':'4thシーズン・非公式まとめ','breadcrumbs':[],'toc':toc,'body':body,'share_image':'share-league-4th.png','share_lines':['777リーグ 4th','実戦日・終了状況','放送・配信日一覧']}
 
 if __name__ == '__main__':
     data=json.loads((HERE/'data/league-4th.json').read_text())

@@ -102,6 +102,15 @@ def main():
         body=render(league,reference)['body']
         assert re.search(r'<li><a[^>]*>(\d+年\d+月\d+日)',section(body,'next'))[1]==first
         assert body.count('class="league-status done"')==sum(r['status']=='終了' for r in league['rows'])
+    # 2026-10-22: resolve only the two reviewed statuses; preserve the other 40 rows.
+    before=json.loads(subprocess.check_output(['git','show','112797c56d7e06c4dd22879ce8d92107eaa3dfd4:scripts/slot-tankyu/data/league-4th.json'],cwd=ROOT))
+    for previous,current in zip(before['rows'],league['rows']):
+        if current['date'] in {'2026-08-31','2026-10-14'}:
+            assert current['status']=='終了' and current['status_checked_at']=='2026-10-22'
+            assert current['status_history'][0]['status']=='終了確認待ち'
+        else:assert previous==current
+    assert league['rallies']==before['rallies']
+    assert render(league)['updated']=='2026-10-22'
     body=render(league,'2026-10-21')['body']
     assert section(body,'rallies').count('動画を見る ↗')==2
     assert '公開確認待ち' in section(body,'rallies') and '公開予定' in section(body,'rallies')
@@ -109,7 +118,8 @@ def main():
     assert '今後の収録予定は確認待ち' in render(league,'2027-04-01')['body']
     for kind in ('finished','video','video-date'):
         invalid=copy.deepcopy(league)
-        if kind=='finished':invalid['rows'][0]['status']='終了'
+        if kind=='finished':
+            invalid['rows'][0]['status']='終了';invalid['rows'][0]['evidence_url']=None
         elif kind=='video':invalid['rallies'][0]['video_url']='https://example.com/video'
         else:invalid['rallies'][0].pop('video_link_checked_at')
         try:render(invalid)

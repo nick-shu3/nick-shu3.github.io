@@ -7,17 +7,30 @@
       "date": "2026-08-31",
       "round": "RED第1回戦",
       "venue": "グランキコーナ松原店",
-      "status": "終了確認待ち",
+      "status": "終了",
       "broadcast_date": null,
       "broadcast_status": "未確認",
       "video_url": null,
       "schedule_source": "https://p-gabu.jp/sc/666/777league/schedule/",
-      "evidence_url": null,
-      "evidence_note": null,
-      "status_checked_at": "2026-10-14",
-      "status_review_note": "同会場の別番組の終了報告が混在するため、8月31日の777リーグ収録終了の根拠として採用しない",
+      "evidence_url": "https://x.com/kicona_osaka/status/2094382532494291151",
+      "evidence_note": "キコーナ広報による当日付の初戦終了報告を原投稿本文で確認。記載の出場者4名がRED第1回戦と一致。",
+      "status_checked_at": "2026-10-22",
+      "status_review_note": "2026年10月22日に原投稿の本文・投稿日を通常HTTP取得で確認。旧確認待ちの理由はstatus_historyに保持。",
       "schedule_checked_at": "2026-10-21",
-      "schedule_source_type": "official"
+      "schedule_source_type": "official",
+      "status_history": [
+        {
+          "checked_at": "2026-10-14",
+          "status": "終了確認待ち",
+          "note": "同会場の別番組の終了報告が混在するため、8月31日の777リーグ収録終了の根拠として採用しない"
+        },
+        {
+          "checked_at": "2026-10-22",
+          "status": "終了",
+          "note": "キコーナ広報による当日付の初戦終了報告を原投稿本文で確認。記載の出場者4名がRED第1回戦と一致。"
+        }
+      ],
+      "status_note": "キコーナ広報の当日終了報告を確認。"
     },
     {
       "date": "2026-09-02",
@@ -147,17 +160,30 @@
       "date": "2026-10-14",
       "round": "BLUE第4回戦",
       "venue": "ダイナム石川松任店",
-      "status": "終了確認待ち",
+      "status": "終了",
       "broadcast_date": null,
       "broadcast_status": "未確認",
       "video_url": null,
       "schedule_source": "https://p-gabu.jp/sc/666/777league/schedule/",
-      "evidence_url": null,
-      "evidence_note": null,
-      "status_note": "日程は公式ページで照合済み。終了報告の本文は未確認。",
-      "status_checked_at": "2026-10-21",
+      "evidence_url": "https://x.com/kurobara_kota/status/2110299274336735743",
+      "evidence_note": "コウタローの10月14日付投稿でホーム戦の実戦後報告と配信予告を確認。前日の松任ホーム戦告知と照合し、収録終了と判断。",
+      "status_note": "出演者の当日実戦後報告から収録終了と判断。",
+      "status_checked_at": "2026-10-22",
       "schedule_checked_at": "2026-10-21",
-      "schedule_source_type": "official"
+      "schedule_source_type": "official",
+      "status_history": [
+        {
+          "checked_at": "2026-10-21",
+          "status": "終了確認待ち",
+          "note": "日程は公式ページで照合済み。終了報告の本文は未確認。"
+        },
+        {
+          "checked_at": "2026-10-22",
+          "status": "終了",
+          "note": "コウタローの10月14日付投稿でホーム戦の実戦後報告と配信予告を確認。前日の松任ホーム戦告知と照合し、収録終了と判断。"
+        }
+      ],
+      "status_review_note": "2026年10月22日に原投稿の本文・投稿日を通常HTTP取得で確認。旧確認待ちの理由はstatus_historyに保持。"
     },
     {
       "date": "2026-10-21",
