@@ -28,6 +28,22 @@ def visible_dates(text):
 def pages():
     return {p.stem: json.loads(p.read_text()) for p in (HERE/'pages').glob('*.json')}
 
+def column_cards(origin, sources=None):
+    catalog = pages()
+    columns = [p for name,p in catalog.items() if p['type']=='column' and (sources is None or name in sources)]
+    if sources is not None and len(columns)!=len(sources):
+        raise ValueError('Related columns must refer to existing column articles')
+    return '<div class="grid">'+''.join(
+        '<a class="card" href="'+esc(href(p['path'],origin))+'"><span class="tag">コラム</span><h3>'+esc(p['short_title'])+' →</h3><p>'+esc(p['description'])+'</p></a>'
+        for p in sorted(columns,key=lambda p:tuple(map(int,re.findall(r'\d+',p['updated']))),reverse=True))+'</div>'
+
+def related_columns(page):
+    relations = json.loads((HERE/'data/column-relations.json').read_text())
+    sources = relations.get(page['path'],[])
+    if not sources:
+        return ''
+    return '<section id="related-columns"><h2>この実戦に関連するコラム</h2>'+column_cards(page['path'],sources)+'</section>'
+
 def href(target, origin):
     import posixpath
     return posixpath.relpath(target, posixpath.dirname(origin)).removesuffix('index.html') or './'

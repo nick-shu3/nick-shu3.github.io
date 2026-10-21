@@ -1,0 +1,18 @@
+{
+  "path": "docs/slot-tankyu/columns/index.html",
+  "title": "スロ探究コラム",
+  "description": "実戦を通して考えたことや、AIを使った記録・分析の試みをまとめています。",
+  "type": "listing",
+  "label": "コラム",
+  "status": "実戦からの気づき・考察",
+  "updated": "2026年10月21日",
+  "short_title": "コラム",
+  "breadcrumbs": [],
+  "toc": [],
+  "share_image": "share-columns.png",
+  "share_lines": [
+    "スロ探究コラム",
+    "実戦からの気づきと、AI活用の試み。"
+  ],
+  "body": "<section id=\"articles\"><h2>コラム一覧</h2><!-- columns-list --></section>"
+}

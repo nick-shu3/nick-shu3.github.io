@@ -114,6 +114,12 @@ def main():
     assert '設定別データ' not in catalog['guide-tokyo']['title']
     # R06: full supplied paragraphs and all prior record body are preserved.
     for name,p in catalog.items():
+        # Navigation-only index: existing articles retain their reviewed hashes.
+        if name=='columns-listing':
+            assert p['type']=='listing' and p['path']=='docs/slot-tankyu/columns/index.html'
+            assert p['body']=='<section id="articles"><h2>コラム一覧</h2><!-- columns-list --></section>'
+            assert 'chatgpt-slot-log-failure/' in build(p)
+            continue
         if name=='guide-sao2':
             check_sao2(p)
             continue

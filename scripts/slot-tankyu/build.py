@@ -2,7 +2,7 @@
 """Build the static Slot Tankyu pages from reviewed editorial JSON. No dependencies."""
 import hashlib,html,json,posixpath,re
 from pathlib import Path
-from editorial_views import visible_dates, date_label, latest_feed, daily_list, schedule_preview, machine_navigation, guide_shortcuts, guide_digest
+from editorial_views import visible_dates, date_label, latest_feed, daily_list, schedule_preview, machine_navigation, guide_shortcuts, guide_digest, column_cards, related_columns
 from record_history import confirmed_history
 
 ROOT=Path(__file__).resolve().parents[2]
@@ -21,6 +21,7 @@ def build(page):
     body=body.replace('<!-- recent-daily -->',daily_list(path,3))
     body=body.replace('<!-- all-daily -->',daily_list(path))
     body=body.replace('<!-- schedule-preview -->',schedule_preview(path))
+    body=body.replace('<!-- columns-list -->',column_cards(path)) if '<!-- columns-list -->' in body else body
     # Optional first-person comments are plain text, escaped at build time.
     comment=page.get('author_comment',[])
     if not isinstance(comment,list) or any(not isinstance(x,str) or not x.strip() for x in comment):
@@ -44,6 +45,7 @@ def build(page):
         source_index=next((i for i,x in enumerate(toc_items) if x['id']=='sources'),len(toc_items))
         toc_items.insert(source_index,item)
     body+=machine_navigation(page)
+    body+=related_columns(page)
     # Content is curated static markup, never runtime user input. Reject active markup.
     if re.search(r'<\s*(script|iframe|object|embed|form)\b|\bon\w+\s*=|javascript\s*:',body,re.I):raise ValueError('Active content in editorial source')
     digest=guide_digest(page)
@@ -81,7 +83,9 @@ def build(page):
     new_machines=relative('docs/slot-tankyu/new-machines/index.html',path)
     news=relative('docs/slot-tankyu/news/index.html',path)
     watch=relative('docs/slot-tankyu/watch/index.html',path)
+    columns=relative('docs/slot-tankyu/columns/index.html',path)
     crumbs='<nav class="breadcrumbs" aria-label="パンくず"><a href="'+esc(top)+'">スロ探究</a>'
+    if page['type']=='column':crumbs+=' <span>／</span> <a href="'+esc(columns)+'">コラム</a>'
     for crumb in page.get('breadcrumbs',[]):crumbs+=' <span>／</span> <a href="'+esc(relative(crumb['path'],path))+'">'+esc(crumb['title'])+'</a>'
     crumbs+=' <span>／</span> <span>'+esc(page.get('short_title',page['title']))+'</span></nav>'
     toc=''
@@ -96,7 +100,7 @@ def build(page):
     hero_actions=''
     if page['type']=='home':
         hero_actions='<nav class="home-entries" aria-label="読みたい内容から選ぶ">'+''.join('<a href="'+esc(href)+'"><strong>'+esc(label)+' <span aria-hidden="true">→</span></strong><small>'+esc(description)+'</small></a>' for href,label,description in [('#guides','機種ガイド','終了画面・設定示唆の意味'),(records,'実戦記録','機種ごとの結果・写真・振り返り'),(new_machines,'新台カレンダー','導入予定日と機種を確認'),(news,'業界ニュース','稼働動向・メーカーの動き'),(league,'777リーグ','収録日と動画の公開状況'),(watch,'スロ番組ウォッチ','動画の見どころと率直な感想')])+'</nav>'
-    nav_items=[(top+'#guides','機種ガイド',page['type']=='guide'),(records,'実戦記録','/records/' in path),(league,'777リーグ',page['type']=='league'),(new_machines,'新台',page['type']=='new-machines'),(news,'ニュース',page['type']=='industry-news'),(watch,'番組',page['type']=='watch'),(about,'編集方針',page['type']=='about')]
+    nav_items=[(top+'#guides','機種ガイド',page['type']=='guide'),(records,'実戦記録','/records/' in path),(league,'777リーグ',page['type']=='league'),(new_machines,'新台',page['type']=='new-machines'),(news,'ニュース',page['type']=='industry-news'),(watch,'番組',page['type']=='watch'),(columns,'コラム','/columns/' in path),(about,'編集方針',page['type']=='about')]
     site_nav=''.join('<a href="'+esc(url)+'"'+(' class="is-current"' if current else '')+(' aria-current="page"' if url==relative(path,path) else '')+'>'+esc(label)+'</a>' for url,label,current in nav_items)
     title=esc(page['title']+'｜スロ探究');desc=esc(page['description'])
     verification=''
