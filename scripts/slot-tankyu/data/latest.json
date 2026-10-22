@@ -3,6 +3,15 @@
   "same_day_order": "同日はデータ登録順。時刻や公開順を推定しない。",
   "entries": [
     {
+      "source": "watch-garden-united",
+      "anchor": "",
+      "date": "2026-10-22",
+      "date_kind": "紹介日",
+      "group": "watch-garden",
+      "category": "番組紹介",
+      "reason": "本人提供の視聴メモ・コメントに基づくガーデン決起集会紹介原稿。動画公開日は10月19日、記事の紹介日と区別。ローカル準備段階。"
+    },
+    {
       "source": "new-machines",
       "anchor": "",
       "date": "2026-10-22",

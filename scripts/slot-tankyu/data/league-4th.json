@@ -709,7 +709,11 @@
       "release_at": "2026-10-19T20:00:00+09:00",
       "team": "ガーデンユナイテッド",
       "channel": "パチンコ・スロット ガーデンチャンネル",
-      "channel_url": "https://www.youtube.com/channel/UCZXm_j4cIA-XzE1QVzoJrHg"
+      "channel_url": "https://www.youtube.com/channel/UCZXm_j4cIA-XzE1QVzoJrHg",
+      "video_url": "https://www.youtube.com/watch?v=Hw7rRNl9vxQ",
+      "watch_slug": "garden-united-rally",
+      "video_link_checked_at": "2026-10-22",
+      "video_evidence": "YouTube公開情報・説明欄・oEmbedと10月19日付ガーデン公式公開告知を照合。動画本編の検証とは別。"
     },
     {
       "release_at": "2026-10-21T20:00:00+09:00",

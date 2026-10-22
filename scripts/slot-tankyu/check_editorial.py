@@ -110,17 +110,25 @@ def main():
             assert current['status']=='終了' and current['status_checked_at']=='2026-10-22'
             assert current['status_history'][0]['status']=='終了確認待ち'
         else:assert previous==current
-    assert league['rallies']==before['rallies']
+    assert prior_edition['rallies']==before['rallies']
+    pre_garden=json.loads(subprocess.check_output(['git','show','cf01a7bdd0996a1d79487a38c4a7adb8e8949407:scripts/slot-tankyu/data/league-4th.json'],cwd=ROOT))
     # Current change: one battle only; rally/video settings remain byte-for-byte equivalent.
-    for previous,current in zip(prior_edition['rows'],league['rows']):
+    for previous,current in zip(prior_edition['rows'],pre_garden['rows']):
         if current['date']=='2026-10-21':
             assert current['status']=='終了' and current['status_checked_at']=='2026-10-22'
             assert current['status_history'][0]['status']=='予定'
             assert current['evidence_url']=='https://x.com/Rino_Tachi/status/2112829620567556492'
             assert current['broadcast_date']==previous['broadcast_date'] and current['broadcast_status']==previous['broadcast_status']
         else:assert previous==current
-    assert {k:v for k,v in league.items() if k!='rows'}=={k:v for k,v in prior_edition.items() if k!='rows'}
-    assert section(render(league)['body'],'rallies')==section(render(prior_edition)['body'],'rallies')
+    assert {k:v for k,v in pre_garden.items() if k!='rows'}=={k:v for k,v in prior_edition.items() if k!='rows'}
+    assert section(render(pre_garden)['body'],'rallies')==section(render(prior_edition)['body'],'rallies')
+    assert {k:v for k,v in league.items() if k!='rallies'}=={k:v for k,v in pre_garden.items() if k!='rallies'}
+    for previous,current in zip(pre_garden['rallies'],league['rallies']):
+        if current['team']=='ガーデンユナイテッド':
+            assert current['video_url']=='https://www.youtube.com/watch?v=Hw7rRNl9vxQ'
+            assert current['watch_slug']=='garden-united-rally' and current['video_link_checked_at']=='2026-10-22'
+            assert {k:v for k,v in current.items() if k not in {'video_url','watch_slug','video_link_checked_at','video_evidence'}}==previous
+        else:assert current==previous
     assert '2026年10月22日 BLUE第6回戦' in section(render(league)['body'],'next')
     assert '2026年10月21日 BLUE第5回戦' not in section(render(league)['body'],'next')
     invalid_date=copy.deepcopy(league)
@@ -146,7 +154,7 @@ def main():
     else:raise AssertionError('Unsafe alternate source URL accepted')
     assert render(league)['updated']=='2026-10-22'
     body=render(league,'2026-10-21')['body']
-    assert section(body,'rallies').count('動画を見る ↗')==2
+    assert section(body,'rallies').count('動画を見る ↗')==3
     assert '公開確認待ち' in section(body,'rallies') and '公開予定' in section(body,'rallies')
     assert '2027年3月12日' in body and league==frozen
     assert '今後の収録予定は確認待ち' in render(league,'2027-04-01')['body']
@@ -189,6 +197,7 @@ def main():
             continue
         # New sources are fixed to their independently reviewed edition.
         additions={'record-tokyo-20261019': '71b8924a10ecc57a2bc07afe703181a1db8180bf43e2e62502e3c39897fd01f6', 'daily-20261019': 'ec926e38d38badcea3d0449d254b3e9fdf3e9bcece04f20dc017837099b5c4ae', 'record-shinuchi-20261018': 'da139b142aa0a7d92b1e188c49a72589892a0bbafe386880e4fb3493e8ce35cb', 'daily-20261018': '1fa5f7c24c22fafad4ad76499a82c354f0b5c43137090bb19008ab15c66f48c7', 'guide-shinuchi': 'f7b15411f5439c6766544153241778fd0e3b11429f6954c625c821172f5f374e', 'watch-tengai-golden-manes': 'f21f33428691055dba7190e95524a1f864cf115221bc1cf6e7aafd99ef806cc8', 'record-sao2-20261017': '20f595ea29a24fcc8eab1bf031bee452bacd826db385983ad89f9da946c75b0d', 'daily-20261017': '8da16be03d0dd6455c213a5e2d010f71b580bb125b598d8093ce607f88229e35'}
+        additions['watch-garden-united']='f2cd80a56de325c815786b2e47b553c79e7b2c808ec3876e40fe1e5091a67b1f'
         # First column: exact local edition, independently checked against the
         # author's manuscript and confirmed session data; see review record.
         additions['column-chatgpt-slot-log-failure']='90d54047d894a995cb05e9b442b7ce565bd2759b8fef6fdeed6f69acd0d662e0'
@@ -259,7 +268,7 @@ def main():
         data=json.loads((HERE/'data'/f'{name}.json').read_text())
         assert renderer(data)==catalog[name]
     # Preserve YouTube new-tab behavior, security controls, images and source data.
-    for name in ['watch-face-mega-tigers','watch-takoslot-wasabi']:
+    for name in ['watch-face-mega-tigers','watch-takoslot-wasabi','watch-garden-united']:
         for a in Content(build(catalog[name])).links:
             if a.get('class')=='button-primary' and 'youtube.com/' in a['href']:
                 assert a.get('target')=='_blank' and {'noopener','noreferrer'}<=set(a.get('rel','').split())
