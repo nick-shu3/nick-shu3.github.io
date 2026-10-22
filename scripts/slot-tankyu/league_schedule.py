@@ -30,7 +30,7 @@ def render(data, as_of=None):
         seen.add(key)
         if row['status'] not in {'予定', '終了', '終了確認待ち', '延期', '中止'}:
             raise ValueError('Invalid battle status')
-        if row['status'] == '終了' and (not row.get('evidence_url') or not row.get('evidence_note') or date >= checked):
+        if row['status'] == '終了' and (not row.get('evidence_url') or not row.get('evidence_note') or date >= datetime.date.fromisoformat(row.get('status_checked_at',data['checked_at']))):
             raise ValueError('Finished battle needs dated evidence')
         if row['broadcast_date']:
             datetime.date.fromisoformat(row['broadcast_date'])

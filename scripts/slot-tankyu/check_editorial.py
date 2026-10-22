@@ -87,7 +87,7 @@ def main():
             assert indexed[('2026-11-12','ルーキー戦第1回戦')]['venue']=='ダイナム長野上田店'
             assert indexed[('2026-11-25','RED第10回戦')]['venue']=='123+N布施店'
         elif name=='new-machines':
-            assert hashlib.sha256((ROOT/path).read_bytes()).hexdigest()=='2842af93b04fabebfacf4e9a34c4940a1a14d51ecc02b18d76159def4eb856e9',name
+            assert hashlib.sha256((ROOT/path).read_bytes()).hexdigest()=='98d6310e0cd8921be19d98fb2214e8ab115054096cc8685ef4d80b5f1e5d25a8',name
         else:assert (ROOT/path).read_bytes()==original(path),name
     league=json.loads((HERE/'data/league-4th.json').read_text());frozen=copy.deepcopy(league)
     legacy=json.loads(subprocess.check_output(['git','show','34eb7ad2ffa0ac6c81f2e782a5e08d1b42822e76:scripts/slot-tankyu/data/league-4th.json'],cwd=ROOT))
@@ -98,18 +98,52 @@ def main():
         assert body.count('class="league-status done"')==sum(r['status']=='終了' for r in legacy['rows'])
         assert '収録情報の確認日：2026年10月14日' in body
     assert '今後の収録予定は確認待ち' in render(legacy,'2027-01-01')['body']
+    prior_edition=json.loads(subprocess.check_output(['git','show','333a2620882d2046af0a31d8f2d8aebb4a602066:scripts/slot-tankyu/data/league-4th.json'],cwd=ROOT))
     for reference,first in [('2026-10-21','2026年10月21日'),('2026-10-22','2026年10月22日'),('2026-10-23','2026年10月30日')]:
-        body=render(league,reference)['body']
+        body=render(prior_edition,reference)['body']
         assert re.search(r'<li><a[^>]*>(\d+年\d+月\d+日)',section(body,'next'))[1]==first
-        assert body.count('class="league-status done"')==sum(r['status']=='終了' for r in league['rows'])
+        assert body.count('class="league-status done"')==sum(r['status']=='終了' for r in prior_edition['rows'])
     # 2026-10-22: resolve only the two reviewed statuses; preserve the other 40 rows.
     before=json.loads(subprocess.check_output(['git','show','112797c56d7e06c4dd22879ce8d92107eaa3dfd4:scripts/slot-tankyu/data/league-4th.json'],cwd=ROOT))
-    for previous,current in zip(before['rows'],league['rows']):
+    for previous,current in zip(before['rows'],prior_edition['rows']):
         if current['date'] in {'2026-08-31','2026-10-14'}:
             assert current['status']=='終了' and current['status_checked_at']=='2026-10-22'
             assert current['status_history'][0]['status']=='終了確認待ち'
         else:assert previous==current
     assert league['rallies']==before['rallies']
+    # Current change: one battle only; rally/video settings remain byte-for-byte equivalent.
+    for previous,current in zip(prior_edition['rows'],league['rows']):
+        if current['date']=='2026-10-21':
+            assert current['status']=='終了' and current['status_checked_at']=='2026-10-22'
+            assert current['status_history'][0]['status']=='予定'
+            assert current['evidence_url']=='https://x.com/Rino_Tachi/status/2112829620567556492'
+            assert current['broadcast_date']==previous['broadcast_date'] and current['broadcast_status']==previous['broadcast_status']
+        else:assert previous==current
+    assert {k:v for k,v in league.items() if k!='rows'}=={k:v for k,v in prior_edition.items() if k!='rows'}
+    assert section(render(league)['body'],'rallies')==section(render(prior_edition)['body'],'rallies')
+    assert '2026年10月22日 BLUE第6回戦' in section(render(league)['body'],'next')
+    assert '2026年10月21日 BLUE第5回戦' not in section(render(league)['body'],'next')
+    invalid_date=copy.deepcopy(league)
+    invalid_date['rows'][10]['status_checked_at']='2026-10-20'
+    try:render(invalid_date)
+    except ValueError:pass
+    else:raise AssertionError('Ended before its dated evidence accepted')
+    calendar=json.loads((HERE/'data/new-machines.json').read_text())
+    prior_calendar=json.loads(subprocess.check_output(['git','show','333a2620882d2046af0a31d8f2d8aebb4a602066:scripts/slot-tankyu/data/new-machines.json'],cwd=ROOT))
+    assert calendar['machines'][:12]==prior_calendar['machines'] and len(calendar['machines'])==17
+    assert [(m['date'],m['name']) for m in calendar['machines'][12:]]==[
+        ('2026-12-21','スマスロ 魔女と野獣'),('2026-12-21','Lブルーリフレクション帝'),
+        ('2027-01-12','パチスロ ライザのアトリエ ～常闇の女王と秘密の隠れ家～'),
+        ('2027-01-12','スマスロモンキーターンRED'),('2027-01-25','スマスロ シャカラッシュ')]
+    calendar_body=calendar_page(calendar)['body']
+    assert '2027年1月の導入予定' in calendar_body and '17機種' in calendar_body
+    for m in calendar['machines'][12:]:assert m['verification'] in calendar_body
+    assert '一撃は1月18日' in calendar_body and '一撃は1月12日' in calendar_body
+    assert calendar_body.count('別の日程資料')==2
+    invalid_link=copy.deepcopy(calendar);invalid_link['machines'][-1]['alternate_schedule_url']='javascript:alert(1)'
+    try:calendar_page(invalid_link)
+    except ValueError:pass
+    else:raise AssertionError('Unsafe alternate source URL accepted')
     assert render(league)['updated']=='2026-10-22'
     body=render(league,'2026-10-21')['body']
     assert section(body,'rallies').count('動画を見る ↗')==2

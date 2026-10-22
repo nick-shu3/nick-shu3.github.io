@@ -350,3 +350,14 @@ check.pyの31ページ生成・リンク・メタ・共有画像、check_editori
 検証：32ページ生成、リンク・アンカー・メタ・共有画像、編集回帰R01〜R09、SAO2保持、安全検査security/security-regression/release、diff検査、Gitleaks8.30.1 redactedの作業ツリー・全履歴に合格。他31ページソースの完全一致と共有画像の日本語/日付を確認。独立照合はreviews/2026-10-22-league-ended-independent.md、根拠と固定版はreviews/2026-10-22-league-ended-evidence.mdに記録する。
 
 今回のスマホ/PC実ブラウザー表示・Safari実機・SNS実カードは未実施。CSS/レイアウトは変更せず、前回の実表示を公開後へ回す本人指示の運用を継続。未実施を合格にせずPRへ明記する。PR最新HEADのverify成功後にmerge、Pages配信成功とHTTPの公開HTML一致を確認する。最終公開結果はPRに追記する。
+
+
+## 2026年10月22日：高崎の終了と新台カレンダー5機種追補
+
+基準main333a2620882d2046af0a31d8f2d8aebb4a602066。本人が10/21高崎を終了、新台未掲載分掲載を指示、決起集会は別途と指定。対象2ページの更新・掲載指示として公開まで進める。前回の別件承認を流用せず今回の明示指示を根拠とする。
+
+高崎は公式告知と橘リノの同日収録終了原投稿を通常HTTP200で照合。旧予定履歴を残す。新台は12/21魔女と野獣・ブルーリフレクション帝、2027/1/12ライザ・モンキーターンRED、1/25シャカラッシュのP-WORLD掲載予定を5件追加。ライザは一撃1/18、シャカは一撃1/12との違いを同じ行に明記し対照資料リンクを追加。日付はメーカー確定と扱わない。既存12件・他41収録行・動画/決起集会データ・日程照合日・予定表示基準日は維持する。GGO先行導入記事と業界ニュースは対象外。
+
+終了の証拠検査が個別確認日でなく全体の日程照合日を使っていた問題を修正。個別status_checked_atに対する日付検査へ変更。旧境界テストを固定fixtureで保持、新版で高崎が次回予定から除かれること・対象外保持・日程差の可視注記・危険な対照URL拒否を追加。new-machines/leagueの固定SHAは対象版へ更新し独立照合する。
+
+check.py、check_editorial.py、check_sao2.py、security.cjs/security-regression.cjs/release.cjs、diff --check合格。32ページ生成、カレンダー17件、42収録のうち終了11件。共有画像目視済み。独立検証はreviews/2026-10-22-calendar-takasaki-independent.md、根拠と版は同evidence.mdへ記録。実ブラウザー・Safari実機・SNSカードは未実施。既存CSS/レイアウトのまま、本人の先に公開してという運用に従い公開後の確認と区分する。Gitleaks最終スキャン後にPR作成、最新HEAD verify成功後merge、Pagesと公開配信を確認してPRへ結果を追記する。
