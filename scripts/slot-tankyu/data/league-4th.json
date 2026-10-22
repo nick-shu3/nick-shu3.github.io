@@ -719,7 +719,11 @@
       "release_at": "2026-10-21T20:00:00+09:00",
       "team": "123エンターテイナーズ",
       "channel": "123TV",
-      "channel_url": "https://www.youtube.com/channel/UC99XOUAd9ni4Mj3DAaVUBGw"
+      "channel_url": "https://www.youtube.com/channel/UC99XOUAd9ni4Mj3DAaVUBGw",
+      "video_url": "https://www.youtube.com/watch?v=Jrnxg90tmk0",
+      "watch_slug": "123-entertainers-rally",
+      "video_link_checked_at": "2026-10-22",
+      "video_evidence": "YouTube公開メタ・説明欄と出演者の公開告知で動画リンクを確認。本編の音声・字幕の直接照合とは別。"
     },
     {
       "release_at": "2026-10-23T20:00:00+09:00",
