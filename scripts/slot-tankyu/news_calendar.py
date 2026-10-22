@@ -49,6 +49,7 @@ def calendar_page(data):
             for item in day_items:
                 sources=link(item['schedule_url'],'日程資料')
                 if item['official_url']:sources+=' ／ '+link(item['official_url'],'メーカー公式')
+                if item.get('alternate_schedule_url'):sources+=' ／ '+link(item['alternate_schedule_url'],'別の日程資料')
                 body+='<tr><td><span class="tag">'+esc(item['kind'])+'</span></td><th scope="row">'+esc(item['name'])+'</th><td>'+esc(item['maker'])+'</td><td>'+esc(item['verification'])+'<br>'+sources+'</td></tr>'
             body+='</tbody></table></div><p><a href="#'+month_id+'">↑ 月のカレンダーへ</a></p></div>'
         body+='</section>'

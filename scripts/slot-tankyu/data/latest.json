@@ -3,6 +3,24 @@
   "same_day_order": "同日はデータ登録順。時刻や公開順を推定しない。",
   "entries": [
     {
+      "source": "new-machines",
+      "anchor": "",
+      "date": "2026-10-22",
+      "date_kind": "内容更新日",
+      "group": "new-machines-20261022",
+      "category": "新台情報",
+      "reason": "未掲載5機種を追加。日程資料に差があるライザ・シャカラッシュは同じ行に相違を明記。"
+    },
+    {
+      "source": "league-4th",
+      "anchor": "",
+      "date": "2026-10-22",
+      "date_kind": "内容更新日",
+      "group": "league-schedule-20261021",
+      "category": "777リーグ",
+      "reason": "10月21日高崎BLUE第5回戦を出演者の収録終了原投稿と照合し終了へ更新。決起集会は対象外。"
+    },
+    {
       "source": "league-4th",
       "anchor": "",
       "date": "2026-10-22",

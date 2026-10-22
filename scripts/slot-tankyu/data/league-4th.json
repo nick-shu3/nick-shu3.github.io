@@ -189,16 +189,30 @@
       "date": "2026-10-21",
       "round": "BLUE第5回戦",
       "venue": "Super D'station高崎本店",
-      "status": "予定",
+      "status": "終了",
       "broadcast_date": null,
       "broadcast_status": "未確認",
       "video_url": null,
       "schedule_source": "https://p-gabu.jp/sc/666/777league/schedule/",
-      "evidence_url": null,
-      "evidence_note": null,
+      "evidence_url": "https://x.com/Rino_Tachi/status/2112829620567556492",
+      "evidence_note": "橘リノの10月21日付投稿で高崎本店での777リーグ収録終了を明記。公式BLUE第5回戦告知の日付・会場・出演者と照合。",
       "schedule_checked_at": "2026-10-21",
       "schedule_source_type": "official",
-      "status_checked_at": "2026-10-14"
+      "status_checked_at": "2026-10-22",
+      "status_history": [
+        {
+          "checked_at": "2026-10-14",
+          "status": "予定",
+          "note": "公式日程を2026年10月21日に照合。終了根拠は未登録。"
+        },
+        {
+          "checked_at": "2026-10-22",
+          "status": "終了",
+          "note": "橘リノの10月21日付の高崎本店777リーグ収録終了報告と公式BLUE第5回戦告知を照合。"
+        }
+      ],
+      "status_note": "出演者・橘リノの当日収録終了報告を確認。",
+      "status_review_note": "2026年10月22日に原投稿本文・投稿日を通常HTTP取得で確認。放送・配信日は今回変更しない。"
     },
     {
       "date": "2026-10-22",

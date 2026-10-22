@@ -1,6 +1,6 @@
 {
-  "checked_at": "2026-10-19",
-  "source_updated_at": "2026-10-18",
+  "checked_at": "2026-10-22",
+  "source_updated_at": "2026-10-22",
   "machines": [
     {
       "date": "2026-10-19",
@@ -121,6 +121,58 @@
       "official_url": "https://oizumi.co.jp/wp-content/uploads/2026/09/aa25c54786413885a2223874e1354a57.pdf",
       "verification": "製品掲載・発売発表確認／導入日は二次資料",
       "checked_at": "2026-10-14"
+    },
+    {
+      "date": "2026-12-21",
+      "name": "スマスロ 魔女と野獣",
+      "maker": "オレンジ",
+      "kind": "パチスロ",
+      "schedule_url": "https://www.p-world.co.jp/database/machine/introduce_calendar.cgi?type=Pachi",
+      "official_url": "https://www.fujimarukun.co.jp/products/l_majo/",
+      "verification": "製品掲載確認／12月21日は日程資料で確認",
+      "checked_at": "2026-10-22"
+    },
+    {
+      "date": "2026-12-21",
+      "name": "Lブルーリフレクション帝",
+      "maker": "オリンピア",
+      "kind": "パチスロ",
+      "schedule_url": "https://www.p-world.co.jp/database/machine/introduce_calendar.cgi?type=Pachi",
+      "official_url": "https://www.heiwanet.co.jp/products/pachislot/sbr1/",
+      "verification": "メーカー発表は12月予定／12月21日は日程資料で確認",
+      "checked_at": "2026-10-22"
+    },
+    {
+      "date": "2027-01-12",
+      "name": "パチスロ ライザのアトリエ ～常闇の女王と秘密の隠れ家～",
+      "maker": "北電子",
+      "kind": "パチスロ",
+      "schedule_url": "https://www.p-world.co.jp/database/machine/introduce_calendar.cgi?type=Pachi",
+      "official_url": "https://www.kitadenshi.co.jp/slot/ryza/",
+      "verification": "製品掲載確認／P-WORLDは1月12日、一撃は1月18日予定。具体日は要確認",
+      "checked_at": "2026-10-22",
+      "alternate_schedule_url": "https://1geki.jp/newmachinecalender/202701/"
+    },
+    {
+      "date": "2027-01-12",
+      "name": "スマスロモンキーターンRED",
+      "maker": "セブンリーグ",
+      "kind": "パチスロ",
+      "schedule_url": "https://www.p-world.co.jp/database/machine/introduce_calendar.cgi?type=Pachi",
+      "official_url": "https://yamasa-next.co.jp/slot/mktrd/",
+      "verification": "製品掲載確認／1月12日は日程資料で確認",
+      "checked_at": "2026-10-22"
+    },
+    {
+      "date": "2027-01-25",
+      "name": "スマスロ シャカラッシュ",
+      "maker": "マルホン",
+      "kind": "パチスロ",
+      "schedule_url": "https://www.p-world.co.jp/database/machine/introduce_calendar.cgi?type=Pachi",
+      "official_url": null,
+      "verification": "P-WORLDは1月25日、一撃は1月12日予定。メーカーの具体日は未確認",
+      "checked_at": "2026-10-22",
+      "alternate_schedule_url": "https://1geki.jp/newmachinecalender/202701/"
     }
   ]
 }
