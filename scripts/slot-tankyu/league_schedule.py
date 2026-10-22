@@ -80,6 +80,7 @@ def render(data, as_of=None):
             raise ValueError('Video links need a reviewed YouTube URL and check date')
         state = '動画リンクあり' if video else '公開確認待ち' if dt.date()<reference else '公開予定'
         state_note = '<br><small>リンク確認：'+date_label(rally['video_link_checked_at'])+'</small>' if video else ''
+        if video and rally.get('video_evidence'):state_note+='<br><small>'+esc(rally['video_evidence'])+'</small>'
         video_link = '<a href="'+esc(video)+'">動画を見る ↗</a><br>' if video else ''
         if not url.startswith('https://www.youtube.com/'):
             raise ValueError('Channel links must use YouTube HTTPS')
@@ -91,7 +92,7 @@ def render(data, as_of=None):
                 raise ValueError('Invalid watch article slug')
             note = '<br><a href="../../watch/'+esc(slug)+'/">サイト内の視聴メモ・感想 →</a>'
         rally_cells.append('<tr><th scope="row"><time datetime="'+esc(rally['release_at'])+'">'+label+'</time></th><td>'+esc(rally['team'])+note+'</td><td>'+state+state_note+'</td><td>'+video_link+'<a href="'+esc(url)+'">'+'公式チャンネル：'+esc(rally['channel'])+' ↗</a></td></tr>')
-    body += '<section id="rallies"><h2>チーム決起集会の公開状況・予定</h2><p>告知上の予定は2026年10月15日〜29日の各日20:00。過去日でも、対象動画を確認できていないものは「公開確認待ち」としています。</p><div class="tablewrap" tabindex="0" role="region" aria-label="チーム決起集会の動画公開予定表"><table><caption>777リーグ4th・チーム決起集会</caption><thead><tr><th scope="col">告知上の公開予定</th><th scope="col">チーム</th><th scope="col">確認状況</th><th scope="col">動画・公式チャンネル</th></tr></thead><tbody>'+''.join(rally_cells)+'</tbody></table></div><p class="hint">動画リンクがある2本は、既存の紹介記事で確認したものです。今回のYouTube本文の再取得はできていません。その他はチャンネルへのリンクで、公開の確認を意味しません。予定は変更される場合があります。</p><p><a href="'+esc(source)+'">告知元：777リーグ公式X ↗</a>（2026年10月14日の告知／確認日：'+esc(date_label(data['video_checked_at']))+'）</p></section>'
+    body += '<section id="rallies"><h2>チーム決起集会の公開状況・予定</h2><p>告知上の予定は2026年10月15日〜29日の各日20:00。過去日でも、対象動画を確認できていないものは「公開確認待ち」としています。</p><div class="tablewrap" tabindex="0" role="region" aria-label="チーム決起集会の動画公開予定表"><table><caption>777リーグ4th・チーム決起集会</caption><thead><tr><th scope="col">告知上の公開予定</th><th scope="col">チーム</th><th scope="col">確認状況</th><th scope="col">動画・公式チャンネル</th></tr></thead><tbody>'+''.join(rally_cells)+'</tbody></table></div><p class="hint">動画リンクの確認日・確認範囲は各行に記載しています。動画の公開情報やリンクの確認と、映像内容の検証は別です。チャンネルへのリンクだけでは、対象動画の公開確認を意味しません。予定は変更される場合があります。</p><p><a href="'+esc(source)+'">告知元：777リーグ公式X ↗</a>（2026年10月14日の告知／確認日：'+esc(date_label(data['video_checked_at']))+'）</p></section>'
     upcoming = [row for row in rows if row['status']=='予定' and datetime.date.fromisoformat(row['date']) >= reference]
     pending = [row for row in rows if row['status']=='終了確認待ち']
     body += '<section id="next"><h2>次の収録予定</h2><p class="hint">予定表示の基準日：'+date_label(reference)+'。公式収録スケジュールの掲載日程です。予定は変更される場合があるため、来場前に公式・店舗案内を確認してください。</p>'

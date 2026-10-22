@@ -72,11 +72,18 @@ def check_sao2(page):
             data=json.loads((ROOT/data_path).read_text())
             assert current==render(data),path
             # Reviewed official schedule edition; facts checked independently.
-            assert hashlib.sha256((ROOT/data_path).read_bytes()).hexdigest()=='8638b4d870c79ba8f151d41323e377d8c33ef82ad9634cb9728005a08706aa50','Unreviewed schedule edition'
+            assert hashlib.sha256((ROOT/data_path).read_bytes()).hexdigest()=='a2ad1273edf56c58cab76fc020a0fe94d8db4ceb9fc1efda72cf2d12ed55b4b2','Unreviewed schedule edition'
             continue
         if path.endswith('/watch-listing.json'):
             old=json.loads(subprocess.check_output(['git','show',BASE+':'+path],cwd=ROOT))
             current=json.loads((ROOT/path).read_text())
+            reviewed=json.loads(subprocess.check_output(['git','show','cf01a7bdd0996a1d79487a38c4a7adb8e8949407:'+path],cwd=ROOT))
+            garden=r'<a class="card report-card" href="garden-united-rally/">.*?</a>'
+            assert len(re.findall(garden,current['body']))==1
+            current['body']=re.sub(garden,'',current['body'])
+            assert current['updated']=='2026年10月22日'
+            current['updated']=reviewed['updated']
+            assert current==reviewed,path
             card=r'<a class="card report-card" href="tengai-golden-manes-rally/">.*?</a>'
             assert len(re.findall(card,current['body']))==1
             current['body']=re.sub(card,'',current['body'])
