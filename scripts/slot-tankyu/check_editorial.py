@@ -123,7 +123,15 @@ def main():
     assert {k:v for k,v in pre_garden.items() if k!='rows'}=={k:v for k,v in prior_edition.items() if k!='rows'}
     assert section(render(pre_garden)['body'],'rallies')==section(render(prior_edition)['body'],'rallies')
     assert {k:v for k,v in league.items() if k!='rallies'}=={k:v for k,v in pre_garden.items() if k!='rallies'}
-    for previous,current in zip(pre_garden['rallies'],league['rallies']):
+    reviewed_garden=json.loads(subprocess.check_output(['git','show','767bf3e0298c91a21b5dab549497593189438f71:scripts/slot-tankyu/data/league-4th.json'],cwd=ROOT))
+    for previous,current in zip(reviewed_garden['rallies'],league['rallies']):
+        if current['team']=='123エンターテイナーズ':
+            assert current['video_url']=='https://www.youtube.com/watch?v=Jrnxg90tmk0'
+            assert current['watch_slug']=='123-entertainers-rally'
+            assert current['video_link_checked_at']=='2026-10-22'
+            assert {k:v for k,v in current.items() if k not in {'video_url','watch_slug','video_link_checked_at','video_evidence'}}==previous
+        else:assert current==previous
+    for previous,current in zip(pre_garden['rallies'],reviewed_garden['rallies']):
         if current['team']=='ガーデンユナイテッド':
             assert current['video_url']=='https://www.youtube.com/watch?v=Hw7rRNl9vxQ'
             assert current['watch_slug']=='garden-united-rally' and current['video_link_checked_at']=='2026-10-22'
@@ -154,7 +162,7 @@ def main():
     else:raise AssertionError('Unsafe alternate source URL accepted')
     assert render(league)['updated']=='2026-10-22'
     body=render(league,'2026-10-21')['body']
-    assert section(body,'rallies').count('動画を見る ↗')==3
+    assert section(body,'rallies').count('動画を見る ↗')==4
     assert '公開確認待ち' in section(body,'rallies') and '公開予定' in section(body,'rallies')
     assert '2027年3月12日' in body and league==frozen
     assert '今後の収録予定は確認待ち' in render(league,'2027-04-01')['body']
@@ -197,6 +205,7 @@ def main():
             continue
         # New sources are fixed to their independently reviewed edition.
         additions={'record-tokyo-20261019': '71b8924a10ecc57a2bc07afe703181a1db8180bf43e2e62502e3c39897fd01f6', 'daily-20261019': 'ec926e38d38badcea3d0449d254b3e9fdf3e9bcece04f20dc017837099b5c4ae', 'record-shinuchi-20261018': 'da139b142aa0a7d92b1e188c49a72589892a0bbafe386880e4fb3493e8ce35cb', 'daily-20261018': '1fa5f7c24c22fafad4ad76499a82c354f0b5c43137090bb19008ab15c66f48c7', 'guide-shinuchi': 'f7b15411f5439c6766544153241778fd0e3b11429f6954c625c821172f5f374e', 'watch-tengai-golden-manes': 'f21f33428691055dba7190e95524a1f864cf115221bc1cf6e7aafd99ef806cc8', 'record-sao2-20261017': '20f595ea29a24fcc8eab1bf031bee452bacd826db385983ad89f9da946c75b0d', 'daily-20261017': '8da16be03d0dd6455c213a5e2d010f71b580bb125b598d8093ce607f88229e35'}
+        additions['watch-123-entertainers']='af4a2faa1f4a7e36b13e386c00226249415aedf31acb02ead7ac5949356b0166'
         additions['watch-garden-united']='f2cd80a56de325c815786b2e47b553c79e7b2c808ec3876e40fe1e5091a67b1f'
         # First column: exact local edition, independently checked against the
         # author's manuscript and confirmed session data; see review record.

@@ -3,6 +3,15 @@
   "same_day_order": "同日はデータ登録順。時刻や公開順を推定しない。",
   "entries": [
     {
+      "source": "watch-123-entertainers",
+      "anchor": "",
+      "date": "2026-10-22",
+      "date_kind": "紹介日",
+      "group": "watch-123",
+      "category": "番組紹介",
+      "reason": "本人提供の視聴メモとコメントによる紹介。動画公開日10月21日と記事紹介日を区別。"
+    },
+    {
       "source": "watch-garden-united",
       "anchor": "",
       "date": "2026-10-22",
