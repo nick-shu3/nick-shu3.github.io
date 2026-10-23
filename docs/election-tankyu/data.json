@@ -1,0 +1,874 @@
+{
+  "version": "0.6",
+  "as_of": "2026-10-23",
+  "scope": "第51回衆議院議員総選挙に関係する3政党5具体策の限定抽出。全公約・全政党を網羅しない。",
+  "internal": false,
+  "parties": [
+    {
+      "id": "LDP",
+      "name": "自由民主党",
+      "order": 0,
+      "role": "当時の与野党・会派の期間は未調査"
+    },
+    {
+      "id": "DPFP",
+      "name": "国民民主党",
+      "order": 1,
+      "role": "当時の与野党・会派の期間は未調査"
+    },
+    {
+      "id": "SANSEI",
+      "name": "参政党",
+      "order": 2,
+      "role": "当時の与野党・会派の期間は未調査"
+    }
+  ],
+  "elections": [
+    {
+      "id": "SHU51",
+      "title": "第51回衆議院議員総選挙",
+      "election_date": "2026-02-08",
+      "source_id": "S13",
+      "verification": "ai_checked",
+      "human_review": "pending"
+    }
+  ],
+  "promises": [
+    {
+      "id": "P001",
+      "revision": 1,
+      "election_id": "SHU51",
+      "party_id": "LDP",
+      "title": "飲食料品の消費税について2年間の時限措置を検討",
+      "summary": "飲食料品を2年間、消費税の対象としないことについて、国民会議で財源や日程を含め検討を加速する。",
+      "original_quote": "飲食料品は、2年間に限り消費税の対象としないことについて、今後「国民会議」において、財源やスケジュールの在り方など、実現に向けた検討を加速します。",
+      "original_verification": "ai_checked",
+      "source_ids": [
+        "S01"
+      ],
+      "condition_ids": [
+        "P001-C1",
+        "P001-C2",
+        "P001-C3",
+        "P001-C4"
+      ],
+      "topics": [
+        "税金"
+      ],
+      "type": "検討型",
+      "target_population": "飲食料品",
+      "amount": "金額の約束ではない",
+      "duration": {
+        "value": 2,
+        "unit": "年",
+        "meaning": "措置の適用期間。実現期限とは別"
+      },
+      "deadline": {
+        "state": "unspecified",
+        "date": null,
+        "note": "原文に明示された実現期限を確認できない"
+      },
+      "policy_change": {
+        "state": "unknown",
+        "note": "撤回・変更の有無は未確認"
+      },
+      "announcement_date": "2026-01-21",
+      "announcement_source_id": "S12",
+      "version_note": "2026年選挙特設ページの取得内容。選挙時点の固定版との照合は人間未承認。",
+      "review_state": "pending",
+      "unknowns": [
+        "検討を加速したと判断する基準と期限",
+        "法案内容と公約条件の一致",
+        "施行と実施実績",
+        "政党・議員への寄与の帰属"
+      ],
+      "related_source_ids": [
+        "S04",
+        "S05",
+        "S14",
+        "S18",
+        "S19"
+      ],
+      "conditions": [
+        {
+          "id": "P001-C1",
+          "promise_id": "P001",
+          "label": "対象",
+          "value": "飲食料品",
+          "required": true,
+          "source_id": "S01",
+          "verification": "ai_checked"
+        },
+        {
+          "id": "P001-C2",
+          "promise_id": "P001",
+          "label": "約束した行為",
+          "value": "検討の加速",
+          "required": true,
+          "source_id": "S01",
+          "verification": "ai_checked"
+        },
+        {
+          "id": "P001-C3",
+          "promise_id": "P001",
+          "label": "適用期間",
+          "value": "2年間",
+          "required": false,
+          "source_id": "S01",
+          "verification": "ai_checked"
+        },
+        {
+          "id": "P001-C4",
+          "promise_id": "P001",
+          "label": "実現期限",
+          "value": "記載を確認できず",
+          "required": false,
+          "source_id": "S01",
+          "verification": "ai_checked"
+        }
+      ],
+      "original_human_approved": false,
+      "assessment_approved": false,
+      "assessment": {
+        "fulfillment": "判定保留",
+        "legislative_stage": "未確認",
+        "social_outcome": "未評価",
+        "deadline_state": "記載なし",
+        "policy_change": "未確認",
+        "reason": "公約と実績の対応を人間が審査するまで判定保留。未達成を意味しません。",
+        "stage_note": "関連する資料は調査済みですが、承認済みの進捗説明はまだありません。"
+      },
+      "events": [],
+      "involvements": [],
+      "metric_result": {
+        "eligible": false,
+        "reason": "比較可能な承認済みの目標値と実績値がありません。"
+      }
+    },
+    {
+      "id": "P002",
+      "revision": 1,
+      "election_id": "SHU51",
+      "party_id": "LDP",
+      "title": "給付付き税額控除の制度設計",
+      "summary": "中・低所得者の税・社会保険料負担を軽減する給付付き税額控除の制度設計を進める。",
+      "original_quote": "中・低所得者（若者・現役世代を含む）の税・社会保険料負担を軽減し、所得に応じて手取りが増えるように、「給付付き税額控除」の制度設計を進めます。",
+      "original_verification": "ai_checked",
+      "source_ids": [
+        "S01"
+      ],
+      "condition_ids": [
+        "P002-C1",
+        "P002-C2",
+        "P002-C3",
+        "P002-C4"
+      ],
+      "topics": [
+        "税金",
+        "社会保障"
+      ],
+      "type": "設計型",
+      "target_population": "中・低所得者（若者・現役世代を含む）",
+      "amount": "一律の金額記載を確認できず",
+      "duration": null,
+      "deadline": {
+        "state": "unspecified",
+        "date": null,
+        "note": "原文に明示された実現期限を確認できない"
+      },
+      "policy_change": {
+        "state": "unknown",
+        "note": "撤回・変更の有無は未確認"
+      },
+      "announcement_date": "2026-01-21",
+      "announcement_source_id": "S12",
+      "version_note": "2026年選挙特設ページの取得内容。選挙時点の固定版との照合は人間未承認。",
+      "review_state": "pending",
+      "unknowns": [
+        "制度設計の完了条件・期限",
+        "8月5日とされる基本方針の本文",
+        "法案・制度と公約の条件対応",
+        "給付開始と政策効果"
+      ],
+      "related_source_ids": [
+        "S05",
+        "S16"
+      ],
+      "conditions": [
+        {
+          "id": "P002-C1",
+          "promise_id": "P002",
+          "label": "対象",
+          "value": "中・低所得者（若者・現役世代を含む）",
+          "required": true,
+          "source_id": "S01",
+          "verification": "ai_checked"
+        },
+        {
+          "id": "P002-C2",
+          "promise_id": "P002",
+          "label": "約束した行為",
+          "value": "制度設計を進める",
+          "required": true,
+          "source_id": "S01",
+          "verification": "ai_checked"
+        },
+        {
+          "id": "P002-C3",
+          "promise_id": "P002",
+          "label": "適用期間",
+          "value": "記載を確認できず",
+          "required": false,
+          "source_id": "S01",
+          "verification": "ai_checked"
+        },
+        {
+          "id": "P002-C4",
+          "promise_id": "P002",
+          "label": "実現期限",
+          "value": "記載を確認できず",
+          "required": false,
+          "source_id": "S01",
+          "verification": "ai_checked"
+        }
+      ],
+      "original_human_approved": false,
+      "assessment_approved": false,
+      "assessment": {
+        "fulfillment": "判定保留",
+        "legislative_stage": "未確認",
+        "social_outcome": "未評価",
+        "deadline_state": "記載なし",
+        "policy_change": "未確認",
+        "reason": "公約と実績の対応を人間が審査するまで判定保留。未達成を意味しません。",
+        "stage_note": "関連する資料は調査済みですが、承認済みの進捗説明はまだありません。"
+      },
+      "events": [],
+      "involvements": [],
+      "metric_result": {
+        "eligible": false,
+        "reason": "比較可能な承認済みの目標値と実績値がありません。"
+      }
+    },
+    {
+      "id": "P003",
+      "revision": 1,
+      "election_id": "SHU51",
+      "party_id": "DPFP",
+      "title": "社会保険料還付制度の導入",
+      "summary": "給付付き税額控除に先行して社会保険料還付制度を導入し、現役世代の負担を軽減する。",
+      "original_quote": "制度が複雑となる「減税＋給付」の連動（給付付き税額控除）に先行して、「社会保険料還付制度」を導入し、現役世代の社会保険料負担を軽減します。",
+      "original_verification": "ai_checked",
+      "source_ids": [
+        "S02"
+      ],
+      "condition_ids": [
+        "P003-C1",
+        "P003-C2",
+        "P003-C3",
+        "P003-C4"
+      ],
+      "topics": [
+        "税金",
+        "社会保障"
+      ],
+      "type": "制度実施型",
+      "target_population": "現役世代の社会保険料負担",
+      "amount": "一律の給付目標額は確認できず",
+      "duration": null,
+      "deadline": {
+        "state": "unspecified",
+        "date": null,
+        "note": "原文に明示された実現期限を確認できない"
+      },
+      "policy_change": {
+        "state": "unknown",
+        "note": "撤回・変更の有無は未確認"
+      },
+      "announcement_date": null,
+      "announcement_source_id": null,
+      "version_note": "2026年選挙特設ページの取得内容。選挙時点の固定版との照合は人間未承認。",
+      "review_state": "pending",
+      "unknowns": [
+        "6月10日の提案PDFの本文と約1000万人・約5万円の根拠",
+        "法案第4条と公約の条件の一致",
+        "成立・公布・給付実施"
+      ],
+      "related_source_ids": [
+        "S06",
+        "S07",
+        "S08",
+        "S15"
+      ],
+      "conditions": [
+        {
+          "id": "P003-C1",
+          "promise_id": "P003",
+          "label": "対象",
+          "value": "現役世代の社会保険料負担",
+          "required": true,
+          "source_id": "S02",
+          "verification": "ai_checked"
+        },
+        {
+          "id": "P003-C2",
+          "promise_id": "P003",
+          "label": "約束した行為",
+          "value": "還付制度の導入",
+          "required": true,
+          "source_id": "S02",
+          "verification": "ai_checked"
+        },
+        {
+          "id": "P003-C3",
+          "promise_id": "P003",
+          "label": "適用期間",
+          "value": "記載を確認できず",
+          "required": false,
+          "source_id": "S02",
+          "verification": "ai_checked"
+        },
+        {
+          "id": "P003-C4",
+          "promise_id": "P003",
+          "label": "実現期限",
+          "value": "記載を確認できず",
+          "required": false,
+          "source_id": "S02",
+          "verification": "ai_checked"
+        }
+      ],
+      "original_human_approved": false,
+      "assessment_approved": false,
+      "assessment": {
+        "fulfillment": "判定保留",
+        "legislative_stage": "未確認",
+        "social_outcome": "未評価",
+        "deadline_state": "記載なし",
+        "policy_change": "未確認",
+        "reason": "公約と実績の対応を人間が審査するまで判定保留。未達成を意味しません。",
+        "stage_note": "関連する資料は調査済みですが、承認済みの進捗説明はまだありません。"
+      },
+      "events": [],
+      "involvements": [],
+      "metric_result": {
+        "eligible": false,
+        "reason": "比較可能な承認済みの目標値と実績値がありません。"
+      }
+    },
+    {
+      "id": "P004",
+      "revision": 1,
+      "election_id": "SHU51",
+      "party_id": "SANSEI",
+      "title": "消費税の廃止",
+      "summary": "消費税を廃止する。",
+      "original_quote": "消費税廃止",
+      "original_verification": "reproduction_checked",
+      "source_ids": [
+        "S03"
+      ],
+      "condition_ids": [
+        "P004-C1",
+        "P004-C2",
+        "P004-C3",
+        "P004-C4"
+      ],
+      "topics": [
+        "税金"
+      ],
+      "type": "法律・制度廃止型",
+      "target_population": "消費税全体",
+      "amount": "金額の約束ではない",
+      "duration": null,
+      "deadline": {
+        "state": "unspecified",
+        "date": null,
+        "note": "原文に明示された実現期限を確認できない"
+      },
+      "policy_change": {
+        "state": "unknown",
+        "note": "撤回・変更の有無は未確認"
+      },
+      "announcement_date": null,
+      "announcement_source_id": null,
+      "version_note": "転載PDFの1ページ目を照合。党公式の原本・公表日は未確認。",
+      "review_state": "pending",
+      "unknowns": [
+        "党公式の選挙公約原本との同一性",
+        "廃止に係る法案・採決・施行の網羅的確認",
+        "達成期限と当該党への寄与"
+      ],
+      "related_source_ids": [
+        "S09",
+        "S10",
+        "S17"
+      ],
+      "conditions": [
+        {
+          "id": "P004-C1",
+          "promise_id": "P004",
+          "label": "対象",
+          "value": "消費税全体",
+          "required": true,
+          "source_id": "S03",
+          "verification": "reproduction_checked"
+        },
+        {
+          "id": "P004-C2",
+          "promise_id": "P004",
+          "label": "約束した行為",
+          "value": "廃止",
+          "required": true,
+          "source_id": "S03",
+          "verification": "reproduction_checked"
+        },
+        {
+          "id": "P004-C3",
+          "promise_id": "P004",
+          "label": "適用期間",
+          "value": "記載を確認できず",
+          "required": false,
+          "source_id": "S03",
+          "verification": "reproduction_checked"
+        },
+        {
+          "id": "P004-C4",
+          "promise_id": "P004",
+          "label": "実現期限",
+          "value": "記載を確認できず",
+          "required": false,
+          "source_id": "S03",
+          "verification": "reproduction_checked"
+        }
+      ],
+      "original_human_approved": false,
+      "assessment_approved": false,
+      "assessment": {
+        "fulfillment": "判定保留",
+        "legislative_stage": "未確認",
+        "social_outcome": "未評価",
+        "deadline_state": "記載なし",
+        "policy_change": "未確認",
+        "reason": "公約と実績の対応を人間が審査するまで判定保留。未達成を意味しません。",
+        "stage_note": "関連する資料は調査済みですが、承認済みの進捗説明はまだありません。"
+      },
+      "events": [],
+      "involvements": [],
+      "metric_result": {
+        "eligible": false,
+        "reason": "比較可能な承認済みの目標値と実績値がありません。"
+      }
+    },
+    {
+      "id": "P005",
+      "revision": 1,
+      "election_id": "SHU51",
+      "party_id": "SANSEI",
+      "title": "インボイス制度の廃止",
+      "summary": "インボイス制度を廃止する。",
+      "original_quote": "インボイス制度廃止",
+      "original_verification": "reproduction_checked",
+      "source_ids": [
+        "S03"
+      ],
+      "condition_ids": [
+        "P005-C1",
+        "P005-C2",
+        "P005-C3",
+        "P005-C4"
+      ],
+      "topics": [
+        "税金"
+      ],
+      "type": "法律・制度廃止型",
+      "target_population": "インボイス制度",
+      "amount": "金額の約束ではない",
+      "duration": null,
+      "deadline": {
+        "state": "unspecified",
+        "date": null,
+        "note": "原文に明示された実現期限を確認できない"
+      },
+      "policy_change": {
+        "state": "unknown",
+        "note": "撤回・変更の有無は未確認"
+      },
+      "announcement_date": null,
+      "announcement_source_id": null,
+      "version_note": "転載PDFの1ページ目を照合。党公式の原本・公表日は未確認。",
+      "review_state": "pending",
+      "unknowns": [
+        "党公式の選挙公約原本との同一性",
+        "廃止法案・成立・施行の網羅的確認",
+        "達成期限と議員別関与"
+      ],
+      "related_source_ids": [
+        "S11",
+        "S17"
+      ],
+      "conditions": [
+        {
+          "id": "P005-C1",
+          "promise_id": "P005",
+          "label": "対象",
+          "value": "インボイス制度",
+          "required": true,
+          "source_id": "S03",
+          "verification": "reproduction_checked"
+        },
+        {
+          "id": "P005-C2",
+          "promise_id": "P005",
+          "label": "約束した行為",
+          "value": "廃止",
+          "required": true,
+          "source_id": "S03",
+          "verification": "reproduction_checked"
+        },
+        {
+          "id": "P005-C3",
+          "promise_id": "P005",
+          "label": "適用期間",
+          "value": "記載を確認できず",
+          "required": false,
+          "source_id": "S03",
+          "verification": "reproduction_checked"
+        },
+        {
+          "id": "P005-C4",
+          "promise_id": "P005",
+          "label": "実現期限",
+          "value": "記載を確認できず",
+          "required": false,
+          "source_id": "S03",
+          "verification": "reproduction_checked"
+        }
+      ],
+      "original_human_approved": false,
+      "assessment_approved": false,
+      "assessment": {
+        "fulfillment": "判定保留",
+        "legislative_stage": "未確認",
+        "social_outcome": "未評価",
+        "deadline_state": "記載なし",
+        "policy_change": "未確認",
+        "reason": "公約と実績の対応を人間が審査するまで判定保留。未達成を意味しません。",
+        "stage_note": "関連する資料は調査済みですが、承認済みの進捗説明はまだありません。"
+      },
+      "events": [],
+      "involvements": [],
+      "metric_result": {
+        "eligible": false,
+        "reason": "比較可能な承認済みの目標値と実績値がありません。"
+      }
+    }
+  ],
+  "sources": [
+    {
+      "id": "S01",
+      "url": "https://www.jimin.jp/election/results/sen_shu51/political_promise/manifesto/04/",
+      "title": "政権公約2026 第4章・社会保障",
+      "publisher": "自由民主党",
+      "kind": "party_manifesto",
+      "fetch_status": "retrieved",
+      "published_at": null,
+      "retrieved_at": "2026-10-23T08:55:58+09:00",
+      "source_version": null,
+      "version_note": "発行版の指定がない場合は取得時点の掲載内容。公開日と取得日は別管理。",
+      "verification_note": "選挙特設サイトで文言を確認。取得時の内容と選挙当日の固定版の同一性は未承認。",
+      "locator": "社会保障の第2・第3項／抽出行77–78",
+      "capture_hash": "a54a05509db3f89c82f37b8e2c5bb6e300715a1c26d6b142a5024ec389a858cb",
+      "hash_scope": "selected_excerpts_utf8"
+    },
+    {
+      "id": "S02",
+      "url": "https://election2026.new-kokumin.jp/policies/specifics/specifics1/",
+      "title": "政策各論1・❹社会保険料軽減策の導入",
+      "publisher": "国民民主党",
+      "kind": "party_manifesto",
+      "fetch_status": "retrieved",
+      "published_at": null,
+      "retrieved_at": "2026-10-23T08:55:58+09:00",
+      "source_version": null,
+      "version_note": "発行版の指定がない場合は取得時点の掲載内容。公開日と取得日は別管理。",
+      "verification_note": "",
+      "locator": "❹社会保険料軽減策の導入／抽出行54",
+      "capture_hash": "c6001ef1c956802767a89db194de5452335b444ab44d7bf64074d61a98b616e1",
+      "hash_scope": "selected_excerpts_utf8"
+    },
+    {
+      "id": "S03",
+      "url": "https://partsa.nikkei.com/parts/ds/shuin2026/pdf/sansei_b.pdf",
+      "title": "参政党 2026衆議院選挙公約（転載PDF）",
+      "publisher": "参政党（配信ホスト：日本経済新聞）",
+      "kind": "reproduced_manifesto_pdf",
+      "fetch_status": "retrieved",
+      "published_at": null,
+      "retrieved_at": "2026-10-23T08:55:58+09:00",
+      "source_version": null,
+      "version_note": "発行版の指定がない場合は取得時点の掲載内容。公開日と取得日は別管理。",
+      "verification_note": "党作成と表示された転載資料。党公式原本との同一性、公開日、固定版は未確認。",
+      "locator": "ファイル内1ページ目・第1の柱①具体策",
+      "capture_hash": "d81c4de709b5085bad23986244b4dab296be6b9267e7cebd7f029e0975feaab4",
+      "hash_scope": "selected_excerpts_utf8"
+    },
+    {
+      "id": "S04",
+      "url": "https://www.shugiin.go.jp/internet/itdb_gian.nsf/html/gian/keika/1DE342E.htm",
+      "title": "第222回国会 閣法第1号・審議経過",
+      "publisher": "衆議院",
+      "kind": "parliament_record",
+      "fetch_status": "retrieved",
+      "published_at": null,
+      "retrieved_at": "2026-10-23T08:55:58+09:00",
+      "source_version": null,
+      "version_note": "発行版の指定がない場合は取得時点の掲載内容。公開日と取得日は別管理。",
+      "verification_note": "空欄を否決・不存在とは解釈しない。基準日時点で成立・公布はこの資料から確認できない。",
+      "locator": "受理・付託・審査結果・公布の各欄",
+      "capture_hash": "f42f1c7b6e901a3d16e1d833ae9315d7cfde031d8d4aa1165de6677be9efbc9a",
+      "hash_scope": "selected_excerpts_utf8"
+    },
+    {
+      "id": "S05",
+      "url": "https://www.nta.go.jp/taxes/shiraberu/zeimokubetsu/shohi/keigenzeiritsu/zeiritsuhikisage.htm",
+      "title": "消費税率引下げ特設サイト",
+      "publisher": "国税庁・財務省",
+      "kind": "government_plan",
+      "fetch_status": "retrieved",
+      "published_at": "2026-09-15",
+      "retrieved_at": "2026-10-23T08:55:58+09:00",
+      "source_version": null,
+      "version_note": "発行版の指定がない場合は取得時点の掲載内容。公開日と取得日は別管理。",
+      "verification_note": "成立を前提にした制度案の説明。施行済みの根拠ではない。",
+      "locator": "冒頭の制度案説明・成立条件の注記",
+      "capture_hash": "35ca44a69dd12d71b11c7eaf63ab6ba8822c9c0a8f1390c68f795181898fc87e",
+      "hash_scope": "selected_excerpts_utf8"
+    },
+    {
+      "id": "S06",
+      "url": "https://www.shugiin.go.jp/internet/itdb_gian.nsf/html/gian/keika/1DE36B6.htm",
+      "title": "第222回国会 衆法第1号・審議経過",
+      "publisher": "衆議院",
+      "kind": "parliament_record",
+      "fetch_status": "retrieved",
+      "published_at": null,
+      "retrieved_at": "2026-10-23T08:55:58+09:00",
+      "source_version": null,
+      "version_note": "発行版の指定がない場合は取得時点の掲載内容。公開日と取得日は別管理。",
+      "verification_note": "",
+      "locator": "提出者・提出会派・受理・公布欄",
+      "capture_hash": "8210b83eab9d4eb1603899fb642550629673785c1a0644765d6d68de2b487c59",
+      "hash_scope": "selected_excerpts_utf8"
+    },
+    {
+      "id": "S07",
+      "url": "https://www.shugiin.go.jp/internet/itdb_gian.nsf/html/gian/honbun/houan/g22205001.htm",
+      "title": "就業者の租税及び社会保険料による負担の軽減のために講ずべき措置に関する法律案",
+      "publisher": "衆議院",
+      "kind": "bill_text",
+      "fetch_status": "retrieved",
+      "published_at": null,
+      "retrieved_at": "2026-10-23T08:55:58+09:00",
+      "source_version": null,
+      "version_note": "発行版の指定がない場合は取得時点の掲載内容。公開日と取得日は別管理。",
+      "verification_note": "ここは原文の逐語引用ではなく条文確認メモ。法律案であり成立法ではない。給付条件の公約との全一致は未判定。",
+      "locator": "第4条第1項、第4項、附則第1項",
+      "capture_hash": "6dcbb0d1194c3557fd9bcc19af0aa86627c2a11d5b9b51d6fc8ca8814ddb7b36",
+      "hash_scope": "selected_excerpts_utf8"
+    },
+    {
+      "id": "S08",
+      "url": "https://new-kokumin.jp/news/diet/20261020_1",
+      "title": "議員立法「中間層向け住民税減税法案」を提出",
+      "publisher": "国民民主党",
+      "kind": "party_activity",
+      "fetch_status": "retrieved",
+      "published_at": "2026-10-20",
+      "retrieved_at": "2026-10-23T08:55:58+09:00",
+      "source_version": null,
+      "version_note": "発行版の指定がない場合は取得時点の掲載内容。公開日と取得日は別管理。",
+      "verification_note": "党自身の活動説明。提出日・提出者は国会記録で交差確認。政策効果の自己評価は採用しない。",
+      "locator": "2026.10.20・本文冒頭、第3項、末尾",
+      "capture_hash": "c48ed4846d4e06c9f7fa46cfd9aeac47b379793347d8a73b31494cd780224950",
+      "hash_scope": "selected_excerpts_utf8"
+    },
+    {
+      "id": "S09",
+      "url": "https://www.sangiin.go.jp/japanese/kaigijoho/shitsugi/221/s027_0407.html",
+      "title": "第221回国会 予算委員会第11回・質疑項目",
+      "publisher": "参議院",
+      "kind": "parliament_summary",
+      "fetch_status": "retrieved",
+      "published_at": "2026-04-07",
+      "retrieved_at": "2026-10-23T08:55:58+09:00",
+      "source_version": null,
+      "version_note": "発行版の指定がない場合は取得時点の掲載内容。公開日と取得日は別管理。",
+      "verification_note": "事務局による項目の抜粋。発言全文・法案提出・政策実現を裏付ける資料ではない。",
+      "locator": "令和8年4月7日・安藤裕（参政）の項目",
+      "capture_hash": "1d54d321f22a8cfd68fa0b5e9a9cad991a8b814f996128938b9b23892bbef9ff",
+      "hash_scope": "selected_excerpts_utf8"
+    },
+    {
+      "id": "S10",
+      "url": "https://www.nta.go.jp/taxes/shiraberu/taxanswer/shohi/6303.htm",
+      "title": "No.6303 消費税および地方消費税の税率",
+      "publisher": "国税庁",
+      "kind": "government_guidance",
+      "fetch_status": "retrieved",
+      "published_at": null,
+      "retrieved_at": "2026-10-23T08:55:58+09:00",
+      "source_version": null,
+      "version_note": "発行版の指定がない場合は取得時点の掲載内容。公開日と取得日は別管理。",
+      "verification_note": "資料の法令基準は2026-04-01。将来の引下げ案の注記と、成立確認・施行確認を混同しない。10月23日時点の網羅的な法令監査の代用にはしない。",
+      "locator": "令和8年4月1日現在法令等・概要",
+      "capture_hash": "b1577be092bfec4b1416f47a7c7b40eb6e9f1bee410bde4c4c332de488c2c189",
+      "hash_scope": "selected_excerpts_utf8"
+    },
+    {
+      "id": "S11",
+      "url": "https://www.nta.go.jp/taxes/shiraberu/zeimokubetsu/shohi/keigenzeiritsu/invoice.htm",
+      "title": "特集 インボイス制度",
+      "publisher": "国税庁",
+      "kind": "government_guidance",
+      "fetch_status": "retrieved",
+      "published_at": null,
+      "retrieved_at": "2026-10-23T08:55:58+09:00",
+      "source_version": null,
+      "version_note": "発行版の指定がない場合は取得時点の掲載内容。公開日と取得日は別管理。",
+      "verification_note": "制度案内・登録手続が掲載されていることの資料。廃止法の有無を網羅的に確認したという意味ではない。",
+      "locator": "TOPICS 2026/10/15、登録申請手続への案内",
+      "capture_hash": "c2f62987ec5efcc5cd290c69708ef0f143a12983f2aff610896a1f4e0df67b8e",
+      "hash_scope": "selected_excerpts_utf8"
+    },
+    {
+      "id": "S12",
+      "url": "https://www.jimin.jp/news/policy/212294.html",
+      "title": "衆院総選挙の公約を発表",
+      "publisher": "自由民主党",
+      "kind": "manifesto_announcement",
+      "fetch_status": "retrieved",
+      "published_at": "2026-01-21",
+      "retrieved_at": "2026-10-23T08:55:58+09:00",
+      "source_version": null,
+      "version_note": "発行版の指定がない場合は取得時点の掲載内容。公開日と取得日は別管理。",
+      "verification_note": "公約全体の発表日。S01のHTMLの更新日・改版日を意味しない。",
+      "locator": "2026年1月21日・本文冒頭",
+      "capture_hash": "a52bf06d263ecd8aded16be331912f39c295d197b59055f46755d18b9f574473",
+      "hash_scope": "selected_excerpts_utf8"
+    },
+    {
+      "id": "S13",
+      "url": "https://www.vill.kitanakagusuku.lg.jp/kakuka/soumu/senkyo/4581.html",
+      "title": "第51回衆議院議員総選挙・選挙日程",
+      "publisher": "北中城村",
+      "kind": "election_authority",
+      "fetch_status": "retrieved",
+      "published_at": null,
+      "retrieved_at": "2026-10-23T08:55:58+09:00",
+      "source_version": null,
+      "version_note": "発行版の指定がない場合は取得時点の掲載内容。公開日と取得日は別管理。",
+      "verification_note": "",
+      "locator": "1. 選挙日程",
+      "capture_hash": "144e60264b050802a19a417a826eae2bd511551df95ed115d7cd79659b3432ca",
+      "hash_scope": "selected_excerpts_utf8"
+    },
+    {
+      "id": "S14",
+      "url": "https://www.cas.go.jp/jp/seisaku/shouhizei_zeigakukoujo/index.html",
+      "title": "飲食料品に係る消費税率の引下げ・給付付き税額控除",
+      "publisher": "内閣官房",
+      "kind": "government_plan",
+      "fetch_status": "fetch_404",
+      "published_at": null,
+      "retrieved_at": "2026-10-23T08:55:58+09:00",
+      "source_version": null,
+      "version_note": "発行版の指定がない場合は取得時点の掲載内容。公開日と取得日は別管理。",
+      "verification_note": "検索結果には存在するが本文取得は404。制度不存在や主張の虚偽とは判定しない。",
+      "locator": "本文取得失敗",
+      "capture_hash": null,
+      "hash_scope": null
+    },
+    {
+      "id": "S15",
+      "url": "https://www.cas.go.jp/jp/seisaku/kokuminkaigi/contents/20260610/02_siryou2.pdf",
+      "title": "2026-06-10 国民民主党の制度提案とされる資料",
+      "publisher": "内閣官房",
+      "kind": "government_meeting_document",
+      "fetch_status": "fetch_404",
+      "published_at": null,
+      "retrieved_at": "2026-10-23T08:55:58+09:00",
+      "source_version": null,
+      "version_note": "発行版の指定がない場合は取得時点の掲載内容。公開日と取得日は別管理。",
+      "verification_note": "約1000万人・約5万円という既存値は原資料本文を取得できず採用しない。",
+      "locator": "本文取得失敗",
+      "capture_hash": null,
+      "hash_scope": null
+    },
+    {
+      "id": "S16",
+      "url": "https://www.cas.go.jp/jp/seisaku/kokuminkaigi/contents/20260805/01_siryou1.pdf",
+      "title": "給付付き税額控除の制度導入の基本方針とされる資料",
+      "publisher": "内閣官房",
+      "kind": "government_plan",
+      "fetch_status": "fetch_failed",
+      "published_at": null,
+      "retrieved_at": "2026-10-23T08:55:58+09:00",
+      "source_version": null,
+      "version_note": "発行版の指定がない場合は取得時点の掲載内容。公開日と取得日は別管理。",
+      "verification_note": "検索断片の8月5日閣議決定は独立した確定実績に採用しない。",
+      "locator": "本文取得失敗",
+      "capture_hash": null,
+      "hash_scope": null
+    },
+    {
+      "id": "S17",
+      "url": "https://sanseito.jp/51th_hor_election_policy/",
+      "title": "第51回衆議院選挙 公約ページ候補",
+      "publisher": "参政党",
+      "kind": "party_manifesto",
+      "fetch_status": "fetch_404",
+      "published_at": null,
+      "retrieved_at": "2026-10-23T08:55:58+09:00",
+      "source_version": null,
+      "version_note": "発行版の指定がない場合は取得時点の掲載内容。公開日と取得日は別管理。",
+      "verification_note": "転載公約の公式原本との同一性確認が未完了。",
+      "locator": "本文取得失敗",
+      "capture_hash": null,
+      "hash_scope": null
+    },
+    {
+      "id": "S18",
+      "url": "https://www.cas.go.jp/jp/seisaku/shouhizei_zeigakukoujo/pdf/sankou4.pdf",
+      "title": "飲食料品消費税率の臨時的な引下げ等の大綱候補",
+      "publisher": "内閣官房",
+      "kind": "government_plan",
+      "fetch_status": "fetch_404",
+      "published_at": null,
+      "retrieved_at": "2026-10-23T08:55:58+09:00",
+      "source_version": null,
+      "version_note": "発行版の指定がない場合は取得時点の掲載内容。公開日と取得日は別管理。",
+      "verification_note": "1%や実質ゼロの詳細条件の本文確認は未完了。",
+      "locator": "本文取得失敗",
+      "capture_hash": null,
+      "hash_scope": null
+    },
+    {
+      "id": "S19",
+      "url": "https://www.shugiin.go.jp/internet/itdb_gian.nsf/html/gian/menu.htm",
+      "title": "第222回国会 議案一覧",
+      "publisher": "衆議院",
+      "kind": "parliament_index",
+      "fetch_status": "retrieved",
+      "published_at": null,
+      "retrieved_at": "2026-10-23T08:55:58+09:00",
+      "source_version": null,
+      "version_note": "発行版の指定がない場合は取得時点の掲載内容。公開日と取得日は別管理。",
+      "verification_note": "",
+      "locator": "閣法第1号／衆法第1号・審議状況欄",
+      "capture_hash": "40ad2b831d2152c653792e902b6b21dc7e81525d5462a0646e0160659c62008e",
+      "hash_scope": "selected_excerpts_utf8"
+    }
+  ],
+  "evidence": []
+}
