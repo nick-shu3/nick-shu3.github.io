@@ -1,7 +1,7 @@
 {
-  "version": "0.6",
+  "version": "0.7",
   "as_of": "2026-10-23",
-  "scope": "第51回衆議院議員総選挙に関係する3政党5具体策の限定抽出。全公約・全政党を網羅しない。",
+  "scope": "第51回衆議院議員総選挙の生活関連分野から、4政党15具体策を限定抽出。全政党・全公約を網羅しない。",
   "internal": false,
   "parties": [
     {
@@ -21,6 +21,12 @@
       "name": "参政党",
       "order": 2,
       "role": "当時の与野党・会派の期間は未調査"
+    },
+    {
+      "id": "ISHIN",
+      "name": "日本維新の会",
+      "order": 3,
+      "role": "当時の与野党・会派の期間は未調査"
     }
   ],
   "elections": [
@@ -36,7 +42,7 @@
   "promises": [
     {
       "id": "P001",
-      "revision": 1,
+      "revision": 2,
       "election_id": "SHU51",
       "party_id": "LDP",
       "title": "飲食料品の消費税について2年間の時限措置を検討",
@@ -140,6 +146,12 @@
       },
       "events": [],
       "involvements": [],
+      "comparison_group": "consumption",
+      "original_locator": "社会保障 第3項（飲食料品部分）",
+      "quote_scope": "対象具体策の抜粋",
+      "rechecked_at": "2026-10-23",
+      "amount_note": "選挙後の提案額を公約の金額として補完しない。",
+      "metrics": null,
       "metric_result": {
         "eligible": false,
         "reason": "比較可能な承認済みの目標値と実績値がありません。"
@@ -147,7 +159,7 @@
     },
     {
       "id": "P002",
-      "revision": 1,
+      "revision": 2,
       "election_id": "SHU51",
       "party_id": "LDP",
       "title": "給付付き税額控除の制度設計",
@@ -245,6 +257,12 @@
       },
       "events": [],
       "involvements": [],
+      "comparison_group": "relief",
+      "original_locator": "社会保障 第2項",
+      "quote_scope": "対象具体策の抜粋",
+      "rechecked_at": "2026-10-23",
+      "amount_note": "選挙後の提案額を公約の金額として補完しない。",
+      "metrics": null,
       "metric_result": {
         "eligible": false,
         "reason": "比較可能な承認済みの目標値と実績値がありません。"
@@ -252,7 +270,7 @@
     },
     {
       "id": "P003",
-      "revision": 1,
+      "revision": 2,
       "election_id": "SHU51",
       "party_id": "DPFP",
       "title": "社会保険料還付制度の導入",
@@ -351,6 +369,12 @@
       },
       "events": [],
       "involvements": [],
+      "comparison_group": "relief",
+      "original_locator": "1（1）❹社会保険料軽減策・還付制度部分",
+      "quote_scope": "対象具体策の抜粋",
+      "rechecked_at": "2026-10-23",
+      "amount_note": "選挙後の提案額を公約の金額として補完しない。",
+      "metrics": null,
       "metric_result": {
         "eligible": false,
         "reason": "比較可能な承認済みの目標値と実績値がありません。"
@@ -358,7 +382,7 @@
     },
     {
       "id": "P004",
-      "revision": 1,
+      "revision": 2,
       "election_id": "SHU51",
       "party_id": "SANSEI",
       "title": "消費税の廃止",
@@ -455,6 +479,12 @@
       },
       "events": [],
       "involvements": [],
+      "comparison_group": "consumption",
+      "original_locator": "PDF1ページ目・第1の柱①具体策",
+      "quote_scope": "対象具体策の抜粋",
+      "rechecked_at": "2026-10-23",
+      "amount_note": "選挙後の提案額を公約の金額として補完しない。",
+      "metrics": null,
       "metric_result": {
         "eligible": false,
         "reason": "比較可能な承認済みの目標値と実績値がありません。"
@@ -462,7 +492,7 @@
     },
     {
       "id": "P005",
-      "revision": 1,
+      "revision": 2,
       "election_id": "SHU51",
       "party_id": "SANSEI",
       "title": "インボイス制度の廃止",
@@ -558,6 +588,913 @@
       },
       "events": [],
       "involvements": [],
+      "comparison_group": "invoice",
+      "original_locator": "PDF1ページ目・第1の柱①具体策",
+      "quote_scope": "対象具体策の抜粋",
+      "rechecked_at": "2026-10-23",
+      "amount_note": "選挙後の提案額を公約の金額として補完しない。",
+      "metrics": null,
+      "metric_result": {
+        "eligible": false,
+        "reason": "比較可能な承認済みの目標値と実績値がありません。"
+      }
+    },
+    {
+      "id": "P006",
+      "revision": 1,
+      "election_id": "SHU51",
+      "party_id": "LDP",
+      "title": "出産費用の負担軽減に向けた法案を提出",
+      "summary": "標準的な出産費用の自己負担をなくす施策など、妊娠・出産の経済負担を軽くする法案を次期国会に提出する。",
+      "original_quote": "法案を次期国会に提出します。",
+      "original_verification": "ai_checked",
+      "source_ids": [
+        "S01"
+      ],
+      "condition_ids": [
+        "P006-C1",
+        "P006-C2"
+      ],
+      "topics": [
+        "子育て",
+        "社会保障"
+      ],
+      "type": "法律型",
+      "target_population": "妊娠・出産に伴う費用",
+      "amount": "金額の明示なし",
+      "duration": null,
+      "deadline": {
+        "state": "relative",
+        "date": null,
+        "note": "次期国会に提出。具体的回次との対応は未確認。"
+      },
+      "policy_change": {
+        "state": "unknown",
+        "note": "撤回・変更の有無は未確認"
+      },
+      "announcement_date": "2026-01-21",
+      "announcement_source_id": "S12",
+      "version_note": "2026年選挙資料の取得版。選挙当日の固定版との同一性は人間未承認。",
+      "review_state": "pending",
+      "unknowns": [
+        "次期国会の回次との対応",
+        "法案の特定・提出と成立の別",
+        "標準的な費用の範囲と自己負担"
+      ],
+      "related_source_ids": [],
+      "conditions": [
+        {
+          "id": "P006-C1",
+          "promise_id": "P006",
+          "label": "約束した行為",
+          "value": "負担軽減に向けた法案の提出",
+          "required": true,
+          "source_id": "S01",
+          "verification": "ai_checked"
+        },
+        {
+          "id": "P006-C2",
+          "promise_id": "P006",
+          "label": "対象費用",
+          "value": "標準的な出産費用等",
+          "required": true,
+          "source_id": "S01",
+          "verification": "ai_checked"
+        }
+      ],
+      "original_human_approved": false,
+      "assessment_approved": false,
+      "assessment": {
+        "fulfillment": "判定保留",
+        "legislative_stage": "未確認",
+        "social_outcome": "未評価",
+        "deadline_state": "相対期限あり・対応未確認",
+        "policy_change": "未確認",
+        "reason": "公約と実績の対応を人間が審査するまで判定保留。未達成を意味しません。",
+        "stage_note": "この追加候補について、選挙後の実績・関連法案の調査と人間審査は未完了です。"
+      },
+      "events": [],
+      "involvements": [],
+      "comparison_group": "childbirth",
+      "original_locator": "こども・子育て 第2項",
+      "quote_scope": "短い抜粋。対象・条件は編集要約と原資料の前後で確認。",
+      "rechecked_at": "2026-10-23",
+      "amount_note": "選挙後の提案額を公約の金額として補完しない。",
+      "metrics": null,
+      "metric_result": {
+        "eligible": false,
+        "reason": "比較可能な承認済みの目標値と実績値がありません。"
+      }
+    },
+    {
+      "id": "P007",
+      "revision": 1,
+      "election_id": "SHU51",
+      "party_id": "LDP",
+      "title": "こども誰でも通園制度の本格実施を進める",
+      "summary": "こども未来戦略の加速化プランに沿い、こども誰でも通園制度を本格的に実施する取組を進める。",
+      "original_quote": "「こども誰でも通園制度」の本格実施",
+      "original_verification": "ai_checked",
+      "source_ids": [
+        "S01"
+      ],
+      "condition_ids": [
+        "P007-C1",
+        "P007-C2"
+      ],
+      "topics": [
+        "子育て"
+      ],
+      "type": "制度実施型",
+      "target_population": "こども誰でも通園制度",
+      "amount": "加速化プラン全体3.6兆円規模。単独制度の予算額ではない。",
+      "duration": null,
+      "deadline": {
+        "state": "unspecified",
+        "date": null,
+        "note": "実現期限の記載を確認できず"
+      },
+      "policy_change": {
+        "state": "unknown",
+        "note": "撤回・変更の有無は未確認"
+      },
+      "announcement_date": "2026-01-21",
+      "announcement_source_id": "S12",
+      "version_note": "2026年選挙資料の取得版。選挙当日の固定版との同一性は人間未承認。",
+      "review_state": "pending",
+      "unknowns": [
+        "選挙前の既存制度・決定との区別",
+        "実施対象・利用条件",
+        "地域別の提供状況"
+      ],
+      "related_source_ids": [],
+      "conditions": [
+        {
+          "id": "P007-C1",
+          "promise_id": "P007",
+          "label": "前提",
+          "value": "加速化プランに基づく取組",
+          "required": true,
+          "source_id": "S01",
+          "verification": "ai_checked"
+        },
+        {
+          "id": "P007-C2",
+          "promise_id": "P007",
+          "label": "行為",
+          "value": "本格実施の推進",
+          "required": true,
+          "source_id": "S01",
+          "verification": "ai_checked"
+        }
+      ],
+      "original_human_approved": false,
+      "assessment_approved": false,
+      "assessment": {
+        "fulfillment": "判定保留",
+        "legislative_stage": "未確認",
+        "social_outcome": "未評価",
+        "deadline_state": "記載なし",
+        "policy_change": "未確認",
+        "reason": "公約と実績の対応を人間が審査するまで判定保留。未達成を意味しません。",
+        "stage_note": "この追加候補について、選挙後の実績・関連法案の調査と人間審査は未完了です。"
+      },
+      "events": [],
+      "involvements": [],
+      "comparison_group": "childcare",
+      "original_locator": "こども・子育て 第1項",
+      "quote_scope": "短い抜粋。対象・条件は編集要約と原資料の前後で確認。",
+      "rechecked_at": "2026-10-23",
+      "amount_note": "選挙後の提案額を公約の金額として補完しない。",
+      "metrics": null,
+      "metric_result": {
+        "eligible": false,
+        "reason": "比較可能な承認済みの目標値と実績値がありません。"
+      }
+    },
+    {
+      "id": "P008",
+      "revision": 1,
+      "election_id": "SHU51",
+      "party_id": "LDP",
+      "title": "医療・福祉・介護の幅広い職種の賃上げ",
+      "summary": "地域の医療や介護の基盤を支えるため、医療・福祉・介護分野の幅広い職種で賃上げを図る。",
+      "original_quote": "確実な賃上げを図ります。",
+      "original_verification": "ai_checked",
+      "source_ids": [
+        "S01"
+      ],
+      "condition_ids": [
+        "P008-C1",
+        "P008-C2"
+      ],
+      "topics": [
+        "雇用",
+        "社会保障"
+      ],
+      "type": "政策目標型",
+      "target_population": "医療・福祉・介護分野の幅広い職種",
+      "amount": "上昇額・割合の明示なし",
+      "duration": null,
+      "deadline": {
+        "state": "unspecified",
+        "date": null,
+        "note": "実現期限の記載を確認できず"
+      },
+      "policy_change": {
+        "state": "unknown",
+        "note": "撤回・変更の有無は未確認"
+      },
+      "announcement_date": "2026-01-21",
+      "announcement_source_id": "S12",
+      "version_note": "2026年選挙資料の取得版。選挙当日の固定版との同一性は人間未承認。",
+      "review_state": "pending",
+      "unknowns": [
+        "賃上げの基準時点・対象職種",
+        "賃金実績と政策の因果関係",
+        "評価期間・期限"
+      ],
+      "related_source_ids": [],
+      "conditions": [
+        {
+          "id": "P008-C1",
+          "promise_id": "P008",
+          "label": "目的",
+          "value": "地域医療・介護等の基盤を守る",
+          "required": true,
+          "source_id": "S01",
+          "verification": "ai_checked"
+        },
+        {
+          "id": "P008-C2",
+          "promise_id": "P008",
+          "label": "対象",
+          "value": "医療・福祉・介護の幅広い職種",
+          "required": true,
+          "source_id": "S01",
+          "verification": "ai_checked"
+        }
+      ],
+      "original_human_approved": false,
+      "assessment_approved": false,
+      "assessment": {
+        "fulfillment": "判定保留",
+        "legislative_stage": "未確認",
+        "social_outcome": "未評価",
+        "deadline_state": "記載なし",
+        "policy_change": "未確認",
+        "reason": "公約と実績の対応を人間が審査するまで判定保留。未達成を意味しません。",
+        "stage_note": "この追加候補について、選挙後の実績・関連法案の調査と人間審査は未完了です。"
+      },
+      "events": [],
+      "involvements": [],
+      "comparison_group": "care-wages",
+      "original_locator": "社会保障 第1項",
+      "quote_scope": "短い抜粋。対象・条件は編集要約と原資料の前後で確認。",
+      "rechecked_at": "2026-10-23",
+      "amount_note": "選挙後の提案額を公約の金額として補完しない。",
+      "metrics": null,
+      "metric_result": {
+        "eligible": false,
+        "reason": "比較可能な承認済みの目標値と実績値がありません。"
+      }
+    },
+    {
+      "id": "P009",
+      "revision": 1,
+      "election_id": "SHU51",
+      "party_id": "DPFP",
+      "title": "条件付きで消費税率を一律5％にする",
+      "summary": "賃金の伸びが物価の伸びを2ポイント上回る水準で安定するまで、消費税率を一律5％に引き下げる。",
+      "original_quote": "消費税減税（10％→一律5％）",
+      "original_verification": "ai_checked",
+      "source_ids": [
+        "S02"
+      ],
+      "condition_ids": [
+        "P009-C1",
+        "P009-C2"
+      ],
+      "topics": [
+        "税金",
+        "物価"
+      ],
+      "type": "数値目標型",
+      "target_population": "消費税率",
+      "amount": "一律5％",
+      "duration": null,
+      "deadline": {
+        "state": "unspecified",
+        "date": null,
+        "note": "実現期限の記載を確認できず"
+      },
+      "policy_change": {
+        "state": "unknown",
+        "note": "撤回・変更の有無は未確認"
+      },
+      "announcement_date": null,
+      "announcement_source_id": null,
+      "version_note": "2026年選挙資料の取得版。選挙当日の固定版との同一性は人間未承認。",
+      "review_state": "pending",
+      "unknowns": [
+        "賃金と物価の指標・観測期間",
+        "安定して達したと判断する基準",
+        "実施法・開始時期"
+      ],
+      "related_source_ids": [],
+      "conditions": [
+        {
+          "id": "P009-C1",
+          "promise_id": "P009",
+          "label": "終了条件",
+          "value": "賃金上昇率が物価上昇率＋2％に安定して達するまで",
+          "required": true,
+          "source_id": "S02",
+          "verification": "ai_checked"
+        },
+        {
+          "id": "P009-C2",
+          "promise_id": "P009",
+          "label": "目標",
+          "value": "一律5％",
+          "required": true,
+          "source_id": "S02",
+          "verification": "ai_checked"
+        }
+      ],
+      "original_human_approved": false,
+      "assessment_approved": false,
+      "assessment": {
+        "fulfillment": "判定保留",
+        "legislative_stage": "未確認",
+        "social_outcome": "未評価",
+        "deadline_state": "記載なし",
+        "policy_change": "未確認",
+        "reason": "公約と実績の対応を人間が審査するまで判定保留。未達成を意味しません。",
+        "stage_note": "この追加候補について、選挙後の実績・関連法案の調査と人間審査は未完了です。"
+      },
+      "events": [],
+      "involvements": [],
+      "comparison_group": "consumption",
+      "original_locator": "1（1）❺消費税減税等 第1段落",
+      "quote_scope": "短い抜粋。対象・条件は編集要約と原資料の前後で確認。",
+      "rechecked_at": "2026-10-23",
+      "amount_note": "選挙後の提案額を公約の金額として補完しない。",
+      "metrics": {
+        "target": {
+          "value": 5,
+          "unit": "％",
+          "entity": "消費税率",
+          "period": "措置期間",
+          "calendar": "未指定",
+          "price_basis": "税率",
+          "population": "一律税率の対象",
+          "region": "日本",
+          "revision": "公約取得版",
+          "direction": "decrease"
+        },
+        "actual": null
+      },
+      "metric_result": {
+        "eligible": false,
+        "reason": "比較可能な承認済みの目標値と実績値がありません。"
+      }
+    },
+    {
+      "id": "P010",
+      "revision": 1,
+      "election_id": "SHU51",
+      "party_id": "DPFP",
+      "title": "インボイス制度を廃止する",
+      "summary": "中小事業者や個人事業主、フリーランスの負担を踏まえ、インボイス制度を廃止する。",
+      "original_quote": "インボイス制度は廃止します。",
+      "original_verification": "ai_checked",
+      "source_ids": [
+        "S02"
+      ],
+      "condition_ids": [
+        "P010-C1"
+      ],
+      "topics": [
+        "税金"
+      ],
+      "type": "制度廃止型",
+      "target_population": "中小事業者・個人事業主・フリーランス等",
+      "amount": "金額の約束ではない",
+      "duration": null,
+      "deadline": {
+        "state": "unspecified",
+        "date": null,
+        "note": "実現期限の記載を確認できず"
+      },
+      "policy_change": {
+        "state": "unknown",
+        "note": "撤回・変更の有無は未確認"
+      },
+      "announcement_date": null,
+      "announcement_source_id": null,
+      "version_note": "2026年選挙資料の取得版。選挙当日の固定版との同一性は人間未承認。",
+      "review_state": "pending",
+      "unknowns": [
+        "廃止に向けた法律案・審議経過",
+        "実施期限",
+        "代替する仕組み・経過措置"
+      ],
+      "related_source_ids": [],
+      "conditions": [
+        {
+          "id": "P010-C1",
+          "promise_id": "P010",
+          "label": "行為",
+          "value": "インボイス制度の廃止",
+          "required": true,
+          "source_id": "S02",
+          "verification": "ai_checked"
+        }
+      ],
+      "original_human_approved": false,
+      "assessment_approved": false,
+      "assessment": {
+        "fulfillment": "判定保留",
+        "legislative_stage": "未確認",
+        "social_outcome": "未評価",
+        "deadline_state": "記載なし",
+        "policy_change": "未確認",
+        "reason": "公約と実績の対応を人間が審査するまで判定保留。未達成を意味しません。",
+        "stage_note": "この追加候補について、選挙後の実績・関連法案の調査と人間審査は未完了です。"
+      },
+      "events": [],
+      "involvements": [],
+      "comparison_group": "invoice",
+      "original_locator": "1（1）❺消費税減税等 第2段落",
+      "quote_scope": "短い抜粋。対象・条件は編集要約と原資料の前後で確認。",
+      "rechecked_at": "2026-10-23",
+      "amount_note": "選挙後の提案額を公約の金額として補完しない。",
+      "metrics": null,
+      "metric_result": {
+        "eligible": false,
+        "reason": "比較可能な承認済みの目標値と実績値がありません。"
+      }
+    },
+    {
+      "id": "P011",
+      "revision": 1,
+      "election_id": "SHU51",
+      "party_id": "DPFP",
+      "title": "再エネ賦課金を廃止する",
+      "summary": "家計の電気料金負担を軽くするため、再生可能エネルギー発電促進賦課金の廃止を掲げる。",
+      "original_quote": "「再生可能エネルギー発電促進賦課金」を廃止",
+      "original_verification": "ai_checked",
+      "source_ids": [
+        "S02"
+      ],
+      "condition_ids": [
+        "P011-C1"
+      ],
+      "topics": [
+        "物価"
+      ],
+      "type": "制度廃止型",
+      "target_population": "再生可能エネルギー発電促進賦課金",
+      "amount": "世帯ごとの軽減額は明示なし",
+      "duration": null,
+      "deadline": {
+        "state": "unspecified",
+        "date": null,
+        "note": "実現期限の記載を確認できず"
+      },
+      "policy_change": {
+        "state": "unknown",
+        "note": "撤回・変更の有無は未確認"
+      },
+      "announcement_date": null,
+      "announcement_source_id": null,
+      "version_note": "2026年選挙資料の取得版。選挙当日の固定版との同一性は人間未承認。",
+      "review_state": "pending",
+      "unknowns": [
+        "廃止の法律案・財源の扱い",
+        "実施期限",
+        "家庭別の電気料金への影響"
+      ],
+      "related_source_ids": [],
+      "conditions": [
+        {
+          "id": "P011-C1",
+          "promise_id": "P011",
+          "label": "行為",
+          "value": "賦課金の廃止",
+          "required": true,
+          "source_id": "S02",
+          "verification": "ai_checked"
+        }
+      ],
+      "original_human_approved": false,
+      "assessment_approved": false,
+      "assessment": {
+        "fulfillment": "判定保留",
+        "legislative_stage": "未確認",
+        "social_outcome": "未評価",
+        "deadline_state": "記載なし",
+        "policy_change": "未確認",
+        "reason": "公約と実績の対応を人間が審査するまで判定保留。未達成を意味しません。",
+        "stage_note": "この追加候補について、選挙後の実績・関連法案の調査と人間審査は未完了です。"
+      },
+      "events": [],
+      "involvements": [],
+      "comparison_group": "energy",
+      "original_locator": "1（1）❼エネルギー関係減税等 第2段落",
+      "quote_scope": "短い抜粋。対象・条件は編集要約と原資料の前後で確認。",
+      "rechecked_at": "2026-10-23",
+      "amount_note": "選挙後の提案額を公約の金額として補完しない。",
+      "metrics": null,
+      "metric_result": {
+        "eligible": false,
+        "reason": "比較可能な承認済みの目標値と実績値がありません。"
+      }
+    },
+    {
+      "id": "P012",
+      "revision": 1,
+      "election_id": "SHU51",
+      "party_id": "SANSEI",
+      "title": "0～15歳の子どもに月10万円の教育給付金",
+      "summary": "0～15歳の子ども一人につき、毎月10万円の教育給付金を支給する。",
+      "original_quote": "0～15 歳の子ども一人につき月 10 万円の教育給付金",
+      "original_verification": "reproduction_checked",
+      "source_ids": [
+        "S03"
+      ],
+      "condition_ids": [
+        "P012-C1",
+        "P012-C2",
+        "P012-C3"
+      ],
+      "topics": [
+        "子育て"
+      ],
+      "type": "数値目標型",
+      "target_population": "0～15歳の子ども一人につき",
+      "amount": "月10万円",
+      "duration": null,
+      "deadline": {
+        "state": "unspecified",
+        "date": null,
+        "note": "実現期限の記載を確認できず"
+      },
+      "policy_change": {
+        "state": "unknown",
+        "note": "撤回・変更の有無は未確認"
+      },
+      "announcement_date": null,
+      "announcement_source_id": null,
+      "version_note": "2026年選挙資料の取得版。選挙当日の固定版との同一性は人間未承認。",
+      "review_state": "pending",
+      "unknowns": [
+        "党公式の選挙公約原本",
+        "国籍・所得制限・申請要件",
+        "財源・開始時期・実績値"
+      ],
+      "related_source_ids": [
+        "S17",
+        "S21",
+        "S22"
+      ],
+      "conditions": [
+        {
+          "id": "P012-C1",
+          "promise_id": "P012",
+          "label": "対象年齢",
+          "value": "0～15歳",
+          "required": true,
+          "source_id": "S03",
+          "verification": "ai_checked"
+        },
+        {
+          "id": "P012-C2",
+          "promise_id": "P012",
+          "label": "支給単位",
+          "value": "子ども一人・月額",
+          "required": true,
+          "source_id": "S03",
+          "verification": "ai_checked"
+        },
+        {
+          "id": "P012-C3",
+          "promise_id": "P012",
+          "label": "給付",
+          "value": "教育給付金",
+          "required": true,
+          "source_id": "S03",
+          "verification": "ai_checked"
+        }
+      ],
+      "original_human_approved": false,
+      "assessment_approved": false,
+      "assessment": {
+        "fulfillment": "判定保留",
+        "legislative_stage": "未確認",
+        "social_outcome": "未評価",
+        "deadline_state": "記載なし",
+        "policy_change": "未確認",
+        "reason": "公約と実績の対応を人間が審査するまで判定保留。未達成を意味しません。",
+        "stage_note": "この追加候補について、選挙後の実績・関連法案の調査と人間審査は未完了です。"
+      },
+      "events": [],
+      "involvements": [],
+      "comparison_group": "childcare",
+      "original_locator": "PDF3ページ目・第3の柱⑦冒頭",
+      "quote_scope": "短い抜粋。対象・条件は編集要約と原資料の前後で確認。",
+      "rechecked_at": "2026-10-23",
+      "amount_note": "選挙後の提案額を公約の金額として補完しない。",
+      "metrics": {
+        "target": {
+          "value": 100000,
+          "unit": "円",
+          "entity": "子ども一人",
+          "period": "月",
+          "calendar": "未指定",
+          "price_basis": "未指定",
+          "population": "0～15歳",
+          "region": "未指定",
+          "revision": "公約取得版",
+          "direction": "increase"
+        },
+        "actual": null
+      },
+      "metric_result": {
+        "eligible": false,
+        "reason": "比較可能な承認済みの目標値と実績値がありません。"
+      }
+    },
+    {
+      "id": "P013",
+      "revision": 1,
+      "election_id": "SHU51",
+      "party_id": "SANSEI",
+      "title": "再エネ賦課金を廃止する",
+      "summary": "再エネ賦課金の廃止を掲げる。",
+      "original_quote": "再エネ賦課金の廃止",
+      "original_verification": "reproduction_checked",
+      "source_ids": [
+        "S03"
+      ],
+      "condition_ids": [
+        "P013-C1"
+      ],
+      "topics": [
+        "物価"
+      ],
+      "type": "制度廃止型",
+      "target_population": "再エネ賦課金",
+      "amount": "世帯ごとの軽減額は明示なし",
+      "duration": null,
+      "deadline": {
+        "state": "unspecified",
+        "date": null,
+        "note": "実現期限の記載を確認できず"
+      },
+      "policy_change": {
+        "state": "unknown",
+        "note": "撤回・変更の有無は未確認"
+      },
+      "announcement_date": null,
+      "announcement_source_id": null,
+      "version_note": "2026年選挙資料の取得版。選挙当日の固定版との同一性は人間未承認。",
+      "review_state": "pending",
+      "unknowns": [
+        "党公式の選挙公約原本",
+        "廃止の法律案・財源の扱い",
+        "実施期限"
+      ],
+      "related_source_ids": [
+        "S17",
+        "S21",
+        "S22"
+      ],
+      "conditions": [
+        {
+          "id": "P013-C1",
+          "promise_id": "P013",
+          "label": "行為",
+          "value": "再エネ賦課金の廃止",
+          "required": true,
+          "source_id": "S03",
+          "verification": "ai_checked"
+        }
+      ],
+      "original_human_approved": false,
+      "assessment_approved": false,
+      "assessment": {
+        "fulfillment": "判定保留",
+        "legislative_stage": "未確認",
+        "social_outcome": "未評価",
+        "deadline_state": "記載なし",
+        "policy_change": "未確認",
+        "reason": "公約と実績の対応を人間が審査するまで判定保留。未達成を意味しません。",
+        "stage_note": "この追加候補について、選挙後の実績・関連法案の調査と人間審査は未完了です。"
+      },
+      "events": [],
+      "involvements": [],
+      "comparison_group": "energy",
+      "original_locator": "PDF2ページ目・第2の柱⑤具体策",
+      "quote_scope": "短い抜粋。対象・条件は編集要約と原資料の前後で確認。",
+      "rechecked_at": "2026-10-23",
+      "amount_note": "選挙後の提案額を公約の金額として補完しない。",
+      "metrics": null,
+      "metric_result": {
+        "eligible": false,
+        "reason": "比較可能な承認済みの目標値と実績値がありません。"
+      }
+    },
+    {
+      "id": "P014",
+      "revision": 1,
+      "election_id": "SHU51",
+      "party_id": "ISHIN",
+      "title": "飲食料品を2年間消費税の対象としない措置を検討",
+      "summary": "飲食料品を2年間消費税の対象から外すことについて、国民会議で財源や日程を含む検討を加速する。新聞は軽減税率の対象から外し、標準税率を適用する方針も同項にある。",
+      "original_quote": "実現に向けた検討を加速します。",
+      "original_verification": "ai_checked",
+      "source_ids": [
+        "S20"
+      ],
+      "condition_ids": [
+        "P014-C1",
+        "P014-C2",
+        "P014-C3"
+      ],
+      "topics": [
+        "税金",
+        "物価"
+      ],
+      "type": "検討型",
+      "target_population": "飲食料品。新聞は別の税率変更方針。",
+      "amount": "金額の約束ではない",
+      "duration": {
+        "value": 2,
+        "unit": "年",
+        "meaning": "飲食料品の措置の適用期間。実現期限とは別。"
+      },
+      "deadline": {
+        "state": "unspecified",
+        "date": null,
+        "note": "実現期限の記載を確認できず"
+      },
+      "policy_change": {
+        "state": "unknown",
+        "note": "撤回・変更の有無は未確認"
+      },
+      "announcement_date": null,
+      "announcement_source_id": null,
+      "version_note": "2026年選挙資料の取得版。選挙当日の固定版との同一性は人間未承認。",
+      "review_state": "pending",
+      "unknowns": [
+        "検討の加速を認定する基準",
+        "新聞の措置を含む条件との対応",
+        "関連法案・施行の確認"
+      ],
+      "related_source_ids": [
+        "S24",
+        "S25"
+      ],
+      "conditions": [
+        {
+          "id": "P014-C1",
+          "promise_id": "P014",
+          "label": "行為",
+          "value": "国民会議で財源・日程を含む検討を加速",
+          "required": true,
+          "source_id": "S20",
+          "verification": "ai_checked"
+        },
+        {
+          "id": "P014-C2",
+          "promise_id": "P014",
+          "label": "期間",
+          "value": "飲食料品の措置は2年間",
+          "required": true,
+          "source_id": "S20",
+          "verification": "ai_checked"
+        },
+        {
+          "id": "P014-C3",
+          "promise_id": "P014",
+          "label": "同項の別施策",
+          "value": "新聞を軽減税率から除外し標準税率にする",
+          "required": true,
+          "source_id": "S20",
+          "verification": "ai_checked"
+        }
+      ],
+      "original_human_approved": false,
+      "assessment_approved": false,
+      "assessment": {
+        "fulfillment": "判定保留",
+        "legislative_stage": "未確認",
+        "social_outcome": "未評価",
+        "deadline_state": "記載なし",
+        "policy_change": "未確認",
+        "reason": "公約と実績の対応を人間が審査するまで判定保留。未達成を意味しません。",
+        "stage_note": "この追加候補について、選挙後の実績・関連法案の調査と人間審査は未完了です。"
+      },
+      "events": [],
+      "involvements": [],
+      "comparison_group": "consumption",
+      "original_locator": "物価高対策 第1項／S24印刷頁3の項目1",
+      "quote_scope": "短い抜粋。対象・条件は編集要約と原資料の前後で確認。",
+      "rechecked_at": "2026-10-23",
+      "amount_note": "選挙後の提案額を公約の金額として補完しない。",
+      "metrics": null,
+      "metric_result": {
+        "eligible": false,
+        "reason": "比較可能な承認済みの目標値と実績値がありません。"
+      }
+    },
+    {
+      "id": "P015",
+      "revision": 1,
+      "election_id": "SHU51",
+      "party_id": "ISHIN",
+      "title": "給付付き税額控除の制度設計",
+      "summary": "減税では支援が届きにくい低所得層も支えるため、勤労税額控除の考え方などを踏まえて給付付き税額控除を設計する。",
+      "original_quote": "給付付き税額控除の制度設計を実施",
+      "original_verification": "ai_checked",
+      "source_ids": [
+        "S20"
+      ],
+      "condition_ids": [
+        "P015-C1",
+        "P015-C2"
+      ],
+      "topics": [
+        "税金",
+        "社会保障"
+      ],
+      "type": "制度設計型",
+      "target_population": "社会保険料や物価高の負担を受ける現役世代・低所得層",
+      "amount": "金額の明示なし",
+      "duration": null,
+      "deadline": {
+        "state": "unspecified",
+        "date": null,
+        "note": "実現期限の記載を確認できず"
+      },
+      "policy_change": {
+        "state": "unknown",
+        "note": "撤回・変更の有無は未確認"
+      },
+      "announcement_date": null,
+      "announcement_source_id": null,
+      "version_note": "2026年選挙資料の取得版。選挙当日の固定版との同一性は人間未承認。",
+      "review_state": "pending",
+      "unknowns": [
+        "制度設計の完了条件",
+        "具体的な給付対象と金額",
+        "関連法律・実施時期"
+      ],
+      "related_source_ids": [
+        "S24",
+        "S25"
+      ],
+      "conditions": [
+        {
+          "id": "P015-C1",
+          "promise_id": "P015",
+          "label": "前提",
+          "value": "勤労税額控除の考え方も含め幅広い意見を踏まえる",
+          "required": true,
+          "source_id": "S20",
+          "verification": "ai_checked"
+        },
+        {
+          "id": "P015-C2",
+          "promise_id": "P015",
+          "label": "行為",
+          "value": "制度設計",
+          "required": true,
+          "source_id": "S20",
+          "verification": "ai_checked"
+        }
+      ],
+      "original_human_approved": false,
+      "assessment_approved": false,
+      "assessment": {
+        "fulfillment": "判定保留",
+        "legislative_stage": "未確認",
+        "social_outcome": "未評価",
+        "deadline_state": "記載なし",
+        "policy_change": "未確認",
+        "reason": "公約と実績の対応を人間が審査するまで判定保留。未達成を意味しません。",
+        "stage_note": "この追加候補について、選挙後の実績・関連法案の調査と人間審査は未完了です。"
+      },
+      "events": [],
+      "involvements": [],
+      "comparison_group": "relief",
+      "original_locator": "物価高対策 第2項／S24印刷頁3の項目2",
+      "quote_scope": "短い抜粋。対象・条件は編集要約と原資料の前後で確認。",
+      "rechecked_at": "2026-10-23",
+      "amount_note": "選挙後の提案額を公約の金額として補完しない。",
+      "metrics": null,
       "metric_result": {
         "eligible": false,
         "reason": "比較可能な承認済みの目標値と実績値がありません。"
@@ -573,13 +1510,26 @@
       "kind": "party_manifesto",
       "fetch_status": "retrieved",
       "published_at": null,
-      "retrieved_at": "2026-10-23T08:55:58+09:00",
+      "retrieved_at": "2026-10-23T12:05:21+09:00",
       "source_version": null,
       "version_note": "発行版の指定がない場合は取得時点の掲載内容。公開日と取得日は別管理。",
       "verification_note": "選挙特設サイトで文言を確認。取得時の内容と選挙当日の固定版の同一性は未承認。",
       "locator": "社会保障の第2・第3項／抽出行77–78",
-      "capture_hash": "a54a05509db3f89c82f37b8e2c5bb6e300715a1c26d6b142a5024ec389a858cb",
-      "hash_scope": "selected_excerpts_utf8"
+      "observations": [
+        {
+          "retrieved_at": "2026-10-23T08:55:58+09:00",
+          "fetch_status": "retrieved",
+          "note": "v0.6からの取得記録",
+          "selected_excerpt_sha256": "a54a05509db3f89c82f37b8e2c5bb6e300715a1c26d6b142a5024ec389a858cb",
+          "hash_scope": "selected_excerpts_utf8"
+        },
+        {
+          "retrieved_at": "2026-10-23T12:05:21+09:00",
+          "fetch_status": "retrieved"
+        }
+      ],
+      "content_sha256": "b7148da5287d35a3db23f11b9f6c09fad9350f52f0184b08326f5e8484c0f297",
+      "hash_scope_full": "retrieved_response_bytes"
     },
     {
       "id": "S02",
@@ -589,13 +1539,26 @@
       "kind": "party_manifesto",
       "fetch_status": "retrieved",
       "published_at": null,
-      "retrieved_at": "2026-10-23T08:55:58+09:00",
+      "retrieved_at": "2026-10-23T12:05:21+09:00",
       "source_version": null,
       "version_note": "発行版の指定がない場合は取得時点の掲載内容。公開日と取得日は別管理。",
       "verification_note": "",
       "locator": "❹社会保険料軽減策の導入／抽出行54",
-      "capture_hash": "c6001ef1c956802767a89db194de5452335b444ab44d7bf64074d61a98b616e1",
-      "hash_scope": "selected_excerpts_utf8"
+      "observations": [
+        {
+          "retrieved_at": "2026-10-23T08:55:58+09:00",
+          "fetch_status": "retrieved",
+          "note": "v0.6からの取得記録",
+          "selected_excerpt_sha256": "c6001ef1c956802767a89db194de5452335b444ab44d7bf64074d61a98b616e1",
+          "hash_scope": "selected_excerpts_utf8"
+        },
+        {
+          "retrieved_at": "2026-10-23T12:05:21+09:00",
+          "fetch_status": "retrieved"
+        }
+      ],
+      "content_sha256": "be9f21fbfb0219217914821c661d2d33372ad4ecc9d661c5697ab852b17a5b60",
+      "hash_scope_full": "retrieved_response_bytes"
     },
     {
       "id": "S03",
@@ -605,13 +1568,26 @@
       "kind": "reproduced_manifesto_pdf",
       "fetch_status": "retrieved",
       "published_at": null,
-      "retrieved_at": "2026-10-23T08:55:58+09:00",
+      "retrieved_at": "2026-10-23T12:05:21+09:00",
       "source_version": null,
       "version_note": "発行版の指定がない場合は取得時点の掲載内容。公開日と取得日は別管理。",
-      "verification_note": "党作成と表示された転載資料。党公式原本との同一性、公開日、固定版は未確認。",
+      "verification_note": "日経配信の党公約転載PDF。本文の党名・選挙年を照合。党公式原本との同一性は未確認。",
       "locator": "ファイル内1ページ目・第1の柱①具体策",
-      "capture_hash": "d81c4de709b5085bad23986244b4dab296be6b9267e7cebd7f029e0975feaab4",
-      "hash_scope": "selected_excerpts_utf8"
+      "observations": [
+        {
+          "retrieved_at": "2026-10-23T08:55:58+09:00",
+          "fetch_status": "retrieved",
+          "note": "v0.6からの取得記録",
+          "selected_excerpt_sha256": "d81c4de709b5085bad23986244b4dab296be6b9267e7cebd7f029e0975feaab4",
+          "hash_scope": "selected_excerpts_utf8"
+        },
+        {
+          "retrieved_at": "2026-10-23T12:05:21+09:00",
+          "fetch_status": "retrieved"
+        }
+      ],
+      "content_sha256": "a0f27f1ad1e21dcf068476f711b7ea572f369650401e0e706fdc9072580a7061",
+      "hash_scope_full": "retrieved_response_bytes"
     },
     {
       "id": "S04",
@@ -621,13 +1597,26 @@
       "kind": "parliament_record",
       "fetch_status": "retrieved",
       "published_at": null,
-      "retrieved_at": "2026-10-23T08:55:58+09:00",
+      "retrieved_at": "2026-10-23T12:05:21+09:00",
       "source_version": null,
       "version_note": "発行版の指定がない場合は取得時点の掲載内容。公開日と取得日は別管理。",
       "verification_note": "空欄を否決・不存在とは解釈しない。基準日時点で成立・公布はこの資料から確認できない。",
       "locator": "受理・付託・審査結果・公布の各欄",
-      "capture_hash": "f42f1c7b6e901a3d16e1d833ae9315d7cfde031d8d4aa1165de6677be9efbc9a",
-      "hash_scope": "selected_excerpts_utf8"
+      "observations": [
+        {
+          "retrieved_at": "2026-10-23T08:55:58+09:00",
+          "fetch_status": "retrieved",
+          "note": "v0.6からの取得記録",
+          "selected_excerpt_sha256": "f42f1c7b6e901a3d16e1d833ae9315d7cfde031d8d4aa1165de6677be9efbc9a",
+          "hash_scope": "selected_excerpts_utf8"
+        },
+        {
+          "retrieved_at": "2026-10-23T12:05:21+09:00",
+          "fetch_status": "retrieved"
+        }
+      ],
+      "content_sha256": "6e44aaef88062a5884a565bc53fd44073538aafadd6ebd29c3d9fa371993cf1e",
+      "hash_scope_full": "retrieved_response_bytes"
     },
     {
       "id": "S05",
@@ -637,13 +1626,26 @@
       "kind": "government_plan",
       "fetch_status": "retrieved",
       "published_at": "2026-09-15",
-      "retrieved_at": "2026-10-23T08:55:58+09:00",
+      "retrieved_at": "2026-10-23T12:05:21+09:00",
       "source_version": null,
       "version_note": "発行版の指定がない場合は取得時点の掲載内容。公開日と取得日は別管理。",
       "verification_note": "成立を前提にした制度案の説明。施行済みの根拠ではない。",
       "locator": "冒頭の制度案説明・成立条件の注記",
-      "capture_hash": "35ca44a69dd12d71b11c7eaf63ab6ba8822c9c0a8f1390c68f795181898fc87e",
-      "hash_scope": "selected_excerpts_utf8"
+      "observations": [
+        {
+          "retrieved_at": "2026-10-23T08:55:58+09:00",
+          "fetch_status": "retrieved",
+          "note": "v0.6からの取得記録",
+          "selected_excerpt_sha256": "35ca44a69dd12d71b11c7eaf63ab6ba8822c9c0a8f1390c68f795181898fc87e",
+          "hash_scope": "selected_excerpts_utf8"
+        },
+        {
+          "retrieved_at": "2026-10-23T12:05:21+09:00",
+          "fetch_status": "retrieved"
+        }
+      ],
+      "content_sha256": "feac4b16a5dd8002961c4bbddf0913d8c56fbf6e2a8db2731f8d7b5383e02ea3",
+      "hash_scope_full": "retrieved_response_bytes"
     },
     {
       "id": "S06",
@@ -653,13 +1655,26 @@
       "kind": "parliament_record",
       "fetch_status": "retrieved",
       "published_at": null,
-      "retrieved_at": "2026-10-23T08:55:58+09:00",
+      "retrieved_at": "2026-10-23T12:05:21+09:00",
       "source_version": null,
       "version_note": "発行版の指定がない場合は取得時点の掲載内容。公開日と取得日は別管理。",
       "verification_note": "",
       "locator": "提出者・提出会派・受理・公布欄",
-      "capture_hash": "8210b83eab9d4eb1603899fb642550629673785c1a0644765d6d68de2b487c59",
-      "hash_scope": "selected_excerpts_utf8"
+      "observations": [
+        {
+          "retrieved_at": "2026-10-23T08:55:58+09:00",
+          "fetch_status": "retrieved",
+          "note": "v0.6からの取得記録",
+          "selected_excerpt_sha256": "8210b83eab9d4eb1603899fb642550629673785c1a0644765d6d68de2b487c59",
+          "hash_scope": "selected_excerpts_utf8"
+        },
+        {
+          "retrieved_at": "2026-10-23T12:05:21+09:00",
+          "fetch_status": "retrieved"
+        }
+      ],
+      "content_sha256": "0e47184ef92ca68c9a144d773df3ec9782b026a5d6eb50275a8d8217ee25c8c0",
+      "hash_scope_full": "retrieved_response_bytes"
     },
     {
       "id": "S07",
@@ -669,13 +1684,26 @@
       "kind": "bill_text",
       "fetch_status": "retrieved",
       "published_at": null,
-      "retrieved_at": "2026-10-23T08:55:58+09:00",
+      "retrieved_at": "2026-10-23T12:05:26+09:00",
       "source_version": null,
       "version_note": "発行版の指定がない場合は取得時点の掲載内容。公開日と取得日は別管理。",
       "verification_note": "ここは原文の逐語引用ではなく条文確認メモ。法律案であり成立法ではない。給付条件の公約との全一致は未判定。",
       "locator": "第4条第1項、第4項、附則第1項",
-      "capture_hash": "6dcbb0d1194c3557fd9bcc19af0aa86627c2a11d5b9b51d6fc8ca8814ddb7b36",
-      "hash_scope": "selected_excerpts_utf8"
+      "observations": [
+        {
+          "retrieved_at": "2026-10-23T08:55:58+09:00",
+          "fetch_status": "retrieved",
+          "note": "v0.6からの取得記録",
+          "selected_excerpt_sha256": "6dcbb0d1194c3557fd9bcc19af0aa86627c2a11d5b9b51d6fc8ca8814ddb7b36",
+          "hash_scope": "selected_excerpts_utf8"
+        },
+        {
+          "retrieved_at": "2026-10-23T12:05:26+09:00",
+          "fetch_status": "retrieved"
+        }
+      ],
+      "content_sha256": "dc7dff17b15e222ce60f8b8326df38e529b518c343fceb20b86c987ce718b758",
+      "hash_scope_full": "retrieved_response_bytes"
     },
     {
       "id": "S08",
@@ -685,13 +1713,26 @@
       "kind": "party_activity",
       "fetch_status": "retrieved",
       "published_at": "2026-10-20",
-      "retrieved_at": "2026-10-23T08:55:58+09:00",
+      "retrieved_at": "2026-10-23T12:05:27+09:00",
       "source_version": null,
       "version_note": "発行版の指定がない場合は取得時点の掲載内容。公開日と取得日は別管理。",
       "verification_note": "党自身の活動説明。提出日・提出者は国会記録で交差確認。政策効果の自己評価は採用しない。",
       "locator": "2026.10.20・本文冒頭、第3項、末尾",
-      "capture_hash": "c48ed4846d4e06c9f7fa46cfd9aeac47b379793347d8a73b31494cd780224950",
-      "hash_scope": "selected_excerpts_utf8"
+      "observations": [
+        {
+          "retrieved_at": "2026-10-23T08:55:58+09:00",
+          "fetch_status": "retrieved",
+          "note": "v0.6からの取得記録",
+          "selected_excerpt_sha256": "c48ed4846d4e06c9f7fa46cfd9aeac47b379793347d8a73b31494cd780224950",
+          "hash_scope": "selected_excerpts_utf8"
+        },
+        {
+          "retrieved_at": "2026-10-23T12:05:27+09:00",
+          "fetch_status": "retrieved"
+        }
+      ],
+      "content_sha256": "994e2dc02750dcc1de9975baa9ea89b996426b048b4fc05c572b1ab5a52a3034",
+      "hash_scope_full": "retrieved_response_bytes"
     },
     {
       "id": "S09",
@@ -701,13 +1742,26 @@
       "kind": "parliament_summary",
       "fetch_status": "retrieved",
       "published_at": "2026-04-07",
-      "retrieved_at": "2026-10-23T08:55:58+09:00",
+      "retrieved_at": "2026-10-23T12:05:27+09:00",
       "source_version": null,
       "version_note": "発行版の指定がない場合は取得時点の掲載内容。公開日と取得日は別管理。",
       "verification_note": "事務局による項目の抜粋。発言全文・法案提出・政策実現を裏付ける資料ではない。",
       "locator": "令和8年4月7日・安藤裕（参政）の項目",
-      "capture_hash": "1d54d321f22a8cfd68fa0b5e9a9cad991a8b814f996128938b9b23892bbef9ff",
-      "hash_scope": "selected_excerpts_utf8"
+      "observations": [
+        {
+          "retrieved_at": "2026-10-23T08:55:58+09:00",
+          "fetch_status": "retrieved",
+          "note": "v0.6からの取得記録",
+          "selected_excerpt_sha256": "1d54d321f22a8cfd68fa0b5e9a9cad991a8b814f996128938b9b23892bbef9ff",
+          "hash_scope": "selected_excerpts_utf8"
+        },
+        {
+          "retrieved_at": "2026-10-23T12:05:27+09:00",
+          "fetch_status": "retrieved"
+        }
+      ],
+      "content_sha256": "53b62d728caa314e704fa4d0ed6ec2e79a3649146ed3af27aeed604fd8aabfc6",
+      "hash_scope_full": "retrieved_response_bytes"
     },
     {
       "id": "S10",
@@ -717,13 +1771,26 @@
       "kind": "government_guidance",
       "fetch_status": "retrieved",
       "published_at": null,
-      "retrieved_at": "2026-10-23T08:55:58+09:00",
+      "retrieved_at": "2026-10-23T12:05:27+09:00",
       "source_version": null,
       "version_note": "発行版の指定がない場合は取得時点の掲載内容。公開日と取得日は別管理。",
       "verification_note": "資料の法令基準は2026-04-01。将来の引下げ案の注記と、成立確認・施行確認を混同しない。10月23日時点の網羅的な法令監査の代用にはしない。",
       "locator": "令和8年4月1日現在法令等・概要",
-      "capture_hash": "b1577be092bfec4b1416f47a7c7b40eb6e9f1bee410bde4c4c332de488c2c189",
-      "hash_scope": "selected_excerpts_utf8"
+      "observations": [
+        {
+          "retrieved_at": "2026-10-23T08:55:58+09:00",
+          "fetch_status": "retrieved",
+          "note": "v0.6からの取得記録",
+          "selected_excerpt_sha256": "b1577be092bfec4b1416f47a7c7b40eb6e9f1bee410bde4c4c332de488c2c189",
+          "hash_scope": "selected_excerpts_utf8"
+        },
+        {
+          "retrieved_at": "2026-10-23T12:05:27+09:00",
+          "fetch_status": "retrieved"
+        }
+      ],
+      "content_sha256": "c432eba7c6897560c10fd7ef4cdb7535c9e7fe5e2ead8ec0dbf03083dbacd507",
+      "hash_scope_full": "retrieved_response_bytes"
     },
     {
       "id": "S11",
@@ -733,13 +1800,26 @@
       "kind": "government_guidance",
       "fetch_status": "retrieved",
       "published_at": null,
-      "retrieved_at": "2026-10-23T08:55:58+09:00",
+      "retrieved_at": "2026-10-23T12:05:27+09:00",
       "source_version": null,
       "version_note": "発行版の指定がない場合は取得時点の掲載内容。公開日と取得日は別管理。",
       "verification_note": "制度案内・登録手続が掲載されていることの資料。廃止法の有無を網羅的に確認したという意味ではない。",
       "locator": "TOPICS 2026/10/15、登録申請手続への案内",
-      "capture_hash": "c2f62987ec5efcc5cd290c69708ef0f143a12983f2aff610896a1f4e0df67b8e",
-      "hash_scope": "selected_excerpts_utf8"
+      "observations": [
+        {
+          "retrieved_at": "2026-10-23T08:55:58+09:00",
+          "fetch_status": "retrieved",
+          "note": "v0.6からの取得記録",
+          "selected_excerpt_sha256": "c2f62987ec5efcc5cd290c69708ef0f143a12983f2aff610896a1f4e0df67b8e",
+          "hash_scope": "selected_excerpts_utf8"
+        },
+        {
+          "retrieved_at": "2026-10-23T12:05:27+09:00",
+          "fetch_status": "retrieved"
+        }
+      ],
+      "content_sha256": "20004a97ff64aab900332addd5562eda72c15d74430aa1bce5a8e4e359bfc46e",
+      "hash_scope_full": "retrieved_response_bytes"
     },
     {
       "id": "S12",
@@ -749,13 +1829,26 @@
       "kind": "manifesto_announcement",
       "fetch_status": "retrieved",
       "published_at": "2026-01-21",
-      "retrieved_at": "2026-10-23T08:55:58+09:00",
+      "retrieved_at": "2026-10-23T12:05:28+09:00",
       "source_version": null,
       "version_note": "発行版の指定がない場合は取得時点の掲載内容。公開日と取得日は別管理。",
       "verification_note": "公約全体の発表日。S01のHTMLの更新日・改版日を意味しない。",
       "locator": "2026年1月21日・本文冒頭",
-      "capture_hash": "a52bf06d263ecd8aded16be331912f39c295d197b59055f46755d18b9f574473",
-      "hash_scope": "selected_excerpts_utf8"
+      "observations": [
+        {
+          "retrieved_at": "2026-10-23T08:55:58+09:00",
+          "fetch_status": "retrieved",
+          "note": "v0.6からの取得記録",
+          "selected_excerpt_sha256": "a52bf06d263ecd8aded16be331912f39c295d197b59055f46755d18b9f574473",
+          "hash_scope": "selected_excerpts_utf8"
+        },
+        {
+          "retrieved_at": "2026-10-23T12:05:28+09:00",
+          "fetch_status": "retrieved"
+        }
+      ],
+      "content_sha256": "478873ab02bec7f41fa4088cbbee2c9ffbc149e0d69bab6a54fb779bd7fae398",
+      "hash_scope_full": "retrieved_response_bytes"
     },
     {
       "id": "S13",
@@ -765,13 +1858,26 @@
       "kind": "election_authority",
       "fetch_status": "retrieved",
       "published_at": null,
-      "retrieved_at": "2026-10-23T08:55:58+09:00",
+      "retrieved_at": "2026-10-23T12:05:30+09:00",
       "source_version": null,
       "version_note": "発行版の指定がない場合は取得時点の掲載内容。公開日と取得日は別管理。",
       "verification_note": "",
       "locator": "1. 選挙日程",
-      "capture_hash": "144e60264b050802a19a417a826eae2bd511551df95ed115d7cd79659b3432ca",
-      "hash_scope": "selected_excerpts_utf8"
+      "observations": [
+        {
+          "retrieved_at": "2026-10-23T08:55:58+09:00",
+          "fetch_status": "retrieved",
+          "note": "v0.6からの取得記録",
+          "selected_excerpt_sha256": "144e60264b050802a19a417a826eae2bd511551df95ed115d7cd79659b3432ca",
+          "hash_scope": "selected_excerpts_utf8"
+        },
+        {
+          "retrieved_at": "2026-10-23T12:05:30+09:00",
+          "fetch_status": "retrieved"
+        }
+      ],
+      "content_sha256": "a2a293e33e46f76e77f76cbc1df9de561000c4505cf087c076cb038cd4b6dba3",
+      "hash_scope_full": "retrieved_response_bytes"
     },
     {
       "id": "S14",
@@ -781,13 +1887,24 @@
       "kind": "government_plan",
       "fetch_status": "fetch_404",
       "published_at": null,
-      "retrieved_at": "2026-10-23T08:55:58+09:00",
+      "retrieved_at": "2026-10-23T12:05:30+09:00",
       "source_version": null,
       "version_note": "発行版の指定がない場合は取得時点の掲載内容。公開日と取得日は別管理。",
       "verification_note": "検索結果には存在するが本文取得は404。制度不存在や主張の虚偽とは判定しない。",
       "locator": "本文取得失敗",
-      "capture_hash": null,
-      "hash_scope": null
+      "observations": [
+        {
+          "retrieved_at": "2026-10-23T08:55:58+09:00",
+          "fetch_status": "fetch_404",
+          "note": "v0.6からの取得記録"
+        },
+        {
+          "retrieved_at": "2026-10-23T12:05:30+09:00",
+          "fetch_status": "fetch_404"
+        }
+      ],
+      "content_sha256": null,
+      "hash_scope_full": null
     },
     {
       "id": "S15",
@@ -797,13 +1914,24 @@
       "kind": "government_meeting_document",
       "fetch_status": "fetch_404",
       "published_at": null,
-      "retrieved_at": "2026-10-23T08:55:58+09:00",
+      "retrieved_at": "2026-10-23T12:05:30+09:00",
       "source_version": null,
       "version_note": "発行版の指定がない場合は取得時点の掲載内容。公開日と取得日は別管理。",
       "verification_note": "約1000万人・約5万円という既存値は原資料本文を取得できず採用しない。",
       "locator": "本文取得失敗",
-      "capture_hash": null,
-      "hash_scope": null
+      "observations": [
+        {
+          "retrieved_at": "2026-10-23T08:55:58+09:00",
+          "fetch_status": "fetch_404",
+          "note": "v0.6からの取得記録"
+        },
+        {
+          "retrieved_at": "2026-10-23T12:05:30+09:00",
+          "fetch_status": "fetch_404"
+        }
+      ],
+      "content_sha256": null,
+      "hash_scope_full": null
     },
     {
       "id": "S16",
@@ -811,15 +1939,26 @@
       "title": "給付付き税額控除の制度導入の基本方針とされる資料",
       "publisher": "内閣官房",
       "kind": "government_plan",
-      "fetch_status": "fetch_failed",
+      "fetch_status": "fetch_404",
       "published_at": null,
-      "retrieved_at": "2026-10-23T08:55:58+09:00",
+      "retrieved_at": "2026-10-23T12:05:32+09:00",
       "source_version": null,
       "version_note": "発行版の指定がない場合は取得時点の掲載内容。公開日と取得日は別管理。",
-      "verification_note": "検索断片の8月5日閣議決定は独立した確定実績に採用しない。",
+      "verification_note": "v0.6では取得失敗。今回の再取得は404。資料の不存在を証明するものではない。",
       "locator": "本文取得失敗",
-      "capture_hash": null,
-      "hash_scope": null
+      "observations": [
+        {
+          "retrieved_at": "2026-10-23T08:55:58+09:00",
+          "fetch_status": "fetch_failed",
+          "note": "v0.6からの取得記録"
+        },
+        {
+          "retrieved_at": "2026-10-23T12:05:32+09:00",
+          "fetch_status": "fetch_404"
+        }
+      ],
+      "content_sha256": null,
+      "hash_scope_full": null
     },
     {
       "id": "S17",
@@ -829,13 +1968,24 @@
       "kind": "party_manifesto",
       "fetch_status": "fetch_404",
       "published_at": null,
-      "retrieved_at": "2026-10-23T08:55:58+09:00",
+      "retrieved_at": "2026-10-23T12:05:33+09:00",
       "source_version": null,
       "version_note": "発行版の指定がない場合は取得時点の掲載内容。公開日と取得日は別管理。",
       "verification_note": "転載公約の公式原本との同一性確認が未完了。",
       "locator": "本文取得失敗",
-      "capture_hash": null,
-      "hash_scope": null
+      "observations": [
+        {
+          "retrieved_at": "2026-10-23T08:55:58+09:00",
+          "fetch_status": "fetch_404",
+          "note": "v0.6からの取得記録"
+        },
+        {
+          "retrieved_at": "2026-10-23T12:05:33+09:00",
+          "fetch_status": "fetch_404"
+        }
+      ],
+      "content_sha256": null,
+      "hash_scope_full": null
     },
     {
       "id": "S18",
@@ -845,13 +1995,24 @@
       "kind": "government_plan",
       "fetch_status": "fetch_404",
       "published_at": null,
-      "retrieved_at": "2026-10-23T08:55:58+09:00",
+      "retrieved_at": "2026-10-23T12:05:34+09:00",
       "source_version": null,
       "version_note": "発行版の指定がない場合は取得時点の掲載内容。公開日と取得日は別管理。",
       "verification_note": "1%や実質ゼロの詳細条件の本文確認は未完了。",
       "locator": "本文取得失敗",
-      "capture_hash": null,
-      "hash_scope": null
+      "observations": [
+        {
+          "retrieved_at": "2026-10-23T08:55:58+09:00",
+          "fetch_status": "fetch_404",
+          "note": "v0.6からの取得記録"
+        },
+        {
+          "retrieved_at": "2026-10-23T12:05:34+09:00",
+          "fetch_status": "fetch_404"
+        }
+      ],
+      "content_sha256": null,
+      "hash_scope_full": null
     },
     {
       "id": "S19",
@@ -861,14 +2022,208 @@
       "kind": "parliament_index",
       "fetch_status": "retrieved",
       "published_at": null,
-      "retrieved_at": "2026-10-23T08:55:58+09:00",
+      "retrieved_at": "2026-10-23T12:05:35+09:00",
       "source_version": null,
       "version_note": "発行版の指定がない場合は取得時点の掲載内容。公開日と取得日は別管理。",
       "verification_note": "",
       "locator": "閣法第1号／衆法第1号・審議状況欄",
-      "capture_hash": "40ad2b831d2152c653792e902b6b21dc7e81525d5462a0646e0160659c62008e",
-      "hash_scope": "selected_excerpts_utf8"
+      "observations": [
+        {
+          "retrieved_at": "2026-10-23T08:55:58+09:00",
+          "fetch_status": "retrieved",
+          "note": "v0.6からの取得記録",
+          "selected_excerpt_sha256": "40ad2b831d2152c653792e902b6b21dc7e81525d5462a0646e0160659c62008e",
+          "hash_scope": "selected_excerpts_utf8"
+        },
+        {
+          "retrieved_at": "2026-10-23T12:05:35+09:00",
+          "fetch_status": "retrieved"
+        }
+      ],
+      "content_sha256": "7aa9c3bc800bc5a95eda52e6499a4c45203646cdbb055374189688f0aa11e54a",
+      "hash_scope_full": "retrieved_response_bytes"
+    },
+    {
+      "id": "S20",
+      "url": "https://o-ishin.jp/policy/8saku2026.html",
+      "title": "維新八策2026 個別政策集",
+      "publisher": "日本維新の会",
+      "kind": "party_manifesto",
+      "fetch_status": "retrieved",
+      "published_at": null,
+      "retrieved_at": "2026-10-23T12:05:37+09:00",
+      "source_version": null,
+      "version_note": "取得版。選挙時点の固定版との同一性は人間未承認。",
+      "verification_note": "選挙特設サイトS25の政策集リンクと照合。公表日・改訂履歴は未確認。",
+      "locator": "経済財政関連施策・物価高対策 第1・第2項",
+      "observations": [
+        {
+          "retrieved_at": "2026-10-23T12:05:37+09:00",
+          "fetch_status": "retrieved"
+        }
+      ],
+      "content_sha256": "ced897061560bb6d3a5090eaad2cefdfc3849dc2f982ede223447dd98634dc75",
+      "hash_scope_full": "retrieved_response_bytes"
+    },
+    {
+      "id": "S21",
+      "url": "https://sanseito.jp/political_measures_2026/",
+      "title": "政策カタログ2026",
+      "publisher": "参政党",
+      "kind": "party_policy",
+      "fetch_status": "retrieved",
+      "published_at": null,
+      "retrieved_at": "2026-10-23T12:05:37+09:00",
+      "source_version": "2026-01-31更新表記。一般政策カタログ。",
+      "version_note": "取得版。選挙時点の固定版との同一性は人間未承認。",
+      "verification_note": "更新型の一般政策資料。選挙当日の公約原本の代用にしない。",
+      "locator": "冒頭・更新日",
+      "observations": [
+        {
+          "retrieved_at": "2026-10-23T12:05:37+09:00",
+          "fetch_status": "retrieved"
+        }
+      ],
+      "content_sha256": "4cd49e62e9e943805b71e25413ac190fed2878da821b965ecd722f0c7ffbd068",
+      "hash_scope_full": "retrieved_response_bytes"
+    },
+    {
+      "id": "S22",
+      "url": "https://sanseito.jp/political_measures_2026/specific_policies/",
+      "title": "政策カタログ2026 各論",
+      "publisher": "参政党",
+      "kind": "party_policy",
+      "fetch_status": "retrieved",
+      "published_at": null,
+      "retrieved_at": "2026-10-23T12:05:37+09:00",
+      "source_version": null,
+      "version_note": "取得版。選挙時点の固定版との同一性は人間未承認。",
+      "verification_note": "現在の一般政策資料。選挙公約への条件の遡及追加はしない。",
+      "locator": "教育・経済分野",
+      "observations": [
+        {
+          "retrieved_at": "2026-10-23T12:05:37+09:00",
+          "fetch_status": "retrieved"
+        }
+      ],
+      "content_sha256": "68c73e3c82e67d8571bf9fb02cca6f0df01e9ab2e2e663416a6afcfb8f272df3",
+      "hash_scope_full": "retrieved_response_bytes"
+    },
+    {
+      "id": "S23",
+      "url": "https://o-ishin.jp/coalition2025/img/index/core_manifesto_2026.pdf",
+      "title": "コア・マニフェスト2026",
+      "publisher": "日本維新の会",
+      "kind": "party_manifesto",
+      "fetch_status": "retrieved",
+      "published_at": null,
+      "retrieved_at": "2026-10-23T12:05:37+09:00",
+      "source_version": null,
+      "version_note": "取得版。選挙時点の固定版との同一性は人間未承認。",
+      "verification_note": "画像PDF。表紙を目視確認、本文全文の照合は未実施。",
+      "locator": "表紙・選挙特設ページS25からリンク",
+      "observations": [
+        {
+          "retrieved_at": "2026-10-23T12:05:37+09:00",
+          "fetch_status": "retrieved"
+        }
+      ],
+      "content_sha256": "f3a6178415861b637192aa0e95ff0cfc7700c8066d52a8acd10d5ea8b24b2f1e",
+      "hash_scope_full": "retrieved_response_bytes"
+    },
+    {
+      "id": "S24",
+      "url": "https://o-ishin.jp/coalition2025/img/index/ishin8saku2026.pdf",
+      "title": "維新八策2026 個別政策集 PDF",
+      "publisher": "日本維新の会",
+      "kind": "party_manifesto",
+      "fetch_status": "retrieved",
+      "published_at": null,
+      "retrieved_at": "2026-10-23T12:05:40+09:00",
+      "source_version": null,
+      "version_note": "取得版。選挙時点の固定版との同一性は人間未承認。",
+      "verification_note": "S20のHTMLと該当2項目を照合。選挙当日の固定版との同一性は未承認。",
+      "locator": "印刷頁3／PDF4ページ目・物価高対策1・2",
+      "observations": [
+        {
+          "retrieved_at": "2026-10-23T12:05:40+09:00",
+          "fetch_status": "retrieved"
+        }
+      ],
+      "content_sha256": "c8816a4580489085b42e63831565abaeb8d87bec78f8984b6579ee46735a5499",
+      "hash_scope_full": "retrieved_response_bytes"
+    },
+    {
+      "id": "S25",
+      "url": "https://o-ishin.jp/shuin2026/",
+      "title": "第51回衆議院議員選挙 特設サイト",
+      "publisher": "日本維新の会",
+      "kind": "election_context",
+      "fetch_status": "retrieved",
+      "published_at": null,
+      "retrieved_at": "2026-10-23T12:09:32+09:00",
+      "source_version": null,
+      "version_note": "取得版。選挙時点の固定版との同一性は人間未承認。",
+      "verification_note": "対象選挙と政策集との関係を確認。",
+      "locator": "冒頭・政策を知る・個別政策集へのリンク",
+      "observations": [
+        {
+          "retrieved_at": "2026-10-23T12:09:32+09:00",
+          "fetch_status": "retrieved"
+        }
+      ],
+      "content_sha256": "f4d014eb0da5a987625c690730b416a121382912bb25f92ec006933b970a1440",
+      "hash_scope_full": "retrieved_response_bytes"
     }
   ],
-  "evidence": []
+  "evidence": [],
+  "schema_version": "public-catalog-1",
+  "comparison_groups": [
+    {
+      "id": "consumption",
+      "label": "消費税"
+    },
+    {
+      "id": "relief",
+      "label": "税額控除・還付"
+    },
+    {
+      "id": "invoice",
+      "label": "インボイス"
+    },
+    {
+      "id": "childbirth",
+      "label": "出産費用"
+    },
+    {
+      "id": "childcare",
+      "label": "子育て・通園・給付"
+    },
+    {
+      "id": "care-wages",
+      "label": "医療・介護等の賃金"
+    },
+    {
+      "id": "energy",
+      "label": "電気料金・再エネ賦課金"
+    }
+  ],
+  "collection_policy": {
+    "basis": "同じ選挙・生活関連分野・原資料に所在を示せる具体策を優先。既存3政党を先に整え、比較可能な維新2件を追加。",
+    "division": "対象・行為・制度が独立して確認できる単位。条件を切り離して達成件数を増やさない。同じ項目の別施策は注記して残す。",
+    "limitations": "網羅調査ではない。資料取得可能性による偏りが残る。他党や未収集分野は次回以降に同一基準で収集。掲載順は旧版順と追加順で、優劣を示さない。"
+  },
+  "allowed_source_hosts": [
+    "election2026.new-kokumin.jp",
+    "new-kokumin.jp",
+    "o-ishin.jp",
+    "partsa.nikkei.com",
+    "sanseito.jp",
+    "www.cas.go.jp",
+    "www.jimin.jp",
+    "www.nta.go.jp",
+    "www.sangiin.go.jp",
+    "www.shugiin.go.jp",
+    "www.vill.kitanakagusuku.lg.jp"
+  ]
 }
