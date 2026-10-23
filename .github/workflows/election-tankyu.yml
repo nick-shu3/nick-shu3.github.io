@@ -1,0 +1,34 @@
+name: Verify election catalog
+on:
+  pull_request:
+    branches: [main]
+    paths:
+      - 'data/election-tankyu/**'
+      - 'scripts/election-tankyu/**'
+      - 'docs/election-tankyu/**'
+      - 'tests/election-tankyu*'
+      - '.github/workflows/election-tankyu.yml'
+  push:
+    branches: [main]
+    paths:
+      - 'data/election-tankyu/**'
+      - 'scripts/election-tankyu/**'
+      - 'docs/election-tankyu/**'
+      - 'tests/election-tankyu*'
+      - '.github/workflows/election-tankyu.yml'
+permissions:
+  contents: read
+jobs:
+  election-data:
+    runs-on: ubuntu-24.04
+    timeout-minutes: 5
+    steps:
+      - uses: actions/checkout@d23441a48e516b6c34aea4fa41551a30e30af803 # v6
+        with:
+          persist-credentials: false
+      - name: Check generated files and approval boundaries
+        run: |
+          python3 scripts/election-tankyu/build.py --check
+          python3 tests/election-tankyu-data.py
+          node tests/election-tankyu.cjs
+          node --check docs/election-tankyu/app.js
