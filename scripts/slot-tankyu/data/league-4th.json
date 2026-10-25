@@ -729,7 +729,11 @@
       "release_at": "2026-10-23T20:00:00+09:00",
       "team": "アルマダイナム",
       "channel": "ダイナム公式チャンネル",
-      "channel_url": "https://www.youtube.com/@dynamjp"
+      "channel_url": "https://www.youtube.com/@dynamjp",
+      "video_url": "https://www.youtube.com/watch?v=bxBwQOQB8cQ",
+      "watch_slug": "armada-dynam-rally",
+      "video_link_checked_at": "2026-10-25",
+      "video_evidence": "YouTube公開メタ・説明欄で対象動画、10月23日公開、5名を照合。本編の音声・字幕検証とは別。"
     },
     {
       "release_at": "2026-10-25T20:00:00+09:00",
