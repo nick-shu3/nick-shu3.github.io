@@ -217,7 +217,9 @@ def main():
         additions['watch-garden-united']='f2cd80a56de325c815786b2e47b553c79e7b2c808ec3876e40fe1e5091a67b1f'
         # First column: exact local edition, independently checked against the
         # author's manuscript and confirmed session data; see review record.
-        additions['column-osaka-umeda-20261025']='988586f2d00242af3ab3cb50dd011e6d4dd4159280f3666bff62f05e8e0448b7'
+        additions['column-osaka-umeda-20261025']='8e25f64b2b5addb858ccb6ced5fee38f4603c8c0f8d7584aafac990394b2f1a0'
+        additions['record-jashinchan-20261025']='52aa4cb98b20218da9edd03f656176da02dafd4a4af70808ac43ccf5b261ca53'
+        additions['daily-20261025']='304b00584ea4bcc714dfdbaf66fe039fa6b686ea91d82a80b1eaeb401bbcc0f2'
         additions['column-chatgpt-slot-log-failure']='90d54047d894a995cb05e9b442b7ce565bd2759b8fef6fdeed6f69acd0d662e0'
         if name in additions:
             if name=='record-tokyo-20261019':
