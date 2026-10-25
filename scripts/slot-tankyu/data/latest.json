@@ -3,6 +3,24 @@
   "same_day_order": "同日はデータ登録順。時刻や公開順を推定しない。",
   "entries": [
     {
+      "source": "record-jashinchan-20261025",
+      "anchor": "",
+      "date": "2026-10-25",
+      "date_kind": "内容更新日",
+      "group": "record-jashinchan-20261025",
+      "category": "実戦記録",
+      "reason": "本人依頼により大阪の公開済みコラムから本人実戦を独立し相互リンク。"
+    },
+    {
+      "source": "column-osaka-umeda-20261025",
+      "anchor": "",
+      "date": "2026-10-25",
+      "date_kind": "内容更新日",
+      "group": "column-osaka-20261025",
+      "category": "コラム",
+      "reason": "本人依頼により15時時点の周年状況レポートに整理。本人実戦は別記事へ。"
+    },
+    {
       "source": "watch-armada-dynam",
       "anchor": "",
       "date": "2026-10-25",

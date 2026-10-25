@@ -102,6 +102,12 @@ def check_sao2(page):
         if path.endswith('/listing.json'):
             old=json.loads(subprocess.check_output(['git','show',BASE+':'+path],cwd=ROOT))
             current=json.loads((ROOT/path).read_text())
+            # Preserve the older listing after removing this reviewed addition.
+            jashin=r'<a class="card" href="2026-10-25/jashinchan/">.*?</a>'
+            assert len(re.findall(jashin,current['body']))==1
+            current['body']=re.sub(jashin,'',current['body'])
+            assert current['updated']=='2026年10月25日'
+            current['updated']='2026年10月19日'
             # Only the reviewed 2026-10-19 card and listing date may be added.
             tokyo=r'<a class="card tone-ghoul" href="2026-10-19/tokyo-ghoul/">.*?</a>'
             assert len(re.findall(tokyo,current['body']))==1
