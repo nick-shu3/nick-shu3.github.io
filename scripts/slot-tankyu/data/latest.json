@@ -3,6 +3,15 @@
   "same_day_order": "同日はデータ登録順。時刻や公開順を推定しない。",
   "entries": [
     {
+      "source": "column-osaka-umeda-20261025",
+      "anchor": "",
+      "date": "2026-10-25",
+      "date_kind": "記事公開日",
+      "group": "column-osaka-20261025",
+      "category": "コラム",
+      "reason": "本人が回収訂正後の最新版を2026年10月25日に公開承認。大阪での旅打ち体験と15時時点の観察。"
+    },
+    {
       "source": "watch-123-entertainers",
       "anchor": "",
       "date": "2026-10-22",
