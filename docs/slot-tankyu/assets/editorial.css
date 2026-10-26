@@ -165,6 +165,7 @@ caption{text-align:left;font-size:13px;color:var(--muted);padding:12px 15px;back
 .data{min-width:540px}.data td{white-space:nowrap}.data td:first-child{white-space:normal}.data td,.data th{text-align:center}.data td:first-child,.data th:first-child{text-align:left}
 .league-schedule{width:100%;min-width:860px;table-layout:fixed}.league-schedule thead th:nth-child(1){width:12%}.league-schedule thead th:nth-child(2){width:15%}.league-schedule thead th:nth-child(3){width:26%}.league-schedule thead th:nth-child(4){width:15%}.league-schedule thead th:nth-child(5){width:15%}.league-schedule thead th:nth-child(6){width:17%}
 .league-schedule th,.league-schedule td{padding:12px 10px}.league-schedule tbody th{color:var(--ink);white-space:nowrap}
+.rally-table{min-width:800px}.rally-table .rally-team{font-weight:700}.rally-team a{display:inline-block;margin-top:8px;font-weight:400}.rally-evidence{margin-top:10px}.rally-evidence summary{cursor:pointer;color:var(--muted);font-size:13px}.rally-evidence>div{padding-top:8px;font-weight:400}.rally-links a{display:inline-block;min-height:44px;padding-block:9px}
 .league-label{font-weight:750}.league-red{color:#ffb0a8}.league-blue{color:#a5d1ff}.league-status{display:inline-block;padding:3px 8px;font-size:12px;line-height:1.8;font-weight:650;border-radius:var(--radius-sm)}.league-status.done{background:#254d40;color:#c8f9df}.league-status.planned{background:#2d405c;color:#d5e9ff}.league-status.pending{background:#55472e;color:#ffe4b1}
 .release-table{min-width:700px}.release-table tbody th{min-width:240px;color:var(--ink);font-size:14px}.release-date{scroll-margin-top:24px;margin-block:30px}
 .release-calendar{display:grid;grid-template-columns:repeat(7,minmax(0,1fr));gap:6px;max-width:700px;margin:24px 0;padding:18px;border:1px solid var(--line);border-radius:var(--radius);background:var(--panel)}
@@ -184,6 +185,27 @@ footer{border-top:1px solid var(--line);padding-block:27px 42px;color:var(--mute
 @media(min-width:1000px){.page-home #archive .archive-card:first-of-type .card-copy{padding:30px 35px}}
 @media(max-width:1000px){.site-header{flex-direction:column;align-items:flex-start;gap:14px}.site-header nav{justify-content:flex-start;column-gap:22px;row-gap:0;width:100%}.site-header nav a{min-height:44px}.machine-grid{gap:14px}.machine-card{padding:20px}.machine-card h3{font-size:22px}.machine-card .tag{font-size:13px}}
 @media(max-width:800px){.machine-grid{grid-template-columns:1fr}.machine-card{padding:24px}.machine-card h3{font-size:23px}.machine-card p{margin-top:0}.setting-visual,.signal-comparison{grid-template-columns:1fr}.archive-card{grid-template-columns:minmax(0,.9fr) minmax(0,1.1fr)}.archive-card .card-copy{padding:20px}.archive-card h3{font-size:20px}.digest-grid{grid-template-columns:1fr}.digest-item+.digest-item{border-left:0;border-top:1px solid var(--line)}}
+/* A single semantic table becomes one full-width team card on small screens. */
+@media(max-width:800px){
+  .rally-table-wrap{overflow:visible;border:0;border-radius:0;background:none}
+  .rally-table{display:block;min-width:0;width:100%}
+  .rally-table caption{display:block;padding:0 0 12px;background:none}
+  .rally-table thead{position:absolute;width:1px;height:1px;padding:0;overflow:hidden;clip:rect(0,0,0,0);white-space:nowrap}
+  .rally-table tbody{display:grid;gap:16px}
+  .rally-table tbody tr{display:grid;grid-template-columns:minmax(0,1fr);grid-template-areas:"team" "date" "state" "links";padding:18px;background:var(--panel);border:1px solid var(--line);border-radius:var(--radius)}
+  .rally-table tbody th,.rally-table tbody td{display:block;min-width:0;width:auto;padding:0;border:0;font-size:15px;line-height:1.8;overflow-wrap:break-word;word-break:normal}
+  .rally-table .rally-team{grid-area:team;font-size:19px;font-weight:750;color:var(--ink);padding-bottom:12px}
+  .rally-team a{display:block;font-size:14px;margin-top:4px;min-height:44px;padding-block:8px}
+  .rally-table .rally-date{grid-area:date;font-weight:400;color:var(--muted);padding-bottom:12px}
+  .rally-date:before{content:attr(data-label);display:block;font-size:12px;color:var(--muted)}
+  .rally-date time{display:block;color:var(--ink)}
+  .rally-table .rally-state{grid-area:state;padding-bottom:14px}
+  .rally-evidence summary{font-size:14px;min-height:44px;padding-block:9px}
+  .rally-evidence small{font-size:13px}
+  .rally-table .rally-links{grid-area:links;border-top:1px solid var(--line-soft);padding-top:8px}
+  .rally-links a{display:block;min-height:44px;font-size:15px;padding-block:10px}
+  .rally-links br{display:none}
+}
 @media(max-width:640px){
   :root{--space:18px;--radius:6px}
   .site-header,main,footer{padding-inline:20px}main{border-inline:0}.site-header{padding-block:14px 10px;gap:12px}.site-header nav{column-gap:18px}.site-header nav a{font-size:13px;min-height:44px}
