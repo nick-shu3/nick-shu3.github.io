@@ -1,6 +1,6 @@
 {
   "season": "4th / 2026–2027",
-  "checked_at": "2026-10-21",
+  "checked_at": "2026-10-26",
   "official_url": "https://p-gabu.jp/sc/666/777league/",
   "rows": [
     {
@@ -16,7 +16,7 @@
       "evidence_note": "キコーナ広報による当日付の初戦終了報告を原投稿本文で確認。記載の出場者4名がRED第1回戦と一致。",
       "status_checked_at": "2026-10-22",
       "status_review_note": "2026年10月22日に原投稿の本文・投稿日を通常HTTP取得で確認。旧確認待ちの理由はstatus_historyに保持。",
-      "schedule_checked_at": "2026-10-21",
+      "schedule_checked_at": "2026-10-26",
       "schedule_source_type": "official",
       "status_history": [
         {
@@ -30,7 +30,8 @@
           "note": "キコーナ広報による当日付の初戦終了報告を原投稿本文で確認。記載の出場者4名がRED第1回戦と一致。"
         }
       ],
-      "status_note": "キコーナ広報の当日終了報告を確認。"
+      "status_note": "キコーナ広報の当日終了報告を確認。",
+      "previous_schedule_checked_at": "2026-10-21"
     },
     {
       "date": "2026-09-02",
@@ -43,9 +44,10 @@
       "schedule_source": "https://p-gabu.jp/sc/666/777league/schedule/",
       "evidence_url": "https://www.sotwe.com/hashtag/%E5%8F%B8%E8%8A%AD%E6%89%B6?lang=tr",
       "evidence_note": "当日の収録告知・参加者の実戦後報告を確認",
-      "schedule_checked_at": "2026-10-21",
+      "schedule_checked_at": "2026-10-26",
       "schedule_source_type": "official",
-      "status_checked_at": "2026-10-14"
+      "status_checked_at": "2026-10-14",
+      "previous_schedule_checked_at": "2026-10-21"
     },
     {
       "date": "2026-09-03",
@@ -60,8 +62,9 @@
       "evidence_note": "9月3日のRED第2回戦・テンガイ与次郎での世譜イブキの収録終了報告を検索掲載内容で確認",
       "evidence_method": "公式・出演者の投稿内容を二次資料経由で確認",
       "status_checked_at": "2026-10-14",
-      "schedule_checked_at": "2026-10-21",
-      "schedule_source_type": "official"
+      "schedule_checked_at": "2026-10-26",
+      "schedule_source_type": "official",
+      "previous_schedule_checked_at": "2026-10-21"
     },
     {
       "date": "2026-09-04",
@@ -74,9 +77,10 @@
       "schedule_source": "https://p-gabu.jp/sc/666/777league/schedule/",
       "evidence_url": "https://search.yahoo.co.jp/realtime/search?p=%23%E3%83%A1%E3%82%AC%E3%83%95%E3%82%A7%E3%82%B91300%E6%B7%80%E5%B7%9D",
       "evidence_note": "当日の公式収録告知と出演者の実戦後報告を確認",
-      "schedule_checked_at": "2026-10-21",
+      "schedule_checked_at": "2026-10-26",
       "schedule_source_type": "official",
-      "status_checked_at": "2026-10-14"
+      "status_checked_at": "2026-10-14",
+      "previous_schedule_checked_at": "2026-10-21"
     },
     {
       "date": "2026-09-10",
@@ -89,9 +93,10 @@
       "schedule_source": "https://p-gabu.jp/sc/666/777league/schedule/",
       "evidence_url": "https://www.sotwe.com/777_league",
       "evidence_note": "公式アカウントの当日収録・エンディング告知を確認",
-      "schedule_checked_at": "2026-10-21",
+      "schedule_checked_at": "2026-10-26",
       "schedule_source_type": "official",
-      "status_checked_at": "2026-10-14"
+      "status_checked_at": "2026-10-14",
+      "previous_schedule_checked_at": "2026-10-21"
     },
     {
       "date": "2026-09-30",
@@ -106,8 +111,9 @@
       "evidence_note": "マルハン東日本広報の「昨日はホーム戦の初戦が無事終わり」「明日の収録店舗は蒲田7」の報告を照合。9月30日の伊勢崎収録の終了を確認",
       "evidence_method": "公式・出演者の投稿内容を二次資料経由で確認",
       "status_checked_at": "2026-10-14",
-      "schedule_checked_at": "2026-10-21",
-      "schedule_source_type": "official"
+      "schedule_checked_at": "2026-10-26",
+      "schedule_source_type": "official",
+      "previous_schedule_checked_at": "2026-10-21"
     },
     {
       "date": "2026-10-02",
@@ -122,8 +128,9 @@
       "evidence_note": "出演者・兎味ペロリナの蒲田7での777リーグ収録終了報告を確認",
       "evidence_method": "公式・出演者の投稿内容を二次資料経由で確認",
       "status_checked_at": "2026-10-14",
-      "schedule_checked_at": "2026-10-21",
-      "schedule_source_type": "official"
+      "schedule_checked_at": "2026-10-26",
+      "schedule_source_type": "official",
+      "previous_schedule_checked_at": "2026-10-21"
     },
     {
       "date": "2026-10-05",
@@ -138,8 +145,9 @@
       "evidence_note": "出演者・黒木ねねの八潮での収録終了報告と公式BLUE第3回戦の収録告知を照合",
       "evidence_method": "公式・出演者の投稿内容を二次資料経由で確認",
       "status_checked_at": "2026-10-14",
-      "schedule_checked_at": "2026-10-21",
-      "schedule_source_type": "official"
+      "schedule_checked_at": "2026-10-26",
+      "schedule_source_type": "official",
+      "previous_schedule_checked_at": "2026-10-21"
     },
     {
       "date": "2026-10-07",
@@ -152,9 +160,10 @@
       "schedule_source": "https://p-gabu.jp/sc/666/777league/schedule/",
       "evidence_url": "https://search.yahoo.co.jp/realtime/search?ei=UTF-8&ifr=tl_hash&md=t&p=%23777%E3%83%AA%E3%83%BC%E3%82%B0&rkf=1",
       "evidence_note": "当日の参加者による実戦後報告を確認",
-      "schedule_checked_at": "2026-10-21",
+      "schedule_checked_at": "2026-10-26",
       "schedule_source_type": "official",
-      "status_checked_at": "2026-10-14"
+      "status_checked_at": "2026-10-14",
+      "previous_schedule_checked_at": "2026-10-21"
     },
     {
       "date": "2026-10-14",
@@ -169,7 +178,7 @@
       "evidence_note": "コウタローの10月14日付投稿でホーム戦の実戦後報告と配信予告を確認。前日の松任ホーム戦告知と照合し、収録終了と判断。",
       "status_note": "出演者の当日実戦後報告から収録終了と判断。",
       "status_checked_at": "2026-10-22",
-      "schedule_checked_at": "2026-10-21",
+      "schedule_checked_at": "2026-10-26",
       "schedule_source_type": "official",
       "status_history": [
         {
@@ -183,7 +192,8 @@
           "note": "コウタローの10月14日付投稿でホーム戦の実戦後報告と配信予告を確認。前日の松任ホーム戦告知と照合し、収録終了と判断。"
         }
       ],
-      "status_review_note": "2026年10月22日に原投稿の本文・投稿日を通常HTTP取得で確認。旧確認待ちの理由はstatus_historyに保持。"
+      "status_review_note": "2026年10月22日に原投稿の本文・投稿日を通常HTTP取得で確認。旧確認待ちの理由はstatus_historyに保持。",
+      "previous_schedule_checked_at": "2026-10-21"
     },
     {
       "date": "2026-10-21",
@@ -196,7 +206,7 @@
       "schedule_source": "https://p-gabu.jp/sc/666/777league/schedule/",
       "evidence_url": "https://x.com/Rino_Tachi/status/2112829620567556492",
       "evidence_note": "橘リノの10月21日付投稿で高崎本店での777リーグ収録終了を明記。公式BLUE第5回戦告知の日付・会場・出演者と照合。",
-      "schedule_checked_at": "2026-10-21",
+      "schedule_checked_at": "2026-10-26",
       "schedule_source_type": "official",
       "status_checked_at": "2026-10-22",
       "status_history": [
@@ -212,22 +222,32 @@
         }
       ],
       "status_note": "出演者・橘リノの当日収録終了報告を確認。",
-      "status_review_note": "2026年10月22日に原投稿本文・投稿日を通常HTTP取得で確認。放送・配信日は今回変更しない。"
+      "status_review_note": "2026年10月22日に原投稿本文・投稿日を通常HTTP取得で確認。放送・配信日は今回変更しない。",
+      "previous_schedule_checked_at": "2026-10-21"
     },
     {
       "date": "2026-10-22",
       "round": "BLUE第6回戦",
       "venue": "ダイナム滋賀彦根店",
-      "status": "予定",
+      "status": "終了確認待ち",
       "broadcast_date": null,
       "broadcast_status": "未確認",
       "video_url": null,
       "schedule_source": "https://p-gabu.jp/sc/666/777league/schedule/",
       "evidence_url": null,
       "evidence_note": null,
-      "schedule_checked_at": "2026-10-21",
+      "schedule_checked_at": "2026-10-26",
       "schedule_source_type": "official",
-      "status_checked_at": "2026-10-14"
+      "status_checked_at": "2026-10-26",
+      "previous_schedule_checked_at": "2026-10-21",
+      "status_history": [
+        {
+          "status": "予定",
+          "checked_at": "2026-10-14",
+          "note": "元の予定を保持。10月26日は終了の裏付けを確認できず。"
+        }
+      ],
+      "status_note": "予定日経過。公式日程の掲載は確認したが、収録終了・延期・中止の裏付けは未確認。"
     },
     {
       "date": "2026-10-30",
@@ -240,9 +260,10 @@
       "schedule_source": "https://p-gabu.jp/sc/666/777league/schedule/",
       "evidence_url": null,
       "evidence_note": null,
-      "schedule_checked_at": "2026-10-21",
+      "schedule_checked_at": "2026-10-26",
       "schedule_source_type": "official",
-      "status_checked_at": "2026-10-14"
+      "status_checked_at": "2026-10-14",
+      "previous_schedule_checked_at": "2026-10-21"
     },
     {
       "date": "2026-11-02",
@@ -255,9 +276,10 @@
       "schedule_source": "https://p-gabu.jp/sc/666/777league/schedule/",
       "evidence_url": null,
       "evidence_note": null,
-      "schedule_checked_at": "2026-10-21",
+      "schedule_checked_at": "2026-10-26",
       "schedule_source_type": "official",
-      "status_checked_at": "2026-10-14"
+      "status_checked_at": "2026-10-14",
+      "previous_schedule_checked_at": "2026-10-21"
     },
     {
       "date": "2026-11-05",
@@ -270,9 +292,10 @@
       "schedule_source": "https://p-gabu.jp/sc/666/777league/schedule/",
       "evidence_url": null,
       "evidence_note": null,
-      "schedule_checked_at": "2026-10-21",
+      "schedule_checked_at": "2026-10-26",
       "schedule_source_type": "official",
-      "status_checked_at": "2026-10-14"
+      "status_checked_at": "2026-10-14",
+      "previous_schedule_checked_at": "2026-10-21"
     },
     {
       "date": "2026-11-06",
@@ -285,9 +308,10 @@
       "schedule_source": "https://p-gabu.jp/sc/666/777league/schedule/",
       "evidence_url": null,
       "evidence_note": null,
-      "schedule_checked_at": "2026-10-21",
+      "schedule_checked_at": "2026-10-26",
       "schedule_source_type": "official",
-      "status_checked_at": "2026-10-14"
+      "status_checked_at": "2026-10-14",
+      "previous_schedule_checked_at": "2026-10-21"
     },
     {
       "date": "2026-11-10",
@@ -300,9 +324,10 @@
       "schedule_source": "https://p-gabu.jp/sc/666/777league/schedule/",
       "evidence_url": null,
       "evidence_note": null,
-      "schedule_checked_at": "2026-10-21",
+      "schedule_checked_at": "2026-10-26",
       "schedule_source_type": "official",
-      "status_checked_at": "2026-10-14"
+      "status_checked_at": "2026-10-14",
+      "previous_schedule_checked_at": "2026-10-21"
     },
     {
       "date": "2026-11-12",
@@ -315,9 +340,10 @@
       "schedule_source": "https://p-gabu.jp/sc/666/777league/schedule/",
       "evidence_url": null,
       "evidence_note": null,
-      "schedule_checked_at": "2026-10-21",
+      "schedule_checked_at": "2026-10-26",
       "schedule_source_type": "official",
-      "status_checked_at": "2026-10-14"
+      "status_checked_at": "2026-10-14",
+      "previous_schedule_checked_at": "2026-10-21"
     },
     {
       "date": "2026-11-24",
@@ -330,9 +356,10 @@
       "schedule_source": "https://p-gabu.jp/sc/666/777league/schedule/",
       "evidence_url": null,
       "evidence_note": null,
-      "schedule_checked_at": "2026-10-21",
+      "schedule_checked_at": "2026-10-26",
       "schedule_source_type": "official",
-      "status_checked_at": "2026-10-14"
+      "status_checked_at": "2026-10-14",
+      "previous_schedule_checked_at": "2026-10-21"
     },
     {
       "date": "2026-11-25",
@@ -345,9 +372,10 @@
       "schedule_source": "https://p-gabu.jp/sc/666/777league/schedule/",
       "evidence_url": null,
       "evidence_note": null,
-      "schedule_checked_at": "2026-10-21",
+      "schedule_checked_at": "2026-10-26",
       "schedule_source_type": "official",
-      "status_checked_at": "2026-10-14"
+      "status_checked_at": "2026-10-14",
+      "previous_schedule_checked_at": "2026-10-21"
     },
     {
       "date": "2026-12-02",
@@ -360,9 +388,10 @@
       "schedule_source": "https://p-gabu.jp/sc/666/777league/schedule/",
       "evidence_url": null,
       "evidence_note": null,
-      "schedule_checked_at": "2026-10-21",
+      "schedule_checked_at": "2026-10-26",
       "schedule_source_type": "official",
-      "status_checked_at": "2026-10-14"
+      "status_checked_at": "2026-10-14",
+      "previous_schedule_checked_at": "2026-10-21"
     },
     {
       "date": "2026-12-03",
@@ -375,9 +404,10 @@
       "schedule_source": "https://p-gabu.jp/sc/666/777league/schedule/",
       "evidence_url": null,
       "evidence_note": null,
-      "schedule_checked_at": "2026-10-21",
+      "schedule_checked_at": "2026-10-26",
       "schedule_source_type": "official",
-      "status_checked_at": "2026-10-14"
+      "status_checked_at": "2026-10-14",
+      "previous_schedule_checked_at": "2026-10-21"
     },
     {
       "date": "2026-12-10",
@@ -390,9 +420,10 @@
       "schedule_source": "https://p-gabu.jp/sc/666/777league/schedule/",
       "evidence_url": null,
       "evidence_note": null,
-      "schedule_checked_at": "2026-10-21",
+      "schedule_checked_at": "2026-10-26",
       "schedule_source_type": "official",
-      "status_checked_at": "2026-10-14"
+      "status_checked_at": "2026-10-14",
+      "previous_schedule_checked_at": "2026-10-21"
     },
     {
       "date": "2026-12-15",
@@ -405,9 +436,10 @@
       "schedule_source": "https://p-gabu.jp/sc/666/777league/schedule/",
       "evidence_url": null,
       "evidence_note": null,
-      "schedule_checked_at": "2026-10-21",
+      "schedule_checked_at": "2026-10-26",
       "schedule_source_type": "official",
-      "status_checked_at": "2026-10-14"
+      "status_checked_at": "2026-10-14",
+      "previous_schedule_checked_at": "2026-10-21"
     },
     {
       "date": "2026-12-16",
@@ -420,9 +452,10 @@
       "schedule_source": "https://p-gabu.jp/sc/666/777league/schedule/",
       "evidence_url": null,
       "evidence_note": null,
-      "schedule_checked_at": "2026-10-21",
+      "schedule_checked_at": "2026-10-26",
       "schedule_source_type": "official",
-      "status_checked_at": "2026-10-14"
+      "status_checked_at": "2026-10-14",
+      "previous_schedule_checked_at": "2026-10-21"
     },
     {
       "date": "2026-12-21",
@@ -435,9 +468,10 @@
       "schedule_source": "https://p-gabu.jp/sc/666/777league/schedule/",
       "evidence_url": null,
       "evidence_note": null,
-      "schedule_checked_at": "2026-10-21",
+      "schedule_checked_at": "2026-10-26",
       "schedule_source_type": "official",
-      "status_checked_at": "2026-10-14"
+      "status_checked_at": "2026-10-14",
+      "previous_schedule_checked_at": "2026-10-21"
     },
     {
       "date": "2026-12-23",
@@ -450,9 +484,10 @@
       "schedule_source": "https://p-gabu.jp/sc/666/777league/schedule/",
       "evidence_url": null,
       "evidence_note": null,
-      "schedule_checked_at": "2026-10-21",
+      "schedule_checked_at": "2026-10-26",
       "schedule_source_type": "official",
-      "status_checked_at": "2026-10-14"
+      "status_checked_at": "2026-10-14",
+      "previous_schedule_checked_at": "2026-10-21"
     },
     {
       "status": "予定",
@@ -465,9 +500,10 @@
       "round": "BLUE第14回戦",
       "venue": "Super D'station新開地店",
       "schedule_source": "https://p-gabu.jp/sc/666/777league/schedule/",
-      "schedule_checked_at": "2026-10-21",
+      "schedule_checked_at": "2026-10-26",
       "schedule_source_type": "official",
-      "status_checked_at": "2026-10-21"
+      "status_checked_at": "2026-10-21",
+      "previous_schedule_checked_at": "2026-10-21"
     },
     {
       "status": "予定",
@@ -480,9 +516,10 @@
       "round": "RED第14回戦",
       "venue": "マルハンメガシティ市原",
       "schedule_source": "https://p-gabu.jp/sc/666/777league/schedule/",
-      "schedule_checked_at": "2026-10-21",
+      "schedule_checked_at": "2026-10-26",
       "schedule_source_type": "official",
-      "status_checked_at": "2026-10-21"
+      "status_checked_at": "2026-10-21",
+      "previous_schedule_checked_at": "2026-10-21"
     },
     {
       "status": "予定",
@@ -495,9 +532,10 @@
       "round": "RED第15回戦",
       "venue": "テンガイ・戸島店",
       "schedule_source": "https://p-gabu.jp/sc/666/777league/schedule/",
-      "schedule_checked_at": "2026-10-21",
+      "schedule_checked_at": "2026-10-26",
       "schedule_source_type": "official",
-      "status_checked_at": "2026-10-21"
+      "status_checked_at": "2026-10-21",
+      "previous_schedule_checked_at": "2026-10-21"
     },
     {
       "status": "予定",
@@ -510,9 +548,10 @@
       "round": "BLUE第15回戦",
       "venue": "ダイナム長野上田店",
       "schedule_source": "https://p-gabu.jp/sc/666/777league/schedule/",
-      "schedule_checked_at": "2026-10-21",
+      "schedule_checked_at": "2026-10-26",
       "schedule_source_type": "official",
-      "status_checked_at": "2026-10-21"
+      "status_checked_at": "2026-10-21",
+      "previous_schedule_checked_at": "2026-10-21"
     },
     {
       "status": "予定",
@@ -525,9 +564,10 @@
       "round": "RED第16回戦",
       "venue": "キコーナ加古川店",
       "schedule_source": "https://p-gabu.jp/sc/666/777league/schedule/",
-      "schedule_checked_at": "2026-10-21",
+      "schedule_checked_at": "2026-10-26",
       "schedule_source_type": "official",
-      "status_checked_at": "2026-10-21"
+      "status_checked_at": "2026-10-21",
+      "previous_schedule_checked_at": "2026-10-21"
     },
     {
       "status": "予定",
@@ -540,9 +580,10 @@
       "round": "BLUE第16回戦",
       "venue": "新！ガーデン八潮",
       "schedule_source": "https://p-gabu.jp/sc/666/777league/schedule/",
-      "schedule_checked_at": "2026-10-21",
+      "schedule_checked_at": "2026-10-26",
       "schedule_source_type": "official",
-      "status_checked_at": "2026-10-21"
+      "status_checked_at": "2026-10-21",
+      "previous_schedule_checked_at": "2026-10-21"
     },
     {
       "status": "予定",
@@ -555,9 +596,10 @@
       "round": "ルーキー戦第2回戦",
       "venue": "ガーデン東大宮",
       "schedule_source": "https://p-gabu.jp/sc/666/777league/schedule/",
-      "schedule_checked_at": "2026-10-21",
+      "schedule_checked_at": "2026-10-26",
       "schedule_source_type": "official",
-      "status_checked_at": "2026-10-21"
+      "status_checked_at": "2026-10-21",
+      "previous_schedule_checked_at": "2026-10-21"
     },
     {
       "status": "予定",
@@ -570,9 +612,10 @@
       "round": "RED第17回戦",
       "venue": "グランキコーナ堺店",
       "schedule_source": "https://p-gabu.jp/sc/666/777league/schedule/",
-      "schedule_checked_at": "2026-10-21",
+      "schedule_checked_at": "2026-10-26",
       "schedule_source_type": "official",
-      "status_checked_at": "2026-10-21"
+      "status_checked_at": "2026-10-21",
+      "previous_schedule_checked_at": "2026-10-21"
     },
     {
       "status": "予定",
@@ -585,9 +628,10 @@
       "round": "BLUE第17回戦",
       "venue": "Super D'station高崎本店",
       "schedule_source": "https://p-gabu.jp/sc/666/777league/schedule/",
-      "schedule_checked_at": "2026-10-21",
+      "schedule_checked_at": "2026-10-26",
       "schedule_source_type": "official",
-      "status_checked_at": "2026-10-21"
+      "status_checked_at": "2026-10-21",
+      "previous_schedule_checked_at": "2026-10-21"
     },
     {
       "status": "予定",
@@ -600,9 +644,10 @@
       "round": "BLUE第18回戦",
       "venue": "新！ガーデン亀戸",
       "schedule_source": "https://p-gabu.jp/sc/666/777league/schedule/",
-      "schedule_checked_at": "2026-10-21",
+      "schedule_checked_at": "2026-10-26",
       "schedule_source_type": "official",
-      "status_checked_at": "2026-10-21"
+      "status_checked_at": "2026-10-21",
+      "previous_schedule_checked_at": "2026-10-21"
     },
     {
       "status": "予定",
@@ -615,9 +660,10 @@
       "round": "RED第18回戦",
       "venue": "テンガイ・与次郎店",
       "schedule_source": "https://p-gabu.jp/sc/666/777league/schedule/",
-      "schedule_checked_at": "2026-10-21",
+      "schedule_checked_at": "2026-10-26",
       "schedule_source_type": "official",
-      "status_checked_at": "2026-10-21"
+      "status_checked_at": "2026-10-21",
+      "previous_schedule_checked_at": "2026-10-21"
     },
     {
       "status": "予定",
@@ -630,9 +676,10 @@
       "round": "RED第19回戦",
       "venue": "マルハンメガシティ2000 蒲田 7",
       "schedule_source": "https://p-gabu.jp/sc/666/777league/schedule/",
-      "schedule_checked_at": "2026-10-21",
+      "schedule_checked_at": "2026-10-26",
       "schedule_source_type": "official",
-      "status_checked_at": "2026-10-21"
+      "status_checked_at": "2026-10-21",
+      "previous_schedule_checked_at": "2026-10-21"
     },
     {
       "status": "予定",
@@ -645,9 +692,10 @@
       "round": "BLUE第19回戦",
       "venue": "ダイナム長野上田店",
       "schedule_source": "https://p-gabu.jp/sc/666/777league/schedule/",
-      "schedule_checked_at": "2026-10-21",
+      "schedule_checked_at": "2026-10-26",
       "schedule_source_type": "official",
-      "status_checked_at": "2026-10-21"
+      "status_checked_at": "2026-10-21",
+      "previous_schedule_checked_at": "2026-10-21"
     },
     {
       "status": "予定",
@@ -660,9 +708,10 @@
       "round": "BLUE第20回戦",
       "venue": "メガフェイス1500宗像",
       "schedule_source": "https://p-gabu.jp/sc/666/777league/schedule/",
-      "schedule_checked_at": "2026-10-21",
+      "schedule_checked_at": "2026-10-26",
       "schedule_source_type": "official",
-      "status_checked_at": "2026-10-21"
+      "status_checked_at": "2026-10-21",
+      "previous_schedule_checked_at": "2026-10-21"
     },
     {
       "status": "予定",
@@ -675,9 +724,10 @@
       "round": "RED第20回戦",
       "venue": "123+N布施店",
       "schedule_source": "https://p-gabu.jp/sc/666/777league/schedule/",
-      "schedule_checked_at": "2026-10-21",
+      "schedule_checked_at": "2026-10-26",
       "schedule_source_type": "official",
-      "status_checked_at": "2026-10-21"
+      "status_checked_at": "2026-10-21",
+      "previous_schedule_checked_at": "2026-10-21"
     }
   ],
   "video_checked_at": "2026-10-14",
@@ -693,7 +743,9 @@
       "watch_slug": "face-mega-tigers-rally",
       "video_url": "https://www.youtube.com/watch?v=-Dfr-57rNFE",
       "video_link_checked_at": "2026-10-15",
-      "video_evidence": "既存紹介記事と独立レビューによる確認。今回のYouTube本文再取得はできていない。"
+      "video_evidence": "既存紹介記事と独立レビューによる確認。今回のYouTube本文再取得はできていない。",
+      "metadata_checked_at": "2026-10-26",
+      "metadata_note": "YouTube oEmbedでタイトル・投稿元を再照合。公開日時や映像内容は未検証。"
     },
     {
       "release_at": "2026-10-17T20:00:00+09:00",
@@ -703,7 +755,9 @@
       "watch_slug": "tengai-golden-manes-rally",
       "video_url": "https://www.youtube.com/watch?v=gvdjRDYu2ek",
       "video_link_checked_at": "2026-10-18",
-      "video_evidence": "既存紹介記事と独立レビューによる確認。今回のYouTube本文再取得はできていない。"
+      "video_evidence": "既存紹介記事と独立レビューによる確認。今回のYouTube本文再取得はできていない。",
+      "metadata_checked_at": "2026-10-26",
+      "metadata_note": "YouTube oEmbedでタイトル・投稿元を再照合。公開日時や映像内容は未検証。"
     },
     {
       "release_at": "2026-10-19T20:00:00+09:00",
@@ -713,7 +767,9 @@
       "video_url": "https://www.youtube.com/watch?v=Hw7rRNl9vxQ",
       "watch_slug": "garden-united-rally",
       "video_link_checked_at": "2026-10-22",
-      "video_evidence": "YouTube公開情報・説明欄・oEmbedと10月19日付ガーデン公式公開告知を照合。動画本編の検証とは別。"
+      "video_evidence": "YouTube公開情報・説明欄・oEmbedと10月19日付ガーデン公式公開告知を照合。動画本編の検証とは別。",
+      "metadata_checked_at": "2026-10-26",
+      "metadata_note": "YouTube oEmbedでタイトル・投稿元を再照合。公開日時や映像内容は未検証。"
     },
     {
       "release_at": "2026-10-21T20:00:00+09:00",
@@ -723,7 +779,9 @@
       "video_url": "https://www.youtube.com/watch?v=Jrnxg90tmk0",
       "watch_slug": "123-entertainers-rally",
       "video_link_checked_at": "2026-10-22",
-      "video_evidence": "YouTube公開メタ・説明欄と出演者の公開告知で動画リンクを確認。本編の音声・字幕の直接照合とは別。"
+      "video_evidence": "YouTube公開メタ・説明欄と出演者の公開告知で動画リンクを確認。本編の音声・字幕の直接照合とは別。",
+      "metadata_checked_at": "2026-10-26",
+      "metadata_note": "YouTube oEmbedでタイトル・投稿元を再照合。公開日時や映像内容は未検証。"
     },
     {
       "release_at": "2026-10-23T20:00:00+09:00",
@@ -733,13 +791,22 @@
       "video_url": "https://www.youtube.com/watch?v=bxBwQOQB8cQ",
       "watch_slug": "armada-dynam-rally",
       "video_link_checked_at": "2026-10-25",
-      "video_evidence": "YouTube公開メタ・説明欄で対象動画、10月23日公開、5名を照合。本編の音声・字幕検証とは別。"
+      "video_evidence": "YouTube公開メタ・説明欄で対象動画、10月23日公開、5名を照合。本編の音声・字幕検証とは別。",
+      "metadata_checked_at": "2026-10-26",
+      "metadata_note": "YouTube oEmbedでタイトル・投稿元を再照合。公開日時や映像内容は未検証。"
     },
     {
       "release_at": "2026-10-25T20:00:00+09:00",
       "team": "キコーナサンクス",
       "channel": "キコーナチャンネル",
-      "channel_url": "https://www.youtube.com/channel/UCNvMlbFo7uIAG2gRQGmQKDQ"
+      "channel_url": "https://www.youtube.com/channel/UCNvMlbFo7uIAG2gRQGmQKDQ",
+      "video_url": "https://www.youtube.com/watch?v=PrzOBrXmJhA",
+      "video_link_checked_at": "2026-10-26",
+      "video_evidence": "10月25日付の777リーグ公式X公開告知とリンク、YouTube oEmbedのタイトル・投稿元を照合。公開時刻と本編映像は未検証。",
+      "video_announcement_url": "https://x.com/777_LEAGUE/status/2114313492740313329",
+      "published_on": "2026-10-25",
+      "metadata_checked_at": "2026-10-26",
+      "metadata_note": "YouTube oEmbedでタイトル・投稿元を再照合。公開日時や映像内容は未検証。"
     },
     {
       "release_at": "2026-10-27T20:00:00+09:00",
@@ -756,6 +823,6 @@
   ],
   "schedule_source_type": "official",
   "previous_schedule_note": "10月14日版は二次資料を参照。10月21日に公式日程の掲載分42件へ照合・更新。過去の終了根拠は個別の確認日を保持。",
-  "video_reviewed_at": "2026-10-21",
-  "video_review_note": "公式X・YouTubeの一部は取得不可。日付だけで動画公開済みにしない。既存確認分2本のみ動画へのリンクを掲載。"
+  "video_reviewed_at": "2026-10-26",
+  "video_review_note": "公式Xで本編11月1日20時の予定とキコーナ公開を照合。YouTube本編・チャンネル一覧は取得制限あり。動画のタイトル・投稿元の確認はoEmbedで行い、公開日時と映像視聴とは分ける。既存リンクの当初確認日は保持。"
 }

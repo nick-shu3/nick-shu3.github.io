@@ -1,6 +1,6 @@
 {
-  "checked_at": "2026-10-22",
-  "source_updated_at": "2026-10-22",
+  "checked_at": "2026-10-26",
+  "source_updated_at": "2026-10-26",
   "machines": [
     {
       "date": "2026-10-19",
@@ -28,9 +28,9 @@
       "maker": "京楽",
       "kind": "パチスロ",
       "schedule_url": "https://www.p-world.co.jp/database/machine/introduce_calendar.cgi?type=Pachi",
-      "official_url": null,
-      "verification": "日程資料で確認",
-      "checked_at": "2026-10-13"
+      "official_url": "https://www.kyoraku.co.jp/news/detail/898",
+      "verification": "メーカー公式の全国導入予定11月2日と日程資料を照合",
+      "checked_at": "2026-10-26"
     },
     {
       "date": "2026-11-02",
@@ -38,9 +38,16 @@
       "maker": "サンスリー",
       "kind": "パチスロ",
       "schedule_url": "https://www.p-world.co.jp/database/machine/introduce_calendar.cgi?type=Pachi",
-      "official_url": null,
-      "verification": "日程資料で確認",
-      "checked_at": "2026-10-13"
+      "official_url": "https://www.sanyobussan.co.jp/information/pdf/sanyo_press_release_20260724_01.pdf",
+      "verification": "メーカー公式のトップ導入予定11月2日と日程資料を照合",
+      "checked_at": "2026-10-26",
+      "official_video": {
+        "url": "https://www.youtube.com/watch?v=VAvfrCi7AEQ",
+        "announced_on": "2026-10-23",
+        "announcement_url": "https://www.sanyobussan.co.jp/information/information.html",
+        "checked_at": "2026-10-26",
+        "note": "SANYOの10月23日付案内からリンクを確認。本編の内容・結果は未検証。"
+      }
     },
     {
       "date": "2026-11-02",
@@ -68,9 +75,9 @@
       "maker": "サンセイR&D",
       "kind": "パチスロ",
       "schedule_url": "https://www.p-world.co.jp/database/machine/introduce_calendar.cgi?type=Pachi",
-      "official_url": null,
-      "verification": "日程資料で確認",
-      "checked_at": "2026-10-13"
+      "official_url": "https://www.sansei-rd.co.jp/search/koushin.html",
+      "verification": "メーカー公式の全国導入予定11月2日と日程資料を照合",
+      "checked_at": "2026-10-26"
     },
     {
       "date": "2026-11-02",
@@ -98,9 +105,9 @@
       "maker": "サミー",
       "kind": "パチスロ",
       "schedule_url": "https://www.p-world.co.jp/database/machine/introduce_calendar.cgi?type=Pachi",
-      "official_url": null,
-      "verification": "日程資料で確認",
-      "checked_at": "2026-10-13"
+      "official_url": "https://www.sammy.co.jp/japanese/news/detail/?id=306",
+      "verification": "メーカー公式の全国導入予定12月7日と日程資料を照合／製造元：ロデオ",
+      "checked_at": "2026-10-26"
     },
     {
       "date": "2026-12-07",

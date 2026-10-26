@@ -7,11 +7,12 @@ from urllib.parse import urlsplit
 
 HERE=Path(__file__).resolve().parent
 def esc(value):return html.escape(str(value),quote=True)
-def link(url,label):
+def link(url,label,new_tab=False):
     parts=urlsplit(url)
     if parts.scheme!='https' or not parts.netloc or parts.username or parts.password:
         raise ValueError('Invalid editorial source URL')
-    return '<a href="'+esc(url)+'">'+esc(label)+' ↗</a>'
+    tab=' target="_blank" rel="noopener noreferrer"' if new_tab and parts.netloc=='www.youtube.com' else ''
+    return '<a href="'+esc(url)+'"'+tab+'>'+esc(label)+' ↗</a>'
 def page(path,kind,title,description,label,body,toc,share_lines,checked):
     return {'path':'docs/slot-tankyu/'+path+'/index.html','type':kind,'title':title,'short_title':label,'description':description,'label':label,'updated':checked,'status':'情報基準日：'+date_label(checked),'body':body,'toc':toc,'breadcrumbs':[],'share_image':'share-'+kind+'.png','share_lines':share_lines}
 
@@ -50,6 +51,17 @@ def calendar_page(data):
                 sources=link(item['schedule_url'],'日程資料')
                 if item['official_url']:sources+=' ／ '+link(item['official_url'],'メーカー公式')
                 if item.get('alternate_schedule_url'):sources+=' ／ '+link(item['alternate_schedule_url'],'別の日程資料')
+                if item.get('official_video'):
+                    video=item['official_video']
+                    if not re.fullmatch(r'https://www\.youtube\.com/watch\?v=[A-Za-z0-9_-]{11}',video['url']):
+                        raise ValueError('Invalid official video URL')
+                    announced=datetime.date.fromisoformat(video['announced_on'])
+                    reviewed=datetime.date.fromisoformat(video['checked_at'])
+                    if announced>reviewed or reviewed>checked:
+                        raise ValueError('Invalid official video dates')
+                    sources+='<br>'+link(video['url'],'公式実戦動画',new_tab=True)+' ／ '+link(video['announcement_url'],'メーカーの動画案内')
+                    sources+='<br><small>動画案内日：'+date_label(announced)+' ／ リンク確認：'+date_label(reviewed)+'。'+esc(video['note'])+'</small>'
+                sources+='<br><small>機種別確認：'+date_label(item['checked_at'])+'</small>'
                 body+='<tr><td><span class="tag">'+esc(item['kind'])+'</span></td><th scope="row">'+esc(item['name'])+'</th><td>'+esc(item['maker'])+'</td><td>'+esc(item['verification'])+'<br>'+sources+'</td></tr>'
             body+='</tbody></table></div><p><a href="#'+month_id+'">↑ 月のカレンダーへ</a></p></div>'
         body+='</section>'
