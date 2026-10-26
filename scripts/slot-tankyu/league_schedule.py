@@ -43,7 +43,7 @@ def render(data, as_of=None):
         league = 'RED' if row['round'].startswith('RED') else 'BLUE' if row['round'].startswith('BLUE') else 'ルーキー'
         broadcast = esc(date_label(row['broadcast_date']) if row['broadcast_date'] else row['broadcast_status'])
         if row.get('video_url'):
-            broadcast += '<br><a href="'+esc(row['video_url'])+'">動画を見る ↗</a>'
+            broadcast += '<br><a href="'+esc(row['video_url'])+'" target="_blank" rel="noopener noreferrer">動画を見る ↗</a>'
         evidence = '<a href="'+esc(row['schedule_source'])+'">公式日程 ↗</a>'
         if row.get('evidence_url'):
             evidence += '<br><a href="'+esc(row['evidence_url'])+'">収録の確認元 ↗</a>'
@@ -81,7 +81,21 @@ def render(data, as_of=None):
         state = '動画リンクあり' if video else '公開確認待ち' if dt.date()<reference else '公開予定'
         state_note = '<br><small>リンク確認：'+date_label(rally['video_link_checked_at'])+'</small>' if video else ''
         if video and rally.get('video_evidence'):state_note+='<br><small>'+esc(rally['video_evidence'])+'</small>'
-        video_link = '<a href="'+esc(video)+'">動画を見る ↗</a><br>' if video else ''
+        if rally.get('metadata_checked_at'):
+            meta_date=datetime.date.fromisoformat(rally['metadata_checked_at'])
+            if not video or meta_date>reference:
+                raise ValueError('Metadata review needs a video and nonfuture date')
+            state_note+='<br><small>タイトル・投稿元確認：'+date_label(meta_date)+'（映像内容・公開日時は未検証）</small>'
+        video_link = '<a href="'+esc(video)+'" target="_blank" rel="noopener noreferrer">動画を見る ↗</a><br>' if video else ''
+        if rally.get('video_announcement_url'):
+            if not rally['video_announcement_url'].startswith('https://'):
+                raise ValueError('Video announcement must use HTTPS')
+            state_note+='<br><a href="'+esc(rally['video_announcement_url'])+'">公開告知 ↗</a>'
+        if rally.get('published_on'):
+            published=datetime.date.fromisoformat(rally['published_on'])
+            if not video or published>datetime.date.fromisoformat(rally['video_link_checked_at']):
+                raise ValueError('Published date needs dated video evidence')
+            state_note+='<br><small>公開告知日：'+date_label(published)+'</small>'
         if not url.startswith('https://www.youtube.com/'):
             raise ValueError('Channel links must use YouTube HTTPS')
         label = date_label(dt)+'（'+'月火水木金土日'[dt.weekday()]+'）'+dt.strftime('%H:%M')
@@ -91,7 +105,7 @@ def render(data, as_of=None):
             if not isinstance(slug, str) or not re.fullmatch(r'[a-z0-9]+(?:-[a-z0-9]+)*', slug):
                 raise ValueError('Invalid watch article slug')
             note = '<br><a href="../../watch/'+esc(slug)+'/">サイト内の視聴メモ・感想 →</a>'
-        rally_cells.append('<tr><th scope="row"><time datetime="'+esc(rally['release_at'])+'">'+label+'</time></th><td>'+esc(rally['team'])+note+'</td><td>'+state+state_note+'</td><td>'+video_link+'<a href="'+esc(url)+'">'+'公式チャンネル：'+esc(rally['channel'])+' ↗</a></td></tr>')
+        rally_cells.append('<tr><th scope="row"><time datetime="'+esc(rally['release_at'])+'">'+label+'</time></th><td>'+esc(rally['team'])+note+'</td><td>'+state+state_note+'</td><td>'+video_link+'<a href="'+esc(url)+'" target="_blank" rel="noopener noreferrer">'+'公式チャンネル：'+esc(rally['channel'])+' ↗</a></td></tr>')
     body += '<section id="rallies"><h2>チーム決起集会の公開状況・予定</h2><p>告知上の予定は2026年10月15日〜29日の各日20:00。過去日でも、対象動画を確認できていないものは「公開確認待ち」としています。</p><div class="tablewrap" tabindex="0" role="region" aria-label="チーム決起集会の動画公開予定表"><table><caption>777リーグ4th・チーム決起集会</caption><thead><tr><th scope="col">告知上の公開予定</th><th scope="col">チーム</th><th scope="col">確認状況</th><th scope="col">動画・公式チャンネル</th></tr></thead><tbody>'+''.join(rally_cells)+'</tbody></table></div><p class="hint">動画リンクの確認日・確認範囲は各行に記載しています。動画の公開情報やリンクの確認と、映像内容の検証は別です。チャンネルへのリンクだけでは、対象動画の公開確認を意味しません。予定は変更される場合があります。</p><p><a href="'+esc(source)+'">告知元：777リーグ公式X ↗</a>（2026年10月14日の告知／確認日：'+esc(date_label(data['video_checked_at']))+'）</p></section>'
     upcoming = [row for row in rows if row['status']=='予定' and datetime.date.fromisoformat(row['date']) >= reference]
     pending = [row for row in rows if row['status']=='終了確認待ち']
@@ -113,7 +127,7 @@ def render(data, as_of=None):
     schedules=body[start:end];body=body[:start]+body[end:]
     insert=body.index('<section id="video-start">');body=body[:insert]+schedules+body[insert:]
     toc.append({'id':'sources','label':'表の見方・出典'})
-    return {'path':'docs/slot-tankyu/league/777league/index.html','type':'league','label':'777.LEAGUE / 4th 2026–2027','title':'777リーグ｜実戦日・終了状況・放送日一覧','short_title':'777リーグの日程','description':'777リーグ4thの2027年3月までの公式収録予定42件、終了状況、決起集会の動画リンク・公開確認状況を一覧で確認できます。','updated':max(data['checked_at'],data['video_checked_at'],*(r.get('status_checked_at',data['checked_at']) for r in data['rows'])),'status':'4thシーズン・非公式まとめ','breadcrumbs':[],'toc':toc,'body':body,'share_image':'share-league-4th.png','share_lines':['777リーグ 4th','実戦日・終了状況','放送・配信日一覧']}
+    return {'path':'docs/slot-tankyu/league/777league/index.html','type':'league','label':'777.LEAGUE / 4th 2026–2027','title':'777リーグ｜実戦日・終了状況・放送日一覧','short_title':'777リーグの日程','description':'777リーグ4thの2027年3月までの公式収録予定42件、終了状況、決起集会の動画リンク・公開確認状況を一覧で確認できます。','updated':max(data['checked_at'],data['video_checked_at'],data.get('video_reviewed_at',data['video_checked_at']),*(r.get('status_checked_at',data['checked_at']) for r in data['rows']),*(r.get('video_link_checked_at',data['video_checked_at']) for r in data['rallies'])),'status':'4thシーズン・非公式まとめ','breadcrumbs':[],'toc':toc,'body':body,'share_image':'share-league-4th.png','share_lines':['777リーグ 4th','実戦日・終了状況','放送・配信日一覧']}
 
 if __name__ == '__main__':
     data=json.loads((HERE/'data/league-4th.json').read_text())

@@ -3,6 +3,24 @@
   "same_day_order": "同日はデータ登録順。時刻や公開順を推定しない。",
   "entries": [
     {
+      "source": "new-machines",
+      "anchor": "",
+      "date": "2026-10-26",
+      "date_kind": "内容更新日",
+      "group": "new-machines-20261022",
+      "category": "新台カレンダー",
+      "reason": "対象4機種のメーカー公式導入予定を再照合、星矢公式実戦動画リンクを追加。"
+    },
+    {
+      "source": "league-4th",
+      "anchor": "",
+      "date": "2026-10-26",
+      "date_kind": "内容更新日",
+      "group": "league-schedule-20261021",
+      "category": "777リーグ",
+      "reason": "10月26日に公式日程42件を再照合。彦根は終了確認待ち、キコーナ決起集会の公開告知・視聴リンクを追加。"
+    },
+    {
       "source": "record-jashinchan-20261025",
       "anchor": "",
       "date": "2026-10-25",

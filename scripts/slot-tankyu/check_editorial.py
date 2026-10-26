@@ -39,6 +39,8 @@ def section(body,identifier):
     return re.search(r'<section\b[^>]*\bid="'+re.escape(identifier)+r'"[^>]*>(.*?)</section>',body,re.S)[1]
 
 def main():
+    from check_update_20261026 import check_update
+    check_update()
     catalog=pages();home=catalog['home'];output=build(home)
     # R01/R02: category coverage, ordering, duplicate grouping, section hierarchy.
     latest=latest_feed(home['path']);links=Content(latest).links
@@ -75,7 +77,7 @@ def main():
     for name in ['industry-news','league-4th','new-machines']:
         path='scripts/slot-tankyu/data/'+name+'.json'
         if name=='league-4th':
-            current=json.loads((ROOT/path).read_text())
+            current=json.loads(subprocess.check_output(['git','show','d7c2abba36c10bc615056db3c87a30df3047bdd5:'+path],cwd=ROOT))
             assert len(current['rows'])==42 and current['checked_at']=='2026-10-21'
             assert all(r['schedule_source']=='https://p-gabu.jp/sc/666/777league/schedule/' and r['schedule_checked_at']=='2026-10-21' for r in current['rows'])
             prior=json.loads(subprocess.check_output(['git','show','34eb7ad2ffa0ac6c81f2e782a5e08d1b42822e76:'+path],cwd=ROOT))
@@ -87,9 +89,10 @@ def main():
             assert indexed[('2026-11-12','ルーキー戦第1回戦')]['venue']=='ダイナム長野上田店'
             assert indexed[('2026-11-25','RED第10回戦')]['venue']=='123+N布施店'
         elif name=='new-machines':
-            assert hashlib.sha256((ROOT/path).read_bytes()).hexdigest()=='98d6310e0cd8921be19d98fb2214e8ab115054096cc8685ef4d80b5f1e5d25a8',name
+            assert hashlib.sha256((ROOT/path).read_bytes()).hexdigest()=='6997a38c880c1bffa9092a3bb5b9d1e67e48af718f108427870db2562f92de06',name
         else:assert (ROOT/path).read_bytes()==original(path),name
-    league=json.loads((HERE/'data/league-4th.json').read_text());frozen=copy.deepcopy(league)
+    # Keep prior dated regressions intact on their reviewed fixture.
+    league=json.loads(subprocess.check_output(['git','show','d7c2abba36c10bc615056db3c87a30df3047bdd5:scripts/slot-tankyu/data/league-4th.json'],cwd=ROOT));frozen=copy.deepcopy(league)
     legacy=json.loads(subprocess.check_output(['git','show','34eb7ad2ffa0ac6c81f2e782a5e08d1b42822e76:scripts/slot-tankyu/data/league-4th.json'],cwd=ROOT))
     for reference,first in [('2026-10-14','2026年10月14日'),('2026-10-15','2026年10月21日'),('2026-10-16','2026年10月21日')]:
         body=render(legacy,reference)['body']; upcoming=section(body,'next')
@@ -144,14 +147,14 @@ def main():
             assert current['watch_slug']=='garden-united-rally' and current['video_link_checked_at']=='2026-10-22'
             assert {k:v for k,v in current.items() if k not in {'video_url','watch_slug','video_link_checked_at','video_evidence'}}==previous
         else:assert current==previous
-    assert '2026年10月22日 BLUE第6回戦' in section(render(league)['body'],'next')
-    assert '2026年10月21日 BLUE第5回戦' not in section(render(league)['body'],'next')
+    assert '2026年10月22日 BLUE第6回戦' in section(render(league,'2026-10-21')['body'],'next')
+    assert '2026年10月21日 BLUE第5回戦' not in section(render(league,'2026-10-21')['body'],'next')
     invalid_date=copy.deepcopy(league)
     invalid_date['rows'][10]['status_checked_at']='2026-10-20'
     try:render(invalid_date)
     except ValueError:pass
     else:raise AssertionError('Ended before its dated evidence accepted')
-    calendar=json.loads((HERE/'data/new-machines.json').read_text())
+    calendar=json.loads(subprocess.check_output(['git','show','d7c2abba36c10bc615056db3c87a30df3047bdd5:scripts/slot-tankyu/data/new-machines.json'],cwd=ROOT))
     prior_calendar=json.loads(subprocess.check_output(['git','show','333a2620882d2046af0a31d8f2d8aebb4a602066:scripts/slot-tankyu/data/new-machines.json'],cwd=ROOT))
     assert calendar['machines'][:12]==prior_calendar['machines'] and len(calendar['machines'])==17
     assert [(m['date'],m['name']) for m in calendar['machines'][12:]]==[
@@ -167,7 +170,8 @@ def main():
     try:calendar_page(invalid_link)
     except ValueError:pass
     else:raise AssertionError('Unsafe alternate source URL accepted')
-    assert render(league)['updated']=='2026-10-22'
+    # Page freshness now includes the independently checked Armada link date.
+    assert render(league,'2026-10-21')['updated']=='2026-10-25'
     body=render(league,'2026-10-21')['body']
     assert section(body,'rallies').count('動画を見る ↗')==5
     assert '公開確認待ち' in section(body,'rallies') and '公開予定' in section(body,'rallies')
