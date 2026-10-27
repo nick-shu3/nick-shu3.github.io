@@ -238,16 +238,21 @@
       "evidence_note": null,
       "schedule_checked_at": "2026-10-26",
       "schedule_source_type": "official",
-      "status_checked_at": "2026-10-26",
+      "status_checked_at": "2026-10-28",
       "previous_schedule_checked_at": "2026-10-21",
       "status_history": [
         {
           "status": "予定",
           "checked_at": "2026-10-14",
           "note": "元の予定を保持。10月26日は終了の裏付けを確認できず。"
+        },
+        {
+          "status": "終了確認待ち",
+          "checked_at": "2026-10-26",
+          "note": "予定日経過。公式日程の掲載は確認したが、収録終了・延期・中止の裏付けは未確認。"
         }
       ],
-      "status_note": "予定日経過。公式日程の掲載は確認したが、収録終了・延期・中止の裏付けは未確認。"
+      "status_note": "10月28日に再調査。公式日程の掲載は確認したが、終了・延期・中止の裏付けは未確認。"
     },
     {
       "date": "2026-10-30",
@@ -744,8 +749,14 @@
       "video_url": "https://www.youtube.com/watch?v=-Dfr-57rNFE",
       "video_link_checked_at": "2026-10-15",
       "video_evidence": "既存紹介記事と独立レビューによる確認。今回のYouTube本文再取得はできていない。",
-      "metadata_checked_at": "2026-10-26",
-      "metadata_note": "YouTube oEmbedでタイトル・投稿元を再照合。公開日時や映像内容は未検証。"
+      "metadata_checked_at": "2026-10-28",
+      "metadata_note": "公開oEmbedで対象動画タイトルと投稿元を再照合。動画自体の公開日時・映像内容は未確認。",
+      "metadata_check_history": [
+        {
+          "checked_at": "2026-10-26",
+          "note": "YouTube oEmbedでタイトル・投稿元を再照合。公開日時や映像内容は未検証。"
+        }
+      ]
     },
     {
       "release_at": "2026-10-17T20:00:00+09:00",
@@ -756,8 +767,14 @@
       "video_url": "https://www.youtube.com/watch?v=gvdjRDYu2ek",
       "video_link_checked_at": "2026-10-18",
       "video_evidence": "既存紹介記事と独立レビューによる確認。今回のYouTube本文再取得はできていない。",
-      "metadata_checked_at": "2026-10-26",
-      "metadata_note": "YouTube oEmbedでタイトル・投稿元を再照合。公開日時や映像内容は未検証。"
+      "metadata_checked_at": "2026-10-28",
+      "metadata_note": "公開oEmbedで対象動画タイトルと投稿元を再照合。動画自体の公開日時・映像内容は未確認。",
+      "metadata_check_history": [
+        {
+          "checked_at": "2026-10-26",
+          "note": "YouTube oEmbedでタイトル・投稿元を再照合。公開日時や映像内容は未検証。"
+        }
+      ]
     },
     {
       "release_at": "2026-10-19T20:00:00+09:00",
@@ -768,8 +785,14 @@
       "watch_slug": "garden-united-rally",
       "video_link_checked_at": "2026-10-22",
       "video_evidence": "YouTube公開情報・説明欄・oEmbedと10月19日付ガーデン公式公開告知を照合。動画本編の検証とは別。",
-      "metadata_checked_at": "2026-10-26",
-      "metadata_note": "YouTube oEmbedでタイトル・投稿元を再照合。公開日時や映像内容は未検証。"
+      "metadata_checked_at": "2026-10-28",
+      "metadata_note": "公開oEmbedで対象動画タイトルと投稿元を再照合。動画自体の公開日時・映像内容は未確認。",
+      "metadata_check_history": [
+        {
+          "checked_at": "2026-10-26",
+          "note": "YouTube oEmbedでタイトル・投稿元を再照合。公開日時や映像内容は未検証。"
+        }
+      ]
     },
     {
       "release_at": "2026-10-21T20:00:00+09:00",
@@ -780,8 +803,14 @@
       "watch_slug": "123-entertainers-rally",
       "video_link_checked_at": "2026-10-22",
       "video_evidence": "YouTube公開メタ・説明欄と出演者の公開告知で動画リンクを確認。本編の音声・字幕の直接照合とは別。",
-      "metadata_checked_at": "2026-10-26",
-      "metadata_note": "YouTube oEmbedでタイトル・投稿元を再照合。公開日時や映像内容は未検証。"
+      "metadata_checked_at": "2026-10-28",
+      "metadata_note": "公開oEmbedで対象動画タイトルと投稿元を再照合。動画自体の公開日時・映像内容は未確認。",
+      "metadata_check_history": [
+        {
+          "checked_at": "2026-10-26",
+          "note": "YouTube oEmbedでタイトル・投稿元を再照合。公開日時や映像内容は未検証。"
+        }
+      ]
     },
     {
       "release_at": "2026-10-23T20:00:00+09:00",
@@ -792,8 +821,14 @@
       "watch_slug": "armada-dynam-rally",
       "video_link_checked_at": "2026-10-25",
       "video_evidence": "YouTube公開メタ・説明欄で対象動画、10月23日公開、5名を照合。本編の音声・字幕検証とは別。",
-      "metadata_checked_at": "2026-10-26",
-      "metadata_note": "YouTube oEmbedでタイトル・投稿元を再照合。公開日時や映像内容は未検証。"
+      "metadata_checked_at": "2026-10-28",
+      "metadata_note": "公開oEmbedで対象動画タイトルと投稿元を再照合。動画自体の公開日時・映像内容は未確認。",
+      "metadata_check_history": [
+        {
+          "checked_at": "2026-10-26",
+          "note": "YouTube oEmbedでタイトル・投稿元を再照合。公開日時や映像内容は未検証。"
+        }
+      ]
     },
     {
       "release_at": "2026-10-25T20:00:00+09:00",
@@ -805,8 +840,14 @@
       "video_evidence": "10月25日付の777リーグ公式X公開告知とリンク、YouTube oEmbedのタイトル・投稿元を照合。公開時刻と本編映像は未検証。",
       "video_announcement_url": "https://x.com/777_LEAGUE/status/2114313492740313329",
       "published_on": "2026-10-25",
-      "metadata_checked_at": "2026-10-26",
-      "metadata_note": "YouTube oEmbedでタイトル・投稿元を再照合。公開日時や映像内容は未検証。"
+      "metadata_checked_at": "2026-10-28",
+      "metadata_note": "公開oEmbedで対象動画タイトルと投稿元を再照合。動画自体の公開日時・映像内容は未確認。",
+      "metadata_check_history": [
+        {
+          "checked_at": "2026-10-26",
+          "note": "YouTube oEmbedでタイトル・投稿元を再照合。公開日時や映像内容は未検証。"
+        }
+      ]
     },
     {
       "release_at": "2026-10-27T20:00:00+09:00",
@@ -818,9 +859,15 @@
       "video_link_checked_at": "2026-10-28",
       "video_evidence": "公開oEmbedのタイトル・投稿チャンネルと、出演者の10月27日付配信告知を確認。動画本編・動画自体の公開日時は未検証。",
       "metadata_checked_at": "2026-10-28",
-      "metadata_note": "YouTube公開oEmbedでタイトル・投稿チャンネルを確認。映像・説明欄・動画公開日時は未確認。",
+      "metadata_note": "公開oEmbedで対象動画タイトルと投稿元を再照合。動画自体の公開日時・映像内容は未確認。",
       "video_announcement_url": "https://x.com/janbari_nene/status/2115057333219082667",
-      "published_on": "2026-10-27"
+      "published_on": "2026-10-27",
+      "metadata_check_history": [
+        {
+          "checked_at": "2026-10-28",
+          "note": "YouTube公開oEmbedでタイトル・投稿チャンネルを確認。映像・説明欄・動画公開日時は未確認。"
+        }
+      ]
     },
     {
       "release_at": "2026-10-29T20:00:00+09:00",
@@ -831,6 +878,15 @@
   ],
   "schedule_source_type": "official",
   "previous_schedule_note": "10月14日版は二次資料を参照。10月21日に公式日程の掲載分42件へ照合・更新。過去の終了根拠は個別の確認日を保持。",
-  "video_reviewed_at": "2026-10-26",
-  "video_review_note": "公式Xで本編11月1日20時の予定とキコーナ公開を照合。YouTube本編・チャンネル一覧は取得制限あり。動画のタイトル・投稿元の確認はoEmbedで行い、公開日時と映像視聴とは分ける。既存リンクの当初確認日は保持。"
+  "video_reviewed_at": "2026-10-28",
+  "video_review_note": "決起集会7本の公開oEmbedでタイトル・投稿元を再照合。本編11月1日20時・決起集会10月29日20時は元の公式告知の予定を維持。未確認の動画公開・終了を推定しない。",
+  "schedule_rechecked_at": "2026-10-28",
+  "schedule_recheck_note": "公式掲載42件の日程・会場に変更なし。各回の終了確認日とは別。",
+  "schedule_recheck_url": "https://p-gabu.jp/sc/666/777league/schedule/",
+  "video_review_history": [
+    {
+      "checked_at": "2026-10-26",
+      "note": "公式Xで本編11月1日20時の予定とキコーナ公開を照合。YouTube本編・チャンネル一覧は取得制限あり。動画のタイトル・投稿元の確認はoEmbedで行い、公開日時と映像視聴とは分ける。既存リンクの当初確認日は保持。"
+    }
+  ]
 }
