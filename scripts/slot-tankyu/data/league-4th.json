@@ -812,7 +812,15 @@
       "release_at": "2026-10-27T20:00:00+09:00",
       "team": "D’ステーションヒーローズ",
       "channel": "日直島田の自由時間",
-      "channel_url": "https://www.youtube.com/channel/UC02SKMfsAneHIGVjq1s0f7g"
+      "channel_url": "https://www.youtube.com/channel/UC02SKMfsAneHIGVjq1s0f7g",
+      "video_url": "https://www.youtube.com/watch?v=SoH59Bc3oIQ",
+      "watch_slug": "dstation-heroes-rally",
+      "video_link_checked_at": "2026-10-28",
+      "video_evidence": "公開oEmbedのタイトル・投稿チャンネルと、出演者の10月27日付配信告知を確認。動画本編・動画自体の公開日時は未検証。",
+      "metadata_checked_at": "2026-10-28",
+      "metadata_note": "YouTube公開oEmbedでタイトル・投稿チャンネルを確認。映像・説明欄・動画公開日時は未確認。",
+      "video_announcement_url": "https://x.com/janbari_nene/status/2115057333219082667",
+      "published_on": "2026-10-27"
     },
     {
       "release_at": "2026-10-29T20:00:00+09:00",
