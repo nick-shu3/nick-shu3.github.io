@@ -3,6 +3,24 @@
   "same_day_order": "同日はデータ登録順。時刻や公開順を推定しない。",
   "entries": [
     {
+      "source": "watch-dstation-heroes",
+      "anchor": "",
+      "date": "2026-10-28",
+      "date_kind": "紹介日",
+      "group": "watch-dstation",
+      "category": "番組紹介",
+      "reason": "本人提供の決起集会視聴メモとコメントを紹介。出演者の配信告知10月27日と紹介日を区別。"
+    },
+    {
+      "source": "league-4th",
+      "anchor": "",
+      "date": "2026-10-28",
+      "date_kind": "内容更新日",
+      "group": "league-schedule-20261021",
+      "category": "777リーグ",
+      "reason": "D’ステーション決起集会の動画・感想記事リンクを追加。収録日程・終了状況の確認日は維持。"
+    },
+    {
       "source": "new-machines",
       "anchor": "",
       "date": "2026-10-26",

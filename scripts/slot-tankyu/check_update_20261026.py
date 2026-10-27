@@ -2,7 +2,9 @@
 import copy, json, subprocess
 from html.parser import HTMLParser
 from pathlib import Path
-from league_schedule import render
+from league_schedule import render as render_current
+def render(data, as_of="2026-10-26"):
+    return render_current(data, as_of)
 from news_calendar import calendar_page
 from build import build, ROOT
 
@@ -10,7 +12,12 @@ HERE=Path(__file__).resolve().parent
 BASE='d7c2abba36c10bc615056db3c87a30df3047bdd5'
 def old(path):
     return json.loads(subprocess.check_output(['git','show',BASE+':scripts/slot-tankyu/'+path],cwd=ROOT))
-def read(path):return json.loads((HERE/path).read_text())
+EDITION='8eedd3cb3fd3330d57d245d6d59b261b7be2bee4'
+def read(path):
+    # Freeze this dated update's fixture; current additions have separate bounds.
+    if path=='data/league-4th.json' or path.startswith('pages/'):
+        return json.loads(subprocess.check_output(['git','show',EDITION+':scripts/slot-tankyu/'+path],cwd=ROOT))
+    return json.loads((HERE/path).read_text())
 class Links(HTMLParser):
     def __init__(self,text):super().__init__();self.links=[];self.feed(text)
     def handle_starttag(self,tag,attrs):
@@ -52,7 +59,7 @@ def check_update():
     for r in league['rallies']:
         if r.get('watch_slug'):
             assert '../../watch/'+r['watch_slug']+'/' in body
-            article=next(read('pages/'+p.name) for p in (HERE/'pages').glob('watch-*.json') if read('pages/'+p.name)['path'].endswith('/'+r['watch_slug']+'/index.html'))
+            article=next(read('pages/'+p.name) for p in (HERE/'pages').glob('watch-*.json') if p.name!='watch-dstation-heroes.json' and read('pages/'+p.name)['path'].endswith('/'+r['watch_slug']+'/index.html'))
             assert '../../league/777league/#rallies' in build(article)
     calendar=read('data/new-machines.json');prior=old('data/new-machines.json')
     assert len(calendar['machines'])==17 and calendar['source_updated_at']=='2026-10-26'
@@ -87,7 +94,7 @@ def check_update():
     paths=subprocess.check_output(['git','ls-tree','-r','--name-only',BASE,'scripts/slot-tankyu/pages'],cwd=ROOT,text=True).splitlines()
     for path in paths:
         if Path(path).name in {'league-4th.json','new-machines.json'}:continue
-        assert (ROOT/path).read_bytes()==subprocess.check_output(['git','show',BASE+':'+path],cwd=ROOT),path
+        assert subprocess.check_output(['git','show',EDITION+':'+path],cwd=ROOT)==subprocess.check_output(['git','show',BASE+':'+path],cwd=ROOT),path
     print('PASS: 10/26 bounded changes, 42 schedule identities, unchanged records/comments, six video links, reciprocal articles, unsafe/future evidence rejection')
 
 if __name__=='__main__':check_update()

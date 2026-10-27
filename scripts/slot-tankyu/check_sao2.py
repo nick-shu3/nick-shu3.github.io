@@ -72,12 +72,17 @@ def check_sao2(page):
             data=json.loads((ROOT/data_path).read_text())
             assert current==render(data),path
             # Reviewed official schedule edition; facts checked independently.
-            assert hashlib.sha256((ROOT/data_path).read_bytes()).hexdigest()=='3132c3bafb645d0a0aea10cb0b667fade99b54cc58bac103bebc290d1ff1a311','Unreviewed schedule edition'
+            assert hashlib.sha256((ROOT/data_path).read_bytes()).hexdigest()=='3f010a6b7a5257803cdfd5f5e33ec6ba560607d2bc23e2fe3dad2f1ce1f6e0f4','Unreviewed schedule edition'
             continue
         if path.endswith('/watch-listing.json'):
             old=json.loads(subprocess.check_output(['git','show',BASE+':'+path],cwd=ROOT))
             current=json.loads((ROOT/path).read_text())
             reviewed=json.loads(subprocess.check_output(['git','show','cf01a7bdd0996a1d79487a38c4a7adb8e8949407:'+path],cwd=ROOT))
+            dstation=r'<a class="card report-card" href="dstation-heroes-rally/">.*?</a>'
+            assert len(re.findall(dstation,current['body']))==1
+            current['body']=re.sub(dstation,'',current['body'])
+            assert current['updated']=='2026年10月28日'
+            current['updated']='2026年10月25日'
             armada=r'<a class="card report-card" href="armada-dynam-rally/">.*?</a>'
             assert len(re.findall(armada,current['body']))==1
             current['body']=re.sub(armada,'',current['body'])

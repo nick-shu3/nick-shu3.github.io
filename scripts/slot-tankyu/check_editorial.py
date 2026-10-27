@@ -41,6 +41,8 @@ def section(body,identifier):
 def main():
     from check_update_20261026 import check_update
     check_update()
+    from check_dstation_20261028 import check_dstation
+    check_dstation()
     catalog=pages();home=catalog['home'];output=build(home)
     # R01/R02: category coverage, ordering, duplicate grouping, section hierarchy.
     latest=latest_feed(home['path']);links=Content(latest).links
@@ -216,6 +218,7 @@ def main():
             continue
         # New sources are fixed to their independently reviewed edition.
         additions={'record-tokyo-20261019': '71b8924a10ecc57a2bc07afe703181a1db8180bf43e2e62502e3c39897fd01f6', 'daily-20261019': 'ec926e38d38badcea3d0449d254b3e9fdf3e9bcece04f20dc017837099b5c4ae', 'record-shinuchi-20261018': 'da139b142aa0a7d92b1e188c49a72589892a0bbafe386880e4fb3493e8ce35cb', 'daily-20261018': '1fa5f7c24c22fafad4ad76499a82c354f0b5c43137090bb19008ab15c66f48c7', 'guide-shinuchi': 'f7b15411f5439c6766544153241778fd0e3b11429f6954c625c821172f5f374e', 'watch-tengai-golden-manes': 'f21f33428691055dba7190e95524a1f864cf115221bc1cf6e7aafd99ef806cc8', 'record-sao2-20261017': '20f595ea29a24fcc8eab1bf031bee452bacd826db385983ad89f9da946c75b0d', 'daily-20261017': '8da16be03d0dd6455c213a5e2d010f71b580bb125b598d8093ce607f88229e35'}
+        additions['watch-dstation-heroes']='19116c8291684d6bc04866bb55963294e25df68344a1592e9ef8ff7d449cfebb'
         additions['watch-armada-dynam']='2dedcdb9359d86e08c1f24f5bab89dafbcaae1922c05c801ee2a14696b426c2b'
         additions['watch-123-entertainers']='af4a2faa1f4a7e36b13e386c00226249415aedf31acb02ead7ac5949356b0166'
         additions['watch-garden-united']='f2cd80a56de325c815786b2e47b553c79e7b2c808ec3876e40fe1e5091a67b1f'
