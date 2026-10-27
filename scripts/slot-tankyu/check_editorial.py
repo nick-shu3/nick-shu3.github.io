@@ -43,6 +43,8 @@ def main():
     check_update()
     from check_dstation_20261028 import check_dstation
     check_dstation()
+    from check_priority_20261028 import check_priority
+    check_priority()
     catalog=pages();home=catalog['home'];output=build(home)
     # R01/R02: category coverage, ordering, duplicate grouping, section hierarchy.
     latest=latest_feed(home['path']);links=Content(latest).links
@@ -91,7 +93,7 @@ def main():
             assert indexed[('2026-11-12','ルーキー戦第1回戦')]['venue']=='ダイナム長野上田店'
             assert indexed[('2026-11-25','RED第10回戦')]['venue']=='123+N布施店'
         elif name=='new-machines':
-            assert hashlib.sha256((ROOT/path).read_bytes()).hexdigest()=='6997a38c880c1bffa9092a3bb5b9d1e67e48af718f108427870db2562f92de06',name
+            assert hashlib.sha256((ROOT/path).read_bytes()).hexdigest()=='1251d2cb8252d0c0eb1ceb9a58dfb037db8cb75a1e5ed4b2592a639edd57a23e',name
         else:assert (ROOT/path).read_bytes()==original(path),name
     # Keep prior dated regressions intact on their reviewed fixture.
     league=json.loads(subprocess.check_output(['git','show','d7c2abba36c10bc615056db3c87a30df3047bdd5:scripts/slot-tankyu/data/league-4th.json'],cwd=ROOT));frozen=copy.deepcopy(league)

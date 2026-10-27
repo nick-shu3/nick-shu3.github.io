@@ -15,7 +15,7 @@ def old(path):
 EDITION='8eedd3cb3fd3330d57d245d6d59b261b7be2bee4'
 def read(path):
     # Freeze this dated update's fixture; current additions have separate bounds.
-    if path=='data/league-4th.json' or path.startswith('pages/'):
+    if path in {'data/league-4th.json','data/new-machines.json'} or path.startswith('pages'):
         return json.loads(subprocess.check_output(['git','show',EDITION+':scripts/slot-tankyu/'+path],cwd=ROOT))
     return json.loads((HERE/path).read_text())
 class Links(HTMLParser):

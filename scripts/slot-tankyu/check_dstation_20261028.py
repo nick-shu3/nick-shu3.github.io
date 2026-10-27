@@ -6,7 +6,8 @@ from league_schedule import render
 HERE=Path(__file__).resolve().parent
 BASE='8eedd3cb3fd3330d57d245d6d59b261b7be2bee4'
 def old(path):return subprocess.check_output(['git','show',BASE+':scripts/slot-tankyu/'+path],cwd=ROOT)
-def read(path):return json.loads((HERE/path).read_text())
+EDITION='e58ad71c98560543c92fdc21524290dd1b498341'
+def read(path):return json.loads(subprocess.check_output(['git','show',EDITION+':scripts/slot-tankyu/'+path],cwd=ROOT))
 def check_dstation():
     before=json.loads(old('data/league-4th.json'));current=read('data/league-4th.json')
     assert len(current['rallies'])==len(before['rallies'])==8
@@ -43,7 +44,7 @@ def check_dstation():
     for path in subprocess.check_output(['git','ls-tree','-r','--name-only',BASE,'scripts/slot-tankyu/pages','scripts/slot-tankyu/data'],cwd=ROOT,text=True).splitlines():
         relative=path.removeprefix('scripts/slot-tankyu/')
         if relative in {'pages/league-4th.json','pages/watch-listing.json','data/league-4th.json','data/latest.json','data/presentation.json'}:continue
-        assert (ROOT/path).read_bytes()==old(relative),path
+        assert subprocess.check_output(['git','show',EDITION+':'+path],cwd=ROOT)==old(relative),path
     for mutate in ['unsafe','future','missing-date']:
         invalid=copy.deepcopy(current);r=invalid['rallies'][6]
         if mutate=='unsafe':r['video_url']='javascript:alert(1)'

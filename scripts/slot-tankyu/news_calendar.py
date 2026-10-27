@@ -61,6 +61,16 @@ def calendar_page(data):
                         raise ValueError('Invalid official video dates')
                     sources+='<br>'+link(video['url'],'公式実戦動画',new_tab=True)+' ／ '+link(video['announcement_url'],'メーカーの動画案内')
                     sources+='<br><small>動画案内日：'+date_label(announced)+' ／ リンク確認：'+date_label(reviewed)+'。'+esc(video['note'])+'</small>'
+                if item.get('field_test'):
+                    test=item['field_test']
+                    announced=datetime.date.fromisoformat(test['announced_on'])
+                    reviewed=datetime.date.fromisoformat(test['checked_at'])
+                    scheduled=datetime.datetime.fromisoformat(test['scheduled_at'])
+                    if announced>reviewed or reviewed>checked or scheduled.utcoffset()!=datetime.timedelta(hours=9) or scheduled.date()<announced:
+                        raise ValueError('Invalid field test dates')
+                    if not isinstance(test['units'],int) or isinstance(test['units'],bool) or not 1<=test['units']<=10000:
+                        raise ValueError('Invalid field test units')
+                    sources+='<br><details><summary>直営店フィールドテスト（全国導入とは別）</summary><p>'+esc(test['venue'])+'：'+date_label(scheduled.date().isoformat())+' '+scheduled.strftime('%H:%M')+'から'+str(test['units'])+'台を予定。'+esc(test['note'])+'</p><p>'+link(test['announcement_url'],'メーカーのフィールドテスト告知')+'<br><small>告知日：'+date_label(announced.isoformat())+' ／ 確認日：'+date_label(reviewed.isoformat())+'</small></p></details>'
                 sources+='<br><small>機種別確認：'+date_label(item['checked_at'])+'</small>'
                 body+='<tr><td><span class="tag">'+esc(item['kind'])+'</span></td><th scope="row">'+esc(item['name'])+'</th><td>'+esc(item['maker'])+'</td><td>'+esc(item['verification'])+'<br>'+sources+'</td></tr>'
             body+='</tbody></table></div><p><a href="#'+month_id+'">↑ 月のカレンダーへ</a></p></div>'

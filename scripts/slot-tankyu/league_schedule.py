@@ -57,6 +57,11 @@ def render(data, as_of=None):
         cell = '<tr><th scope="row"><time datetime="'+row['date']+'">'+f'{date.month}/{date.day}'+'（'+'月火水木金土日'[date.weekday()]+'）</time></th><td><span class="league-label league-'+league.lower()+'">'+esc(row['round'])+'</span></td><td>'+esc(row['venue'])+'</td><td><span class="league-status '+badge+'">'+esc(row['status'])+'</span>'+status_note+'</td><td>'+broadcast+'</td><td>'+evidence+'</td></tr>'
         months.setdefault(date.strftime('%Y-%m'), []).append(cell)
     body = '<div class="notice">収録日と放送・動画配信日は別です。「終了」は実施の根拠を確認した回。「終了確認待ち」は終了の確認が不足する回です。収録情報の確認日：'+date_label(checked)+'（日程の照合日）。各回の終了根拠・状況確認日は表に分けて記載します。予定表示の基準日：'+date_label(reference)+'。日付だけで終了・動画公開済みとは判断しません。</div>'
+    if data.get('schedule_rechecked_at'):
+        rechecked=datetime.date.fromisoformat(data['schedule_rechecked_at'])
+        if rechecked<checked or rechecked>reference or not data.get('schedule_recheck_url','').startswith('https://'):
+            raise ValueError('Invalid schedule recheck')
+        body+='<p class="hint">日程・会場の再照合：'+date_label(rechecked)+'。'+esc(data['schedule_recheck_note'])+' <a href="'+esc(data['schedule_recheck_url'])+'">公式収録日程 ↗</a></p>'
     source = data['video_announcement_url']
     if not source.startswith('https://'):
         raise ValueError('Announcement must use HTTPS')
