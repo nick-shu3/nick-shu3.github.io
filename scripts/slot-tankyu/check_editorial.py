@@ -45,6 +45,8 @@ def main():
     check_dstation()
     from check_priority_20261028 import check_priority
     check_priority()
+    from check_rallies_20261029 import check_rallies
+    check_rallies()
     catalog=pages();home=catalog['home'];output=build(home)
     # R01/R02: category coverage, ordering, duplicate grouping, section hierarchy.
     latest=latest_feed(home['path']);links=Content(latest).links

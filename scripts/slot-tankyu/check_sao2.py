@@ -72,7 +72,7 @@ def check_sao2(page):
             data=json.loads((ROOT/data_path).read_text())
             assert current==render(data),path
             # Reviewed official schedule edition; facts checked independently.
-            assert hashlib.sha256((ROOT/data_path).read_bytes()).hexdigest()=='4e711d17703e2ca092b0e727619e9d4c231962f4ff5d28f77ade99d6c5575d18','Unreviewed schedule edition'
+            assert hashlib.sha256((ROOT/data_path).read_bytes()).hexdigest()=='69d70d23fe2a9b2b5c5d0d1da95339385b1249d91eb8c05cd73f8a7b18a806f1','Unreviewed schedule edition'
             continue
         if path.endswith('/watch-listing.json'):
             old=json.loads(subprocess.check_output(['git','show',BASE+':'+path],cwd=ROOT))

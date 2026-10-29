@@ -2,7 +2,8 @@
 import copy, json, re, subprocess
 from pathlib import Path
 from build import ROOT, build
-from league_schedule import render
+from league_schedule import render as league_render
+def render(data):return league_render(data, as_of="2026-10-28")
 HERE=Path(__file__).resolve().parent
 BASE='8eedd3cb3fd3330d57d245d6d59b261b7be2bee4'
 def old(path):return subprocess.check_output(['git','show',BASE+':scripts/slot-tankyu/'+path],cwd=ROOT)
