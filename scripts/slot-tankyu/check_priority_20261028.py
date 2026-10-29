@@ -3,11 +3,13 @@ import copy,hashlib,json,subprocess
 from pathlib import Path
 from build import ROOT
 from news_calendar import calendar_page
-from league_schedule import render
+from league_schedule import render as league_render
+def render(data):return league_render(data, as_of="2026-10-28")
 H=Path(__file__).resolve().parent
 BASE='e58ad71c98560543c92fdc21524290dd1b498341'
 def old(p):return subprocess.check_output(['git','show',BASE+':scripts/slot-tankyu/'+p],cwd=ROOT)
-def read(p):return json.loads((H/p).read_text())
+EDITION='3ef8df5ad9502ee246dfe378b4e6f8b725317f4a'
+def read(p):return json.loads(subprocess.check_output(['git','show',EDITION+':scripts/slot-tankyu/'+p],cwd=ROOT))
 def fails(fn,value):
     try:fn(value)
     except ValueError:return
@@ -63,6 +65,6 @@ def check_priority():
     for p in subprocess.check_output(['git','ls-tree','-r','--name-only',BASE,'scripts/slot-tankyu/pages','scripts/slot-tankyu/data'],cwd=ROOT,text=True).splitlines():
         rel=p.removeprefix('scripts/slot-tankyu/')
         if rel in {'pages/new-machines.json','pages/league-4th.json','data/new-machines.json','data/league-4th.json','data/latest.json'}:continue
-        assert (ROOT/p).read_bytes()==old(rel),p
+        assert subprocess.check_output(['git','show',EDITION+':'+p],cwd=ROOT)==old(rel),p
     print('PASS: priority changes bounded; 18 slots, GGO national/test separation, 42 schedule identities, 7 video links, records/comments preserved, invalid evidence rejected')
 if __name__=='__main__':check_priority()
