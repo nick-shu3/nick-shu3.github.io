@@ -102,6 +102,12 @@ def latest_feed(origin):
 def presentation_date():
     return datetime.date.fromisoformat(json.loads((HERE/'data/presentation.json').read_text())['as_of'])
 
+def next_rally(rallies, reference):
+    """Known video links are no longer future release announcements."""
+    candidates = [r for r in rallies if not r.get('video_url') and
+                  datetime.datetime.fromisoformat(r['release_at']).date() >= reference]
+    return min(candidates, key=lambda r: r['release_at']) if candidates else None
+
 def schedule_preview(origin):
     reference=presentation_date()
     data=json.loads((HERE/'data/new-machines.json').read_text())
@@ -117,10 +123,13 @@ def schedule_preview(origin):
         row=future[0]
         result+='<p><strong>次の収録予定：'+date_label(row['date'])+' '+esc(row['round'])+'</strong><br>'+esc(row['venue'])+'</p>'
     result+='<p class="hint">収録日と動画公開日は別です。公式掲載の予定で、変更の可能性があります。日程確認日：'+date_label(league['checked_at'])+'。</p>'
-    upcoming_rallies=sorted((r for r in league['rallies'] if datetime.datetime.fromisoformat(r['release_at']).date()>=reference),key=lambda r:r['release_at'])
-    if upcoming_rallies:
-        rally=upcoming_rallies[0];dt=datetime.datetime.fromisoformat(rally['release_at'])
+    rally=next_rally(league['rallies'], reference)
+    if rally:
+        dt=datetime.datetime.fromisoformat(rally['release_at'])
         result+='<p><strong>決起集会の次の公開予定：'+date_label(dt.date())+' '+dt.strftime('%H:%M')+'</strong><br>'+esc(rally['team'])+'<br><a href="league/777league/#rallies">動画リンク・公開の確認状況 →</a></p>'
+    else:
+        linked=sum(bool(r.get('video_url') and r.get('video_link_checked_at')) for r in league['rallies'])
+        result+='<p><strong>決起集会：'+str(linked)+'チームの動画リンクを掲載</strong><br><a href="league/777league/#rallies">動画と感想記事を見る →</a></p>'
     return result+'<p><a href="new-machines/">新台カレンダー →</a> ／ <a href="league/777league/#next">収録予定・終了確認待ち →</a></p></div>'
 
 def machine_navigation(page):

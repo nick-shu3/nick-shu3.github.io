@@ -3,6 +3,42 @@
   "same_day_order": "同日はデータ登録順。時刻や公開順を推定しない。",
   "entries": [
     {
+      "source": "guide-sao2",
+      "anchor": "",
+      "date": "2026-11-01",
+      "date_kind": "内容更新日",
+      "group": "guide-sao2",
+      "category": "機種ガイド",
+      "reason": "10月20日・27日の媒体更新に基づくメニュー画面4キャラの示唆追補。メーカー確定とは区別。"
+    },
+    {
+      "source": "industry-news",
+      "anchor": "",
+      "date": "2026-11-01",
+      "date_kind": "内容更新日",
+      "group": "news-sammy-cup",
+      "category": "ニュース",
+      "reason": "Sammyカップの試打詳細を10月29日・30日の公式案内で追補。元の発表日は保持。"
+    },
+    {
+      "source": "new-machines",
+      "anchor": "",
+      "date": "2026-11-01",
+      "date_kind": "内容更新日",
+      "group": "new-machines-20261022",
+      "category": "新台カレンダー",
+      "reason": "未掲載2機種の追加とGGOフィールドテスト開始報告を追補。全国日程と区別。"
+    },
+    {
+      "source": "record-tako-20261022",
+      "anchor": "",
+      "date": "2026-11-01",
+      "date_kind": "内容更新日",
+      "group": "play-20261022",
+      "category": "実戦",
+      "reason": "本人提供済み10月22日のタコスロ記録を新規記事化。実戦日と内容更新日を区別し、公開日は推定しない。"
+    },
+    {
       "source": "league-4th",
       "anchor": "",
       "date": "2026-10-29",

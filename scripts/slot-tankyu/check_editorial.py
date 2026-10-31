@@ -47,6 +47,8 @@ def main():
     check_priority()
     from check_rallies_20261029 import check_rallies
     check_rallies()
+    from check_priority_six_20261101 import check_six
+    check_six()
     catalog=pages();home=catalog['home'];output=build(home)
     # R01/R02: category coverage, ordering, duplicate grouping, section hierarchy.
     latest=latest_feed(home['path']);links=Content(latest).links
@@ -94,9 +96,9 @@ def main():
                     for field in ('status','evidence_url','evidence_note'):assert new.get(field)==r.get(field)
             assert indexed[('2026-11-12','ルーキー戦第1回戦')]['venue']=='ダイナム長野上田店'
             assert indexed[('2026-11-25','RED第10回戦')]['venue']=='123+N布施店'
-        elif name=='new-machines':
-            assert hashlib.sha256((ROOT/path).read_bytes()).hexdigest()=='1251d2cb8252d0c0eb1ceb9a58dfb037db8cb75a1e5ed4b2592a639edd57a23e',name
-        else:assert (ROOT/path).read_bytes()==original(path),name
+        else:
+            expected={'new-machines':'8f4bbcd3a1208724f670f3a9c86229919dd17e756337bf072bcf0fe2b36f321f','industry-news':'5c17b1672124c645bcb01071781b25b353fe181f621ebdb7e5c83703c93e7d97'}
+            assert hashlib.sha256((ROOT/path).read_bytes()).hexdigest()==expected[name],name
     # Keep prior dated regressions intact on their reviewed fixture.
     league=json.loads(subprocess.check_output(['git','show','d7c2abba36c10bc615056db3c87a30df3047bdd5:scripts/slot-tankyu/data/league-4th.json'],cwd=ROOT));frozen=copy.deepcopy(league)
     legacy=json.loads(subprocess.check_output(['git','show','34eb7ad2ffa0ac6c81f2e782a5e08d1b42822e76:scripts/slot-tankyu/data/league-4th.json'],cwd=ROOT))
@@ -245,6 +247,9 @@ def main():
                 assert 'id="at-history"' in build(p) and '8,480枚' in build(p)
             assert hashlib.sha256((SOURCE/(name+'.json')).read_bytes()).hexdigest()==additions[name],name
             continue
+        if name in {'record-tako-20261022','daily-20261022'}:
+            # Current additions are bounded and reviewed by check_six.
+            continue
         old=base_page(name)
         assert p.get('author_comment')==old.get('author_comment'),name
         if p['type']=='record':assert p['body']==old['body'],name
@@ -264,7 +269,8 @@ def main():
     assert '&lt;b&gt;感想 &amp; 本人&lt;/b&gt;' in build(escaped)
     # R07: every published same-machine destination, excluding current page.
     tako=[p for p in catalog.values() if (p.get('machine_slug')=='takoslot' or '/takoslot/' in p['path']) and p['type'] in {'guide','record','watch'}]
-    assert len(tako)==5
+    assert len(tako)==6
+    assert any("2026-10-22/takoslot/" in x["path"] for x in tako)
     for p in tako:
         navigation=machine_navigation(p)
         for q in tako:

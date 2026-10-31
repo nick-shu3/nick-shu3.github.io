@@ -1,6 +1,6 @@
 {
-  "checked_at": "2026-10-28",
-  "source_updated_at": "2026-10-27",
+  "checked_at": "2026-11-01",
+  "source_updated_at": "2026-10-31",
   "machines": [
     {
       "date": "2026-10-19",
@@ -30,15 +30,27 @@
       "schedule_url": "https://www.p-world.co.jp/database/machine/introduce_calendar.cgi?type=Pachi",
       "official_url": "https://www.kyoraku.co.jp/news/detail/898",
       "verification": "メーカー公式の全国導入予定11月2日と日程資料を照合",
-      "checked_at": "2026-10-28",
+      "checked_at": "2026-11-01",
       "field_test": {
         "announcement_url": "https://www.kyoraku.co.jp/news/detail/896",
         "announced_on": "2026-10-20",
         "scheduled_at": "2026-10-28T09:00:00+09:00",
-        "checked_at": "2026-10-28",
+        "checked_at": "2026-11-01",
         "venue": "サンシャインKYORAKU平針店",
         "units": 20,
-        "note": "南店・植田店では実施しないとの告知。開始日・開放時間は変更の場合あり。実施状況は未確認。"
+        "note": "事前告知では南店・植田店は実施対象外。開始日・開放時間は変更の場合あり。",
+        "history": [
+          {
+            "checked_at": "2026-10-28",
+            "note": "南店・植田店では実施しないとの告知。開始日・開放時間は変更の場合あり。実施状況は未確認。"
+          }
+        ],
+        "start_confirmation": {
+          "date": "2026-10-28",
+          "checked_at": "2026-11-01",
+          "url": "https://www.kyoraku.co.jp/dev-letter/articles/lflbuby1fgq1m4hgfidm",
+          "note": "京楽の開発チームが10月28日、一部直営店でフィールドテスト導入が開始したと報告しています。報告本文だけでは、店舗別の実際の開始時刻・台数までは確認できません。全国導入開始予定の11月2日とは別です。"
+        }
       }
     },
     {
@@ -200,6 +212,26 @@
       "verification": "公式機種サイトは10月26日公開。12月7日の導入開始予定はP-WORLDと遊技日本で確認（メーカーサイト本文で導入日までは未確認）。",
       "alternate_schedule_url": "https://yugi-nippon.com/pachinko-new-machine/post-80753/",
       "checked_at": "2026-10-28"
+    },
+    {
+      "date": "2026-12-07",
+      "name": "L アサルトリリィ",
+      "maker": "七匠",
+      "kind": "パチスロ",
+      "schedule_url": "https://pachimaga.com/free/newmachine/",
+      "official_url": "https://prtimes.jp/main/html/rd/p/000000069.000180393.html",
+      "verification": "発売元の公式発信は2026年12月予定。12月7日はパチマガの日程資料で確認。製造元：七匠／総発売元：フィールズ。P-WORLDの10月31日版カレンダーには未掲載。",
+      "checked_at": "2026-11-01"
+    },
+    {
+      "date": "2026-12-21",
+      "name": "スマスロ バジリスク～甲賀忍法帖～Ⅳ",
+      "maker": "アクロス",
+      "kind": "パチスロ",
+      "schedule_url": "https://pachimaga.com/free/newmachine/",
+      "official_url": "https://www.universal-777.com/product/slot/basilisk4/",
+      "verification": "メーカー公式の発売月は2026年12月。12月21日はパチマガの日程資料で確認。P-WORLDの10月31日版カレンダーには未掲載。",
+      "checked_at": "2026-11-01"
     }
   ]
 }
