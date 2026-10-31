@@ -70,7 +70,15 @@ def calendar_page(data):
                         raise ValueError('Invalid field test dates')
                     if not isinstance(test['units'],int) or isinstance(test['units'],bool) or not 1<=test['units']<=10000:
                         raise ValueError('Invalid field test units')
-                    sources+='<br><details><summary>直営店フィールドテスト（全国導入とは別）</summary><p>'+esc(test['venue'])+'：'+date_label(scheduled.date().isoformat())+' '+scheduled.strftime('%H:%M')+'から'+str(test['units'])+'台を予定。'+esc(test['note'])+'</p><p>'+link(test['announcement_url'],'メーカーのフィールドテスト告知')+'<br><small>告知日：'+date_label(announced.isoformat())+' ／ 確認日：'+date_label(reviewed.isoformat())+'</small></p></details>'
+                    sources+='<br><details><summary>直営店フィールドテスト（全国導入とは別）</summary><p>事前告知：'+esc(test['venue'])+'：'+date_label(scheduled.date().isoformat())+' '+scheduled.strftime('%H:%M')+'から'+str(test['units'])+'台を予定。'+esc(test['note'])+'</p><p>'+link(test['announcement_url'],'メーカーのフィールドテスト告知')+'<br><small>告知日：'+date_label(announced.isoformat())+' ／ 確認日：'+date_label(reviewed.isoformat())+'</small></p>'
+                    if test.get('start_confirmation'):
+                        confirmation=test['start_confirmation']
+                        started=datetime.date.fromisoformat(confirmation['date'])
+                        confirmed=datetime.date.fromisoformat(confirmation['checked_at'])
+                        if not announced<=started<=confirmed<=reviewed:
+                            raise ValueError('Invalid field test start confirmation dates')
+                        sources+='<p><strong>開始報告：'+date_label(started)+'</strong><br>'+esc(confirmation['note'])+'<br>'+link(confirmation['url'],'メーカー開発チームの開始報告')+'<br><small>確認日：'+date_label(confirmed)+'</small></p>'
+                    sources+='</details>'
                 sources+='<br><small>機種別確認：'+date_label(item['checked_at'])+'</small>'
                 body+='<tr><td><span class="tag">'+esc(item['kind'])+'</span></td><th scope="row">'+esc(item['name'])+'</th><td>'+esc(item['maker'])+'</td><td>'+esc(item['verification'])+'<br>'+sources+'</td></tr>'
             body+='</tbody></table></div><p><a href="#'+month_id+'">↑ 月のカレンダーへ</a></p></div>'
@@ -90,7 +98,13 @@ def news_page(data):
             seen.add(item['id']);published=datetime.date.fromisoformat(item['published_at'])
             published_label=f'{published.year}年{published.month}月{published.day}日'
             if not item['sources']:raise ValueError('News needs sources')
-            body+='<article class="panel news-item" id="'+item['id']+'"><span class="tag">'+esc(item['category'])+'</span><h3>'+esc(item['title'])+'</h3><p class="hint">公表・掲載日：<time datetime="'+item['published_at']+'">'+published_label+'</time><br>出来事：'+esc(item['event_date'])+'</p><div class="news-fact"><h4>確認できた事実</h4><p>'+esc(item['facts'])+'</p>'
+            update=''
+            if item.get('updated_at'):
+                updated=datetime.date.fromisoformat(item['updated_at'])
+                if not published<=updated<=datetime.date.fromisoformat(data['checked_at']):
+                    raise ValueError('Invalid news update date')
+                update='<br>追補：<time datetime="'+item['updated_at']+'">'+date_label(updated)+'</time>'
+            body+='<article class="panel news-item" id="'+item['id']+'"><span class="tag">'+esc(item['category'])+'</span><h3>'+esc(item['title'])+'</h3><p class="hint">公表・掲載日：<time datetime="'+item['published_at']+'">'+published_label+'</time><br>出来事：'+esc(item['event_date'])+update+'</p><div class="news-fact"><h4>確認できた事実</h4><p>'+esc(item['facts'])+'</p>'
             if item.get('metrics'):
                 body+='<details><summary>パチンコとパチスロのDI比較を開く</summary><div class="tablewrap"><table><caption>パチンコとパチスロのDI比較</caption><thead><tr><th scope="col">項目</th><th scope="col">パチンコ</th><th scope="col">パチスロ</th></tr></thead><tbody>'
                 for metric in item['metrics']:

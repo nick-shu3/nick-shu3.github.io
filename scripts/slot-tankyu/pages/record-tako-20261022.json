@@ -1,0 +1,45 @@
+{
+  "path": "docs/slot-tankyu/records/2026-10-22/takoslot/index.html",
+  "type": "record",
+  "label": "機種別実戦記録",
+  "title": "タコスロ実戦｜387Gノーボーナスで−592枚。いいところなし。",
+  "short_title": "タコスロ実戦",
+  "description": "2026年10月22日のスマスロ タコスロ実戦。総387G・通常387Gでボーナス0回。投資592枚・回収0枚、差枚−592枚でした。",
+  "status": "実戦日：2026年10月22日",
+  "updated": "2026-11-01",
+  "breadcrumbs": [
+    {
+      "path": "docs/slot-tankyu/records/index.html",
+      "title": "実戦記録"
+    },
+    {
+      "path": "docs/slot-tankyu/records/2026-10-22/index.html",
+      "title": "2026年10月22日"
+    }
+  ],
+  "toc": [
+    {
+      "id": "result",
+      "label": "最終収支"
+    },
+    {
+      "id": "bonuses",
+      "label": "ボーナス・ゲーム数"
+    },
+    {
+      "id": "sources",
+      "label": "記録の確認元"
+    }
+  ],
+  "share_image": "share-record-tako-20261022.png",
+  "share_lines": [
+    "タコスロ実戦",
+    "387Gノーボーナスで−592枚",
+    "いいところなし。"
+  ],
+  "author_comment": [
+    "いいところなし。"
+  ],
+  "author_excerpt": "いいところなし。",
+  "body": "<section id=\"result\"><h2>投資592枚・回収0枚で、−592枚</h2><p>2026年10月22日はスマスロ タコスロを実戦。387Gを回しましたが、ボーナスには当たりませんでした。投資592枚・回収0枚で終了しています。</p><div class=\"tablewrap\"><table><thead><tr><th scope=\"col\">項目</th><th scope=\"col\">結果</th></tr></thead><tbody><tr><th scope=\"row\">投資</th><td>592枚</td></tr><tr><th scope=\"row\">回収</th><td>0枚</td></tr><tr><th scope=\"row\">差枚</th><td><strong>−592枚</strong></td></tr></tbody></table></div><p class=\"hint\">投資・回収は本人申告。差枚は0−592で計算しています。</p></section><section id=\"bonuses\"><h2>総387G・通常387G、ボーナス0回</h2><div class=\"tablewrap\"><table><thead><tr><th scope=\"col\">項目</th><th scope=\"col\">結果</th></tr></thead><tbody><tr><th scope=\"row\">総プレイ数</th><td>387G</td></tr><tr><th scope=\"row\">通常時プレイ数</th><td>387G</td></tr><tr><th scope=\"row\">ボーナス合計</th><td>0回</td></tr><tr><th scope=\"row\">BIG合計</th><td>0回</td></tr><tr><th scope=\"row\">REG</th><td>0回</td></tr></tbody></table></div><p>ボーナスに当選していないため、ボーナス中の技術介入成績はありません。387Gの結果だけで設定の高低は判断しません。</p></section><section id=\"sources\"><h2>記録の確認元</h2><p>投資592枚・回収0枚と所感はシュウ３の申告。ゲーム数とボーナス回数は、2026年10月22日分として提供されたユニメモ画像で確認しました。店舗・開始時刻・貸出や交換条件は未確認のため補っていません。</p></section><section class=\"related\"><h2>関連する記録</h2><p><a href=\"../../../machines/takoslot/\">タコスロの記録ガイド →</a> ／ <a href=\"../\">10月22日のまとめ →</a></p></section>"
+}
