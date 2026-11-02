@@ -3,6 +3,15 @@
   "same_day_order": "同日はデータ登録順。時刻や公開順を推定しない。",
   "entries": [
     {
+      "source": "industry-news",
+      "anchor": "aria-hihigami-2026",
+      "date": "2026-11-02",
+      "date_kind": "内容更新日",
+      "group": "news-aria-20261102",
+      "category": "ニュース",
+      "reason": "11月2日号に10月30日のメーカー発表を追加。発表日と掲載日を区別。"
+    },
+    {
       "source": "guide-sao2",
       "anchor": "",
       "date": "2026-11-01",
@@ -10,15 +19,6 @@
       "group": "guide-sao2",
       "category": "機種ガイド",
       "reason": "10月20日・27日の媒体更新に基づくメニュー画面4キャラの示唆追補。メーカー確定とは区別。"
-    },
-    {
-      "source": "industry-news",
-      "anchor": "",
-      "date": "2026-11-01",
-      "date_kind": "内容更新日",
-      "group": "news-sammy-cup",
-      "category": "ニュース",
-      "reason": "Sammyカップの試打詳細を10月29日・30日の公式案内で追補。元の発表日は保持。"
     },
     {
       "source": "new-machines",
