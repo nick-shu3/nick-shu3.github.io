@@ -81,6 +81,8 @@ def check_six():
     assert build(record).count('id="author-comment"')==1
     assert 'takoslot/' in daily['body'] and '2026-10-22/takoslot/' in read('pages/listing.json')['body']
     latest=read('data/latest.json')
+    assert latest['entries'][0]=={'source': 'column-kichijoji-juggler-20261103', 'anchor': '', 'date': '2026-11-04', 'date_kind': '内容更新日', 'group': 'column-kichijoji-juggler-20261103', 'category': 'コラム', 'reason': '周年コラムにAT機10機種のグラフ判定と考察を追記。未確認台と出玉・設定の区別を明記。'}
+    latest=copy.deepcopy(latest);latest['entries']=latest['entries'][1:]
     # Reviewed 11/3 record and released 11/2 Aria entry precede the six-item feed.
     assert latest['entries'][0]=={'source':'column-kichijoji-juggler-20261103','anchor':'','date':'2026-11-04','date_kind':'記事公開日','group':'column-kichijoji-juggler-20261103','category':'コラム','reason':'本人承認済みの周年ジャグラー編を11月4日に新規掲載。実戦日11月3日とは区別。'}
     latest=copy.deepcopy(latest);latest['entries']=latest['entries'][1:]
