@@ -3,6 +3,15 @@
   "same_day_order": "同日はデータ登録順。時刻や公開順を推定しない。",
   "entries": [
     {
+      "source": "record-gogo-20261103",
+      "anchor": "",
+      "date": "2026-11-03",
+      "date_kind": "内容更新日",
+      "group": "play-20261103",
+      "category": "実戦記録",
+      "reason": "本人が提供した11月3日の完成原稿を確認・投稿指示に基づき掲載。21時40分の島集計と本人実戦最終値を区別。"
+    },
+    {
       "source": "industry-news",
       "anchor": "aria-hihigami-2026",
       "date": "2026-11-02",

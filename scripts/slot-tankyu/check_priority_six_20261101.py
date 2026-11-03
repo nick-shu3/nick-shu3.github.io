@@ -25,6 +25,12 @@ def check_six():
     restored=restored.replace('初回確認：2026年10月17日。メニュー画面4キャラの示唆は2026年11月1日に追補しました。確認範囲は各項目の日付を参照してください。','情報確認・内容更新：2026年10月17日。')
     assert restored==a['body'],'Unrelated SAO2 content changed'
     n=read('data/industry-news.json');o=old('data/industry-news.json');item=None
+    # The published 11/2 Aria addition postdates this six-item edition.
+    # Accept only its exact released bytes; retain all older issue checks below.
+    assert hashlib.sha256((H/'data/industry-news.json').read_bytes()).hexdigest()=='acc89d47a20124257929601205fb62e2afb32a513dd7fab737aa841c4f334fbc'
+    assert n['issues'][-1]['date']=='2026-11-02'
+    assert [a['id'] for a in n['issues'][-1]['articles']]==['aria-hihigami-2026']
+    n['issues'].pop();n['checked_at']='2026-11-01'
     for previous_issue,current_issue in zip(o['issues'],n['issues']):
         assert previous_issue['date']==current_issue['date']
         for before,after in zip(previous_issue['articles'],current_issue['articles']):
@@ -74,7 +80,14 @@ def check_six():
     assert '<img ' not in record['body'] and '店舗・開始時刻・貸出や交換条件は未確認' in record['body']
     assert build(record).count('id="author-comment"')==1
     assert 'takoslot/' in daily['body'] and '2026-10-22/takoslot/' in read('pages/listing.json')['body']
-    latest=read('data/latest.json');assert latest['entries'][4:]==old('data/latest.json')['entries']
+    latest=read('data/latest.json')
+    # Reviewed 11/3 record and released 11/2 Aria entry precede the six-item feed.
+    baseline=json.loads(subprocess.check_output(['git','show','e6226d483a10e18a1524e36ea900df3177072371:scripts/slot-tankyu/data/latest.json'],cwd=ROOT))
+    assert latest['entries'][0]['source']=='record-gogo-20261103'
+    assert latest['entries'][0]['date']=='2026-11-03'
+    assert latest['entries'][1:]==baseline['entries']
+    assert latest['entries'][1]['anchor']=='aria-hihigami-2026'
+    assert latest['entries'][5:]==old('data/latest.json')['entries']
     allowed={'guide-sao2.json','home.json','listing.json','new-machines.json','industry-news.json','league-4th.json'}
     for p in subprocess.check_output(['git','ls-tree','-r','--name-only',BASE,'scripts/slot-tankyu/pages'],cwd=ROOT,text=True).splitlines():
         name=Path(p).name
