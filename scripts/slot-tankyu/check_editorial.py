@@ -39,6 +39,8 @@ def section(body,identifier):
     return re.search(r'<section\b[^>]*\bid="'+re.escape(identifier)+r'"[^>]*>(.*?)</section>',body,re.S)[1]
 
 def main():
+    from check_gogo_history import check_gogo
+    check_gogo()
     from check_update_20261026 import check_update
     check_update()
     from check_dstation_20261028 import check_dstation
@@ -224,7 +226,7 @@ def main():
             continue
         # New sources are fixed to their independently reviewed edition.
         additions={'record-tokyo-20261019': '71b8924a10ecc57a2bc07afe703181a1db8180bf43e2e62502e3c39897fd01f6', 'daily-20261019': 'ec926e38d38badcea3d0449d254b3e9fdf3e9bcece04f20dc017837099b5c4ae', 'record-shinuchi-20261018': 'da139b142aa0a7d92b1e188c49a72589892a0bbafe386880e4fb3493e8ce35cb', 'daily-20261018': '1fa5f7c24c22fafad4ad76499a82c354f0b5c43137090bb19008ab15c66f48c7', 'guide-shinuchi': 'f7b15411f5439c6766544153241778fd0e3b11429f6954c625c821172f5f374e', 'watch-tengai-golden-manes': 'f21f33428691055dba7190e95524a1f864cf115221bc1cf6e7aafd99ef806cc8', 'record-sao2-20261017': '20f595ea29a24fcc8eab1bf031bee452bacd826db385983ad89f9da946c75b0d', 'daily-20261017': '8da16be03d0dd6455c213a5e2d010f71b580bb125b598d8093ce607f88229e35'}
-        additions['record-gogo-20261103']='2447c0ae4fb85750d1dbf288ffc96085a9a4ee00e30a0e6589b4530d2e105e58'
+        additions['record-gogo-20261103']='457f092c37757573ae377198b584c2d681f06a375ac1e9c14aef937c48d41ab0'
         additions['daily-20261103']='609da8915ece982af6e786b05c4b768e8c565011dcabe7ec7d4ece2f87360481'
         additions['watch-dstation-heroes']='19116c8291684d6bc04866bb55963294e25df68344a1592e9ef8ff7d449cfebb'
         additions['watch-armada-dynam']='2dedcdb9359d86e08c1f24f5bab89dafbcaae1922c05c801ee2a14696b426c2b'

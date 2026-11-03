@@ -4,6 +4,7 @@ import hashlib,html,json,posixpath,re
 from pathlib import Path
 from editorial_views import visible_dates, date_label, latest_feed, daily_list, schedule_preview, machine_navigation, guide_shortcuts, guide_digest, column_cards, related_columns
 from record_history import confirmed_history
+from gogo_history import bonus_history
 
 ROOT=Path(__file__).resolve().parents[2]
 SOURCE=Path(__file__).parent/'pages'
@@ -17,6 +18,8 @@ def build(page):
     body=visible_dates(page['body'])
     if '<!-- confirmed-tokyo-20261019 -->' in body:
         body=body.replace('<!-- confirmed-tokyo-20261019 -->',confirmed_history())
+    if '<!-- gogo-20261103-history -->' in body:
+        body=body.replace('<!-- gogo-20261103-history -->',bonus_history())
     body=body.replace('<!-- latest-feed -->',latest_feed(path)) if '<!-- latest-feed -->' in body else body
     body=body.replace('<!-- recent-daily -->',daily_list(path,3))
     body=body.replace('<!-- all-daily -->',daily_list(path))
