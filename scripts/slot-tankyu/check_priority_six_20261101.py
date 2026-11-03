@@ -81,6 +81,8 @@ def check_six():
     assert build(record).count('id="author-comment"')==1
     assert 'takoslot/' in daily['body'] and '2026-10-22/takoslot/' in read('pages/listing.json')['body']
     latest=read('data/latest.json')
+    assert latest['entries'][0]=={'source': 'battle-red1-20261104', 'anchor': '', 'date': '2026-11-04', 'date_kind': '記事公開日', 'group': 'battle-red1-20261104', 'category': '番組', 'reason': '本人が承認した777リーグ4th RED第1回戦の視聴メモと前後編動画を紹介。'}
+    latest=copy.deepcopy(latest);latest['entries']=latest['entries'][1:]
     assert latest['entries'][0]=={'source': 'column-kichijoji-juggler-20261103', 'anchor': '', 'date': '2026-11-04', 'date_kind': '内容更新日', 'group': 'column-kichijoji-juggler-20261103', 'category': 'コラム', 'reason': '周年コラムにAT機10機種のグラフ判定と考察を追記。未確認台と出玉・設定の区別を明記。'}
     latest=copy.deepcopy(latest);latest['entries']=latest['entries'][1:]
     # Reviewed 11/3 record and released 11/2 Aria entry precede the six-item feed.
@@ -100,6 +102,7 @@ def check_six():
         if name=='columns-listing.json':
             current=json.loads((ROOT/p).read_text());assert current['updated']=='2026年11月4日'
             current['updated']=old('pages/'+name)['updated'];assert current==old('pages/'+name),p
+        elif name=='watch-listing.json':assert hashlib.sha256((ROOT/p).read_bytes()).hexdigest()=='8d9dd1690493f442f6d20334e990af5f23e29c72f12b98bab7d213b70a4b568d',p
         elif name not in allowed:assert json.loads((ROOT/p).read_text())==old('pages/'+name),p
     for p in subprocess.check_output(['git','ls-tree','-r','--name-only',BASE,'scripts/slot-tankyu/data'],cwd=ROOT,text=True).splitlines():
         name=Path(p).name

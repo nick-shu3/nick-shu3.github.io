@@ -3,6 +3,15 @@
   "same_day_order": "同日はデータ登録順。時刻や公開順を推定しない。",
   "entries": [
     {
+      "source": "battle-red1-20261104",
+      "anchor": "",
+      "date": "2026-11-04",
+      "date_kind": "記事公開日",
+      "group": "battle-red1-20261104",
+      "category": "番組",
+      "reason": "本人が承認した777リーグ4th RED第1回戦の視聴メモと前後編動画を紹介。"
+    },
+    {
       "source": "column-kichijoji-juggler-20261103",
       "anchor": "",
       "date": "2026-11-04",
