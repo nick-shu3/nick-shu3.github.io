@@ -84,10 +84,12 @@ def check_six():
     # Reviewed 11/3 record and released 11/2 Aria entry precede the six-item feed.
     baseline=json.loads(subprocess.check_output(['git','show','e6226d483a10e18a1524e36ea900df3177072371:scripts/slot-tankyu/data/latest.json'],cwd=ROOT))
     assert latest['entries'][0]['source']=='record-gogo-20261103'
-    assert latest['entries'][0]['date']=='2026-11-03'
-    assert latest['entries'][1:]==baseline['entries']
-    assert latest['entries'][1]['anchor']=='aria-hihigami-2026'
-    assert latest['entries'][5:]==old('data/latest.json')['entries']
+    assert latest['entries'][0]['date']=='2026-11-04'
+    assert latest['entries'][0]['anchor']==''
+    assert latest['entries'][1]['source']=='record-gogo-20261103' and latest['entries'][1]['date']=='2026-11-03'
+    assert latest['entries'][2:]==baseline['entries']
+    assert latest['entries'][2]['anchor']=='aria-hihigami-2026'
+    assert latest['entries'][6:]==old('data/latest.json')['entries']
     allowed={'guide-sao2.json','home.json','listing.json','new-machines.json','industry-news.json','league-4th.json'}
     for p in subprocess.check_output(['git','ls-tree','-r','--name-only',BASE,'scripts/slot-tankyu/pages'],cwd=ROOT,text=True).splitlines():
         name=Path(p).name

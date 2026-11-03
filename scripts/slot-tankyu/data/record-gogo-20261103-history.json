@@ -1,0 +1,600 @@
+{
+  "session": "2026-11-03-messe-kichijoji-697-gogo3",
+  "checked_at": "2026-11-04",
+  "source": "本人が提示した再取得履歴（当選G・時刻・種別・出玉）と実戦中メモ（成立契機・演出）。元サイト・原画像を今回再取得したものではない。",
+  "events": [
+    {
+      "number": 1,
+      "time": "10:19",
+      "game": 6,
+      "kind": "REG",
+      "coins": 96,
+      "trigger": "チェリー重複",
+      "note": ""
+    },
+    {
+      "number": 2,
+      "time": "10:31",
+      "game": 150,
+      "kind": "REG",
+      "coins": 96,
+      "trigger": "単独",
+      "note": ""
+    },
+    {
+      "number": 3,
+      "time": "10:43",
+      "game": 162,
+      "kind": "BIG",
+      "coins": 240,
+      "trigger": "単独",
+      "note": ""
+    },
+    {
+      "number": 4,
+      "time": "10:56",
+      "game": 156,
+      "kind": "BIG",
+      "coins": 240,
+      "trigger": "チェリー重複",
+      "note": ""
+    },
+    {
+      "number": 5,
+      "time": "11:04",
+      "game": 86,
+      "kind": "BIG",
+      "coins": 240,
+      "trigger": "レアチェリー疑い",
+      "note": ""
+    },
+    {
+      "number": 6,
+      "time": "11:06",
+      "game": 3,
+      "kind": "REG",
+      "coins": 96,
+      "trigger": "単独",
+      "note": ""
+    },
+    {
+      "number": 7,
+      "time": "11:38",
+      "game": 441,
+      "kind": "BIG",
+      "coins": 240,
+      "trigger": "チェリー重複",
+      "note": "3秒フリーズ"
+    },
+    {
+      "number": 8,
+      "time": "11:41",
+      "game": 7,
+      "kind": "REG",
+      "coins": 96,
+      "trigger": "単独",
+      "note": ""
+    },
+    {
+      "number": 9,
+      "time": "11:44",
+      "game": 22,
+      "kind": "BIG",
+      "coins": 240,
+      "trigger": "単独",
+      "note": ""
+    },
+    {
+      "number": 10,
+      "time": "11:51",
+      "game": 86,
+      "kind": "BIG",
+      "coins": 240,
+      "trigger": "単独",
+      "note": ""
+    },
+    {
+      "number": 11,
+      "time": "11:58",
+      "game": 60,
+      "kind": "BIG",
+      "coins": 240,
+      "trigger": "単独",
+      "note": ""
+    },
+    {
+      "number": 12,
+      "time": "12:09",
+      "game": 134,
+      "kind": "REG",
+      "coins": 96,
+      "trigger": "単独",
+      "note": ""
+    },
+    {
+      "number": 13,
+      "time": "12:11",
+      "game": 16,
+      "kind": "REG",
+      "coins": 96,
+      "trigger": "単独",
+      "note": ""
+    },
+    {
+      "number": 14,
+      "time": "12:12",
+      "game": 6,
+      "kind": "BIG",
+      "coins": 240,
+      "trigger": "単独",
+      "note": ""
+    },
+    {
+      "number": 15,
+      "time": "12:27",
+      "game": 32,
+      "kind": "BIG",
+      "coins": 240,
+      "trigger": "チェリー重複",
+      "note": ""
+    },
+    {
+      "number": 16,
+      "time": "12:29",
+      "game": 11,
+      "kind": "BIG",
+      "coins": 240,
+      "trigger": "単独",
+      "note": "チェリー→単独へ本人訂正"
+    },
+    {
+      "number": 17,
+      "time": "12:32",
+      "game": 7,
+      "kind": "REG",
+      "coins": 96,
+      "trigger": "チェリー重複",
+      "note": ""
+    },
+    {
+      "number": 18,
+      "time": "12:45",
+      "game": 188,
+      "kind": "BIG",
+      "coins": 240,
+      "trigger": "単独",
+      "note": ""
+    },
+    {
+      "number": 19,
+      "time": "13:02",
+      "game": 203,
+      "kind": "REG",
+      "coins": 96,
+      "trigger": "不明",
+      "note": ""
+    },
+    {
+      "number": 20,
+      "time": "13:15",
+      "game": 177,
+      "kind": "REG",
+      "coins": 96,
+      "trigger": "単独",
+      "note": ""
+    },
+    {
+      "number": 21,
+      "time": "13:22",
+      "game": 95,
+      "kind": "REG",
+      "coins": 96,
+      "trigger": "不明",
+      "note": ""
+    },
+    {
+      "number": 22,
+      "time": "13:30",
+      "game": 95,
+      "kind": "REG",
+      "coins": 96,
+      "trigger": "単独",
+      "note": ""
+    },
+    {
+      "number": 23,
+      "time": "14:15",
+      "game": 80,
+      "kind": "BIG",
+      "coins": 240,
+      "trigger": "単独",
+      "note": ""
+    },
+    {
+      "number": 24,
+      "time": "14:28",
+      "game": 153,
+      "kind": "BIG",
+      "coins": 240,
+      "trigger": "単独",
+      "note": ""
+    },
+    {
+      "number": 25,
+      "time": "14:46",
+      "game": 229,
+      "kind": "REG",
+      "coins": 96,
+      "trigger": "不明",
+      "note": ""
+    },
+    {
+      "number": 26,
+      "time": "15:02",
+      "game": 213,
+      "kind": "BIG",
+      "coins": 240,
+      "trigger": "単独",
+      "note": "スロースタート"
+    },
+    {
+      "number": 27,
+      "time": "15:14",
+      "game": 147,
+      "kind": "BIG",
+      "coins": 240,
+      "trigger": "チェリー重複",
+      "note": ""
+    },
+    {
+      "number": 28,
+      "time": "15:20",
+      "game": 57,
+      "kind": "BIG",
+      "coins": 240,
+      "trigger": "単独",
+      "note": ""
+    },
+    {
+      "number": 29,
+      "time": "15:22",
+      "game": 2,
+      "kind": "BIG",
+      "coins": 240,
+      "trigger": "単独",
+      "note": ""
+    },
+    {
+      "number": 30,
+      "time": "15:47",
+      "game": 239,
+      "kind": "BIG",
+      "coins": 240,
+      "trigger": "単独",
+      "note": ""
+    },
+    {
+      "number": 31,
+      "time": "15:57",
+      "game": 124,
+      "kind": "BIG",
+      "coins": 240,
+      "trigger": "チェリー重複",
+      "note": ""
+    },
+    {
+      "number": 32,
+      "time": "16:05",
+      "game": 87,
+      "kind": "BIG",
+      "coins": 240,
+      "trigger": "チェリー重複",
+      "note": ""
+    },
+    {
+      "number": 33,
+      "time": "16:09",
+      "game": 34,
+      "kind": "BIG",
+      "coins": 240,
+      "trigger": null,
+      "note": ""
+    },
+    {
+      "number": 34,
+      "time": "16:24",
+      "game": 171,
+      "kind": "BIG",
+      "coins": 240,
+      "trigger": "チェリー重複",
+      "note": ""
+    },
+    {
+      "number": 35,
+      "time": "16:35",
+      "game": 57,
+      "kind": "BIG",
+      "coins": 240,
+      "trigger": "単独",
+      "note": ""
+    },
+    {
+      "number": 36,
+      "time": "16:39",
+      "game": 24,
+      "kind": "BIG",
+      "coins": 240,
+      "trigger": "単独",
+      "note": ""
+    },
+    {
+      "number": 37,
+      "time": "16:44",
+      "game": 52,
+      "kind": "REG",
+      "coins": 97,
+      "trigger": "不明",
+      "note": ""
+    },
+    {
+      "number": 38,
+      "time": "16:45",
+      "game": 14,
+      "kind": "REG",
+      "coins": 96,
+      "trigger": "単独",
+      "note": ""
+    },
+    {
+      "number": 39,
+      "time": "16:47",
+      "game": 9,
+      "kind": "BIG",
+      "coins": 240,
+      "trigger": "レアチェリー",
+      "note": ""
+    },
+    {
+      "number": 40,
+      "time": "16:49",
+      "game": 3,
+      "kind": "BIG",
+      "coins": 240,
+      "trigger": "単独",
+      "note": ""
+    },
+    {
+      "number": 41,
+      "time": "16:55",
+      "game": 62,
+      "kind": "REG",
+      "coins": 96,
+      "trigger": "不明",
+      "note": ""
+    },
+    {
+      "number": 42,
+      "time": "16:58",
+      "game": 31,
+      "kind": "REG",
+      "coins": 97,
+      "trigger": "不明",
+      "note": ""
+    },
+    {
+      "number": 43,
+      "time": "17:24",
+      "game": 352,
+      "kind": "REG",
+      "coins": 96,
+      "trigger": "チェリー重複",
+      "note": ""
+    },
+    {
+      "number": 44,
+      "time": "17:36",
+      "game": 161,
+      "kind": "REG",
+      "coins": 96,
+      "trigger": "単独",
+      "note": ""
+    },
+    {
+      "number": 45,
+      "time": "18:12",
+      "game": 475,
+      "kind": "REG",
+      "coins": 96,
+      "trigger": "単独",
+      "note": ""
+    },
+    {
+      "number": 46,
+      "time": "18:54",
+      "game": 550,
+      "kind": "BIG",
+      "coins": 240,
+      "trigger": "チェリー重複",
+      "note": ""
+    },
+    {
+      "number": 47,
+      "time": "18:58",
+      "game": 35,
+      "kind": "REG",
+      "coins": 96,
+      "trigger": "単独",
+      "note": ""
+    },
+    {
+      "number": 48,
+      "time": "19:02",
+      "game": 48,
+      "kind": "REG",
+      "coins": 96,
+      "trigger": "不明",
+      "note": ""
+    },
+    {
+      "number": 49,
+      "time": "19:05",
+      "game": 35,
+      "kind": "REG",
+      "coins": 96,
+      "trigger": "チェリー重複",
+      "note": ""
+    },
+    {
+      "number": 50,
+      "time": "19:27",
+      "game": 304,
+      "kind": "BIG",
+      "coins": 240,
+      "trigger": "単独",
+      "note": ""
+    },
+    {
+      "number": 51,
+      "time": "20:47",
+      "game": 632,
+      "kind": "REG",
+      "coins": 96,
+      "trigger": "単独",
+      "note": ""
+    },
+    {
+      "number": 52,
+      "time": "20:52",
+      "game": 60,
+      "kind": "BIG",
+      "coins": 240,
+      "trigger": "単独",
+      "note": ""
+    },
+    {
+      "number": 53,
+      "time": "20:58",
+      "game": 65,
+      "kind": "REG",
+      "coins": 96,
+      "trigger": "不明",
+      "note": ""
+    },
+    {
+      "number": 54,
+      "time": "21:00",
+      "game": 14,
+      "kind": "BIG",
+      "coins": 240,
+      "trigger": "単独",
+      "note": ""
+    },
+    {
+      "number": 55,
+      "time": "21:04",
+      "game": 31,
+      "kind": "BIG",
+      "coins": 240,
+      "trigger": "単独",
+      "note": ""
+    },
+    {
+      "number": 56,
+      "time": "21:10",
+      "game": 53,
+      "kind": "BIG",
+      "coins": 240,
+      "trigger": "単独",
+      "note": ""
+    },
+    {
+      "number": 57,
+      "time": "21:20",
+      "game": 132,
+      "kind": "BIG",
+      "coins": 240,
+      "trigger": "単独",
+      "note": ""
+    },
+    {
+      "number": 58,
+      "time": "21:40",
+      "game": 258,
+      "kind": "BIG",
+      "coins": 240,
+      "trigger": "単独",
+      "note": ""
+    },
+    {
+      "number": 59,
+      "time": "21:46",
+      "game": 66,
+      "kind": "REG",
+      "coins": 96,
+      "trigger": "チェリー重複",
+      "note": ""
+    },
+    {
+      "number": 60,
+      "time": "22:01",
+      "game": 192,
+      "kind": "BIG",
+      "coins": 240,
+      "trigger": "チェリー重複",
+      "note": ""
+    },
+    {
+      "number": 61,
+      "time": "22:26",
+      "game": 343,
+      "kind": "BIG",
+      "coins": 240,
+      "trigger": "単独",
+      "note": "無音プレミア"
+    },
+    {
+      "number": 62,
+      "time": "22:32",
+      "game": 60,
+      "kind": "REG",
+      "coins": 96,
+      "trigger": "チェリー重複",
+      "note": ""
+    }
+  ],
+  "corrections": [
+    {
+      "number": 26,
+      "memo_game": 216,
+      "history_game": 213,
+      "reason": "本人提示の再取得履歴を採用"
+    },
+    {
+      "number": 27,
+      "memo_game": 146,
+      "history_game": 147,
+      "reason": "本人提示の再取得履歴を採用"
+    },
+    {
+      "number": 46,
+      "memo_game": 549,
+      "history_game": 550,
+      "reason": "本人提示の再取得履歴を採用"
+    }
+  ],
+  "added": {
+    "number": 33,
+    "game": 34,
+    "kind": "BIG",
+    "time": "16:09",
+    "trigger": null
+  },
+  "totals": {
+    "games": 7908,
+    "BIG": 36,
+    "REG": 26,
+    "investment": 184,
+    "recovery": 1976,
+    "difference": 1792
+  }
+}
