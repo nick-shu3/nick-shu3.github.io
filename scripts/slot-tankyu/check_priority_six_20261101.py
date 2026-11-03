@@ -82,6 +82,8 @@ def check_six():
     assert 'takoslot/' in daily['body'] and '2026-10-22/takoslot/' in read('pages/listing.json')['body']
     latest=read('data/latest.json')
     # Reviewed 11/3 record and released 11/2 Aria entry precede the six-item feed.
+    assert latest['entries'][0]=={'source':'column-kichijoji-juggler-20261103','anchor':'','date':'2026-11-04','date_kind':'記事公開日','group':'column-kichijoji-juggler-20261103','category':'コラム','reason':'本人承認済みの周年ジャグラー編を11月4日に新規掲載。実戦日11月3日とは区別。'}
+    latest=copy.deepcopy(latest);latest['entries']=latest['entries'][1:]
     baseline=json.loads(subprocess.check_output(['git','show','e6226d483a10e18a1524e36ea900df3177072371:scripts/slot-tankyu/data/latest.json'],cwd=ROOT))
     assert latest['entries'][0]['source']=='record-gogo-20261103'
     assert latest['entries'][0]['date']=='2026-11-04'
@@ -93,9 +95,15 @@ def check_six():
     allowed={'guide-sao2.json','home.json','listing.json','new-machines.json','industry-news.json','league-4th.json'}
     for p in subprocess.check_output(['git','ls-tree','-r','--name-only',BASE,'scripts/slot-tankyu/pages'],cwd=ROOT,text=True).splitlines():
         name=Path(p).name
-        if name not in allowed:assert json.loads((ROOT/p).read_text())==old('pages/'+name),p
+        if name=='columns-listing.json':
+            current=json.loads((ROOT/p).read_text());assert current['updated']=='2026年11月4日'
+            current['updated']=old('pages/'+name)['updated'];assert current==old('pages/'+name),p
+        elif name not in allowed:assert json.loads((ROOT/p).read_text())==old('pages/'+name),p
     for p in subprocess.check_output(['git','ls-tree','-r','--name-only',BASE,'scripts/slot-tankyu/data'],cwd=ROOT,text=True).splitlines():
         name=Path(p).name
-        if name not in {'latest.json','industry-news.json','new-machines.json','presentation.json'}:assert json.loads((ROOT/p).read_text())==old('data/'+name),p
+        if name=='column-relations.json':
+            current=json.loads((ROOT/p).read_text());added=current.pop('docs/slot-tankyu/records/2026-11-03/gogo-juggler3/index.html')
+            assert added==['column-kichijoji-juggler-20261103'] and current==old('data/'+name),p
+        elif name not in {'latest.json','industry-news.json','new-machines.json','presentation.json'}:assert json.loads((ROOT/p).read_text())==old('data/'+name),p
     print('PASS: six-priority source boundaries, new record, old history/comments preserved, same-day video exclusion, invalid dates/URLs and HTML escaped')
 if __name__=='__main__':check_six()

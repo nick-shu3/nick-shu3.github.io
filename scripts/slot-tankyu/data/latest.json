@@ -3,6 +3,15 @@
   "same_day_order": "同日はデータ登録順。時刻や公開順を推定しない。",
   "entries": [
     {
+      "source": "column-kichijoji-juggler-20261103",
+      "anchor": "",
+      "date": "2026-11-04",
+      "date_kind": "記事公開日",
+      "group": "column-kichijoji-juggler-20261103",
+      "category": "コラム",
+      "reason": "本人承認済みの周年ジャグラー編を11月4日に新規掲載。実戦日11月3日とは区別。"
+    },
+    {
       "source": "record-gogo-20261103",
       "anchor": "",
       "date": "2026-11-04",
