@@ -13,7 +13,7 @@ MAINTENANCE_PAGE_CANDIDATES={
     'guide-lycoris.json':'398d4d850f9e21fc01842966c1b039a8f0d81a309d172721a0199f8d95f26dc7',
     'guide-tako.json':'442b157e07d2e02ddbd2ed5d58ffbdaadd25a7a18289de9a420f65a031faa767',
     'new-machines.json':'5690215ec7b090f6d6ac78d44ad61d914535f8c6771d15322a5fb2922ae702c9',
-    'industry-news.json':'b3f5468f9785e14103982f5d9d842ce9cd315d5878dc20e663f6aef05c0b4cb2',
+    'industry-news.json':'671b88661e9005b009b5258b87568fe01fbf50630eab4ff67b1f2865e4f79ce5',
 }
 class Cells(HTMLParser):
     def __init__(self,body):
@@ -108,6 +108,13 @@ def check_sao2(page):
         if path.endswith('/listing.json'):
             old=json.loads(subprocess.check_output(['git','show',BASE+':'+path],cwd=ROOT))
             current=json.loads((ROOT/path).read_text())
+            # Strip only the independently reviewed 11/3 card, then preserve
+            # every earlier listing invariant and date below.
+            gogo=r'<a class="card" href="2026-11-03/gogo-juggler3/">.*?</a>'
+            assert len(re.findall(gogo,current['body']))==1
+            current['body']=re.sub(gogo,'',current['body'])
+            assert current['updated']=='2026-11-03'
+            current['updated']='2026-11-01'
             # Preserve the older listing after removing this reviewed addition.
             new_record=r'<a class="card tone-tako" href="2026-10-22/takoslot/">.*?</a>'
             assert len(re.findall(new_record,current['body']))==1
