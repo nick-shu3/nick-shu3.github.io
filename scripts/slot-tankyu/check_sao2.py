@@ -78,6 +78,16 @@ def check_sao2(page):
         if path.endswith('/watch-listing.json'):
             old=json.loads(subprocess.check_output(['git','show',BASE+':'+path],cwd=ROOT))
             current=json.loads((ROOT/path).read_text())
+            # Reviewed RED opener addition, then preserve every older listing check.
+            published=json.loads(subprocess.check_output(['git','show','fffed517f70ee0ee159e26d999858772ad47e435:'+path],cwd=ROOT))
+            red=r'<a class="card report-card" href="777league-4th-red1/">.*?</a>'
+            assert len(re.findall(red,current['body']))==1
+            current['body']=re.sub(red,'',current['body'])
+            current['body']=current['body'].replace('番組の入口と楽しみ方を紹介します。結果に触れる記事にはネタバレの案内があります。気になったら、リンク先の動画へ。','番組の入口と楽しみ方を短く紹介し、勝敗や最終差枚、意外な展開は伏せています。気になったら、リンク先の動画へ。')
+            assert current['description']=='パチスロ番組の見どころや、シュウ３の視聴メモ・感想を紹介。結果に触れる記事にはネタバレを案内します。'
+            assert current['updated']=='2026年11月4日'
+            current['description']=published['description'];current['updated']=published['updated']
+            assert current==published
             reviewed=json.loads(subprocess.check_output(['git','show','cf01a7bdd0996a1d79487a38c4a7adb8e8949407:'+path],cwd=ROOT))
             dstation=r'<a class="card report-card" href="dstation-heroes-rally/">.*?</a>'
             assert len(re.findall(dstation,current['body']))==1
