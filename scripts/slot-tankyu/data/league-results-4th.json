@@ -1,0 +1,97 @@
+{
+  "as_of": "2026-11-04",
+  "source_url": "https://p-gabu.jp/sc/666/777league/game/",
+  "source_method": "本人提供の公式サイト画面",
+  "red": [
+    {
+      "rank": 1,
+      "team": "123エンターテイナーズ",
+      "team_pt": 2786
+    },
+    {
+      "rank": 2,
+      "team": "キコーナサンクス",
+      "team_pt": 1277
+    },
+    {
+      "rank": 3,
+      "team": "テンガイゴールデンメインズ",
+      "team_pt": 239
+    },
+    {
+      "rank": 4,
+      "team": "マルハンフォースエナジー",
+      "team_pt": -3000
+    }
+  ],
+  "blue": [
+    {
+      "rank": 1,
+      "team": "D’ステーションヒーローズ",
+      "team_pt": 0
+    },
+    {
+      "rank": 1,
+      "team": "フェイスメガタイガース",
+      "team_pt": 0
+    },
+    {
+      "rank": 1,
+      "team": "ガーデンユナイテッド",
+      "team_pt": 0
+    },
+    {
+      "rank": 1,
+      "team": "アルマダイナム",
+      "team_pt": 0
+    }
+  ],
+  "battle_red1": [
+    {
+      "rank": 1,
+      "team": "123エンターテイナーズ",
+      "team_pt": 2786
+    },
+    {
+      "rank": 2,
+      "team": "キコーナサンクス",
+      "team_pt": 1277
+    },
+    {
+      "rank": 3,
+      "team": "テンガイゴールデンメインズ",
+      "team_pt": 239
+    },
+    {
+      "rank": 4,
+      "team": "マルハンフォースエナジー",
+      "team_pt": -3000
+    }
+  ],
+  "players": [
+    {
+      "rank": 1,
+      "player": "寺井一択",
+      "player_avg_pt": 1786,
+      "player_total_pt": 1786
+    },
+    {
+      "rank": 2,
+      "player": "嵐",
+      "player_avg_pt": 518,
+      "player_total_pt": 518
+    },
+    {
+      "rank": 3,
+      "player": "スロミック・エイキ",
+      "player_avg_pt": 239,
+      "player_total_pt": 239
+    },
+    {
+      "rank": 4,
+      "player": "ゆうちゃろ",
+      "player_avg_pt": -2500,
+      "player_total_pt": -2500
+    }
+  ]
+}
