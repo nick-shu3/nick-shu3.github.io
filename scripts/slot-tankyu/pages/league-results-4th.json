@@ -1,0 +1,44 @@
+{
+  "path": "docs/slot-tankyu/league/777league-results/index.html",
+  "title": "777リーグ4th｜チーム順位・実戦結果",
+  "description": "777リーグ4thのRED・BLUEチーム順位と、RED第1回戦の結果を整理。試合結果のネタバレがあります。",
+  "type": "league",
+  "label": "777.LEAGUE / 4th",
+  "status": "チーム順位・実戦結果",
+  "updated": "2026年11月4日",
+  "short_title": "777リーグの順位・結果",
+  "breadcrumbs": [
+    {
+      "title": "777リーグの日程",
+      "path": "docs/slot-tankyu/league/777league/index.html"
+    }
+  ],
+  "toc": [
+    {
+      "id": "overview",
+      "label": "掲載している成績"
+    },
+    {
+      "id": "red",
+      "label": "REDリーグの順位"
+    },
+    {
+      "id": "blue",
+      "label": "BLUEリーグの順位"
+    },
+    {
+      "id": "battle",
+      "label": "RED第1回戦の結果"
+    },
+    {
+      "id": "players",
+      "label": "選手の差枚数pt"
+    },
+    {
+      "id": "source",
+      "label": "出典・確認範囲"
+    }
+  ],
+  "share_image": "share-league-4th.png",
+  "body": "<aside class=\"notice\" role=\"note\" style=\"border:2px solid #efc18e;border-left:6px solid #efc18e;border-radius:10px;background:#33291d;\"><strong>⚠ 実戦結果のネタバレがあります</strong><p>試合結果・順位・ポイントを掲載しています。動画を先に見たい方は<a href=\"../../watch/777league-4th-red1/#video\">RED第1回戦の動画</a>へ。</p></aside><section id=\"overview\"><h2>掲載している成績</h2><p>777リーグ4thのチーム順位と公開済みの実戦結果を、公式サイトの画面をもとに整理しました。</p><p><strong>公式画面の表示基準：2026年11月4日現在。</strong> これは自動更新ではありません。最新の順位は<a href=\"https://p-gabu.jp/sc/666/777league/game/\" target=\"_blank\" rel=\"noopener noreferrer\">公式の実戦結果・成績 ↗</a>もご確認ください。</p><p class=\"hint\">公式画面には、実戦の獲得ptに順位pt・ホームptなどが含まれると記載されています。選手の差枚数ptとは別の数字です。</p></section><section id=\"red\"><h2>REDリーグ｜チーム順位</h2><p>RED第1回戦の結果を反映した、チームの累計ポイントです。</p><div role=\"region\" aria-label=\"REDリーグ・チーム順位\"><ul style=\"list-style:none;padding:0;display:grid;gap:10px;\"><li style=\"border:1px solid #4b5d6b;border-radius:8px;padding:14px 16px;background:#17232e;\"><strong>1位｜123エンターテイナーズ</strong><br><span>チーム累計：<strong>+2,786pt</strong></span></li><li style=\"border:1px solid #4b5d6b;border-radius:8px;padding:14px 16px;background:#17232e;\"><strong>2位｜キコーナサンクス</strong><br><span>チーム累計：<strong>+1,277pt</strong></span></li><li style=\"border:1px solid #4b5d6b;border-radius:8px;padding:14px 16px;background:#17232e;\"><strong>3位｜テンガイゴールデンメインズ</strong><br><span>チーム累計：<strong>+239pt</strong></span></li><li style=\"border:1px solid #4b5d6b;border-radius:8px;padding:14px 16px;background:#17232e;\"><strong>4位｜マルハンフォースエナジー</strong><br><span>チーム累計：<strong>-3,000pt</strong></span></li></ul></div></section><section id=\"blue\"><h2>BLUEリーグ｜チーム順位</h2><p>公式画面では4チームすべてが0pt、同率1位の表示です。0ptという累計表示だけでは、各実戦の結果が発表済みかどうかは判断できません。</p><div role=\"region\" aria-label=\"BLUEリーグ・チーム順位\"><ul style=\"list-style:none;padding:0;display:grid;gap:10px;\"><li style=\"border:1px solid #4b5d6b;border-radius:8px;padding:14px 16px;background:#17232e;\"><strong>1位｜D’ステーションヒーローズ</strong><br><span>チーム累計：<strong>0pt</strong></span></li><li style=\"border:1px solid #4b5d6b;border-radius:8px;padding:14px 16px;background:#17232e;\"><strong>1位｜フェイスメガタイガース</strong><br><span>チーム累計：<strong>0pt</strong></span></li><li style=\"border:1px solid #4b5d6b;border-radius:8px;padding:14px 16px;background:#17232e;\"><strong>1位｜ガーデンユナイテッド</strong><br><span>チーム累計：<strong>0pt</strong></span></li><li style=\"border:1px solid #4b5d6b;border-radius:8px;padding:14px 16px;background:#17232e;\"><strong>1位｜アルマダイナム</strong><br><span>チーム累計：<strong>0pt</strong></span></li></ul></div></section><section id=\"battle\"><h2>RED第1回戦｜チーム獲得ポイント</h2><p>順位・ホームのポイントなどを含む、その試合のチーム獲得ptです。今回の公式画面では、REDのチーム累計と同じ値でした。</p><div role=\"region\" aria-label=\"RED第1回戦のチーム獲得pt\"><ul style=\"list-style:none;padding:0;display:grid;gap:10px;\"><li style=\"border:1px solid #4b5d6b;border-radius:8px;padding:14px 16px;background:#17232e;\"><strong>1位｜123エンターテイナーズ</strong><br><span>獲得pt：<strong>+2,786pt</strong></span></li><li style=\"border:1px solid #4b5d6b;border-radius:8px;padding:14px 16px;background:#17232e;\"><strong>2位｜キコーナサンクス</strong><br><span>獲得pt：<strong>+1,277pt</strong></span></li><li style=\"border:1px solid #4b5d6b;border-radius:8px;padding:14px 16px;background:#17232e;\"><strong>3位｜テンガイゴールデンメインズ</strong><br><span>獲得pt：<strong>+239pt</strong></span></li><li style=\"border:1px solid #4b5d6b;border-radius:8px;padding:14px 16px;background:#17232e;\"><strong>4位｜マルハンフォースエナジー</strong><br><span>獲得pt：<strong>-3,000pt</strong></span></li></ul></div><p><a href=\"../../watch/777league-4th-red1/\">試合の視聴メモ・前後編動画を見る →</a></p></section><section id=\"players\"><h2>選手の差枚数ポイント</h2><p>公式画面に掲載された個人ランキングの「平均差枚数pt」と「Total差枚数pt」です。画像で確認できた4人の数値を掲載しています。</p><p class=\"hint\">チーム獲得ptとは計算の対象が異なります。</p><div role=\"region\" aria-label=\"個人ランキング｜平均差枚数pt（4選手）\"><ul style=\"list-style:none;padding:0;display:grid;gap:10px;\"><li style=\"border:1px solid #4b5d6b;border-radius:8px;padding:14px 16px;background:#17232e;\"><strong>1位｜寺井一択</strong><br><span>平均差枚数pt：<strong>+1,786pt</strong> ／ Total：+1,786pt</span></li><li style=\"border:1px solid #4b5d6b;border-radius:8px;padding:14px 16px;background:#17232e;\"><strong>2位｜嵐</strong><br><span>平均差枚数pt：<strong>+518pt</strong> ／ Total：+518pt</span></li><li style=\"border:1px solid #4b5d6b;border-radius:8px;padding:14px 16px;background:#17232e;\"><strong>3位｜スロミック・エイキ</strong><br><span>平均差枚数pt：<strong>+239pt</strong> ／ Total：+239pt</span></li><li style=\"border:1px solid #4b5d6b;border-radius:8px;padding:14px 16px;background:#17232e;\"><strong>4位｜ゆうちゃろ</strong><br><span>平均差枚数pt：<strong>-2,500pt</strong> ／ Total：-2,500pt</span></li></ul></div><p>画像に写っていない選手の順位・値は掲載していません。</p></section><section id=\"source\"><h2>出典・確認範囲</h2><p>本人が提供した公式サイトのスクリーンショットに表示された2026年11月4日現在のチーム順位、RED第1回戦と個人ランキングを転記しました。公式ページの本文をこの環境から直接取得できていないため、画像以外の内容は確認できていません。</p><p>BLUE第1回戦の画像には一部チームの実戦結果として「－」が表示され、残りは画像外です。これらを0ptの実戦結果や試合未実施と断定していません。</p><p><a href=\"https://p-gabu.jp/sc/666/777league/game/\" target=\"_blank\" rel=\"noopener noreferrer\">777リーグ公式｜実戦結果・成績 ↗</a> ／ <a href=\"../777league/\">収録日程へ戻る →</a></p></section>"
+}
