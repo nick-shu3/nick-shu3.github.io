@@ -3,6 +3,15 @@
   "same_day_order": "同日はデータ登録順。時刻や公開順を推定しない。",
   "entries": [
     {
+      "source": "record-gogo-20261105",
+      "anchor": "",
+      "date": "2026-11-05",
+      "date_kind": "記事公開日",
+      "group": "play-20261105",
+      "category": "実戦記録",
+      "reason": "本人の実戦メモと公開指示に基づく。"
+    },
+    {
       "source": "league-results-4th",
       "anchor": "",
       "date": "2026-11-04",

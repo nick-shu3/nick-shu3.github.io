@@ -118,6 +118,11 @@ def check_sao2(page):
         if path.endswith('/listing.json'):
             old=json.loads(subprocess.check_output(['git','show',BASE+':'+path],cwd=ROOT))
             current=json.loads((ROOT/path).read_text())
+            added=r'<a class="card" href="2026-11-05/gogo-juggler/">.*?</a>'
+            assert len(re.findall(added,current['body']))==1
+            current['body']=re.sub(added,'',current['body'])
+            assert current['updated']=='2026-11-05'
+            current['updated']='2026-11-03'
             # Strip only the independently reviewed 11/3 card, then preserve
             # every earlier listing invariant and date below.
             gogo=r'<a class="card" href="2026-11-03/gogo-juggler3/">.*?</a>'

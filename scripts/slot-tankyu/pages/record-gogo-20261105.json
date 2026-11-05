@@ -1,0 +1,36 @@
+{
+  "path": "docs/slot-tankyu/records/2026-11-05/gogo-juggler/index.html",
+  "type": "record",
+  "label": "機種別実戦記録",
+  "title": "ゴーゴージャグラー実戦｜REGは良好もBIGが伸びず、−492枚",
+  "short_title": "ゴーゴージャグラー実戦",
+  "description": "2026年11月5日のゴーゴージャグラー実戦。投資592枚・回収100枚、差枚−492枚。",
+  "status": "実戦日：2026年11月5日",
+  "updated": "2026-11-05",
+  "breadcrumbs": [
+    {
+      "path": "docs/slot-tankyu/records/index.html",
+      "title": "実戦記録"
+    },
+    {
+      "path": "docs/slot-tankyu/records/2026-11-05/index.html",
+      "title": "2026年11月5日"
+    }
+  ],
+  "toc": [
+    {
+      "id": "result",
+      "label": "実戦結果"
+    },
+    {
+      "id": "sources",
+      "label": "記録の確認元"
+    }
+  ],
+  "share_image": "share-listing.png",
+  "author_comment": [
+    "ブドウは体感で良かったし、バケも良かったけど、ビッグが引けない。俺が打つとハマる、でフィニッシュ。"
+  ],
+  "author_excerpt": "ブドウは体感で良かったし、バケも良かったけど、ビッグが引けない。",
+  "body": "<section id=\"result\"><h2>投資592枚・回収100枚で、−492枚</h2><p>11月5日は、良さそうなゴーゴージャグラーを実戦。ブドウは体感で良く、REGも良かったものの、BIGがなかなか引けず、自分が打ち始めるとハマる展開に。投資592枚・回収100枚、差枚は−492枚で終了しました。</p><p class=\"hint\">ブドウとREGは本人の所感です。ゲーム数やボーナス回数が不明のため、この記録だけで設定は判断できません。</p></section><section id=\"sources\"><h2>記録の確認元</h2><p>実戦日・投資・回収・所感は本人の申告。差枚は回収から投資を引いて計算しました。店舗、台番号、機種の詳細、ゲーム数、BIG・REG回数は未確認です。</p></section><section class=\"related\"><h2>関連する記録</h2><p><a href=\"../\">11月5日のまとめ →</a></p></section>"
+}
