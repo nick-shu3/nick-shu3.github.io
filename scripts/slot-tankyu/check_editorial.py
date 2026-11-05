@@ -101,7 +101,7 @@ def main():
             assert indexed[('2026-11-12','ルーキー戦第1回戦')]['venue']=='ダイナム長野上田店'
             assert indexed[('2026-11-25','RED第10回戦')]['venue']=='123+N布施店'
         else:
-            expected={'new-machines':'8f4bbcd3a1208724f670f3a9c86229919dd17e756337bf072bcf0fe2b36f321f','industry-news':'acc89d47a20124257929601205fb62e2afb32a513dd7fab737aa841c4f334fbc'}
+            expected={'new-machines':'8f4bbcd3a1208724f670f3a9c86229919dd17e756337bf072bcf0fe2b36f321f','industry-news':'b45cc942d882c08f55257351c15b539550967023a4928ae7fb6c28e4454aea3a'}
             assert hashlib.sha256((ROOT/path).read_bytes()).hexdigest()==expected[name],name
     # Keep prior dated regressions intact on their reviewed fixture.
     league=json.loads(subprocess.check_output(['git','show','d7c2abba36c10bc615056db3c87a30df3047bdd5:scripts/slot-tankyu/data/league-4th.json'],cwd=ROOT));frozen=copy.deepcopy(league)

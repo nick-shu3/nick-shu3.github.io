@@ -31,7 +31,19 @@
         }
       ],
       "status_note": "キコーナ広報の当日終了報告を確認。",
-      "previous_schedule_checked_at": "2026-10-21"
+      "previous_schedule_checked_at": "2026-10-21",
+      "videos": [
+        {
+          "label": "前編",
+          "url": "https://www.youtube.com/watch?v=1FB2XMFvt58"
+        },
+        {
+          "label": "後編",
+          "url": "https://www.youtube.com/watch?v=F6SlbYopAxs"
+        }
+      ],
+      "watch_slug": "777league-4th-red1",
+      "video_links_checked_at": "2026-11-05"
     },
     {
       "date": "2026-09-02",
@@ -911,8 +923,8 @@
   ],
   "schedule_source_type": "official",
   "previous_schedule_note": "10月14日版は二次資料を参照。10月21日に公式日程の掲載分42件へ照合・更新。過去の終了根拠は個別の確認日を保持。",
-  "video_reviewed_at": "2026-10-29",
-  "video_review_note": "決起集会8本の公開oEmbedでタイトル・投稿元を照合。マルハン公式チャンネルの動画リンクを追加。動画本編の視聴検証とは別。本編11月1日20時は既存の公式告知上の予定を維持。",
+  "video_reviewed_at": "2026-11-05",
+  "video_review_note": "RED第1回戦の前後編への導線を追加。各動画のリンクは既存の記事と独立検証を参照。",
   "schedule_rechecked_at": "2026-10-28",
   "schedule_recheck_note": "公式掲載42件の日程・会場に変更なし。各回の終了確認日とは別。",
   "schedule_recheck_url": "https://p-gabu.jp/sc/666/777league/schedule/",
@@ -924,6 +936,11 @@
     {
       "checked_at": "2026-10-28",
       "note": "決起集会7本の公開oEmbedでタイトル・投稿元を再照合。本編11月1日20時・決起集会10月29日20時は元の公式告知の予定を維持。未確認の動画公開・終了を推定しない。"
+    },
+    {
+      "checked_at": "2026-11-05",
+      "note": "RED第1回戦の前後編動画リンクを既存記事および独立検証と照合。映像本編の再視聴と公開日時の原本再検証は未実施。"
     }
-  ]
+  ],
+  "battle_video_confirmed_at": "2026-11-05"
 }

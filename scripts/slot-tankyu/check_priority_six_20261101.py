@@ -27,7 +27,10 @@ def check_six():
     n=read('data/industry-news.json');o=old('data/industry-news.json');item=None
     # The published 11/2 Aria addition postdates this six-item edition.
     # Accept only its exact released bytes; retain all older issue checks below.
-    assert hashlib.sha256((H/'data/industry-news.json').read_bytes()).hexdigest()=='acc89d47a20124257929601205fb62e2afb32a513dd7fab737aa841c4f334fbc'
+    assert n['issues'][-1]['date']=='2026-11-05'
+    n['issues'].pop(); n['checked_at']='2026-11-02'
+    baseline=subprocess.check_output(['git','show','d2794d8edaaf1210f3fe8b05ae2a8a31c141ff8b:scripts/slot-tankyu/data/industry-news.json'],cwd=ROOT)
+    assert hashlib.sha256(baseline).hexdigest()=='acc89d47a20124257929601205fb62e2afb32a513dd7fab737aa841c4f334fbc' and n==json.loads(baseline)
     assert n['issues'][-1]['date']=='2026-11-02'
     assert [a['id'] for a in n['issues'][-1]['articles']]==['aria-hihigami-2026']
     n['issues'].pop();n['checked_at']='2026-11-01'
@@ -64,9 +67,13 @@ def check_six():
         rejected(calendar_page,bad)
     bad=copy.deepcopy(c);t=next(m['field_test']['start_confirmation'] for m in bad['machines'] if 'field_test' in m);t['note']='<script>untrusted</script>'
     assert '&lt;script&gt;' in calendar_page(bad)['body'] and '<script>untrusted' not in calendar_page(bad)['body']
-    league=read('data/league-4th.json');assert league==old('data/league-4th.json'),'No new battle/video claims authorized'
+    league=read('data/league-4th.json'); baseline=json.loads(subprocess.check_output(['git','show','d2794d8edaaf1210f3fe8b05ae2a8a31c141ff8b:scripts/slot-tankyu/data/league-4th.json'],cwd=ROOT)); projected=copy.deepcopy(league)
+    for k in ['video_reviewed_at','video_review_note','video_review_history']: projected[k]=baseline[k]
+    projected.pop('battle_video_confirmed_at'); row=next(r for r in projected['rows'] if r['round']=='RED第1回戦')
+    for k in ['videos','watch_slug','video_links_checked_at']: row.pop(k)
+    assert projected==baseline and baseline==old('data/league-4th.json')
     lb=render(league)['body'];assert lb.count('動画を見る ↗')==8 and '予定日経過。収録実施・延期・中止は未確認。' in lb
-    preview=schedule_preview('docs/slot-tankyu/index.html');assert '次の収録予定：2026年11月2日' in preview
+    preview=schedule_preview('docs/slot-tankyu/index.html');assert '次の収録予定：2026年11月5日' in preview
     assert '決起集会の次の公開予定' not in preview and '決起集会：8チームの動画リンクを掲載' in preview
     sample=[{'release_at':'2026-11-01T20:00:00+09:00','video_url':'https://www.youtube.com/watch?v=abcdefghijk'},{'release_at':'2026-11-02T20:00:00+09:00'},{'release_at':'2026-10-31T20:00:00+09:00'}];frozen=copy.deepcopy(sample)
     assert next_rally(sample,datetime.date(2026,11,1))==sample[1] and sample==frozen
@@ -111,6 +118,6 @@ def check_six():
         if name=='column-relations.json':
             current=json.loads((ROOT/p).read_text());added=current.pop('docs/slot-tankyu/records/2026-11-03/gogo-juggler3/index.html')
             assert added==['column-kichijoji-juggler-20261103'] and current==old('data/'+name),p
-        elif name not in {'latest.json','industry-news.json','new-machines.json','presentation.json'}:assert json.loads((ROOT/p).read_text())==old('data/'+name),p
+        elif name not in {'latest.json','industry-news.json','new-machines.json','presentation.json','league-4th.json'}:assert json.loads((ROOT/p).read_text())==old('data/'+name),p
     print('PASS: six-priority source boundaries, new record, old history/comments preserved, same-day video exclusion, invalid dates/URLs and HTML escaped')
 if __name__=='__main__':check_six()

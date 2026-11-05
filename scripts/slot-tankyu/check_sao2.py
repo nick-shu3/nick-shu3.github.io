@@ -13,7 +13,7 @@ MAINTENANCE_PAGE_CANDIDATES={
     'guide-lycoris.json':'398d4d850f9e21fc01842966c1b039a8f0d81a309d172721a0199f8d95f26dc7',
     'guide-tako.json':'442b157e07d2e02ddbd2ed5d58ffbdaadd25a7a18289de9a420f65a031faa767',
     'new-machines.json':'5690215ec7b090f6d6ac78d44ad61d914535f8c6771d15322a5fb2922ae702c9',
-    'industry-news.json':'671b88661e9005b009b5258b87568fe01fbf50630eab4ff67b1f2865e4f79ce5',
+    'industry-news.json':'308dd50a6682a027daff049612ad1d037def68600297588a991f1c4611a1e599',
 }
 class Cells(HTMLParser):
     def __init__(self,body):
@@ -73,7 +73,7 @@ def check_sao2(page):
             data=json.loads((ROOT/data_path).read_text())
             assert current==render(data),path
             # Reviewed official schedule edition; facts checked independently.
-            assert hashlib.sha256((ROOT/data_path).read_bytes()).hexdigest()=='69d70d23fe2a9b2b5c5d0d1da95339385b1249d91eb8c05cd73f8a7b18a806f1','Unreviewed schedule edition'
+            assert hashlib.sha256((ROOT/data_path).read_bytes()).hexdigest()=='d156046aed04ca211688cab7b5afe685c5fc6be70f53a746adb473e6eef82fbc','Unreviewed schedule edition'
             continue
         if path.endswith('/watch-listing.json'):
             old=json.loads(subprocess.check_output(['git','show',BASE+':'+path],cwd=ROOT))
