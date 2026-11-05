@@ -44,6 +44,18 @@ def render(data, as_of=None):
         broadcast = esc(date_label(row['broadcast_date']) if row['broadcast_date'] else row['broadcast_status'])
         if row.get('video_url'):
             broadcast += '<br><a href="'+esc(row['video_url'])+'" target="_blank" rel="noopener noreferrer">動画を見る ↗</a>'
+        if row.get('videos'):
+            reviewed = datetime.date.fromisoformat(row['video_links_checked_at'])
+            if reviewed > reference:
+                raise ValueError('Video review is in the future')
+            for video in row['videos']:
+                if video['label'] not in {'前編', '後編'} or not re.fullmatch(r'https://www\.youtube\.com/watch\?v=[A-Za-z0-9_-]{11}', video['url']):
+                    raise ValueError('Invalid battle video')
+                broadcast += '<br><a href="'+esc(video['url'])+'" target="_blank" rel="noopener noreferrer">'+esc(video['label'])+'を見る ↗</a>'
+            slug = row.get('watch_slug', '')
+            if not re.fullmatch(r'[a-z0-9]+(?:-[a-z0-9]+)*', slug):
+                raise ValueError('Invalid watch article slug')
+            broadcast += '<br><a href="../../watch/'+esc(slug)+'/">感想記事（ネタバレあり） →</a><br><small>動画リンク確認：'+date_label(reviewed)+'</small>'
         evidence = '<a href="'+esc(row['schedule_source'])+'">公式日程 ↗</a>'
         if row.get('evidence_url'):
             evidence += '<br><a href="'+esc(row['evidence_url'])+'">収録の確認元 ↗</a>'
@@ -72,7 +84,10 @@ def render(data, as_of=None):
             raise ValueError('Release times must use Japan time')
         return dt
     start = release_time(data['battle_release_start'])
-    body += '<section id="video-start"><h2>本編の動画公開はいつ？</h2><div class="panel"><p><strong>4thシーズンのバトル本編は'+date_label(start)+'（'+'月火水木金土日'[start.weekday()]+'）'+start.strftime('%H:%M')+'から公開予定</strong></p><p>それに先立ち、10月15日から隔日で各チームの決起集会を公開。チームの雰囲気や今シーズンの作戦をチェックできます。</p><p class="hint">本編全体の公開開始日です。各回戦・各動画の公開日は、下の日程表で別に確認してください。</p></div></section>'
+    confirmed=data.get('battle_video_confirmed_at')
+    if confirmed and datetime.date.fromisoformat(confirmed)>reference: raise ValueError('Video confirmation is in the future')
+    release_label = '4thシーズンのバトル本編は公開中。RED第1回戦の前編・後編へのリンクを掲載しています。' if confirmed else '4thシーズンのバトル本編は'+date_label(start)+'（'+'月火水木金土日'[start.weekday()]+'）'+start.strftime('%H:%M')+'から公開予定'
+    body += '<section id="video-start"><h2>本編の動画公開はいつ？</h2><div class="panel"><p><strong>'+release_label+'</strong></p><p>それに先立ち、10月15日から隔日で各チームの決起集会を公開。チームの雰囲気や今シーズンの作戦をチェックできます。</p><p class="hint">各回戦・各動画の公開日は、下の日程表で別に確認してください。</p></div></section>'
     rally_cells = []
     rally_dates = set()
     for rally in sorted(data['rallies'], key=lambda r: r['release_at']):

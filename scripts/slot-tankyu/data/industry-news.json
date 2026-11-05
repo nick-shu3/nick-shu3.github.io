@@ -1,5 +1,5 @@
 {
-  "checked_at": "2026-11-02",
+  "checked_at": "2026-11-05",
   "issues": [
     {
       "date": "2026-10-13",
@@ -198,6 +198,79 @@
             {
               "kind": "業界媒体（10月30日掲載、導入予定日を1月12日と報道）",
               "label": "遊技日本・スマスロ 緋弾のアリア発表",
+              "url": "https://yugi-nippon.com/pachinko-new-machine/post-80950/"
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "date": "2026-11-05",
+      "articles": [
+        {
+          "id": "lb-akagi-2026",
+          "category": "新台",
+          "title": "LB アカギを発表、2027年2月導入予定と報道",
+          "published_at": "2026-11-04",
+          "event_date": "発表：11月4日／報道：11月4日・5日",
+          "facts": "業界媒体の遊技通信と遊技日本は、ボーダーが「LB アカギ」を発表し、2027年2月の導入を予定していると報じています。製造元はネオスと報じられています。",
+          "analysis": "具体的な導入日とメーカー発表の原本は確認できていません。月単位の予定として扱い、日付が確認できるまで新台カレンダーには追加しません。",
+          "sources": [
+            {
+              "kind": "業界媒体",
+              "label": "遊技通信・LB アカギ発表",
+              "url": "https://www.yugitsushin.jp/news/%E3%83%9C%E3%83%BC%E3%83%80%E3%83%BC%E3%80%81%E3%83%91%E3%83%81%E3%82%B9%E3%83%AD%E6%96%B0%E6%A9%9F%E7%A8%AE%E3%80%8Elb-%E3%82%A2%E3%82%AB%E3%82%AE%E3%80%8F%E3%82%92%E7%99%BA%E8%A1%A8%E3%80%8010/"
+            },
+            {
+              "kind": "業界媒体",
+              "label": "遊技日本・LB アカギ",
+              "url": "https://yugi-nippon.com/pachinko-new-machine/post-81051/"
+            }
+          ]
+        },
+        {
+          "id": "oreleve-sammy-2026",
+          "category": "新台",
+          "title": "「俺だけレベルアップな件」のパチスロ化を報道",
+          "published_at": "2026-11-02",
+          "event_date": "報道：2026年11月2日",
+          "facts": "業界媒体の情報島は、サミーによる「俺だけレベルアップな件」のパチンコ・パチスロ化を報じています。",
+          "analysis": "パチスロの機種仕様や導入時期は未確認です。サミー公式Xの投稿は取得制限のため本文を直接確認できておらず、現段階では報道を根拠として紹介します。",
+          "sources": [
+            {
+              "kind": "業界媒体",
+              "label": "情報島・新台ニュース",
+              "url": "https://p-johojima.jp/new_machine/post-74917/"
+            },
+            {
+              "kind": "メーカー公式X（本文は直接未確認）",
+              "label": "サミー公式Xの投稿",
+              "url": "https://x.com/sammy_corp/status/2116726941277708472"
+            }
+          ]
+        },
+        {
+          "id": "aria-dates-2026",
+          "category": "新台",
+          "title": "L緋弾のアリアの導入日、公式資料と報道で違い",
+          "published_at": "2026-11-05",
+          "event_date": "公式発表：10月30日／再確認：11月5日",
+          "facts": "メーカー公式の製品サイトには2027年1月4日予定（地域により異なる）とあります。一方、10月30日のメーカー発表資料は1月中旬、業界媒体の遊技日本は1月12日予定と伝えています。",
+          "analysis": "資料によって案内が異なるため、どの日付が最新の正しい全国予定かは未確認です。変更や延期と断定せず、カレンダーへの日付掲載は保留します。来店前には店舗の入替案内も確認してください。",
+          "sources": [
+            {
+              "kind": "メーカー公式・製品サイト",
+              "label": "L緋弾のアリア 機種サイト",
+              "url": "https://www.fujimarukun.co.jp/products/machine/l_aria/sp/"
+            },
+            {
+              "kind": "メーカー公式・10月30日発表資料",
+              "label": "藤商事・プレスリリース",
+              "url": "https://www.fujimarukun.co.jp/corp/news/tdpr_20261030.pdf"
+            },
+            {
+              "kind": "業界媒体",
+              "label": "遊技日本・導入予定報道",
               "url": "https://yugi-nippon.com/pachinko-new-machine/post-80950/"
             }
           ]
