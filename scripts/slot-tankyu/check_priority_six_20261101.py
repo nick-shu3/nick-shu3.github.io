@@ -114,6 +114,18 @@ def check_six():
             current=json.loads((ROOT/p).read_text());assert current['updated']=='2026年11月4日'
             current['updated']=old('pages/'+name)['updated'];assert current==old('pages/'+name),p
         elif name=='watch-listing.json':assert hashlib.sha256((ROOT/p).read_bytes()).hexdigest()=='8d9dd1690493f442f6d20334e990af5f23e29c72f12b98bab7d213b70a4b568d',p
+        elif name=='guide-shinuchi.json':
+            current=json.loads((ROOT/p).read_text()); before=old('pages/'+name)
+            for marker in ('<p><strong>弱スイカの直乗せが当たった場合</strong>', '<p><strong>AT中の勧善懲悪チャンス</strong>'):
+                pattern=re.escape(marker)+r'.*?</p>'
+                assert len(re.findall(pattern,current['body']))==1
+                current['body']=re.sub(r'\n'+pattern,'',current['body'])
+            pattern=r'<li><a id="src-H02"></a>.*?</li>\n'
+            assert len(re.findall(pattern,current['body']))==1
+            current['body']=re.sub(pattern,'',current['body'])
+            assert current['updated']=='2026-11-07'
+            current['updated']=before['updated']
+            assert current==before,p
         elif name not in allowed:assert json.loads((ROOT/p).read_text())==old('pages/'+name),p
     for p in subprocess.check_output(['git','ls-tree','-r','--name-only',BASE,'scripts/slot-tankyu/data'],cwd=ROOT,text=True).splitlines():
         name=Path(p).name
