@@ -1,0 +1,53 @@
+{
+  "path": "docs/slot-tankyu/records/2026-11-07/shinuchi-yoshimune/index.html",
+  "type": "record",
+  "label": "機種別実戦記録",
+  "title": "真打 吉宗実戦｜高設定示唆が出るも真BIGに届かず、−4,108枚",
+  "short_title": "真打 吉宗実戦",
+  "description": "2026年11月7日の真打 吉宗。総6,524G、投資5,428枚・回収1,320枚。高設定示唆が出る中、真BIGに届かなかった実戦を振り返ります。",
+  "status": "実戦日：2026年11月7日",
+  "updated": "2026-11-07",
+  "breadcrumbs": [
+    {
+      "path": "docs/slot-tankyu/records/index.html",
+      "title": "実戦記録"
+    },
+    {
+      "path": "docs/slot-tankyu/records/2026-11-07/index.html",
+      "title": "2026年11月7日"
+    }
+  ],
+  "toc": [
+    {
+      "id": "result",
+      "label": "実戦結果"
+    },
+    {
+      "id": "cz",
+      "label": "CZ対戦結果"
+    },
+    {
+      "id": "at",
+      "label": "ATと真高確率"
+    },
+    {
+      "id": "setting",
+      "label": "示唆と振り返り"
+    },
+    {
+      "id": "data",
+      "label": "通常時小役"
+    },
+    {
+      "id": "sources",
+      "label": "記録の確認元"
+    }
+  ],
+  "share_image": "share-listing.png",
+  "author_comment": [
+    "高設定示唆はバンバン出たけど結果に繋がらず。真高確率も1回しかできなかったし、駆け抜けだった。"
+  ],
+  "author_excerpt": "高設定示唆はバンバン出たけど結果に繋がらず。",
+  "body": "<section id=\"result\"><h2>総6,524G、投資5,428枚・回収1,320枚</h2><p>11月7日は真打 吉宗を実戦。高設定示唆を何度も見られたものの、真BIGを引くことはできず、投資5,428枚・回収1,320枚で<strong>差枚−4,108枚</strong>となりました。</p><div class=\"tablewrap\"><table><thead><tr><th>項目</th><th>結果</th></tr></thead><tbody><tr><th>総プレイ数</th><td>6,524G</td></tr><tr><th>通常プレイ数</th><td>5,005G</td></tr><tr><th>通常プレイ数（CZ込み）</th><td>5,222G</td></tr><tr><th>AT初当たり</th><td>9回・1/556.1</td></tr><tr><th>投資</th><td>5,428枚</td></tr><tr><th>回収</th><td>1,320枚</td></tr><tr><th>差枚</th><td>−4,108枚</td></tr><tr><th>最大獲得枚数</th><td>941枚</td></tr></tbody></table></div><p class=\"hint\">差枚は回収−投資で計算。最大獲得枚数はダイトモの遊技履歴の表示で、最終回収・差枚とは別です。</p></section><section id=\"cz\"><h2>悪人成敗チャンスは21回中9回成功</h2><p>ダイトモの遊技履歴上の成功率は9÷21で約42.9%。CZ確率1/238.3には直撃ATを含むと表示されています。集計条件を確認せず設定別のCZ確率と同一視しません。</p><div class=\"tablewrap\"><table><thead><tr><th>対戦相手</th><th>成功／総回数</th><th>成功率</th></tr></thead><tbody><tr><td>和入道</td><td>3／5</td><td>60%</td></tr><tr><td>鼠小僧</td><td>2／10</td><td>20%</td></tr><tr><td>姉御</td><td>2／4</td><td>50%</td></tr><tr><td>武器商人</td><td>1／1</td><td>100%</td></tr><tr><td>柳生</td><td>1／1</td><td>100%</td></tr></tbody></table></div><p class=\"hint\">成功率は画面の回数から計算した実戦値です。少ない回数で、相手ごとの本来の期待度や設定を判断できません。</p></section><section id=\"at\"><h2>真高確率は1回、真BIGには届かず</h2><p>本人の振り返りでは、真高確率は1回だけで駆け抜け。ダイトモの遊技履歴には真高確率の最大上乗せ50枚、真高確率 一撃の突入0回、真BIG0回と表示されました。「真高確率」と「真高確率 一撃」は別の項目です。</p><p>御白洲チャンスは6回。釜茹での刑の最大上乗せは238枚でした。</p><figure><img src=\"../../../assets/records/2026-11-07/shinuchi-yoshimune/maguma.jpg\" alt=\"マグマ湯を描いた演出画面\" width=\"1200\" height=\"900\" loading=\"lazy\"><figcaption>本人撮影のマグマ湯の演出画面。</figcaption></figure><figure><img src=\"../../../assets/records/2026-11-07/shinuchi-yoshimune/plus238.jpg\" alt=\"プラス238枚と表示された画面\" width=\"1200\" height=\"900\" loading=\"lazy\"><figcaption>本人撮影の＋238枚表示。ダイトモの遊技履歴の釜茹で最大上乗せと数値は一致しますが、同一場面かは未確認です。</figcaption></figure></section><section id=\"setting\"><h2>高設定示唆は多かったが、結果につながらず</h2><p>御白洲ビジョンで高設定示唆がたくさん出たという本人の所感。AT終了画面の三日月は1回だった記憶です。示唆の具体的な種類・回数、三日月の正確な回数は未確認のため、設定は断定しません。</p><p>設定等を示唆する御白洲ビジョンと、ダイトモの遊技履歴に表示された御白洲チャンス6回は別の項目です。</p></section><section id=\"data\"><h2>通常時の小役</h2><div class=\"tablewrap\"><table><thead><tr><th>小役</th><th>回数</th><th>ダイトモの遊技履歴表示</th></tr></thead><tbody><tr><td>弱チェリー</td><td>35回</td><td>1/143.0</td></tr><tr><td>強チェリー</td><td>5回</td><td>1/1001.0</td></tr><tr><td>弱スイカ</td><td>47回</td><td>1/106.5</td></tr><tr><td>強スイカ</td><td>4回</td><td>1/1251.3</td></tr><tr><td>弱チャンス目</td><td>52回</td><td>1/96.3</td></tr><tr><td>強チャンス目</td><td>4回</td><td>1/1251.3</td></tr><tr><td>共通ベル</td><td>53回</td><td>1/94.4</td></tr></tbody></table></div></section><section id=\"sources\"><h2>記録の確認元</h2><p>ダイトモの遊技履歴は2026年11月7日20時59分時点の本人提供画像。投資・回収・示唆の所感は本人申告です。店舗・台番号・実戦時間は未確認。</p></section><section class=\"related\"><h2>関連ページ</h2><p><a href=\"../../../machines/shinuchi-yoshimune/\">真打 吉宗の設定推測・やめどきガイド →</a> ／ <a href=\"../\">11月7日のまとめ →</a></p></section>",
+  "machine_slug": "shinuchi-yoshimune"
+}

@@ -118,6 +118,11 @@ def check_sao2(page):
         if path.endswith('/listing.json'):
             old=json.loads(subprocess.check_output(['git','show',BASE+':'+path],cwd=ROOT))
             current=json.loads((ROOT/path).read_text())
+            record_1107=r'<a class="card" href="2026-11-07/shinuchi-yoshimune/">.*?</a>'
+            assert len(re.findall(record_1107,current['body']))==1
+            current['body']=re.sub(record_1107,'',current['body'])
+            assert current['updated']=='2026-11-07'
+            current['updated']='2026-11-05'
             added=r'<a class="card" href="2026-11-05/gogo-juggler/">.*?</a>'
             assert len(re.findall(added,current['body']))==1
             current['body']=re.sub(added,'',current['body'])

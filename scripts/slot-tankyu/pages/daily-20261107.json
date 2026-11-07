@@ -1,0 +1,28 @@
+{
+  "path": "docs/slot-tankyu/records/2026-11-07/index.html",
+  "type": "daily",
+  "label": "当日の実戦まとめ",
+  "title": "2026年11月7日の実戦｜真打 吉宗、示唆は出るも−4,108枚",
+  "short_title": "2026年11月7日",
+  "description": "真打 吉宗の実戦。投資5,428枚、回収1,320枚、差枚−4,108枚。",
+  "status": "実戦日：2026年11月7日",
+  "updated": "2026-11-07",
+  "breadcrumbs": [
+    {
+      "path": "docs/slot-tankyu/records/index.html",
+      "title": "実戦記録"
+    }
+  ],
+  "toc": [
+    {
+      "id": "result",
+      "label": "提供記録の収支"
+    },
+    {
+      "id": "records",
+      "label": "機種別実戦"
+    }
+  ],
+  "share_image": "share-listing.png",
+  "body": "<section id=\"result\"><h2>真打 吉宗の実戦結果</h2><p>提供された実戦記録は真打 吉宗。投資5,428枚・回収1,320枚で、差枚は−4,108枚でした。</p></section><section id=\"records\"><h2>機種別の実戦記事</h2><a class=\"card\" href=\"shinuchi-yoshimune/\"><span class=\"tag\">真打 吉宗／2026年11月7日</span><h3>高設定示唆が出るも真BIGに届かず、−4,108枚 →</h3><p>総6,524G、CZ21回とAT9回の振り返り。</p></a></section><p><a href=\"../\">実戦記録一覧へ →</a></p>"
+}

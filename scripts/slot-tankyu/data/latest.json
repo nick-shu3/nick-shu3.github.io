@@ -3,6 +3,15 @@
   "same_day_order": "同日はデータ登録順。時刻や公開順を推定しない。",
   "entries": [
     {
+      "source": "record-shinuchi-20261107",
+      "anchor": "",
+      "date": "2026-11-07",
+      "date_kind": "記事公開日",
+      "group": "play-20261107",
+      "category": "実戦記録",
+      "reason": "本人の実戦記録と掲載指示に基づく。"
+    },
+    {
       "source": "record-gogo-20261105",
       "anchor": "",
       "date": "2026-11-05",
