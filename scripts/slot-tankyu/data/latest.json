@@ -3,6 +3,15 @@
   "same_day_order": "同日はデータ登録順。時刻や公開順を推定しない。",
   "entries": [
     {
+      "source": "battle-blue1-20261107",
+      "anchor": "",
+      "date": "2026-11-07",
+      "date_kind": "紹介日",
+      "group": "battle-blue1-20261107",
+      "category": "番組",
+      "reason": "本人承認のBLUE第1回戦視聴メモと動画を紹介。"
+    },
+    {
       "source": "record-shinuchi-20261107",
       "anchor": "",
       "date": "2026-11-07",
