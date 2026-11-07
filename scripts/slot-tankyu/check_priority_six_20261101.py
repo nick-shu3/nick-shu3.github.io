@@ -88,6 +88,8 @@ def check_six():
     assert build(record).count('id="author-comment"')==1
     assert 'takoslot/' in daily['body'] and '2026-10-22/takoslot/' in read('pages/listing.json')['body']
     latest=read('data/latest.json')
+    assert latest['entries'][0]['source']=='record-shinuchi-20261107'
+    latest=copy.deepcopy(latest);latest['entries']=latest['entries'][1:]
     assert latest['entries'][0]['source']=='record-gogo-20261105'
     latest=copy.deepcopy(latest);latest['entries']=latest['entries'][1:]
     assert latest['entries'][0]=={'source': 'league-results-4th', 'anchor': '', 'date': '2026-11-04', 'date_kind': '記事公開日', 'group': 'league-results-4th', 'category': '777リーグ', 'reason': '本人提供の公式画面をもとに2026年11月4日現在の順位・実戦結果を掲載。'}
