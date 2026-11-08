@@ -59,7 +59,19 @@
       "schedule_checked_at": "2026-10-26",
       "schedule_source_type": "official",
       "status_checked_at": "2026-10-14",
-      "previous_schedule_checked_at": "2026-10-21"
+      "previous_schedule_checked_at": "2026-10-21",
+      "videos": [
+        {
+          "label": "前編",
+          "url": "https://www.youtube.com/watch?v=W27ifmZWEZc"
+        },
+        {
+          "label": "後編",
+          "url": "https://www.youtube.com/watch?v=nAPtO7zIcvg"
+        }
+      ],
+      "watch_slug": "777league-4th-blue1",
+      "video_links_checked_at": "2026-11-08"
     },
     {
       "date": "2026-09-03",
@@ -923,10 +935,10 @@
   ],
   "schedule_source_type": "official",
   "previous_schedule_note": "10月14日版は二次資料を参照。10月21日に公式日程の掲載分42件へ照合・更新。過去の終了根拠は個別の確認日を保持。",
-  "video_reviewed_at": "2026-11-05",
-  "video_review_note": "RED第1回戦の前後編への導線を追加。各動画のリンクは既存の記事と独立検証を参照。",
-  "schedule_rechecked_at": "2026-10-28",
-  "schedule_recheck_note": "公式掲載42件の日程・会場に変更なし。各回の終了確認日とは別。",
+  "video_reviewed_at": "2026-11-08",
+  "video_review_note": "BLUE第1回戦の前後編URLを公開済みの視聴メモと照合して日程表に接続。映像本編の再視聴・動画公開日時の原本確認は未実施。",
+  "schedule_rechecked_at": "2026-11-08",
+  "schedule_recheck_note": "公式掲載42件の日付・回戦・会場に変更なし。収録実施・延期・中止や動画公開日時の確認とは別。各回の終了確認日は維持。",
   "schedule_recheck_url": "https://p-gabu.jp/sc/666/777league/schedule/",
   "video_review_history": [
     {
@@ -940,6 +952,10 @@
     {
       "checked_at": "2026-11-05",
       "note": "RED第1回戦の前後編動画リンクを既存記事および独立検証と照合。映像本編の再視聴と公開日時の原本再検証は未実施。"
+    },
+    {
+      "checked_at": "2026-11-08",
+      "note": "BLUE第1回戦の前後編URLを公開済みの視聴メモと照合して日程表に接続。映像本編の再視聴・動画公開日時の原本確認は未実施。"
     }
   ],
   "battle_video_confirmed_at": "2026-11-05"

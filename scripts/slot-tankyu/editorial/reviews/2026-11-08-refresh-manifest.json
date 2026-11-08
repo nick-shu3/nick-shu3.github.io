@@ -1,0 +1,13 @@
+{
+  "data/presentation.json": "794606e07ad7ba3d604d0be3f63667589630d7db3bb5d2c89eda91fae0eb8264",
+  "data/league-4th.json": "f1c0b2ded180002b2a9ca8c6920298d6cdc5b78113acd2aa5f254cd818cfd205",
+  "data/new-machines.json": "cbe6df491b21a4040fdd5647fa8573630608215c9d962b29f4b38a3a6f35964a",
+  "data/industry-news.json": "0ce5b110874c0c8e6deb5bbe3317c99b70e17f2c8da8c8e71abfa234dfbd7b82",
+  "data/latest.json": "2657640543fe349dcceaf0f8a47f350bf77b75891a0b7f40521181762f658abf",
+  "pages/league-4th.json": "f496a99d1edeea117158ac35327746796c0832165d3b9053721fd6a3f45510f1",
+  "pages/new-machines.json": "06e01dfb1dee47aa4b47bf374fe3c9cc1f5cd576b18e0aea58c09a5b17497041",
+  "pages/industry-news.json": "9731ffc0ef57b5f8da93565f15009af52d3ce893730e38a3d374d1f5abc41cda",
+  "pages/league-results-4th.json": "bfd99e474392cfff07557312ea556960c00c396a45f4d5e17c0afd36f8d9d511",
+  "news_calendar.py": "643fceb72f378871980e8f3014de9d5f03e7bc28eec5b8081900c6b779bbe9ab",
+  "render_league_results.py": "0499565bceb3261922af2a757332115af54079af01c6e8de798eb5a51fa17314"
+}

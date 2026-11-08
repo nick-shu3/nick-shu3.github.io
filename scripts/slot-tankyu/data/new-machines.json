@@ -1,6 +1,6 @@
 {
-  "checked_at": "2026-11-01",
-  "source_updated_at": "2026-10-31",
+  "checked_at": "2026-11-08",
+  "source_updated_at": "2026-11-08",
   "machines": [
     {
       "date": "2026-10-19",
@@ -232,6 +232,17 @@
       "official_url": "https://www.universal-777.com/product/slot/basilisk4/",
       "verification": "メーカー公式の発売月は2026年12月。12月21日はパチマガの日程資料で確認。P-WORLDの10月31日版カレンダーには未掲載。",
       "checked_at": "2026-11-01"
+    },
+    {
+      "date": "2027-02-08",
+      "name": "LB海スロ",
+      "maker": "サンスリー",
+      "kind": "パチスロ",
+      "schedule_url": "https://www.sanyobussan.co.jp/information/pdf/sanyo_press_release_20261106_1.pdf",
+      "official_url": "https://www.sanyobussan.co.jp/products/LB-umislot/",
+      "verification": "メーカーの11月6日付発表でトップ導入予定2027年2月8日を確認。各店舗の導入日は別。",
+      "checked_at": "2026-11-08"
     }
-  ]
+  ],
+  "schedule_review_note": "11月8日にP-WORLDとパチマガの掲載日程を再照合しました。既存の11月2日以降の掲載予定は維持し、LB海スロをメーカー発表から追加。アサルトリリィは今回のP-WORLD本文で掲載を確認できず、パチマガの12月7日予定を参照しています。既存の機種別確認日は各仕様・一次資料の従来の確認日です。日付が食い違う機種は確定扱いにしません。"
 }

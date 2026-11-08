@@ -3,6 +3,33 @@
   "same_day_order": "同日はデータ登録順。時刻や公開順を推定しない。",
   "entries": [
     {
+      "source": "league-4th",
+      "anchor": "",
+      "date": "2026-11-08",
+      "date_kind": "内容更新日",
+      "group": "league-schedule-refresh",
+      "category": "777リーグ",
+      "reason": "公式日程42件を再照合し、BLUE第1回戦の前後編と視聴メモへの導線を追加。終了状況・最新ポイントは別途未確認。"
+    },
+    {
+      "source": "new-machines",
+      "anchor": "",
+      "date": "2026-11-08",
+      "date_kind": "内容更新日",
+      "group": "calendar-refresh",
+      "category": "新台情報",
+      "reason": "11月8日版の日程資料を再照合し、メーカー発表のLB海スロ・2月8日予定を追加。"
+    },
+    {
+      "source": "industry-news",
+      "anchor": "umislot-announcement-20261106",
+      "date": "2026-11-08",
+      "date_kind": "内容更新日",
+      "group": "news-refresh",
+      "category": "ニュース",
+      "reason": "海スロの11月6日発表と、試打会の告知日程・未確認の実施状況を追補。"
+    },
+    {
       "source": "feature-umislot-20261107",
       "anchor": "",
       "date": "2026-11-08",
