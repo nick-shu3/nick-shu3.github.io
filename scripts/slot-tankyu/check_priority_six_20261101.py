@@ -88,6 +88,12 @@ def check_six():
     assert build(record).count('id="author-comment"')==1
     assert 'takoslot/' in daily['body'] and '2026-10-22/takoslot/' in read('pages/listing.json')['body']
     latest=read('data/latest.json')
+    # Admit this exact new entry, then preserve all existing feed assertions.
+    assert latest['entries'][0]=={'source':'feature-umislot-20261107','anchor':'','date':'2026-11-08','date_kind':'記事公開日','group':'feature-umislot-20261107','category':'新台解説','reason':'LB海スロのBB約300枚とBT込み平均約450枚を、11月6日付メーカー発表から解説。公開後の紹介・振り返りの試行対象。'}
+    latest=copy.deepcopy(latest);latest['entries']=latest['entries'][1:]
+    # Preserve the BLUE1 entry already published by PR #116 as exact data.
+    assert latest['entries'][0]=={'source':'battle-blue1-20261107','anchor':'','date':'2026-11-07','date_kind':'紹介日','group':'battle-blue1-20261107','category':'番組','reason':'本人承認のBLUE第1回戦視聴メモと動画を紹介。'}
+    latest=copy.deepcopy(latest);latest['entries']=latest['entries'][1:]
     assert latest['entries'][0]['source']=='record-shinuchi-20261107'
     latest=copy.deepcopy(latest);latest['entries']=latest['entries'][1:]
     assert latest['entries'][0]['source']=='record-gogo-20261105'
@@ -115,7 +121,8 @@ def check_six():
         if name=='columns-listing.json':
             current=json.loads((ROOT/p).read_text());assert current['updated']=='2026年11月4日'
             current['updated']=old('pages/'+name)['updated'];assert current==old('pages/'+name),p
-        elif name=='watch-listing.json':assert hashlib.sha256((ROOT/p).read_bytes()).hexdigest()=='8d9dd1690493f442f6d20334e990af5f23e29c72f12b98bab7d213b70a4b568d',p
+        # Pin the already published PR #116 listing, unchanged by this article.
+        elif name=='watch-listing.json':assert hashlib.sha256((ROOT/p).read_bytes()).hexdigest()=='8ffb768e931ead0a4decd3d62820b78513c46e2fce8d9f16f8f076d492091353',p
         elif name=='guide-shinuchi.json':
             current=json.loads((ROOT/p).read_text()); before=old('pages/'+name)
             for marker in ('<p><strong>弱スイカの直乗せが当たった場合</strong>', '<p><strong>AT中の勧善懲悪チャンス</strong>'):
