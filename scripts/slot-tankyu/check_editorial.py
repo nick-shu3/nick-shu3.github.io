@@ -233,7 +233,7 @@ def main():
         additions['battle-red1-20261104']='83aef61bf91ef648b0622e4e2cff96658522d6f8fbda9a77d684ceb0255e3eab'
         # Preserve the exact BLUE1 article already published by PR #116.
         additions['battle-blue1-20261107']='5ab1e5f77a99cf95199ae5ba7ba5d3d5caadf05e42416520930d18914c5dc586'
-        additions['league-results-4th']='f0990ea8cc6c49b084250d946fcea29cd14dd419e42eecbc11119d21894354b7'
+        additions['league-results-4th']='ceb9d67127980cbe23950aa062e2b978963c12bd795afb5c2bb333e364238d9c'
         additions['record-shinuchi-20261107']='e86b9670da3dd82ddf3a977c34890834f2e66915476f5872ed3277f6df1b2083'
         additions['daily-20261107']='f4f4a2fe5b33e7c7cc1c8908ecd356a6ab5bbdb6aa81d0cd0909a51f8721cfd6'
         additions['record-gogo-20261105']='96470c1a11a8060bb1690b2344e414d12a8af0ed046ad7452fe02a090c2eae39'

@@ -18,7 +18,7 @@ def main():
     from news_calendar import calendar_page,news_page
     from render_league_results import render as result_page
     pins=read('editorial/reviews/2026-11-08-refresh-manifest.json')
-    updated={'pages/league-results-4th.json':'f0990ea8cc6c49b084250d946fcea29cd14dd419e42eecbc11119d21894354b7','render_league_results.py':'ffb2a2dbd9ed6b65fa910543bffc6ed28c532a1f3db09b18d3f7180749a03a81'}
+    updated={'pages/league-results-4th.json':'ceb9d67127980cbe23950aa062e2b978963c12bd795afb5c2bb333e364238d9c','render_league_results.py':'f7daa82f65f005067502d3d6c2911d922b5bb0b920a1b13340560b24574cb705'}
     for p,sha in pins.items():
         if p in updated:
             assert hashlib.sha256((H/p).read_bytes()).hexdigest()==updated[p],p
@@ -26,6 +26,8 @@ def main():
             assert hashlib.sha256(previous).hexdigest()==sha,p
         else:assert hashlib.sha256((H/p).read_bytes()).hexdigest()==sha,p
     result_text=read('pages/league-results-4th.json')['body']
+    assert result_text.index('第1回戦終了時の順位') < result_text.index('−1,550pt')
+    assert '4チームすべてが0pt' not in result_text
     assert '−1,550pt' in result_text and '−1,500pt' in result_text and '差の理由は未確認' in result_text
     n=read('data/industry-news.json');prior=original('data/industry-news.json');projected=copy.deepcopy(n)
     issue=projected['issues'].pop();assert issue['date']=='2026-11-08'
