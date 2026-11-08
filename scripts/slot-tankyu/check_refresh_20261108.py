@@ -18,7 +18,15 @@ def main():
     from news_calendar import calendar_page,news_page
     from render_league_results import render as result_page
     pins=read('editorial/reviews/2026-11-08-refresh-manifest.json')
-    for p,sha in pins.items():assert hashlib.sha256((H/p).read_bytes()).hexdigest()==sha,p
+    updated={'pages/league-results-4th.json':'f0990ea8cc6c49b084250d946fcea29cd14dd419e42eecbc11119d21894354b7','render_league_results.py':'ffb2a2dbd9ed6b65fa910543bffc6ed28c532a1f3db09b18d3f7180749a03a81'}
+    for p,sha in pins.items():
+        if p in updated:
+            assert hashlib.sha256((H/p).read_bytes()).hexdigest()==updated[p],p
+            previous=subprocess.check_output(['git','show','79d09d9:scripts/slot-tankyu/'+p],cwd=H)
+            assert hashlib.sha256(previous).hexdigest()==sha,p
+        else:assert hashlib.sha256((H/p).read_bytes()).hexdigest()==sha,p
+    result_text=read('pages/league-results-4th.json')['body']
+    assert '−1,550pt' in result_text and '−1,500pt' in result_text and '差の理由は未確認' in result_text
     n=read('data/industry-news.json');prior=original('data/industry-news.json');projected=copy.deepcopy(n)
     issue=projected['issues'].pop();assert issue['date']=='2026-11-08'
     assert [a['id'] for a in issue['articles']]==['umislot-announcement-20261106','twin2-trial-20261108']
