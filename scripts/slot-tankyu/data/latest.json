@@ -3,6 +3,15 @@
   "same_day_order": "同日はデータ登録順。時刻や公開順を推定しない。",
   "entries": [
     {
+      "source": "feature-umislot-20261107",
+      "anchor": "",
+      "date": "2026-11-08",
+      "date_kind": "記事公開日",
+      "group": "feature-umislot-20261107",
+      "category": "新台解説",
+      "reason": "LB海スロのBB約300枚とBT込み平均約450枚を、11月6日付メーカー発表から解説。公開後の紹介・振り返りの試行対象。"
+    },
+    {
       "source": "battle-blue1-20261107",
       "anchor": "",
       "date": "2026-11-07",

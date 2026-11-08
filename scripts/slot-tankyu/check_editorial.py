@@ -229,11 +229,16 @@ def main():
         # New sources are fixed to their independently reviewed edition.
         additions={'record-tokyo-20261019': '71b8924a10ecc57a2bc07afe703181a1db8180bf43e2e62502e3c39897fd01f6', 'daily-20261019': 'ec926e38d38badcea3d0449d254b3e9fdf3e9bcece04f20dc017837099b5c4ae', 'record-shinuchi-20261018': 'da139b142aa0a7d92b1e188c49a72589892a0bbafe386880e4fb3493e8ce35cb', 'daily-20261018': '1fa5f7c24c22fafad4ad76499a82c354f0b5c43137090bb19008ab15c66f48c7', 'guide-shinuchi': '0ccd1d556cc8f16132de5c87a8a908165e7795b469622e190c9ce5bde78cb13c', 'watch-tengai-golden-manes': 'f21f33428691055dba7190e95524a1f864cf115221bc1cf6e7aafd99ef806cc8', 'record-sao2-20261017': '20f595ea29a24fcc8eab1bf031bee452bacd826db385983ad89f9da946c75b0d', 'daily-20261017': '8da16be03d0dd6455c213a5e2d010f71b580bb125b598d8093ce607f88229e35'}
         additions['battle-red1-20261104']='83aef61bf91ef648b0622e4e2cff96658522d6f8fbda9a77d684ceb0255e3eab'
+        # Preserve the exact BLUE1 article already published by PR #116.
+        additions['battle-blue1-20261107']='834b779671a7101924f2e658da778a84ad1e675963989635d8a39b4e3af51ec2'
         additions['league-results-4th']='53ac8cdead4bed6ee76d5b41a14581b1161f27f3bceb14042f6703630e575bfe'
         additions['record-shinuchi-20261107']='e86b9670da3dd82ddf3a977c34890834f2e66915476f5872ed3277f6df1b2083'
         additions['daily-20261107']='f4f4a2fe5b33e7c7cc1c8908ecd356a6ab5bbdb6aa81d0cd0909a51f8721cfd6'
         additions['record-gogo-20261105']='96470c1a11a8060bb1690b2344e414d12a8af0ed046ad7452fe02a090c2eae39'
         additions['daily-20261105']='9f732ec8104eb81dd7a6086f395ed6317796dcee6ac64b7322f22afd1b9a7454'
+        # Exact new article edition; manufacturer sources and review are recorded
+        # in editorial/reviews/2026-11-07-umislot-*.md. Prior pins remain intact.
+        additions['feature-umislot-20261107']='a5b0fe3e3e6a12f259eee08b9dc3b91580efb90edffa13c4f644863a231b7b49'
         additions['record-gogo-20261103']='457f092c37757573ae377198b584c2d681f06a375ac1e9c14aef937c48d41ab0'
         additions['column-kichijoji-juggler-20261103']='08e38f4e89cb64ea1ec6ca46510f056dae438a6001e4f3428e7cf6dcd7f51835'
         additions['daily-20261103']='609da8915ece982af6e786b05c4b768e8c565011dcabe7ec7d4ece2f87360481'

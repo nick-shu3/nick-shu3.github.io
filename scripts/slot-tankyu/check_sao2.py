@@ -78,6 +78,16 @@ def check_sao2(page):
         if path.endswith('/watch-listing.json'):
             old=json.loads(subprocess.check_output(['git','show',BASE+':'+path],cwd=ROOT))
             current=json.loads((ROOT/path).read_text())
+            # Project the exact already released BLUE1 listing back to the
+            # previous edition before running every older preservation check.
+            assert hashlib.sha256((ROOT/path).read_bytes()).hexdigest()=='8ffb768e931ead0a4decd3d62820b78513c46e2fce8d9f16f8f076d492091353'
+            blue=r'<a class="card report-card" href="777league-4th-blue1/">.*?</a>'
+            assert len(re.findall(blue,current['body']))==1
+            current['body']=re.sub(blue,'',current['body'])
+            assert current['updated']=='2026年11月7日'
+            current['updated']='2026年11月4日'
+            before_blue=json.loads(subprocess.check_output(['git','show','78b9df50ea9744ca5cd9a951bbe61ce74c449fe7:'+path],cwd=ROOT))
+            assert current==before_blue
             # Reviewed RED opener addition, then preserve every older listing check.
             published=json.loads(subprocess.check_output(['git','show','fffed517f70ee0ee159e26d999858772ad47e435:'+path],cwd=ROOT))
             red=r'<a class="card report-card" href="777league-4th-red1/">.*?</a>'
