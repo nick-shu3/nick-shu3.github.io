@@ -53,6 +53,8 @@ def main():
     check_rallies()
     from check_priority_six_20261101 import check_six
     check_six()
+    from check_refresh_20261108 import main as check_refresh
+    check_refresh()
     catalog=pages();home=catalog['home'];output=build(home)
     # R01/R02: category coverage, ordering, duplicate grouping, section hierarchy.
     latest=latest_feed(home['path']);links=Content(latest).links
@@ -101,7 +103,7 @@ def main():
             assert indexed[('2026-11-12','ルーキー戦第1回戦')]['venue']=='ダイナム長野上田店'
             assert indexed[('2026-11-25','RED第10回戦')]['venue']=='123+N布施店'
         else:
-            expected={'new-machines':'8f4bbcd3a1208724f670f3a9c86229919dd17e756337bf072bcf0fe2b36f321f','industry-news':'b45cc942d882c08f55257351c15b539550967023a4928ae7fb6c28e4454aea3a'}
+            expected={'new-machines':'cbe6df491b21a4040fdd5647fa8573630608215c9d962b29f4b38a3a6f35964a','industry-news':'0ce5b110874c0c8e6deb5bbe3317c99b70e17f2c8da8c8e71abfa234dfbd7b82'}
             assert hashlib.sha256((ROOT/path).read_bytes()).hexdigest()==expected[name],name
     # Keep prior dated regressions intact on their reviewed fixture.
     league=json.loads(subprocess.check_output(['git','show','d7c2abba36c10bc615056db3c87a30df3047bdd5:scripts/slot-tankyu/data/league-4th.json'],cwd=ROOT));frozen=copy.deepcopy(league)
@@ -231,7 +233,7 @@ def main():
         additions['battle-red1-20261104']='83aef61bf91ef648b0622e4e2cff96658522d6f8fbda9a77d684ceb0255e3eab'
         # Preserve the exact BLUE1 article already published by PR #116.
         additions['battle-blue1-20261107']='834b779671a7101924f2e658da778a84ad1e675963989635d8a39b4e3af51ec2'
-        additions['league-results-4th']='53ac8cdead4bed6ee76d5b41a14581b1161f27f3bceb14042f6703630e575bfe'
+        additions['league-results-4th']='bfd99e474392cfff07557312ea556960c00c396a45f4d5e17c0afd36f8d9d511'
         additions['record-shinuchi-20261107']='e86b9670da3dd82ddf3a977c34890834f2e66915476f5872ed3277f6df1b2083'
         additions['daily-20261107']='f4f4a2fe5b33e7c7cc1c8908ecd356a6ab5bbdb6aa81d0cd0909a51f8721cfd6'
         additions['record-gogo-20261105']='96470c1a11a8060bb1690b2344e414d12a8af0ed046ad7452fe02a090c2eae39'

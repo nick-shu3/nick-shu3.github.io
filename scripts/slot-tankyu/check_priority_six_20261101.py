@@ -8,7 +8,8 @@ from league_schedule import render
 H=Path(__file__).resolve().parent
 BASE='d52bd1b2cdcccae321ca372c711ca4bc72e1e3be'
 def old(p):return json.loads(subprocess.check_output(['git','show',BASE+':scripts/slot-tankyu/'+p],cwd=ROOT))
-def read(p):return json.loads((H/p).read_text())
+from check_refresh_20261108 import previous_edition
+def read(p):return previous_edition(p)
 def rejected(renderer,data):
     try:renderer(data)
     except ValueError:return
@@ -73,7 +74,7 @@ def check_six():
     for k in ['videos','watch_slug','video_links_checked_at']: row.pop(k)
     assert projected==baseline and baseline==old('data/league-4th.json')
     lb=render(league)['body'];assert lb.count('動画を見る ↗')==8 and '予定日経過。収録実施・延期・中止は未確認。' in lb
-    preview=schedule_preview('docs/slot-tankyu/index.html');assert '次の収録予定：2026年11月5日' in preview
+    preview=schedule_preview('docs/slot-tankyu/index.html');assert '次の収録予定：2026年11月10日' in preview
     assert '決起集会の次の公開予定' not in preview and '決起集会：8チームの動画リンクを掲載' in preview
     sample=[{'release_at':'2026-11-01T20:00:00+09:00','video_url':'https://www.youtube.com/watch?v=abcdefghijk'},{'release_at':'2026-11-02T20:00:00+09:00'},{'release_at':'2026-10-31T20:00:00+09:00'}];frozen=copy.deepcopy(sample)
     assert next_rally(sample,datetime.date(2026,11,1))==sample[1] and sample==frozen

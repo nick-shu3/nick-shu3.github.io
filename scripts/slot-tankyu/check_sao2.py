@@ -12,8 +12,8 @@ MAINTENANCE_PAGE_CANDIDATES={
     'guide-tokyo.json':'0736527e18fd7988a66a758bf792a9626bc8c2af60e286e51dfa457382bfa471',
     'guide-lycoris.json':'398d4d850f9e21fc01842966c1b039a8f0d81a309d172721a0199f8d95f26dc7',
     'guide-tako.json':'442b157e07d2e02ddbd2ed5d58ffbdaadd25a7a18289de9a420f65a031faa767',
-    'new-machines.json':'5690215ec7b090f6d6ac78d44ad61d914535f8c6771d15322a5fb2922ae702c9',
-    'industry-news.json':'308dd50a6682a027daff049612ad1d037def68600297588a991f1c4611a1e599',
+    'new-machines.json':'06e01dfb1dee47aa4b47bf374fe3c9cc1f5cd576b18e0aea58c09a5b17497041',
+    'industry-news.json':'9731ffc0ef57b5f8da93565f15009af52d3ce893730e38a3d374d1f5abc41cda',
 }
 class Cells(HTMLParser):
     def __init__(self,body):
@@ -73,7 +73,7 @@ def check_sao2(page):
             data=json.loads((ROOT/data_path).read_text())
             assert current==render(data),path
             # Reviewed official schedule edition; facts checked independently.
-            assert hashlib.sha256((ROOT/data_path).read_bytes()).hexdigest()=='d156046aed04ca211688cab7b5afe685c5fc6be70f53a746adb473e6eef82fbc','Unreviewed schedule edition'
+            assert hashlib.sha256((ROOT/data_path).read_bytes()).hexdigest()=='f1c0b2ded180002b2a9ca8c6920298d6cdc5b78113acd2aa5f254cd818cfd205','Unreviewed schedule edition'
             continue
         if path.endswith('/watch-listing.json'):
             old=json.loads(subprocess.check_output(['git','show',BASE+':'+path],cwd=ROOT))

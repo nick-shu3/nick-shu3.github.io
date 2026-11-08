@@ -30,6 +30,8 @@ def calendar_page(data):
     body='<div class="notice">パチスロの全国導入開始予定を整理しています。各店舗の新台入替日・設置状況とは別です。地域や店舗で日程が前後する場合があります。掲載は確認できた'+str(len(seen))+'機種で、全新台の網羅ではありません。</div>'
     body+='<p class="hint">情報基準日：'+esc(data['checked_at'])+' ／ 日程資料の表示更新日：'+esc(data['source_updated_at'])+'。カレンダーの色が付いた日を選ぶと、その日の機種一覧へ移動します。</p>'
     toc=[]
+    if data.get('schedule_review_note'):
+        body+='<p class="hint">'+esc(data['schedule_review_note'])+'</p>'
     for month,items in groups.items():
         year,num=map(int,month.split('-'));month_id='month-'+month
         toc.append({'id':month_id,'label':str(num)+'月'})
