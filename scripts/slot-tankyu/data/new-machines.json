@@ -1,6 +1,6 @@
 {
-  "checked_at": "2026-11-08",
-  "source_updated_at": "2026-11-08",
+  "checked_at": "2026-11-09",
+  "source_updated_at": "2026-11-09",
   "machines": [
     {
       "date": "2026-10-19",
@@ -176,10 +176,10 @@
       "maker": "北電子",
       "kind": "パチスロ",
       "schedule_url": "https://www.p-world.co.jp/database/machine/introduce_calendar.cgi?type=Pachi",
-      "official_url": "https://www.kitadenshi.co.jp/slot/ryza/",
-      "verification": "製品掲載確認／P-WORLDは1月12日、一撃は1月18日予定。具体日は要確認",
-      "checked_at": "2026-10-22",
-      "alternate_schedule_url": "https://1geki.jp/newmachinecalender/202701/"
+      "official_url": "https://www.kitadenshi.co.jp/slot/?s=2&slot-year=",
+      "verification": "北電子の公式製品一覧は2027年1月と案内。1月12日はP-WORLD・パチマガの日程資料で確認。一方、遊技日本は12月21日と掲載しており資料間に相違があります。メーカーの具体日・変更告知は未確認です。",
+      "checked_at": "2026-11-09",
+      "alternate_schedule_url": "https://yugi-nippon.com/newmachine-list/post-28190/"
     },
     {
       "date": "2027-01-12",
@@ -220,18 +220,20 @@
       "kind": "パチスロ",
       "schedule_url": "https://pachimaga.com/free/newmachine/",
       "official_url": "https://prtimes.jp/main/html/rd/p/000000069.000180393.html",
-      "verification": "発売元の公式発信は2026年12月予定。12月7日はパチマガの日程資料で確認。製造元：七匠／総発売元：フィールズ。P-WORLDの10月31日版カレンダーには未掲載。",
-      "checked_at": "2026-11-01"
+      "verification": "発売元の9月15日付発表は2026年12月から全国導入予定。12月7日はパチマガ・遊技日本の日程資料による予定です。11月9日時点でP-WORLD本文への掲載は確認できず、メーカーの具体日・変更告知は未確認です。製造元：七匠／総発売元：フィールズ。",
+      "checked_at": "2026-11-09",
+      "alternate_schedule_url": "https://yugi-nippon.com/newmachine-list/post-28190/"
     },
     {
       "date": "2026-12-21",
       "name": "スマスロ バジリスク～甲賀忍法帖～Ⅳ",
       "maker": "アクロス",
       "kind": "パチスロ",
-      "schedule_url": "https://pachimaga.com/free/newmachine/",
+      "schedule_url": "https://www.p-world.co.jp/database/machine/introduce_calendar.cgi?type=Pachi",
       "official_url": "https://www.universal-777.com/product/slot/basilisk4/",
-      "verification": "メーカー公式の発売月は2026年12月。12月21日はパチマガの日程資料で確認。P-WORLDの10月31日版カレンダーには未掲載。",
-      "checked_at": "2026-11-01"
+      "verification": "メーカー公式の発売月は2026年12月。12月21日はP-WORLDとパチマガの日程資料で確認。各店舗の導入日は別途確認が必要です。",
+      "checked_at": "2026-11-09",
+      "alternate_schedule_url": "https://pachimaga.com/free/newmachine/"
     },
     {
       "date": "2027-02-08",
@@ -244,5 +246,5 @@
       "checked_at": "2026-11-08"
     }
   ],
-  "schedule_review_note": "11月8日にP-WORLDとパチマガの掲載日程を再照合しました。既存の11月2日以降の掲載予定は維持し、LB海スロをメーカー発表から追加。アサルトリリィは今回のP-WORLD本文で掲載を確認できず、パチマガの12月7日予定を参照しています。既存の機種別確認日は各仕様・一次資料の従来の確認日です。日付が食い違う機種は確定扱いにしません。"
+  "schedule_review_note": "11月9日はバジリスクⅣ・アサルトリリィ・ライザのアトリエの3機種を再照合。バジリスクⅣとライザはP-WORLD・パチマガを確認。アサルトリリィはパチマガ・遊技日本を参照し、P-WORLD本文では掲載を確認できませんでした。ライザの公式製品一覧は2027年1月と案内しています。対象外の機種別確認日は更新せず、メーカーの変更・延期告知や店舗別の稼働実績を確認したものではありません。"
 }

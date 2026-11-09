@@ -1,0 +1,20 @@
+{
+  "base": "4968be56d1d3760d07ae58b208adaa241555db12",
+  "files": {
+    "data/industry-news.json": "76181d5e62c73730ec75f4d5b265677397acc96602f839169ff0eb3bd415f21f",
+    "data/new-machines.json": "de26f1865b3452733a544ddc68a3da63791b77e1194c49328cc9691ba93282e9",
+    "data/latest.json": "4f426533d7f6128d7db643fd89e955d2614a210bebe07ffcb92b9bd3dd34b0df",
+    "pages/industry-news.json": "aac117713c230bc568bfc6516f9de32ada51204dc19471c1a1188cc9e6e41499",
+    "pages/new-machines.json": "c4a83fec2d69db3d18a6328461291666e36d94222fd87aa77c24c33155230629"
+  },
+  "articles": {
+    "segasammy-interim-20261106": "cfa1ebb7b84ffc195c3dffa7017add4150c4497da44a0519f8aaf04d89acb0ea",
+    "fujishoji-interim-20261106": "01373cba1d03a4de0bc927273972c328a15ec4c755dbf41dd0681fb8d28f2c03",
+    "sankyo-interim-20261105": "7b4efbe5f1793d87e356266aedebfe7c164642629495e905ea9fc9716b7fc1d3"
+  },
+  "machines": {
+    "パチスロ ライザのアトリエ ～常闇の女王と秘密の隠れ家～": "29add1104ae41bed16b711e2e642dfa621eb1fc86761f5c65049d019024365ff",
+    "L アサルトリリィ": "aca7c30a5a74b2c5dde6605edc5caa34a3270953f9a5ef35cd06e084aa070aa0",
+    "スマスロ バジリスク～甲賀忍法帖～Ⅳ": "9d70418eb20b4ecfc74d323985a0d37f72158f184a585750b36b79f06bb40a38"
+  }
+}

@@ -4,6 +4,7 @@ import hashlib, json, re, subprocess
 from pathlib import Path
 from html.parser import HTMLParser
 from build import build, ROOT
+from check_news_20261109 import previous_bytes
 BASE='81e10253b432899ef15d611390b75f30b6460cfb'
 # Local maintenance candidates only. These pins bound the authorized source
 # changes. Content review is recorded separately; pins do not certify rendering.
@@ -62,7 +63,7 @@ def check_sao2(page):
         if path.endswith('/home.json'):continue
         name=Path(path).name
         if name in MAINTENANCE_PAGE_CANDIDATES:
-            assert hashlib.sha256((ROOT/path).read_bytes()).hexdigest()==MAINTENANCE_PAGE_CANDIDATES[name],path
+            assert hashlib.sha256(previous_bytes('pages/'+name)).hexdigest()==MAINTENANCE_PAGE_CANDIDATES[name],path
             continue
         if path.endswith('/league-4th.json'):
             # Reproduce the page at the current presentation as_of date. The
