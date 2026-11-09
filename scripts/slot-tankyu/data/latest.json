@@ -3,6 +3,53 @@
   "same_day_order": "同日はデータ登録順。時刻や公開順を推定しない。",
   "entries": [
     {
+      "source": "industry-news",
+      "anchor": "segasammy-interim-20261106",
+      "date": "2026-11-09",
+      "date_kind": "内容更新日",
+      "group": "news-segasammy-interim-20261106",
+      "category": "ニュース",
+      "reason": "11月9日号に公式中間決算を掲載。発表日と決算対象期間は記事本文に分離。"
+    },
+    {
+      "source": "industry-news",
+      "anchor": "fujishoji-interim-20261106",
+      "date": "2026-11-09",
+      "date_kind": "内容更新日",
+      "group": "news-fujishoji-interim-20261106",
+      "category": "ニュース",
+      "reason": "11月9日号に公式中間決算を掲載。発表日と決算対象期間は記事本文に分離。"
+    },
+    {
+      "source": "industry-news",
+      "anchor": "sankyo-interim-20261105",
+      "date": "2026-11-09",
+      "date_kind": "内容更新日",
+      "group": "news-sankyo-interim-20261105",
+      "category": "ニュース",
+      "reason": "11月9日号に公式中間決算を掲載。発表日と決算対象期間は記事本文に分離。"
+    },
+    {
+      "source": "new-machines",
+      "anchor": "",
+      "date": "2026-11-09",
+      "date_kind": "内容更新日",
+      "group": "calendar-refresh",
+      "category": "新台情報",
+      "reason": "バジリスクⅣ・アサルトリリィ・ライザの公式月表記と日程資料を再照合。導入日配置は保持。",
+      "history": [
+        {
+          "source": "new-machines",
+          "anchor": "",
+          "date": "2026-11-08",
+          "date_kind": "内容更新日",
+          "group": "calendar-refresh",
+          "category": "新台情報",
+          "reason": "11月8日版の日程資料を再照合し、メーカー発表のLB海スロ・2月8日予定を追加。"
+        }
+      ]
+    },
+    {
       "source": "league-4th",
       "anchor": "",
       "date": "2026-11-08",
@@ -10,15 +57,6 @@
       "group": "league-schedule-refresh",
       "category": "777リーグ",
       "reason": "公式日程42件を再照合し、BLUE第1回戦の前後編と視聴メモへの導線を追加。終了状況・最新ポイントは別途未確認。"
-    },
-    {
-      "source": "new-machines",
-      "anchor": "",
-      "date": "2026-11-08",
-      "date_kind": "内容更新日",
-      "group": "calendar-refresh",
-      "category": "新台情報",
-      "reason": "11月8日版の日程資料を再照合し、メーカー発表のLB海スロ・2月8日予定を追加。"
     },
     {
       "source": "industry-news",

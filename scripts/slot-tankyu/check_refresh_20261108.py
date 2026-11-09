@@ -2,16 +2,17 @@
 import copy,hashlib,json,subprocess
 from pathlib import Path
 H=Path(__file__).resolve().parent
+from check_news_20261109 import previous_bytes
 BASE='e45322b3abfb99cfcddcaf83dbee5fb2aeaa58c1'
 FILES={'data/industry-news.json','data/new-machines.json','data/league-4th.json','data/latest.json'}
-def read(p):return json.loads((H/p).read_text())
+def read(p):return json.loads(previous_bytes(p))
 def original(p):return json.loads(subprocess.check_output(['git','show',BASE+':scripts/slot-tankyu/'+p],cwd=H))
 def previous_edition(p):
     # Only the four explicitly reviewed changes may project to the prior fixture.
     # The current edition is separately checked below, never silently discarded.
     if p not in FILES:return read(p)
     pins=read('editorial/reviews/2026-11-08-refresh-manifest.json')
-    assert hashlib.sha256((H/p).read_bytes()).hexdigest()==pins[p],p
+    assert hashlib.sha256(previous_bytes(p)).hexdigest()==pins[p],p
     return original(p)
 def main():
     from league_schedule import render
@@ -21,10 +22,10 @@ def main():
     updated={'pages/league-results-4th.json':'ceb9d67127980cbe23950aa062e2b978963c12bd795afb5c2bb333e364238d9c','render_league_results.py':'f7daa82f65f005067502d3d6c2911d922b5bb0b920a1b13340560b24574cb705'}
     for p,sha in pins.items():
         if p in updated:
-            assert hashlib.sha256((H/p).read_bytes()).hexdigest()==updated[p],p
+            assert hashlib.sha256(previous_bytes(p)).hexdigest()==updated[p],p
             previous=subprocess.check_output(['git','show','79d09d9:scripts/slot-tankyu/'+p],cwd=H)
             assert hashlib.sha256(previous).hexdigest()==sha,p
-        else:assert hashlib.sha256((H/p).read_bytes()).hexdigest()==sha,p
+        else:assert hashlib.sha256(previous_bytes(p)).hexdigest()==sha,p
     result_text=read('pages/league-results-4th.json')['body']
     assert result_text.index('第1回戦終了時の順位') < result_text.index('−1,550pt')
     assert '4チームすべてが0pt' not in result_text

@@ -39,6 +39,8 @@ def section(body,identifier):
     return re.search(r'<section\b[^>]*\bid="'+re.escape(identifier)+r'"[^>]*>(.*?)</section>',body,re.S)[1]
 
 def main():
+    from check_news_20261109 import main as check_news, previous_bytes
+    check_news()
     from check_league_results import main as check_league_results
     check_league_results()
     from check_gogo_history import check_gogo
@@ -104,7 +106,7 @@ def main():
             assert indexed[('2026-11-25','RED第10回戦')]['venue']=='123+N布施店'
         else:
             expected={'new-machines':'cbe6df491b21a4040fdd5647fa8573630608215c9d962b29f4b38a3a6f35964a','industry-news':'0ce5b110874c0c8e6deb5bbe3317c99b70e17f2c8da8c8e71abfa234dfbd7b82'}
-            assert hashlib.sha256((ROOT/path).read_bytes()).hexdigest()==expected[name],name
+            assert hashlib.sha256(previous_bytes('data/'+name+'.json')).hexdigest()==expected[name],name
     # Keep prior dated regressions intact on their reviewed fixture.
     league=json.loads(subprocess.check_output(['git','show','d7c2abba36c10bc615056db3c87a30df3047bdd5:scripts/slot-tankyu/data/league-4th.json'],cwd=ROOT));frozen=copy.deepcopy(league)
     legacy=json.loads(subprocess.check_output(['git','show','34eb7ad2ffa0ac6c81f2e782a5e08d1b42822e76:scripts/slot-tankyu/data/league-4th.json'],cwd=ROOT))
