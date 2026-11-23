@@ -128,7 +128,8 @@ def check_sao2(page):
             continue
         if path.endswith('/listing.json'):
             old=json.loads(subprocess.check_output(['git','show',BASE+':'+path],cwd=ROOT))
-            current=json.loads((ROOT/path).read_text())
+            # Current listing additions are bounded by check_records_20261123.
+            current=json.loads(previous_bytes('pages/listing.json'))
             record_1107=r'<a class="card" href="2026-11-07/shinuchi-yoshimune/">.*?</a>'
             assert len(re.findall(record_1107,current['body']))==1
             current['body']=re.sub(record_1107,'',current['body'])

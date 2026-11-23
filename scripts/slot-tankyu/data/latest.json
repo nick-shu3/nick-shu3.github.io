@@ -3,6 +3,24 @@
   "same_day_order": "同日はデータ登録順。時刻や公開順を推定しない。",
   "entries": [
     {
+      "source": "record-god-20261123",
+      "anchor": "",
+      "date": "2026-11-23",
+      "date_kind": "内容更新日",
+      "group": "record-god-kiseki-20261123",
+      "category": "実戦",
+      "reason": "本人が11月23日の実戦内容と最終回収を確認し、今回の掲載・公開を依頼。内容確認日であり公開時刻は推定しない。"
+    },
+    {
+      "source": "record-im-20261123",
+      "anchor": "",
+      "date": "2026-11-23",
+      "date_kind": "内容更新日",
+      "group": "record-im-juggler-20261123",
+      "category": "実戦",
+      "reason": "本人が11月23日の実戦内容と最終回収を確認し、今回の掲載・公開を依頼。内容確認日であり公開時刻は推定しない。"
+    },
+    {
       "source": "industry-news",
       "anchor": "getter-brothers-announcement-20261116",
       "date": "2026-11-23",
