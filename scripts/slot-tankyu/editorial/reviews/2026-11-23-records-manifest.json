@@ -1,0 +1,26 @@
+{
+  "base": "edb3a7a91e2cf6e6cceaf2fefae24b39c2229f4d",
+  "files": {
+    "data/latest.json": "4221d4ec09cff05552a220d32d96f12729bc8be75e89200a58d6126562e486d8",
+    "pages/listing.json": "5721406e839de5674a3a418a4affe16e6e74050deaa137aba422c13f6722514b",
+    "pages/record-god-20261123.json": "f3e6cdb0e898f65c7ea94899eccb3bd665cc0413109b53cece9499cb35caf832",
+    "pages/record-im-20261123.json": "173c799542e8a2608cf0c26615363c6710b30c829073ab8c3e82eab5418df2b8",
+    "pages/daily-20261123.json": "964376811cb00f352bc7479151348fcf40a276c2d19e9d7c3e20993e108d0416"
+  },
+  "new_pages": [
+    "record-god-20261123",
+    "record-im-20261123",
+    "daily-20261123"
+  ],
+  "listing_cards": "<a class=\"card\" href=\"2026-11-23/god-kiseki/\"><span class=\"tag\">神々の軌跡／2026年11月23日</span><h3>久々に軌跡でヤレた！ アメグレから18連 →</h3><p>200枚投資・5,200枚回収。ゼウスステージの写真と本人の実戦メモ。</p></a><a class=\"card\" href=\"2026-11-23/im-juggler/\"><span class=\"tag\">アイムジャグラー／2026年11月23日</span><h3>軌跡のあとも好調、持ちメダルを＋960枚 →</h3><p>持ち込み5,200枚から最終6,160枚。台全体の履歴と本人の区間成績を分けて掲載。</p></a>",
+  "assets": {
+    "docs/slot-tankyu/assets/records/2026-11-23/god-kiseki/session-history.jpg": "f7af8908b922ced13f6e3900b9517c38ae4347164281b76101872d4f99930f16",
+    "docs/slot-tankyu/assets/records/2026-11-23/god-kiseki/zeus-amazing-grace.jpg": "c516315af83f8a1a6d141bde2a0144a93153217b5d9c90c4520352f1626d4dbf",
+    "docs/slot-tankyu/assets/records/2026-11-23/god-kiseki/gg18-result.jpg": "a8a17232e8c0f86051e6bb16b24290627a0463f19f71ff77aae04c499e120d53",
+    "docs/slot-tankyu/assets/records/2026-11-23/im-juggler/final-counter.jpg": "92c15f2f876e13c456b156e289f833276ba0e84835474d487b0b784b6cc165cf",
+    "docs/slot-tankyu/assets/records/2026-11-23/im-juggler/bonus-history.jpg": "e523ac385ac150512da4db71504b3b668da32ffa2e27fb2884db692cac6f32b6",
+    "docs/slot-tankyu/assets/share-record-im-20261123.png": "b94ee687b5bbcefaa3bd0b996c8e58215e56f9e09d21b7138bcde557bb86fd0f",
+    "docs/slot-tankyu/assets/share-daily-20261123.png": "0b9410f8cf7bd0f79aafc38f124c9ed43b0d1f1732ebceb02be9e58025a053da",
+    "docs/slot-tankyu/assets/share-record-god-20261123.png": "25a9b8cc8ce14162657be721774f59d2fb7ea08451615169aa1f6b4f516e9209"
+  }
+}

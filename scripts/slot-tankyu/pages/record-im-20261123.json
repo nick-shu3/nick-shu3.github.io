@@ -1,0 +1,51 @@
+{
+  "path": "docs/slot-tankyu/records/2026-11-23/im-juggler/index.html",
+  "title": "アイムジャグラー実戦｜軌跡のあとも好調、持ちメダルを＋960枚",
+  "short_title": "アイムジャグラー実戦",
+  "description": "2026年11月23日のアイム実戦。軌跡から持ちメダル5,200枚を移し、最終6,160枚で＋960枚。台全体の履歴と本人の遊技区間を分けて振り返ります。",
+  "type": "record",
+  "machine_slug": "im-juggler",
+  "label": "機種別実戦記録",
+  "status": "実戦日：2026年11月23日",
+  "updated": "2026-11-23",
+  "share_image": "share-record-im-20261123.png",
+  "share_lines": [
+    "軌跡のあともアイムで上乗せ",
+    "持ちメダル5,200→6,160枚",
+    "アイム区間は＋960枚"
+  ],
+  "breadcrumbs": [
+    {
+      "path": "docs/slot-tankyu/records/index.html",
+      "title": "実戦記録"
+    },
+    {
+      "path": "docs/slot-tankyu/records/2026-11-23/index.html",
+      "title": "2026年11月23日"
+    }
+  ],
+  "toc": [
+    {
+      "id": "result",
+      "label": "区間収支"
+    },
+    {
+      "id": "story",
+      "label": "アイムへ移動"
+    },
+    {
+      "id": "data",
+      "label": "台全体のデータ"
+    },
+    {
+      "id": "sources",
+      "label": "記録の範囲"
+    }
+  ],
+  "body": "<section id=\"result\"><h2>持ちメダル5,200枚から、最終6,160枚へ</h2><p>軌跡を終えた後はアイムジャグラーへ。本人が「大当たり確率が6付近」と感じた台で良い当たりに恵まれ、持ちメダルをさらに<strong>960枚</strong>増やして終了しました。設定6が確定した実戦ではありません。</p><div class=\"tablewrap\"><table><thead><tr><th scope=\"col\">項目</th><th scope=\"col\">記録</th></tr></thead><tbody><tr><th scope=\"row\">移動時の持ちメダル</th><td>5,200枚</td></tr><tr><th scope=\"row\">最終回収（本人確認済み）</th><td>6,160枚</td></tr><tr><th scope=\"row\">アイム区間の増減</th><td>＋960枚（6,160−5,200）</td></tr></tbody></table></div><p class=\"hint\">5,200枚は前の機種から移した持ちメダルです。当日の追加投資に再計上しません。この機種区間の増減と、一日全体の収支は別の集計です。</p></section><section id=\"story\"><h2>最後にアイムでも上乗せ</h2><p>大当たり確率を見て期待して移動したところ、本人の言葉では「まさかの良い当たり」。最終回収は6,160枚で確定しています。本人が打った区間だけのゲーム数・BB・RB回数は記録から分離できないため、台全体の数値で代用しません。</p><figure class=\"record-photo\"><img src=\"../../../assets/records/2026-11-23/im-juggler/final-counter.jpg\" width=\"1200\" height=\"900\" loading=\"lazy\" alt=\"NEO Im JUGGLERのデータ表示、6160枚、累計7496G、BB32とRB32\"><figcaption>6,160枚の表示は本人が最終回収枚数として確認。累計7,496G・BB32回・RB32回・合成1/117は台全体のデータで、本人だけの成績ではありません。 撮影・提供：シュウ３。</figcaption></figure></section><section id=\"data\"><h2>台全体のデータは7,496G・BB32回・RB32回</h2><div class=\"tablewrap\"><table><thead><tr><th scope=\"col\">項目</th><th scope=\"col\">記録</th></tr></thead><tbody><tr><th scope=\"row\">台全体の累計ゲーム数</th><td>7,496G</td></tr><tr><th scope=\"row\">台全体のBB／RB</th><td>32回／32回</td></tr><tr><th scope=\"row\">表示上のBB確率／RB確率</th><td>各1/234</td></tr><tr><th scope=\"row\">表示上の合成確率</th><td>1/117</td></tr><tr><th scope=\"row\">現在ゲーム数（写真の表示）</th><td>228G</td></tr><tr><th scope=\"row\">本人区間のゲーム数・当選回数</th><td>未記録（台全体からの切り分け不可）</td></tr></tbody></table></div><p class=\"hint\">「設定6付近」は本人が台を選んだ際の印象です。表示確率だけで設定を確定できるものではなく、この記録では機種の細かな型式や設定別確率との厳密な比較は行っていません。</p><details><summary>台全体の当たり履歴を見る</summary><figure class=\"record-photo\"><img src=\"../../../assets/records/2026-11-23/im-juggler/bonus-history.jpg\" width=\"1200\" height=\"900\" loading=\"lazy\" alt=\"アイムジャグラーのデータ表示機に記録された台全体の当たり履歴\"><figcaption>写真の当たり履歴には前任者分を含みます。どこからが本人の遊技か特定していないため、本人の連チャン回数や初当たりの計算には使いません。 撮影・提供：シュウ３。</figcaption></figure></details></section><section id=\"sources\"><h2>記録の範囲と確認元</h2><p>移動の順序・最終回収・所感は本人申告。台全体の表示値は本人撮影のデータ表示機写真によります。筐体表記はNEO I’m JUGGLER。未確認の設定、細かな型式、本人区間の試行数は補完していません。</p><p><a href=\"../\">同日の実戦まとめへ →</a> ／ <a href=\"../../\">実戦記録一覧へ →</a></p></section>",
+  "author_comment": [
+    "軌跡が終わった後は、アイムジャグラーに移動した。大当たり確率が6付近。",
+    "これがまさかの良い当たりをしてくれて、上乗せして終了です。"
+  ],
+  "author_excerpt": "これがまさかの良い当たりをしてくれて、上乗せして終了です。"
+}
