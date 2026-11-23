@@ -1,0 +1,25 @@
+{
+  "base": "c644d222408b7ea19e3c0f966b8023932e7ce257",
+  "files": {
+    "data/industry-news.json": "18f001acc005e5a0237b9510c9adef08ae2c677ce26d0e55844bf4cb77261f66",
+    "data/new-machines.json": "b0dbcd99f74c5f8f74f7b8130ca8281efa3f97d9a2e9710b496e16c23951864a",
+    "data/latest.json": "ee79488e75f57309ab5e6b3835583de510a82b089772206adb10ac4951214877",
+    "pages/industry-news.json": "df82399ea09eb98ecb9478cbb5293ffdfa4cc41617375497ca9dab129e0f68cb",
+    "pages/new-machines.json": "11df0ec60996ca6e2d4ee5bc4d3f7655a168360ccfe1ae3760dd229bb6ce9b91",
+    "news_calendar.py": "8f8e4240c74e97b21926eb99f6297f96e001a9b5bf4abc7fcf88235bfcd85801"
+  },
+  "articles": {
+    "getter-brothers-announcement-20261116": "56ef2dfe7890ef4aca1e278525aef0eaff3583b4b5b04999a992b73c2800a7f1",
+    "digislo-announcement-20261116": "6e0b92dfbf7443e711205a13726810b0f07cc0889fe54e3f63110fcb68ac1c87",
+    "fafner-bt-announcement-20261118": "8b8c7f9f6dbf2c5eff57b47e4bf03993dd88ea6719c871828d88266fec8b52af",
+    "sankyo-suntac-acquisition-20261119": "6e17fe0c7ec08b94a5edcf0996a9877640b903b712e47778590f9812811d6d02"
+  },
+  "machines": {
+    "スマスロ 快盗天使ツインエンジェル2": "db810671284392dfef4c2c43e085e35690c7b3a996ebf8dcdee784e0cf87715b",
+    "パチスロ ライザのアトリエ ～常闇の女王と秘密の隠れ家～": "cb2a4042ba9272c12462127ded8b7825c2591bdf5a13f86ca104224e6c2ee709",
+    "スマスロモンキーターンRED": "eab86923c28617c865257de6c177c6bc3ebad58cb594b4041921fbeec77cef0b",
+    "L アサルトリリィ": "71acec770c0b3f5411ff654df65c2995881c79fb4348b6a0f37cda37d5687d74",
+    "スマスロ バジリスク～甲賀忍法帖～Ⅳ": "71f0b46dd20ca4fbdce9f1813aa7944ca5a5c8b6d9abb63f4e527e340bd286db"
+  },
+  "announcements": "1d69f0046f3224fcd0f4c57108f5782972a2bbc3a90cd1b6e9f4f2c073dbb134"
+}

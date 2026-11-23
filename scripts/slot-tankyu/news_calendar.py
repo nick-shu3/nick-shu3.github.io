@@ -32,6 +32,20 @@ def calendar_page(data):
     toc=[]
     if data.get('schedule_review_note'):
         body+='<p class="hint">'+esc(data['schedule_review_note'])+'</p>'
+    if data.get('announcements'):
+        toc.append({'id':'announcements','label':'月・納品時期の予告'})
+        body+='<section id="announcements"><h2>月・納品時期が案内されている新台</h2><p>具体的な全国導入開始日を確定した一覧ではありません。納品予定と、店舗で打てる日は別です。</p><div class="tablewrap" tabindex="0" role="region" aria-label="月・納品時期の新台予告"><table class="release-table"><thead><tr><th scope="col">機種</th><th scope="col">メーカー・発売元</th><th scope="col">公式の予定表記</th><th scope="col">確認範囲・出典</th></tr></thead><tbody>'
+        preview_names=set()
+        for item in data['announcements']:
+            if item['name'] in preview_names or any(m['name']==item['name'] for m in data['machines']):
+                raise ValueError('Duplicate machine announcement')
+            preview_names.add(item['name'])
+            reviewed=datetime.date.fromisoformat(item['checked_at'])
+            if reviewed>checked:raise ValueError('Future announcement verification')
+            sources=link(item['official_url'],'発表資料・公式案内')
+            if item.get('special_site_url'):sources+=' ／ '+link(item['special_site_url'],'特設サイト')
+            body+='<tr><th scope="row">'+esc(item['name'])+'</th><td>'+esc(item['maker'])+'</td><td>'+esc(item['expected_at'])+'</td><td>'+esc(item['verification'])+'<br>'+sources+'<br><small>確認日：'+date_label(reviewed)+'</small></td></tr>'
+        body+='</tbody></table></div></section>'
     for month,items in groups.items():
         year,num=map(int,month.split('-'));month_id='month-'+month
         toc.append({'id':month_id,'label':str(num)+'月'})
