@@ -4,6 +4,73 @@
   "entries": [
     {
       "source": "industry-news",
+      "anchor": "getter-brothers-announcement-20261116",
+      "date": "2026-11-23",
+      "date_kind": "内容更新日",
+      "group": "news-getter-brothers-announcement-20261116",
+      "category": "ニュース",
+      "reason": "11月23日号の原稿作成・内容確認日。発表日は本文に分離し、公開日として扱わない。"
+    },
+    {
+      "source": "industry-news",
+      "anchor": "digislo-announcement-20261116",
+      "date": "2026-11-23",
+      "date_kind": "内容更新日",
+      "group": "news-digislo-announcement-20261116",
+      "category": "ニュース",
+      "reason": "11月23日号の原稿作成・内容確認日。発表日は本文に分離し、公開日として扱わない。"
+    },
+    {
+      "source": "industry-news",
+      "anchor": "fafner-bt-announcement-20261118",
+      "date": "2026-11-23",
+      "date_kind": "内容更新日",
+      "group": "news-fafner-bt-announcement-20261118",
+      "category": "ニュース",
+      "reason": "11月23日号の原稿作成・内容確認日。発表日は本文に分離し、公開日として扱わない。"
+    },
+    {
+      "source": "industry-news",
+      "anchor": "sankyo-suntac-acquisition-20261119",
+      "date": "2026-11-23",
+      "date_kind": "内容更新日",
+      "group": "news-sankyo-suntac-acquisition-20261119",
+      "category": "ニュース",
+      "reason": "11月23日号の原稿作成・内容確認日。発表日は本文に分離し、公開日として扱わない。"
+    },
+    {
+      "source": "new-machines",
+      "anchor": "",
+      "date": "2026-11-23",
+      "date_kind": "内容更新日",
+      "group": "calendar-refresh",
+      "category": "新台情報",
+      "reason": "日程資料の相違・P-WORLDへのアサルト掲載と月/納品時期の予告を追補。公開日ではない。",
+      "history": [
+        {
+          "source": "new-machines",
+          "anchor": "",
+          "date": "2026-11-09",
+          "date_kind": "内容更新日",
+          "group": "calendar-refresh",
+          "category": "新台情報",
+          "reason": "バジリスクⅣ・アサルトリリィ・ライザの公式月表記と日程資料を再照合。導入日配置は保持。",
+          "history": [
+            {
+              "source": "new-machines",
+              "anchor": "",
+              "date": "2026-11-08",
+              "date_kind": "内容更新日",
+              "group": "calendar-refresh",
+              "category": "新台情報",
+              "reason": "11月8日版の日程資料を再照合し、メーカー発表のLB海スロ・2月8日予定を追加。"
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "source": "industry-news",
       "anchor": "segasammy-interim-20261106",
       "date": "2026-11-09",
       "date_kind": "内容更新日",
@@ -28,26 +95,6 @@
       "group": "news-sankyo-interim-20261105",
       "category": "ニュース",
       "reason": "11月9日号に公式中間決算を掲載。発表日と決算対象期間は記事本文に分離。"
-    },
-    {
-      "source": "new-machines",
-      "anchor": "",
-      "date": "2026-11-09",
-      "date_kind": "内容更新日",
-      "group": "calendar-refresh",
-      "category": "新台情報",
-      "reason": "バジリスクⅣ・アサルトリリィ・ライザの公式月表記と日程資料を再照合。導入日配置は保持。",
-      "history": [
-        {
-          "source": "new-machines",
-          "anchor": "",
-          "date": "2026-11-08",
-          "date_kind": "内容更新日",
-          "group": "calendar-refresh",
-          "category": "新台情報",
-          "reason": "11月8日版の日程資料を再照合し、メーカー発表のLB海スロ・2月8日予定を追加。"
-        }
-      ]
     },
     {
       "source": "league-4th",

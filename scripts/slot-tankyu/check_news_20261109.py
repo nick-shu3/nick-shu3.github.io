@@ -6,7 +6,11 @@ MANIFEST=H/'editorial/reviews/2026-11-09-publication-manifest.json'
 def manifest():return json.loads(MANIFEST.read_text())
 def original(path):
     return subprocess.check_output(['git','show',manifest()['base']+':scripts/slot-tankyu/'+path],cwd=H)
-def read(path):return json.loads((H/path).read_text())
+def edition_bytes(path):
+    # Validate the new edition separately before replaying this historical fixture.
+    from check_news_20261123 import previous_bytes as preceding_edition
+    return preceding_edition(path)
+def read(path):return json.loads(edition_bytes(path))
 def canonical_sha(value):return hashlib.sha256(json.dumps(value,ensure_ascii=False,sort_keys=True,separators=(',',':')).encode()).hexdigest()
 def previous_bytes(path):
     """Older date-specific tests still run unchanged on their exact original data.
@@ -14,15 +18,17 @@ def previous_bytes(path):
     The projection is allowed only for the five pinned source/page files. Current
     data is separately checked by main(); unknown changes fail the SHA guard.
     """
-    pins=manifest()['files'];current=(H/path).read_bytes()
+    pins=manifest()['files'];current=edition_bytes(path)
     if path not in pins:return current
     assert hashlib.sha256(current).hexdigest()==pins[path],path
     return original(path)
 def main():
+    from check_news_20261123 import main as check_current, historical_latest
+    check_current()
     from news_calendar import news_page,calendar_page
     from editorial_views import latest_feed
     for p,sha in manifest()['files'].items():
-        assert hashlib.sha256((H/p).read_bytes()).hexdigest()==sha,p
+        assert hashlib.sha256(edition_bytes(p)).hexdigest()==sha,p
     n=read('data/industry-news.json');old=json.loads(original('data/industry-news.json'))
     reverted=copy.deepcopy(n);issue=reverted['issues'].pop()
     assert issue['date']=='2026-11-09' and len(issue['articles'])==3
@@ -51,7 +57,7 @@ def main():
     projected['entries'].insert(index,added[3]['history'][0]);assert projected==old
     for name,renderer,data in [('industry-news',news_page,n),('new-machines',calendar_page,c)]:
         assert read('pages/'+name+'.json')==renderer(data)
-    text=latest_feed('docs/slot-tankyu/index.html')
+    text=historical_latest()
     assert all('#'+a['id'] in text for a in issue['articles'])
     assert text.count('new-machines/')==1
     assert '2027年1月' in calendar_page(c)['body'] and '資料間に相違' in calendar_page(c)['body']
