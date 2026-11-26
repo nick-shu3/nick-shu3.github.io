@@ -17,10 +17,9 @@ PC・スマートフォンのブラウザで利用できます。各作品の制
 | SQUAD FRONT | 援軍と武器を育てる防衛シューティング | [遊ぶ](https://nick-shu3.github.io/docs/games/squad-front/) |
 | ハチよけライン | 線を描いて蜂から守るお絵かき防衛。全5ステージ | [遊ぶ](https://nick-shu3.github.io/docs/games/hachiyoke-line/) |
 | 勇者は何度でも | 装備を引き継いで再挑戦する育成オートRPG | [遊ぶ](https://nick-shu3.github.io/docs/games/hero-again/) |
-| 麻雀 点数チャレンジ | 4択で点数・逆転条件を学ぶ、別サイト公開のゲーム | [遊ぶ](https://shu3-mahjong-challenge.nagata-sh3.chatgpt.site) |
 | アイムジャグラーEX ブドウシミュレーター | 実測・差枚逆算・確率分布を比較する非公式ツール | [使う](https://nick-shu3.github.io/docs/tools/im-juggler-grape/) |
 
-麻雀 点数チャレンジの実装はこのリポジトリに含みません。トップページには公開先へのリンクを掲載しています。
+麻雀 点数チャレンジは廃止対象として作品集の導線を整理しました。実装はこのリポジトリに含みません。ホスティングの廃止完了は管理台帳で別途確認します。
 
 ## スロ探究
 
